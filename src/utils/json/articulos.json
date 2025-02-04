@@ -1,0 +1,57 @@
+[
+    {
+      "id": 1,
+      "type": "Research",
+      "title": "Avances en Inteligencia Artificial",
+      "description": "Un estudio sobre los avances y aplicaciones de la inteligencia artificial en el siglo XXI.",
+      "links": "https://example.com/articulo/ia-avances",
+      "doi": "10.1000/ia2025",
+      "issn": "1234-5678",
+      "file_path": "files/ia-avances.pdf",
+      "cover_image": "images/ia-avances.jpg"
+    },
+    {
+      "id": 2,
+      "type": "Review",
+      "title": "Revisión de Tecnologías Emergentes",
+      "description": "Una revisión exhaustiva de las tecnologías emergentes y su impacto en la sociedad.",
+      "links": "https://example.com/articulo/tecnologias",
+      "doi": "10.1000/tec2025",
+      "issn": "2345-6789",
+      "file_path": "files/tecnologias.pdf",
+      "cover_image": "images/tecnologias.jpg"
+    },
+    {
+      "id": 3,
+      "type": "Case Study",
+      "title": "Caso de Estudio: Transformación Digital",
+      "description": "Análisis detallado de un caso real de transformación digital en una gran empresa.",
+      "links": "https://example.com/articulo/transformacion-digital",
+      "doi": "10.1000/td2025",
+      "issn": "3456-7890",
+      "file_path": "files/transformacion-digital.pdf",
+      "cover_image": "images/transformacion-digital.jpg"
+    },
+    {
+      "id": 4,
+      "type": "Opinion",
+      "title": "El Futuro de la Educación en Línea",
+      "description": "Opiniones y predicciones sobre el futuro de la educación en línea tras la pandemia.",
+      "links": "https://example.com/articulo/educacion-online",
+      "doi": "10.1000/eo2025",
+      "issn": "4567-8901",
+      "file_path": "files/educacion-online.pdf",
+      "cover_image": "images/educacion-online.jpg"
+    },
+    {
+      "id": 5,
+      "type": "Research",
+      "title": "Innovaciones en Biotecnología",
+      "description": "Un artículo que explora las últimas innovaciones en biotecnología y su aplicación en la medicina.",
+      "links": "https://example.com/articulo/biotecnologia",
+      "doi": "10.1000/bio2025",
+      "issn": "5678-9012",
+      "file_path": "files/biotecnologia.pdf",
+      "cover_image": "images/biotecnologia.jpg"
+    }
+  ]

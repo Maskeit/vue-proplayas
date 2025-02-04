@@ -1,0 +1,52 @@
+[
+    {
+      "id": 1,
+      "section_name": "Admin Section 1",
+      "content": "Content for Admin Section 1"
+    },
+    {
+      "id": 2,
+      "section_name": "Admin Section 2",
+      "content": "Content for Admin Section 2"
+    },
+    {
+      "id": 3,
+      "section_name": "Admin Section 3",
+      "content": "Content for Admin Section 3"
+    },
+    {
+      "id": 4,
+      "section_name": "Admin Section 4",
+      "content": "Content for Admin Section 4"
+    },
+    {
+      "id": 5,
+      "section_name": "Admin Section 5",
+      "content": "Content for Admin Section 5"
+    },
+    {
+      "id": 6,
+      "section_name": "Admin Section 6",
+      "content": "Content for Admin Section 6"
+    },
+    {
+      "id": 7,
+      "section_name": "Admin Section 7",
+      "content": "Content for Admin Section 7"
+    },
+    {
+      "id": 8,
+      "section_name": "Admin Section 8",
+      "content": "Content for Admin Section 8"
+    },
+    {
+      "id": 9,
+      "section_name": "Admin Section 9",
+      "content": "Content for Admin Section 9"
+    },
+    {
+      "id": 10,
+      "section_name": "Admin Section 10",
+      "content": "Content for Admin Section 10"
+    }
+  ]

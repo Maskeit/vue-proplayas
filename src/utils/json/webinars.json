@@ -1,0 +1,57 @@
+[
+    {
+      "id": 1,
+      "title": "Introducción a Vue 3",
+      "date": "2025-02-01T00:00:00Z",
+      "description": "Un webinar introductorio sobre Vue 3 y sus nuevas características.",
+      "organizer_type": "educational",
+      "organizer_id": 101,
+      "link": "https://example.com/webinar/vue3",
+      "format": "online",
+      "location": null
+    },
+    {
+      "id": 2,
+      "title": "Mastering TypeScript",
+      "date": "2025-03-15T00:00:00Z",
+      "description": "Aprende a dominar TypeScript en este webinar avanzado.",
+      "organizer_type": "professional",
+      "organizer_id": 102,
+      "link": "https://example.com/webinar/typescript",
+      "format": "online",
+      "location": null
+    },
+    {
+      "id": 3,
+      "title": "Desarrollo de APIs RESTful",
+      "date": "2025-04-10T00:00:00Z",
+      "description": "Explora cómo diseñar y desarrollar APIs RESTful eficaces.",
+      "organizer_type": "workshop",
+      "organizer_id": 103,
+      "link": "https://example.com/webinar/apis",
+      "format": "online",
+      "location": null
+    },
+    {
+      "id": 4,
+      "title": "UI/UX Design Trends 2025",
+      "date": "2025-05-05T00:00:00Z",
+      "description": "Conoce las últimas tendencias en diseño de interfaces y experiencia de usuario.",
+      "organizer_type": "conference",
+      "organizer_id": 104,
+      "link": "https://example.com/webinar/ui-ux",
+      "format": "online",
+      "location": null
+    },
+    {
+      "id": 5,
+      "title": "Seguridad en Aplicaciones Web",
+      "date": "2025-06-20T00:00:00Z",
+      "description": "Un webinar sobre las mejores prácticas para asegurar aplicaciones web.",
+      "organizer_type": "training",
+      "organizer_id": 105,
+      "link": "https://example.com/webinar/security",
+      "format": "online",
+      "location": null
+    }
+  ]

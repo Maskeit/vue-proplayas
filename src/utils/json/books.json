@@ -1,0 +1,57 @@
+[
+    {
+      "id": 1,
+      "title": "El Quijote",
+      "author": "Miguel de Cervantes",
+      "publication_date": "1605-01-16T00:00:00Z",
+      "isbn": "978-3-16-148410-0",
+      "description": "La historia de Don Quijote, una novela emblemática de la literatura española.",
+      "link": "https://example.com/el-quijote",
+      "file_path": "files/el-quijote.pdf",
+      "cover_image": "images/el-quijote.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Cien Años de Soledad",
+      "author": "Gabriel García Márquez",
+      "publication_date": "1967-05-30T00:00:00Z",
+      "isbn": "978-0-06-088328-7",
+      "description": "Una novela emblemática del realismo mágico.",
+      "link": "https://example.com/cien-anos-de-soledad",
+      "file_path": "files/cien-anos-de-soledad.pdf",
+      "cover_image": "images/cien-anos-de-soledad.jpg"
+    },
+    {
+      "id": 3,
+      "title": "La Sombra del Viento",
+      "author": "Carlos Ruiz Zafón",
+      "publication_date": "2001-04-03T00:00:00Z",
+      "isbn": "978-84-08-07793-7",
+      "description": "Un misterio literario ambientado en la Barcelona del siglo XX.",
+      "link": "https://example.com/la-sombra-del-viento",
+      "file_path": "files/la-sombra-del-viento.pdf",
+      "cover_image": "images/la-sombra-del-viento.jpg"
+    },
+    {
+      "id": 4,
+      "title": "1984",
+      "author": "George Orwell",
+      "publication_date": "1949-06-08T00:00:00Z",
+      "isbn": "978-0-452-28423-4",
+      "description": "Una novela distópica sobre un futuro totalitario.",
+      "link": "https://example.com/1984",
+      "file_path": "files/1984.pdf",
+      "cover_image": "images/1984.jpg"
+    },
+    {
+      "id": 5,
+      "title": "Fahrenheit 451",
+      "author": "Ray Bradbury",
+      "publication_date": "1953-10-19T00:00:00Z",
+      "isbn": "978-0-7432-4722-1",
+      "description": "Una novela que imagina un futuro donde la lectura está prohibida.",
+      "link": "https://example.com/fahrenheit-451",
+      "file_path": "files/fahrenheit-451.pdf",
+      "cover_image": "images/fahrenheit-451.jpg"
+    }
+  ]
