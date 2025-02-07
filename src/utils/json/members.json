@@ -1,0 +1,130 @@
+[
+  {
+    "id": 1,
+    "node_id": 1,
+    "name": "Carlos Ramírez",
+    "email": "carlos.ramirez@example.com",
+    "research_line": "Inteligencia Artificial",
+    "work_area": "Desarrollo de Software"
+  },
+  {
+    "id": 2,
+    "node_id": 1,
+    "name": "Laura Martínez",
+    "email": "laura.martinez@example.com",
+    "research_line": "Visión por Computadora",
+    "work_area": "Investigación Académica"
+  },
+  {
+    "id": 3,
+    "node_id": 1,
+    "name": "Miguel Alejandre",
+    "email": "miguel.alejandre@example.com",
+    "research_line": "Redes Neuronales",
+    "work_area": "Machine Learning"
+  },
+  {
+    "id": 4,
+    "node_id": 2,
+    "name": "Sofía Pérez",
+    "email": "sofia.perez@example.com",
+    "research_line": "Big Data",
+    "work_area": "Análisis de Datos"
+  },
+  {
+    "id": 5,
+    "node_id": 2,
+    "name": "Jorge Torres",
+    "email": "jorge.torres@example.com",
+    "research_line": "Seguridad Informática",
+    "work_area": "Ciberseguridad"
+  },
+  {
+    "id": 6,
+    "node_id": 2,
+    "name": "Ana López",
+    "email": "ana.lopez@example.com",
+    "research_line": "Desarrollo Web",
+    "work_area": "Frontend"
+  },
+  {
+    "id": 7,
+    "node_id": 3,
+    "name": "Roberto Díaz",
+    "email": "roberto.diaz@example.com",
+    "research_line": "Cloud Computing",
+    "work_area": "Infraestructura"
+  },
+  {
+    "id": 8,
+    "node_id": 3,
+    "name": "María González",
+    "email": "maria.gonzalez@example.com",
+    "research_line": "Automatización de Procesos",
+    "work_area": "Robótica"
+  },
+  {
+    "id": 9,
+    "node_id": 3,
+    "name": "Fernando Rojas",
+    "email": "fernando.rojas@example.com",
+    "research_line": "Blockchain",
+    "work_area": "Fintech"
+  },
+  {
+    "id": 10,
+    "node_id": 4,
+    "name": "Gabriela Mendoza",
+    "email": "gabriela.mendoza@example.com",
+    "research_line": "Realidad Aumentada",
+    "work_area": "Interfaz de Usuario"
+  },
+  {
+    "id": 11,
+    "node_id": 5,
+    "name": "Luis Herrera",
+    "email": "luis.herrera@example.com",
+    "research_line": "Computación Cuántica",
+    "work_area": "Investigación y Desarrollo"
+  },
+  {
+    "id": 12,
+    "node_id": 6,
+    "name": "Paula Vázquez",
+    "email": "paula.vazquez@example.com",
+    "research_line": "Internet de las Cosas",
+    "work_area": "Sistemas Embebidos"
+  },
+  {
+    "id": 13,
+    "node_id": 7,
+    "name": "Ximena Manzo",
+    "email": "paula.vazquez@example.com",
+    "research_line": "Internet de las Cosas",
+    "work_area": "Sistemas Embebidos"
+  },
+  {
+    "id": 14,
+    "node_id": 8,
+    "name": "Agustin Iturbide",
+    "email": "paula.vazquez@example.com",
+    "research_line": "Internet de las Cosas",
+    "work_area": "Sistemas Embebidos"
+  },
+  {
+    "id": 15,
+    "node_id": 9,
+    "name": "Guillermo Ochoa",
+    "email": "paula.vazquez@example.com",
+    "research_line": "Internet de las Cosas",
+    "work_area": "Sistemas Embebidos"
+  },
+  {
+    "id": 16,
+    "node_id": 10,
+    "name": "Alex Marín",
+    "email": "paula.vazquez@example.com",
+    "research_line": "Internet de las Cosas",
+    "work_area": "Sistemas Embebidos"
+  }
+]
