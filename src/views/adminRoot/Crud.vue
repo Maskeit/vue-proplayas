@@ -17,7 +17,6 @@ import CrudTable from '@/components/AdminRoot/Crud/CrudTable.vue';
 import CrudForm from '@/components/AdminRoot/Crud/CrudForm.vue';
 import CrudModal from '@/components/AdminRoot/Crud/CrudModal.vue';
 import type { Nodes } from '@/interfaces/Nodes';
-// Importa el archivo JSON que contiene los datos de ejemplo
 import nodes from '@/utils/json/nodes.json';
 
 // Aquí usamos el archivo JSON para inicializar la variable 'registros'
@@ -34,6 +33,7 @@ const registrosFiltrados = computed(() => {
     return registros.value.filter(r =>
         r.name.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
         r.code.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
+        r.type.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
         r.country.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
         r.city.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
         r.activity_level.toLowerCase().includes(searchTerm.value.toLowerCase())

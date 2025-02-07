@@ -8,11 +8,11 @@
             </div>
             <!-- Menú de navegación en el footer con los mismos enlaces -->
             <div class="flex space-x-4">
-                <router-link to="/root/Crud" class="text-gray-300 hover:text-white">Nodos</router-link>
-                <router-link to="/root/CMS/Webinar" class="text-gray-300 hover:text-white">Webinars</router-link>
-                <router-link to="/root/CMS/Libros" class="text-gray-300 hover:text-white">Libros</router-link>
-                <router-link to="/root/CMS/WebSeries" class="text-gray-300 hover:text-white">WebSeries</router-link>
-                <router-link to="/root/CMS/Articulos" class="text-gray-300 hover:text-white">Artículos</router-link>
+                <a href="/nodos" class="text-gray-300 hover:text-white">Nodos</a>
+                <a href="/webinars" class="text-gray-300 hover:text-white">Webinars</a>
+                <a href="/libros" class="text-gray-300 hover:text-white">Libros</a>
+                <a href="/webseries" class="text-gray-300 hover:text-white">WebSeries</a>
+                <a href="/articulos" class="text-gray-300 hover:text-white">Artículos</a>
             </div>
         </div>
     </footer>

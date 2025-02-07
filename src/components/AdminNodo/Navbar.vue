@@ -9,11 +9,11 @@
             </div>
             <!-- Menú de navegación para pantallas medianas y grandes -->
             <div class="hidden md:flex space-x-4">
-                <router-link to="/root/Crud" class="text-gray-600 hover:text-gray-800">Nodos</router-link>
-                <router-link to="/root/CMS/Webinar" class="text-gray-600 hover:text-gray-800">Webinars</router-link>
-                <router-link to="/root/CMS/Libros" class="text-gray-600 hover:text-gray-800">Libros</router-link>
-                <router-link to="/root/CMS/WebSeries" class="text-gray-600 hover:text-gray-800">WebSeries</router-link>
-                <router-link to="/root/CMS/Articulos" class="text-gray-600 hover:text-gray-800">Artículos</router-link>
+                <router-link :to="`/nodo/${nodeId}`" class="text-gray-600 hover:text-gray-800 font-semibold">Miembros</router-link>
+                <router-link :to="`/nodo/${nodeId}/CMS/Webinar`" class="text-gray-600 hover:text-gray-800">Webinars</router-link>
+                <router-link :to="`/nodo/${nodeId}/CMS/Libros`" class="text-gray-600 hover:text-gray-800">Libros</router-link>
+                <router-link :to="`/nodo/${nodeId}/CMS/WebSeries`" class="text-gray-600 hover:text-gray-800">WebSeries</router-link>
+                <router-link :to="`/nodo/${nodeId}/CMS/Articulos`" class="text-gray-600 hover:text-gray-800">Artículos</router-link>
             </div>
             <!-- Botón para desplegar el menú en pantallas pequeñas -->
             <div class="md:hidden">
@@ -35,20 +35,25 @@
         <!-- Menú móvil: se muestra solo en pantallas pequeñas -->
         <div v-if="isOpen" class="md:hidden">
             <div class="flex flex-col justify-center items-center text-center space-y-3 sm:px-4">
-                <router-link to="/root/Crud" class="block text-gray-600 hover:text-gray-800">Nodos</router-link>
-                <router-link to="/root/CMS/Webinar" class="block text-gray-600 hover:text-gray-800">Webinars</router-link>
-                <router-link to="/root/CMS/Libros" class="block text-gray-600 hover:text-gray-800">Libros</router-link>
-                <router-link to="/root/CMS/WebSeries" class="block text-gray-600 hover:text-gray-800">WebSeries</router-link>
-                <router-link to="/root/CMS/Articulos" class="block text-gray-600 hover:text-gray-800">Artículos</router-link>
+                <router-link :to="`/nodo/${nodeId}`" class="block text-gray-600 hover:text-gray-800 font-semibold">Miembros</router-link>
+                <router-link :to="`/nodo/${nodeId}/CMS/Webinar`" class="block text-gray-600 hover:text-gray-800">Webinars</router-link>
+                <router-link :to="`/nodo/${nodeId}/CMS/Libros`" class="block text-gray-600 hover:text-gray-800">Libros</router-link>
+                <router-link :to="`/nodo/${nodeId}/CMS/WebSeries`" class="block text-gray-600 hover:text-gray-800">WebSeries</router-link>
+                <router-link :to="`/nodo/${nodeId}/CMS/Articulos`" class="block text-gray-600 hover:text-gray-800">Artículos</router-link>
             </div>
         </div>
     </nav>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-// Variable reactiva para controlar la visibilidad del menú móvil
+import { ref, computed } from 'vue';
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 const isOpen = ref(false);
+
+// Obtenemos el nodeId dinámico desde la URL
+const nodeId = computed(() => route.params.node_id);
 
 // Función para alternar el menú
 function toggleMenu() {
