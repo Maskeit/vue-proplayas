@@ -10,13 +10,16 @@
     "check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@types/js-cookie": "^3.0.6",
     "axios": "^1.7.9",
+    "js-cookie": "^3.0.5",
     "pinia": "^2.3.1",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
+    "@heroicons/vue": "^2.2.0",
     "@tailwindcss/vite": "^4.0.3",
     "@types/node": "^22.13.1",
     "@vitejs/plugin-vue": "^5.2.1",

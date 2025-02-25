@@ -19,12 +19,11 @@
 
 <script setup lang="ts">
 import CrudTableRow from './CrudTableRow.vue';
-import type { Members } from '@/interfaces/Members'; // Ejemplo de interface para un Members
+import { Members } from '@/interfaces/Members'; // Ejemplo de interface para un Members
 
 const props = defineProps<{
   items: Members[];
 }>();
-
 const emits = defineEmits<{
   (e: 'editar', item: Members): void;
   (e: 'eliminar', item: Members): void;

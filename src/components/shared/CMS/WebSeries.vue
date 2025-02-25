@@ -1,26 +1,26 @@
 <template>
-    <div class="p-4">
+    <div class="dark:text-[var(--color-dark-text)]">
         <h1 class="text-2xl font-bold mb-4">Gestión de WebSeries</h1>
 
         <!-- Formulario para crear/editar una WebSeries -->
-        <form @submit.prevent="onSubmit" class="space-y-4 mb-8">
+        <form @submit.prevent="onSubmit" class="p-4 space-y-4 mb-8 bg-white dark:bg-[var(--color-dark-bg)] shadow-md rounded-lg">
             <div>
-                <label class="block text-sm font-medium text-gray-700">Título</label>
+                <label class="block text-sm font-medium ">Título</label>
                 <input v-model="formData.title" type="text" class="mt-1 block w-full border rounded px-3 py-2"
                     required />
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">Código Iframe</label>
+                <label class="block text-sm font-medium ">Código Iframe</label>
                 <textarea v-model="formData.iframe_code" class="mt-1 block w-full border rounded px-3 py-2"
                     required></textarea>
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">Tipo de Organizador</label>
+                <label class="block text-sm font-medium ">Tipo de Organizador</label>
                 <input v-model="formData.organizer_type" type="text" class="mt-1 block w-full border rounded px-3 py-2"
                     required />
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">ID del Organizador</label>
+                <label class="block text-sm font-medium ">ID del Organizador</label>
                 <input v-model.number="formData.organizer_id" type="number"
                     class="mt-1 block w-full border rounded px-3 py-2" required />
             </div>
@@ -39,7 +39,7 @@
                     <h3 class="text-lg font-bold mb-2">{{ serie.title }}</h3>
                     <!-- Se usa v-html para renderizar el código iframe -->
                     <div class="mb-2" v-html="serie.iframe_code"></div>
-                    <p class="text-sm text-gray-600">
+                    <p class="text-sm ">
                         Organizador: {{ serie.organizer_type }} (ID: {{ serie.organizer_id }})
                     </p>
                 </div>

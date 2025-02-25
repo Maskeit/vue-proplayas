@@ -2,77 +2,135 @@ import { createRouter, createWebHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 
 // Layouts 
-import AdminRootLayout from "../layouts/AdminRootLayout.vue";
-import AdminNodoLayout from "../layouts/AdminNodoLayout.vue";
+import AdminRootLayout from "@layout/AdminRootLayout.vue";
+import AdminNodoLayout from "@layout/AdminNodoLayout.vue";
+import BlankLayout from "@layout/BlankLayout.vue";
+import UserLayout from "@layout/UserLayout.vue";
 // paginas
-import AdminRootCrud from "../views/adminRoot/Crud.vue";
-import AdminRootCMS from "../views/adminRoot/CMS.vue";
+import AdminRootCrud from "@view/adminRoot/Crud.vue";
+import AdminRootCMS from "@view/adminRoot/CMS.vue"; //vista
 
-import AdminNodoCrud from "../views/adminNodo/Crud.vue";
-import AdminNodoCMS from "../views/adminNodo/CMS.vue";
+import AdminNodoCrud from "@view/adminNodo/Crud.vue";
+import AdminNodoCMS from "@/views/adminNodo/CMS.vue"; //vista
 
+import Profile from "@view/user/Profile.vue";
+import UserCMS from "@view/user/CMS.vue"; //vista
+
+// paginas publicas 
+import Login from "@view/public/Login.vue";
+import Register from "@view/public/Register.vue";
+
+import PublicProfile from "@view/public/PublicProfile.vue";
 // Components para CMS
-import WebinarsCMS from "../components/AdminRoot/CMS/Webinars.vue";
-import LibrosCMS from "../components/AdminRoot/CMS/Libros.vue";
-import WebSeriesCMS from "../components/AdminRoot/CMS/WebSeries.vue";
-import ArticulosCMS from "../components/AdminRoot/CMS/Articulos.vue";
+import WebinarsCMS from "@components/shared/CMS/Webinars.vue";
+import LibrosCMS from "@components/shared/CMS/Libros.vue";
+import WebSeriesCMS from "@components/shared/CMS/WebSeries.vue";
+import ArticulosCMS from "@components/shared/CMS/Articulos.vue";
+
+
+const generateCmsRoutes = (prefix: string): Array<RouteRecordRaw> => [
+  { path: 'Webinar', name: `${prefix}CMSWebinar`, component: WebinarsCMS },
+  { path: 'Libros', name: `${prefix}CMSLibros`, component: LibrosCMS },
+  { path: 'WebSeries', name: `${prefix}CMSWebSeries`, component: WebSeriesCMS },
+  { path: 'Articulos', name: `${prefix}CMSArticulos`, component: ArticulosCMS },
+];
 
 // Rutas para administradores_root
 const adminRootRoutes: Array<RouteRecordRaw> = [
   {
-    path: 'Crud',
+    path: 'nodos',
     name: 'CrudRoot',
     component: AdminRootCrud,
   },
   {
-    path: 'CMS',
-    name: 'CMSRoot',
+    path: '',
     component: AdminRootCMS,
-    children: [
-      { path: 'Webinar', name: 'CMSRootWebinar', component: WebinarsCMS }, // ✅ Asegurar que es CMSRootWebinar
-      { path: 'Libros', name: 'CMSRootLibros', component: LibrosCMS },
-      { path: 'WebSeries', name: 'CMSRootWebSeries', component: WebSeriesCMS },
-      { path: 'Articulos', name: 'CMSRootArticulos', component: ArticulosCMS },
-      { path: '', redirect: { name: 'CMSRootWebinar' } }, // ✅ Ahora referencia al nombre correcto
-    ],
-  }
+    children: generateCmsRoutes('root'),
+  },
 ];
+
+// Rutas para usuarios normales
+const userRoutes: Array<RouteRecordRaw> = [
+  {
+    path: 'Profile',
+    name: 'Profile',
+    component: Profile,
+  },
+  {
+    path: '',
+    component: UserCMS,
+    children: generateCmsRoutes('user'),
+  },
+];
+
+// Rutas para administradores de nodo
 const adminNodoRoutes: Array<RouteRecordRaw> = [
   {
     path: '',
     name: 'CrudNodo',
     component: AdminNodoCrud,
-    props: (route) => ({ node_id: route.params.node_id })
+    props: (route) => ({ node_id: route.params.node_id }),
   },
   {
-    path: 'CMS',
+    path: '',
     component: AdminNodoCMS,
-    children: [
-      { path: 'Webinar', name: 'CMSNodoWebinar', component: WebinarsCMS },
-      { path: 'Libros', name: 'CMSNodoLibros', component: LibrosCMS },
-      { path: 'WebSeries', name: 'CMSNodoWebSeries', component: WebSeriesCMS },
-      { path: 'Articulos', name: 'CMSNodoArticulos', component: ArticulosCMS },
-      { path: '', redirect: { name: 'CMSNodoWebinar' } }
-    ]
-  }
+    children: generateCmsRoutes('nodo'),
+  },
 ];
 
+
+const blankPages = [
+  { path: '/login', component: Login },
+  { path: '/register', component: Register },
+  { path: '/:pathMatch(.*)*', component: BlankLayout }, // Para cualquier ruta que no coincida con las anteriores
+  { path: '', redirect: { name: 'Login' } }, // Para redireccionar a /login al inicio de la app.
+]
 const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/User',
+    component: UserLayout,
+    children: userRoutes,
+    //meta: { requiresAuth: true },
+  },
   {
     path: '/root',
     component: AdminRootLayout,
-    children: adminRootRoutes, // 🔹 Esta ruta NO requiere `props: true`
+    children: adminRootRoutes,
   },
   {
     path: '/nodo/:node_id',
     component: AdminNodoLayout,
     children: adminNodoRoutes,
   },
+  {
+    path: '/login',
+    component: BlankLayout,
+    children: blankPages,
+  }
 ];
 
+
+const publicRoutes: Array<RouteRecordRaw> = [
+  {
+    path: "profile/:username", // 🔗 URL amigable usando el username
+    name: "PublicProfile",
+    component: PublicProfile,
+    props: true, // Permite pasar 'username' como prop
+  },
+];
 const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+// ✅ Middleware para restringir el perfil privado solo a usuarios autenticados
+// router.beforeEach((to, from, next) => {
+//   const isAuthenticated = !!localStorage.getItem("authToken"); // Simulación de autenticación
+//   if (to.meta.requiresAuth && !isAuthenticated) {
+//     next({ name: "Login" });
+//   } else {
+//     next();
+//   }
+// });
 
 export default router;

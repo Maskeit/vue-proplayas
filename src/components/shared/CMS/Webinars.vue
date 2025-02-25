@@ -1,32 +1,32 @@
 <template>
-  <div class="p-4">
+  <div class="dark:text-[var(--color-dark-text)]">
     <h1 class="text-2xl font-bold mb-4">Gestión de Webinars</h1>
 
     <!-- Formulario para crear un Webinar -->
-    <form @submit.prevent="onSubmit" class="space-y-4 mb-8">
+    <form @submit.prevent="onSubmit" class="p-4 space-y-4 mb-8 bg-white dark:bg-[var(--color-dark-bg)] shadow-md rounded-lg">
       <div>
-        <label class="block text-sm font-medium text-gray-700">Título</label>
+        <label class="block text-sm font-medium ">Título</label>
         <input v-model="formData.title" type="text" class="mt-1 block w-full border rounded px-3 py-2" required />
       </div>
       <div>
-        <label class="block text-sm font-medium text-gray-700">Descripción</label>
-        <textarea v-model="formData.description" class="mt-1 block w-full border rounded px-3 py-2" required></textarea>
+        <label class="block text-sm font-medium ">Descripción</label>
+        <textarea v-model="formData.description" class="mt-1 block w-full border rounded px-3 py-2 field-sizing-content" required></textarea>
       </div>
       <div>
-        <label class="block text-sm font-medium text-gray-700">Fecha</label>
+        <label class="block text-sm font-medium ">Fecha</label>
         <!-- Usamos un campo de tipo date y almacenamos el valor en dateString -->
         <input v-model="formData.dateString" type="date" class="mt-1 block w-full border rounded px-3 py-2" required />
       </div>
       <div>
-        <label class="block text-sm font-medium text-gray-700">Enlace</label>
+        <label class="block text-sm font-medium ">Enlace</label>
         <input v-model="formData.link" type="url" class="mt-1 block w-full border rounded px-3 py-2" required />
       </div>
       <div>
-        <label class="block text-sm font-medium text-gray-700">Formato del webinar</label>
+        <label class="block text-sm font-medium ">Formato del webinar</label>
         <input v-model="formData.format" type="url" class="mt-1 block w-full border rounded px-3 py-2" required />
       </div>
       <div>
-        <label class="block text-sm font-medium text-gray-700">Lugar</label>
+        <label class="block text-sm font-medium ">Lugar</label>
         <input v-model="formData.location" type="url" class="mt-1 block w-full border rounded px-3 py-2" required />
       </div>
       <!-- Puedes agregar más campos (organizer_type, organizer_id, format, location) según necesites -->
@@ -41,8 +41,8 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div v-for="webinar in webinars" :key="webinar.id" class="border rounded p-4 shadow">
           <h3 class="text-lg font-bold mb-2">{{ webinar.title }}</h3>
-          <p class="text-sm text-gray-600 mb-1">{{ formatDate(webinar.date) }}</p>
-          <p class="text-gray-700 mb-2">{{ webinar.description }}</p>
+          <p class="text-sm  mb-1">{{ formatDate(webinar.date) }}</p>
+          <p class=" mb-2">{{ webinar.description }}</p>
           <a :href="webinar.link" class="text-blue-500 hover:underline" target="_blank">Ver Webinar</a>
         </div>
       </div>

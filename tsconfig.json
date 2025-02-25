@@ -1,15 +1,34 @@
 {
+  "compilerOptions": {
+    "baseUrl": "./",
+    "rootDir": "./src",
+    "paths": {
+      "@/*": ["src/*"],
+      "@view/*": ["src/views/*"],
+      "@components/*": ["components/*"],
+      "@layout/*": ["src/layouts/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@service/*": ["src/services/*"],
+      "@store/*": ["store/*"],
+      "@assets/*": ["assets/*"],
+      "@api": ["src/api/axiosInstance.ts"],
+      "@icons/*" : ["src/components/icons/*"],
+    },
+    "declaration": true,
+    "outDir": "./dist",
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true
+    // "declaration": true, // muestra los archivos de declaracion de tipos d.ts
+    // "declarationDir": "dist/types", // envia los archivos d.ts
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    }
-  },
   "exclude": ["node_modules", "dist"],
-  
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

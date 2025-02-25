@@ -34,7 +34,6 @@ const registrosFiltrados = computed(() => {
         r.work_area.toLowerCase().includes(searchTerm.value.toLowerCase())
     );
 });
-
 // Filtra los miembros cuando cambia la ruta
 watch(() => route.params.node_id, (nodeId) => {
     const id = parseInt(nodeId as string, 10);

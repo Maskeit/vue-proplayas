@@ -1,43 +1,43 @@
 <template>
-    <div class="p-4">
+    <div class="dark:text-[var(--color-dark-text)]">
         <h1 class="text-2xl font-bold mb-4">Gestión de Artículos</h1>
 
         <!-- Formulario para crear/editar un Artículo -->
-        <form @submit.prevent="onSubmit" class="space-y-4 mb-8">
+        <form @submit.prevent="onSubmit" class="p-4 space-y-4 mb-8 bg-white dark:bg-[var(--color-dark-bg)] shadow-md rounded-lg">
             <div>
-                <label class="block text-sm font-medium text-gray-700">Tipo</label>
+                <label class="block text-sm font-medium ">Tipo</label>
                 <input v-model="formData.type" type="text" class="mt-1 block w-full border rounded px-3 py-2"
                     required />
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">Título</label>
+                <label class="block text-sm font-medium ">Título</label>
                 <input v-model="formData.title" type="text" class="mt-1 block w-full border rounded px-3 py-2"
                     required />
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">Descripción</label>
-                <textarea v-model="formData.description" class="mt-1 block w-full border rounded px-3 py-2"
+                <label class="block text-sm font-medium ">Descripción</label>
+                <textarea v-model="formData.description" class="mt-1 block w-full border rounded px-3 py-2 field-sizing-content"
                     required></textarea>
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">Enlace</label>
+                <label class="block text-sm font-medium ">Enlace</label>
                 <input v-model="formData.links" type="url" class="mt-1 block w-full border rounded px-3 py-2"
                     required />
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">DOI</label>
+                <label class="block text-sm font-medium ">DOI</label>
                 <input v-model="formData.doi" type="text" class="mt-1 block w-full border rounded px-3 py-2" />
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">ISSN</label>
+                <label class="block text-sm font-medium ">ISSN</label>
                 <input v-model="formData.issn" type="text" class="mt-1 block w-full border rounded px-3 py-2" />
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">File Path</label>
+                <label class="block text-sm font-medium ">File Path</label>
                 <input v-model="formData.file_path" type="text" class="mt-1 block w-full border rounded px-3 py-2" />
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">Cover Image</label>
+                <label class="block text-sm font-medium ">Cover Image</label>
                 <input v-model="formData.cover_image" type="text" class="mt-1 block w-full border rounded px-3 py-2" />
             </div>
             <div class="flex justify-end">
@@ -51,10 +51,10 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div v-for="pub in publications" :key="pub.id" class="border rounded p-4 shadow">
                     <h3 class="text-lg font-bold mb-2">{{ pub.title }}</h3>
-                    <p class="text-sm text-gray-600 mb-1"><strong>Tipo:</strong> {{ pub.type }}</p>
-                    <p class="text-gray-700 mb-2">{{ pub.description }}</p>
-                    <p class="text-sm text-gray-600 mb-1"><strong>DOI:</strong> {{ pub.doi }}</p>
-                    <p class="text-sm text-gray-600 mb-1"><strong>ISSN:</strong> {{ pub.issn }}</p>
+                    <p class="text-sm  mb-1"><strong>Tipo:</strong> {{ pub.type }}</p>
+                    <p class=" mb-2">{{ pub.description }}</p>
+                    <p class="text-sm  mb-1"><strong>DOI:</strong> {{ pub.doi }}</p>
+                    <p class="text-sm  mb-1"><strong>ISSN:</strong> {{ pub.issn }}</p>
                     <a :href="pub.links" class="text-blue-500 hover:underline" target="_blank">Ver Artículo</a>
                 </div>
             </div>

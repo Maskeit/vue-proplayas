@@ -1,37 +1,37 @@
 <template>
-    <div class="p-4">
+    <div class="dark:text-[var(--color-dark-text)]">
         <h1 class="text-2xl font-bold mb-4">Gestión de Libros</h1>
 
         <!-- Formulario para crear/editar un Libro -->
-        <form @submit.prevent="onSubmit" class="space-y-4 mb-8">
+        <form @submit.prevent="onSubmit" class="p-4 space-y-4 mb-8 bg-white dark:bg-[var(--color-dark-bg)] shadow-md rounded-lg">
             <div>
-                <label class="block text-sm font-medium text-gray-700">Título</label>
+                <label class="block text-sm font-medium ">Título</label>
                 <input v-model="formData.title" type="text" class="mt-1 block w-full border rounded px-3 py-2"
                     required />
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">Autor</label>
+                <label class="block text-sm font-medium">Autor</label>
                 <input v-model="formData.author" type="text" class="mt-1 block w-full border rounded px-3 py-2"
                     placeholder="Nombre del autor" />
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">Fecha de Publicación</label>
+                <label class="block text-sm font-medium">Fecha de Publicación</label>
                 <!-- Se usa un input type="date" y se almacena en publicationDateString -->
                 <input v-model="formData.publicationDateString" type="date"
                     class="mt-1 block w-full border rounded px-3 py-2" />
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">ISBN</label>
+                <label class="block text-sm font-medium">ISBN</label>
                 <input v-model="formData.isbn" type="text" class="mt-1 block w-full border rounded px-3 py-2"
                     placeholder="Número ISBN" />
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">Descripción</label>
-                <textarea v-model="formData.description" class="mt-1 block w-full border rounded px-3 py-2"
+                <label class="block text-sm font-medium">Descripción</label>
+                <textarea v-model="formData.description" class="mt-1 block w-full border rounded px-3 py-2 field-sizing-content"
                     placeholder="Descripción del libro"></textarea>
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">Enlace</label>
+                <label class="block text-sm font-medium">Enlace</label>
                 <input v-model="formData.link" type="url" class="mt-1 block w-full border rounded px-3 py-2"
                     placeholder="Enlace al libro" />
             </div>
@@ -47,11 +47,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div v-for="book in books" :key="book.id" class="border rounded p-4 shadow">
                     <h3 class="text-lg font-bold mb-2">{{ book.title }}</h3>
-                    <p class="text-sm text-gray-600 mb-1">
+                    <p class="text-sm  mb-1">
                         {{ book.author ? book.author : 'Autor desconocido' }}
                     </p>
-                    <p class="text-sm text-gray-600 mb-1">{{ formatDate(book.publication_date) }}</p>
-                    <p class="text-gray-700 mb-2">{{ book.description }}</p>
+                    <p class="text-sm  mb-1">{{ formatDate(book.publication_date) }}</p>
+                    <p class="mb-2">{{ book.description }}</p>
                     <a v-if="book.link" :href="book.link" class="text-blue-500 hover:underline" target="_blank">Ver
                         Libro</a>
                 </div>
