@@ -1,6 +1,6 @@
 <template>
-    <div class="bg-white dark:bg-[var(--color-dark-bg)] shadow-md rounded-lg p-6 flex items-center">
-        <div class="grid grid-cols-2 gap-3">
+    <div class="bg-white dark:bg-[var(--color-dark-bg)] shadow-md rounded-lg p-6 flex items-center justify-between">
+        <div class="grid md:grid-cols-2 gap-3">
             <!-- Información básica -->
             <div class="mb-4">
                 <h2 class="text-lg font-semibold">Sobre mí</h2>
@@ -12,13 +12,18 @@
                 <h2 class="text-lg font-semibold">Educación</h2>
                 <p class=" mt-1"><strong>Grado:</strong> {{ degree }}</p>
                 <p v-if="postgraduate"><strong>Postgrado:</strong> {{ postgraduate
-                }}</p>
+                    }}</p>
             </div>
 
             <!-- Área de especialización -->
             <div class="mb-4">
                 <h2 class="text-lg font-semibold">Área de Especialización</h2>
                 <p class=" mt-1">{{ expertiseArea }}</p>
+            </div>
+            <!-- Área de especialización -->
+            <div class="mb-4">
+                <h2 class="text-lg font-semibold">Trabajos de Investigación</h2>
+                <p class=" mt-1">{{ researchWork }}</p>
             </div>
 
             <!-- Redes Sociales -->
@@ -33,11 +38,20 @@
                 </div>
             </div>
         </div>
-        <!-- Botón de Configuración -->
-        <button class="cursor-pointer p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-500 transition"
+        <!-- Botón de Configuración abre el modal con un form para hacer cambios-->
+        <button @click="openEditProfileModal"
+            class="cursor-pointer p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-500 transition"
             aria-label="Configuración">
             <PencilIcon class="w-6 h-6" />
         </button>
+        <EditProfileBio :isOpen="isEditProfileOpen" :userData="{
+            about,
+            degree,
+            postgraduate,
+            expertise_area: expertiseArea,
+            research_work: researchWork,
+            social_media: socialMedia
+        }" @close="isEditProfileOpen = false" @update="updateProfile" />
     </div>
 
 </template>
@@ -46,6 +60,8 @@
 import { SocialLink } from "@/interfaces/profile";
 import { GlobeAltIcon } from "@heroicons/vue/24/outline";
 import { AcademicCapIcon, PencilIcon } from "@heroicons/vue/24/solid";
+import { ref } from "vue";
+import EditProfileBio from "./EditProfileBio.vue";
 
 import FacebookIcon from "@icons/FacebookIcon.vue";
 import TwitterIcon from "@icons/TwitterIcon.vue";
@@ -59,6 +75,7 @@ interface Props {
     degree: string;
     postgraduate?: string;
     expertiseArea: string;
+    researchWork: string;
     socialMedia: SocialLink[];
 }
 
@@ -82,5 +99,16 @@ const getIconComponent = (platform: string) => {
 // Función para formatear el nombre de la plataforma
 const formatPlatform = (platform: string) => {
     return platform.charAt(0).toUpperCase() + platform.slice(1);
+};
+
+const isEditProfileOpen = ref(false);
+
+const openEditProfileModal = () => {
+    isEditProfileOpen.value = true;
+};
+
+const updateProfile = (updatedData: { name: string; profile_picture: string }) => {
+    console.log("Datos actualizados:", updatedData);
+    // Aquí puedes actualizar el estado global o emitir un evento para actualizar el perfil en el padre
 };
 </script>

@@ -13,7 +13,7 @@
                 <router-link to="/root/nodos" class="text-gray-700 dark:text-[var(--color-dark-text)] dark:hover:text-gray-400 font-semibold">Nodos</router-link>
                 <router-link to="/root/Webinar" class="text-gray-700 dark:text-[var(--color-dark-text)] dark:hover:text-gray-400">Webinars</router-link>
                 <router-link to="/root/Libros" class="text-gray-700 dark:text-[var(--color-dark-text)] dark:hover:text-gray-400">Libros</router-link>
-                <router-link to="/root/WebSeries" class="text-gray-700 dark:text-[var(--color-dark-text)] dark:hover:text-gray-400">WebSeries</router-link>
+                <router-link to="/root/WebSeries" class="text-gray-700 dark:text-[var(--color-dark-text)] dark:hover:text-gray-400">Web Series</router-link>
                 <router-link to="/root/Articulos" class="text-gray-700 dark:text-[var(--color-dark-text)] dark:hover:text-gray-400">Artículos</router-link>
                 <DarkModeToggle />
             </div>

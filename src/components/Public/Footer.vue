@@ -8,11 +8,9 @@
             </div>
             <!-- Menú de navegación en el footer con los mismos enlaces -->
             <div class="flex space-x-4">
-                <a href="/User/Profile" class="text-gray-300 hover:text-white">Perfil</a>
-                <a href="/User/Webinar" class="text-gray-300 hover:text-white">Webinars</a>
-                <a href="/User/Libros" class="text-gray-300 hover:text-white">Libros</a>
-                <a href="/User/WebSeries" class="text-gray-300 hover:text-white">Web Series</a>
-                <a href="/User/Articulos" class="text-gray-300 hover:text-white">Artículos</a>
+                <a href="/Home" class="text-gray-300 hover:text-white">Inicio</a>
+                <a href="/About" class="text-gray-300 hover:text-white">Quienes Somos</a>
+                <a href="/Content" class="text-gray-300 hover:text-white">Content</a>
             </div>
         </div>
     </footer>

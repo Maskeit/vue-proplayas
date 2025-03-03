@@ -10,7 +10,7 @@
             <div class="flex space-x-4">
                 <a href="/webinars" class="text-gray-300 hover:text-white">Webinars</a>
                 <a href="/libros" class="text-gray-300 hover:text-white">Libros</a>
-                <a href="/webseries" class="text-gray-300 hover:text-white">WebSeries</a>
+                <a href="/webseries" class="text-gray-300 hover:text-white">Web Series</a>
                 <a href="/articulos" class="text-gray-300 hover:text-white">Artículos</a>
             </div>
         </div>

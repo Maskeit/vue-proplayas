@@ -11,7 +11,7 @@
                 <router-link to="/root/nodos" class="text-gray-300 hover:text-white">Nodos</router-link>
                 <router-link to="/root/Webinar" class="text-gray-300 hover:text-white">Webinars</router-link>
                 <router-link to="/root/Libros" class="text-gray-300 hover:text-white">Libros</router-link>
-                <router-link to="/root/WebSeries" class="text-gray-300 hover:text-white">WebSeries</router-link>
+                <router-link to="/root/WebSeries" class="text-gray-300 hover:text-white">Web Series</router-link>
                 <router-link to="/root/Articulos" class="text-gray-300 hover:text-white">Artículos</router-link>
             </div>
         </div>

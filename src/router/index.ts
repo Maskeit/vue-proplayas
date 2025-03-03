@@ -6,6 +6,7 @@ import AdminRootLayout from "@layout/AdminRootLayout.vue";
 import AdminNodoLayout from "@layout/AdminNodoLayout.vue";
 import BlankLayout from "@layout/BlankLayout.vue";
 import UserLayout from "@layout/UserLayout.vue";
+import PublicLayout from "@layout/PublicLayout.vue";
 // paginas
 import AdminRootCrud from "@view/adminRoot/Crud.vue";
 import AdminRootCMS from "@view/adminRoot/CMS.vue"; //vista
@@ -19,6 +20,7 @@ import UserCMS from "@view/user/CMS.vue"; //vista
 // paginas publicas 
 import Login from "@view/public/Login.vue";
 import Register from "@view/public/Register.vue";
+import Home  from "@view/public/Home.vue";
 
 import PublicProfile from "@view/public/PublicProfile.vue";
 // Components para CMS
@@ -85,6 +87,29 @@ const blankPages = [
   { path: '/:pathMatch(.*)*', component: BlankLayout }, // Para cualquier ruta que no coincida con las anteriores
   { path: '', redirect: { name: 'Login' } }, // Para redireccionar a /login al inicio de la app.
 ]
+
+const publicRoutes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    redirect: { name: 'Home' } // Redirige el path vacío a Home
+  },
+  {
+    path: "/Home",
+    name: "Home",
+    component: Home,
+  },
+  {
+    path: "profile/:username",
+    name: "PublicProfile",
+    component: PublicProfile,
+    props: true,
+  },
+  { 
+    path: '/:pathMatch(.*)*', 
+    redirect: { name: 'Home' } // Redirige cualquier ruta no encontrada a Home
+  }
+];
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/User',
@@ -106,18 +131,16 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login',
     component: BlankLayout,
     children: blankPages,
-  }
-];
-
-
-const publicRoutes: Array<RouteRecordRaw> = [
-  {
-    path: "profile/:username", // 🔗 URL amigable usando el username
-    name: "PublicProfile",
-    component: PublicProfile,
-    props: true, // Permite pasar 'username' como prop
   },
+  {
+    path: '/',
+    component: PublicLayout,
+    children: publicRoutes,
+  },
+
 ];
+
+
 const router = createRouter({
   history: createWebHistory(),
   routes,

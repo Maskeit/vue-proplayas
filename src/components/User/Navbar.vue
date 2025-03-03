@@ -13,7 +13,7 @@
                 <router-link to="/User/Profile" class="text-gray-700 dark:text-[var(--color-dark-text)] dark:hover:text-gray-400 font-semibold">Perfil</router-link>
                 <router-link to="/User/Webinar" class="text-gray-700 dark:text-[var(--color-dark-text)] dark:hover:text-gray-400">Webinars</router-link>
                 <router-link to="/User/Libros" class="text-gray-700 dark:text-[var(--color-dark-text)] dark:hover:text-gray-400">Libros</router-link>
-                <router-link to="/User/WebSeries" class="text-gray-700 dark:text-[var(--color-dark-text)] dark:hover:text-gray-400">WebSeries</router-link>
+                <router-link to="/User/WebSeries" class="text-gray-700 dark:text-[var(--color-dark-text)] dark:hover:text-gray-400">Web Series</router-link>
                 <router-link to="/User/Articulos" class="text-gray-700 dark:text-[var(--color-dark-text)] dark:hover:text-gray-400">Artículos</router-link>
                 <DarkModeToggle />
             </div>
@@ -41,7 +41,7 @@
                 <router-link to="/User/Profile" class="block text-gray-700 dark:text-[var(--color-dark-text)] dark:hover:text-gray-400">Perfil</router-link>
                 <router-link to="/User/Webinar" class="block text-gray-700 dark:text-[var(--color-dark-text)] dark:hover:text-gray-400">Webinars</router-link>
                 <router-link to="/User/Libros" class="block text-gray-700 dark:text-[var(--color-dark-text)] dark:hover:text-gray-400">Libros</router-link>
-                <router-link to="/User/WebSeries" class="block text-gray-700 dark:text-[var(--color-dark-text)] dark:hover:text-gray-400">WebSeries</router-link>
+                <router-link to="/User/WebSeries" class="block text-gray-700 dark:text-[var(--color-dark-text)] dark:hover:text-gray-400">Web Series</router-link>
                 <router-link to="/User/Articulos" class="block text-gray-700 dark:text-[var(--color-dark-text)] dark:hover:text-gray-400">Artículos</router-link>
             </div>
         </div>

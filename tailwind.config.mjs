@@ -1,25 +1,29 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: [
-      './index.html',
-      './src/**/*.{vue,js,ts,jsx,tsx}',
-    ],
-    darkMode: 'class',
-    theme: {
-      extend: {
-        colors: {
-          // 🔹 Modo oscuro personalizado
-          "dark-bg": "var(--color-dark-bg)",
-          "dark-text": "var(--color-dark-text)",
-          "dark-primary": "var(--color-dark-primary)",
-        },
-        // Personalizaciones de tema (colores, fuentes, etc.)
-        fontFamily: {
-          poppins: ["Poppins", "sans-serif"],
-        },
+  darkMode: "class",
+  content: [
+    './index.html',
+    './src/**/*.{vue,js,ts,jsx,tsx}',
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
       },
     },
-    plugins: [
-      // Aquí puedes agregar plugins adicionales si los necesitas
-    ],
-  }
+  },
+  safelist: [
+    'text-gray-800',
+    'text-gray-700',
+    'dark:text-white',
+    'dark:text-[var(--color-text-dark)]',    
+    'opacity-0',
+    'opacity-100',
+    'translate-y-10',
+    'translate-y-0'
+  ],
+  plugins: [
+    require('tailwindcss-animated'),
+  ],
+
+}
