@@ -1,6 +1,6 @@
 <template>
     <section class="min-h-screen flex items-center justify-center">
-        <div class="mx-auto px-6 lg:px-20 flex flex-col lg:flex-row items-center">
+        <div class="px-6 max-w-6xl flex flex-col lg:flex-row items-center gap-14">
             <div class="lg:w-1/2 text-center lg:text-left animate-fade-up">
                 <h1 class="text-4xl lg:text-6xl font-bold text-[var(--color-eastern-blue-800)] dark:text-gray-200">
                     Estructura Organizativa (Nodos)

@@ -25,7 +25,7 @@
                 <h1 class="text-4xl lg:text-6xl font-bold text-[var(--color-eastern-blue-800)] dark:text-gray-200">
                     ¿Quiénes Somos?
                 </h1>
-                <p class="mt-4 text-lg text-gray-700 dark:text-gray-200 ">
+                <p class="mt-4 text-lg text-gray-700 dark:text-gray-200">
                     La mayor comunidad de profesionales, ciudadanos, empresarios, funcionarios y científicos que
                     trabajan en y con las playas en América Latina y Europa del Sur.
                     Desde 2007, nos hemos consolidado como la comunidad de playeros más grande y diversa del continente,

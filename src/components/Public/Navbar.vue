@@ -41,7 +41,7 @@
         <div v-if="isOpen" class="md:hidden">
             <div class="flex flex-col justify-center items-center text-center space-y-3 sm:px-4 py-4">
                 <router-link to="/Home" class="block dark:text-gray-200">Inicio</router-link>
-                <router-link to="/About" class="block dark:text-gray-200">Quienes Somos</router-link>
+                <a href="#quienes-somos" @click.prevent="scrollToSection" class="block dark:text-gray-200">Quienes Somos</a>
                 <router-link to="/Content" class="block dark:text-gray-200">Actividades</router-link>
                 <router-link to="/Login" class="block bg-gray-200 p-3 rounded-lg text-gray-700 dark:text-black dark:hover:text-gray-400">Login</router-link>
             </div>
