@@ -1,7 +1,9 @@
 [
   {
     "id": 1,
+    "user_id": 1,
     "node_id": 1,
+    "member_code": "A3",
     "name": "Carlos Ramírez",
     "email": "carlos.ramirez@example.com",
     "research_line": "Inteligencia Artificial",
@@ -9,7 +11,9 @@
   },
   {
     "id": 2,
+    "user_id": 2,
     "node_id": 1,
+    "member_code": "A3",
     "name": "Laura Martínez",
     "email": "laura.martinez@example.com",
     "research_line": "Visión por Computadora",
@@ -17,7 +21,9 @@
   },
   {
     "id": 3,
+    "user_id": 3,
     "node_id": 1,
+    "member_code": "A3",
     "name": "Miguel Alejandre",
     "email": "miguel.alejandre@example.com",
     "research_line": "Redes Neuronales",
@@ -25,7 +31,9 @@
   },
   {
     "id": 4,
-    "node_id": 2,
+    "user_id": 4,
+    "node_id": 1,
+    "member_code": "A3",
     "name": "Sofía Pérez",
     "email": "sofia.perez@example.com",
     "research_line": "Big Data",
@@ -33,7 +41,9 @@
   },
   {
     "id": 5,
+    "user_id": 5,
     "node_id": 2,
+    "member_code": "A4",
     "name": "Jorge Torres",
     "email": "jorge.torres@example.com",
     "research_line": "Seguridad Informática",
@@ -41,7 +51,9 @@
   },
   {
     "id": 6,
+    "user_id": 6,
     "node_id": 2,
+    "member_code": "A4",
     "name": "Ana López",
     "email": "ana.lopez@example.com",
     "research_line": "Desarrollo Web",
@@ -49,7 +61,9 @@
   },
   {
     "id": 7,
-    "node_id": 3,
+    "user_id": 7,
+    "node_id": 2,
+    "member_code": "A4",
     "name": "Roberto Díaz",
     "email": "roberto.diaz@example.com",
     "research_line": "Cloud Computing",
@@ -57,7 +71,9 @@
   },
   {
     "id": 8,
-    "node_id": 3,
+    "user_id": 8,
+    "node_id": 2,
+    "member_code": "A4",
     "name": "María González",
     "email": "maria.gonzalez@example.com",
     "research_line": "Automatización de Procesos",
@@ -65,7 +81,9 @@
   },
   {
     "id": 9,
+    "user_id": 9,
     "node_id": 3,
+    "member_code": "A5",
     "name": "Fernando Rojas",
     "email": "fernando.rojas@example.com",
     "research_line": "Blockchain",
@@ -73,7 +91,9 @@
   },
   {
     "id": 10,
-    "node_id": 4,
+    "user_id": 10,
+    "node_id": 3,
+    "member_code": "A5",
     "name": "Gabriela Mendoza",
     "email": "gabriela.mendoza@example.com",
     "research_line": "Realidad Aumentada",
@@ -81,7 +101,9 @@
   },
   {
     "id": 11,
-    "node_id": 5,
+    "user_id": 11,
+    "node_id": 3,
+    "member_code": "A5",
     "name": "Luis Herrera",
     "email": "luis.herrera@example.com",
     "research_line": "Computación Cuántica",
@@ -89,7 +111,9 @@
   },
   {
     "id": 12,
-    "node_id": 6,
+    "user_id": 12,
+    "node_id": 3,
+    "member_code": "A5",
     "name": "Paula Vázquez",
     "email": "paula.vazquez@example.com",
     "research_line": "Internet de las Cosas",
@@ -97,33 +121,41 @@
   },
   {
     "id": 13,
-    "node_id": 7,
+    "user_id": 13,
+    "node_id": 4,
+    "member_code": "A6",
     "name": "Ximena Manzo",
-    "email": "paula.vazquez@example.com",
+    "email": "ximena.manzo@example.com",
     "research_line": "Internet de las Cosas",
     "work_area": "Sistemas Embebidos"
   },
   {
     "id": 14,
-    "node_id": 8,
+    "user_id": 14,
+    "node_id": 4,
+    "member_code": "A6",
     "name": "Agustin Iturbide",
-    "email": "paula.vazquez@example.com",
+    "email": "agustin.iturbide@example.com",
     "research_line": "Internet de las Cosas",
     "work_area": "Sistemas Embebidos"
   },
   {
     "id": 15,
-    "node_id": 9,
+    "user_id": 15,
+    "node_id": 4,
+    "member_code": "A6",
     "name": "Guillermo Ochoa",
-    "email": "paula.vazquez@example.com",
+    "email": "guillermo.ochoa@example.com",
     "research_line": "Internet de las Cosas",
     "work_area": "Sistemas Embebidos"
   },
   {
     "id": 16,
-    "node_id": 10,
+    "user_id": 16,
+    "node_id": 4,
+    "member_code": "A6",
     "name": "Alex Marín",
-    "email": "paula.vazquez@example.com",
+    "email": "alex.marin@example.com",
     "research_line": "Internet de las Cosas",
     "work_area": "Sistemas Embebidos"
   }

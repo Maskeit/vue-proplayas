@@ -1,9 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" class="bg-white dark:bg-[var(--color-eastern-blue-950)] min-h-screen">
         <router-view />
     </div>
 </template>
-
-<script setup lang="ts">
-// No es necesaria lógica adicional
-</script>

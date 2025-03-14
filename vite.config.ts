@@ -11,8 +11,18 @@ const __dirname = path.dirname(__filename)
 export default defineConfig({
   plugins: [vue(), tailwindcss()],
   resolve: {
-    alias: [
-      { find: '@', replacement: path.resolve(__dirname, 'src') },
-    ],
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+      '@view': path.resolve(__dirname, './src/views'),
+      '@components': path.resolve(__dirname, './src/components'),
+      '@layout': path.resolve(__dirname, './src/layouts'),
+      '@interfaces': path.resolve(__dirname, './src/interfaces'),
+      '@service': path.resolve(__dirname, './src/services'),
+      '@store': path.resolve(__dirname, './src/stores'),
+      '@assets': path.resolve(__dirname, './src/assets'),
+      '@api' : path.resolve(__dirname, './src/api/axiosInstance.ts'),
+      '@icons' : path.resolve(__dirname, './src/components/icons'),
+    },
   },
+  logLevel: "info", // 🔹 Esto mostrará más detalles sobre los errores en la consola
 })

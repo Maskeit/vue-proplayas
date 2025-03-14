@@ -1,1 +1,53 @@
 @import "tailwindcss";
+@import "tailwindcss-animated";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Agregar fuentes personalizadas */
+@font-face {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-style: normal;
+  src: url("@/assets/fonts/Poppins-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-weight: 500;
+  font-style: normal;
+  src: url("@/assets/fonts/Poppins-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-weight: 600;
+  font-style: normal;
+  src: url("@/assets/fonts/Poppins-SemiBold.ttf") format("truetype");
+}
+* {
+  @apply transition-colors duration-200;
+}
+/* Aplicar la fuente personalizada a todo el proyecto */
+@layer base {
+  body {
+    font-family: "Poppins", sans-serif;
+  }
+  :root {
+    --tw-bg-opacity: 1;
+    --color-eastern-blue-50: #eefdfd;
+    --color-eastern-blue-100: #d3f8fa;
+    --color-eastern-blue-200: #adf1f4;
+    --color-eastern-blue-300: #75e4eb;
+    --color-eastern-blue-400: #35cedb;
+    --color-eastern-blue-500: #19b1c1;
+    --color-eastern-blue-600: #188fa2;
+    --color-eastern-blue-700: #1a7384;
+    --color-eastern-blue-800: #1e5d6c;
+    --color-eastern-blue-900: #1d4f5c;
+    --color-eastern-blue-950: #0e343e;
+  }
+  .dark {
+    --tw-bg-opacity: 1 !important;
+  }
+}
+

@@ -1,45 +1,45 @@
 <template>
     <!-- Contenedor del navbar con fondo blanco y sombra -->
-    <nav class="bg-white shadow-md">
+    <nav class="bg-white dark:bg-[var(--color-dark-bg)] shadow-md">
         <div class="container mx-auto px-4 py-4 flex items-center justify-between">
             <!-- Logo y nombre del sitio -->
             <div class="flex items-center gap-4 text-xl font-bold">
                 <img src="/proplayas_logo.svg" alt="Logo" class="h-14">
-                <a href="/" class="text-gray-800 hover:text-gray-600">Proplayas</a>
+                <a href="/" class="dark:text-gray-100 text-cyan-900">Proplayas</a>
             </div>
-            <!-- Menú de navegación para pantallas medianas y grandes -->
-            <div class="hidden md:flex space-x-4">
-                <router-link to="/root/Crud" class="text-gray-600 hover:text-gray-800">Nodos</router-link>
-                <router-link to="/root/CMS/Webinar" class="text-gray-600 hover:text-gray-800">Webinars</router-link>
-                <router-link to="/root/CMS/Libros" class="text-gray-600 hover:text-gray-800">Libros</router-link>
-                <router-link to="/root/CMS/WebSeries" class="text-gray-600 hover:text-gray-800">WebSeries</router-link>
-                <router-link to="/root/CMS/Articulos" class="text-gray-600 hover:text-gray-800">Artículos</router-link>
+            
+            <!-- Menú de navegación del admin root para pantallas medianas y grandes -->            
+            <div class="hidden md:flex space-x-4 items-center">
+                <router-link to="/root/nodos" class="text-gray-800 dark:text-gray-200 font-semibold">Nodos</router-link>
+                <router-link to="/root/Webinar" class="text-gray-800 dark:text-gray-200">Webinars</router-link>
+                <router-link to="/root/Libros" class="text-gray-800 dark:text-gray-200">Libros</router-link>
+                <router-link to="/root/WebSeries" class="text-gray-800 dark:text-gray-200">Web Series</router-link>
+                <router-link to="/root/Articulos" class="text-gray-800 dark:text-gray-200">Artículos</router-link>
             </div>
             <!-- Botón para desplegar el menú en pantallas pequeñas -->
-            <div class="md:hidden">
-                <button @click="toggleMenu" type="button" class="text-gray-600 hover:text-gray-800 focus:outline-none">
-                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
+            <div class="md:hidden flex items-center gap-2">
+                <!-- Botón de Modo Oscuro para móvil -->
+                <button @click="toggleMenu" type="button" class="text-gray-800 dark:text-gray-200 focus:outline-none">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <template v-if="!isOpen">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </template>
                         <template v-else>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </template>
                     </svg>
                 </button>
             </div>
         </div>
+
         <!-- Menú móvil: se muestra solo en pantallas pequeñas -->
         <div v-if="isOpen" class="md:hidden">
             <div class="flex flex-col justify-center items-center text-center space-y-3 sm:px-4">
-                <router-link to="/root/Crud" class="block text-gray-600 hover:text-gray-800">Nodos</router-link>
-                <router-link to="/root/CMS/Webinar" class="block text-gray-600 hover:text-gray-800">Webinars</router-link>
-                <router-link to="/root/CMS/Libros" class="block text-gray-600 hover:text-gray-800">Libros</router-link>
-                <router-link to="/root/CMS/WebSeries" class="block text-gray-600 hover:text-gray-800">WebSeries</router-link>
-                <router-link to="/root/CMS/Articulos" class="block text-gray-600 hover:text-gray-800">Artículos</router-link>
+                <router-link to="/root/nodos" class="block text-gray-800 dark:text-gray-200">Nodos</router-link>
+                <router-link to="/root/Webinar" class="block text-gray-800 dark:text-gray-200">Webinars</router-link>
+                <router-link to="/root/Libros" class="block text-gray-800 dark:text-gray-200">Libros</router-link>
+                <router-link to="/root/WebSeries" class="block text-gray-800 dark:text-gray-200">WebSeries</router-link>
+                <router-link to="/root/Articulos" class="block text-gray-800 dark:text-gray-200">Artículos</router-link>
             </div>
         </div>
     </nav>
@@ -47,7 +47,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-// Variable reactiva para controlar la visibilidad del menú móvil
+
 const isOpen = ref(false);
 
 // Función para alternar el menú
@@ -55,7 +55,3 @@ function toggleMenu() {
     isOpen.value = !isOpen.value;
 }
 </script>
-
-<style scoped>
-/* Puedes agregar estilos adicionales si es necesario */
-</style>
