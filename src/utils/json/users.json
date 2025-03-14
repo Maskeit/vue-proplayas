@@ -1,172 +1,449 @@
 [
     {
         "id": 1,
-        "name": "John Doe",
-        "email": "john.doe@example.com",        
-        "role": "admin",
-        "about": "Administrator of the system",
+        "name": "Carlos Ramírez",
+        "email": "carlos.ramirez@example.com",
+        "role": "member",
+        "about": "Carlos Ramírez es un desarrollador de software especializado en Inteligencia Artificial.",
         "degree": "Computer Science",
         "postgraduate": "Software Engineering",
-        "expertise_area": "Web Development",
+        "expertise_area": "Desarrollo de Software",
         "research_work": [],
-        "profile_picture": "john_doe.jpg",
+        "profile_picture": "carlos_ramirez.jpg",
         "social_media": [
-            {"platform": "twitter", "url": "twitter.com/johndoe"},
-            {"platform": "linkedin", "url": "linkedin.com/in/johndoe"}
+            {
+                "platform": "linkedin",
+                "url": "https://www.linkedin.com/in/miguel1170/"
+            },
+            {
+                "platform": "github",
+                "url": "https://github.com/Maskeit/"
+            },
+            {
+                "platform": "website",
+                "url": "https://codeale.com"
+            }
         ],
-        "status": "active"
+        "status": "active",
+        "username": "carlos_ramirez"
     },
     {
         "id": 2,
-        "name": "Jane Smith",
-        "email": "jane.smith@example.com",        
-        "role": "user",
-        "about": "Regular user of the system",
+        "name": "Laura Martínez",
+        "email": "laura.martinez@example.com",
+        "role": "member",
+        "about": "Laura Martínez es una investigadora académica en el campo de la Visión por Computadora.",
         "degree": "Information Technology",
         "postgraduate": "Cybersecurity",
-        "expertise_area": "Network Security",
+        "expertise_area": "Investigación Académica",
         "research_work": [],
-        "profile_picture": "jane_smith.jpg",
+        "profile_picture": "laura_martinez.jpg",
         "social_media": [
-            {"platform": "twitter", "url": "twitter.com/janesmith"},
-            {"platform": "linkedin", "url": "linkedin.com/in/janesmith"}
+            {
+                "platform": "linkedin",
+                "url": "https://www.linkedin.com/in/miguel1170/"
+            },
+            {
+                "platform": "github",
+                "url": "https://github.com/Maskeit/"
+            },
+            {
+                "platform": "website",
+                "url": "https://codeale.com"
+            }
         ],
-        "status": "active"
+        "status": "active",
+        "username": "laura_martinez"
     },
     {
         "id": 3,
-        "name": "Alice Johnson",
-        "email": "alice.johnson@example.com",        
-        "role": "user",
-        "about": "Inactive user",
+        "name": "Miguel Alejandre",
+        "email": "miguel.alejandre@example.com",
+        "role": "member",
+        "about": "Miguel Alejandre es un experto en Machine Learning con un enfoque en Redes Neuronales.",
         "degree": "Software Engineering",
         "postgraduate": "Data Science",
         "expertise_area": "Machine Learning",
         "research_work": [],
-        "profile_picture": "alice_johnson.jpg",
+        "profile_picture": "miguel_alejandre.jpg",
         "social_media": [
-            {"platform": "twitter", "url": "twitter.com/alicejohnson"},
-            {"platform": "linkedin", "url": "linkedin.com/in/alicejohnson"}
+            {
+                "platform": "linkedin",
+                "url": "https://www.linkedin.com/in/miguel1170/"
+            },
+            {
+                "platform": "github",
+                "url": "https://github.com/Maskeit/"
+            },
+            {
+                "platform": "website",
+                "url": "https://codeale.com"
+            }
         ],
-        "status": "inactive"
+        "status": "active",
+        "username": "miguel_alejandre"
     },
     {
         "id": 4,
-        "name": "Bob Brown",
-        "email": "bob.brown@example.com",        
-        "role": "user",
-        "about": "Regular user of the system",
+        "name": "Sofía Pérez",
+        "email": "sofia.perez@example.com",
+        "role": "member",
+        "about": "Sofía Pérez es una analista de datos especializada en Big Data.",
         "degree": "Computer Engineering",
         "postgraduate": "Embedded Systems",
-        "expertise_area": "IoT",
+        "expertise_area": "Análisis de Datos",
         "research_work": [],
-        "profile_picture": "bob_brown.jpg",
         "social_media": [
-            {"platform": "twitter", "url": "twitter.com/bobbrown"},
-            {"platform": "linkedin", "url": "linkedin.com/in/bobbrown"}
+            {
+                "platform": "linkedin",
+                "url": "https://www.linkedin.com/in/miguel1170/"
+            },
+            {
+                "platform": "github",
+                "url": "https://github.com/Maskeit/"
+            },
+            {
+                "platform": "website",
+                "url": "https://codeale.com"
+            }
         ],
-        "status": "active"
+        "status": "active",
+        "username": "sofia_perez"
     },
     {
         "id": 5,
-        "name": "Charlie Davis",
-        "email": "charlie.davis@example.com",        
-        "role": "admin",
-        "about": "System administrator",
+        "name": "Jorge Torres",
+        "email": "jorge.torres@example.com",
+        "role": "member",
+        "about": "Jorge Torres es un experto en ciberseguridad con un enfoque en Seguridad Informática.",
         "degree": "Information Systems",
         "postgraduate": "Project Management",
-        "expertise_area": "IT Management",
+        "expertise_area": "Ciberseguridad",
         "research_work": [],
-        "profile_picture": "charlie_davis.jpg",
+        "profile_picture": "jorge_torres.jpg",
         "social_media": [
-            {"platform": "twitter", "url": "twitter.com/charliedavis"},
-            {"platform": "linkedin", "url": "linkedin.com/in/charliedavis"}
+            {
+                "platform": "linkedin",
+                "url": "https://www.linkedin.com/in/miguel1170/"
+            },
+            {
+                "platform": "github",
+                "url": "https://github.com/Maskeit/"
+            },
+            {
+                "platform": "website",
+                "url": "https://codeale.com"
+            }
         ],
-        "status": "active"
+        "status": "active",
+        "username": "jorge_torres"
     },
     {
         "id": 6,
-        "name": "Diana Evans",
-        "email": "diana.evans@example.com",        
-        "role": "user",
-        "about": "Regular user of the system",
+        "name": "Ana López",
+        "email": "ana.lopez@example.com",
+        "role": "member",
+        "about": "Ana López es una desarrolladora frontend especializada en Desarrollo Web.",
         "degree": "Computer Science",
         "postgraduate": "Human-Computer Interaction",
-        "expertise_area": "UI/UX Design",
+        "expertise_area": "Frontend",
         "research_work": [],
-        "profile_picture": "diana_evans.jpg",
+        "profile_picture": "ana_lopez.jpg",
         "social_media": [
-            {"platform": "twitter", "url": "twitter.com/dianaevans"},
-            {"platform": "linkedin", "url": "linkedin.com/in/dianaevans"}
+            {
+                "platform": "linkedin",
+                "url": "https://www.linkedin.com/in/miguel1170/"
+            },
+            {
+                "platform": "github",
+                "url": "https://github.com/Maskeit/"
+            },
+            {
+                "platform": "website",
+                "url": "https://codeale.com"
+            }
         ],
-        "status": "active"
+        "status": "active",
+        "username": "ana_lopez"
     },
     {
         "id": 7,
-        "name": "Ethan Foster",
-        "email": "ethan.foster@example.com",        
-        "role": "user",
-        "about": "Inactive user",
+        "name": "Roberto Díaz",
+        "email": "roberto.diaz@example.com",
+        "role": "member",
+        "about": "Roberto Díaz es un ingeniero de infraestructura especializado en Cloud Computing.",
         "degree": "Software Engineering",
         "postgraduate": "Cloud Computing",
-        "expertise_area": "DevOps",
+        "expertise_area": "Infraestructura",
         "research_work": [],
-        "profile_picture": "ethan_foster.jpg",
+        "profile_picture": "roberto_diaz.jpg",
         "social_media": [
-            {"platform": "twitter", "url": "twitter.com/ethanfoster"},
-            {"platform": "linkedin", "url": "linkedin.com/in/ethanfoster"}
+            {
+                "platform": "linkedin",
+                "url": "https://www.linkedin.com/in/miguel1170/"
+            },
+            {
+                "platform": "github",
+                "url": "https://github.com/Maskeit/"
+            },
+            {
+                "platform": "website",
+                "url": "https://codeale.com"
+            }
         ],
-        "status": "inactive"
+        "status": "active",
+        "username": "roberto_diaz"
     },
     {
         "id": 8,
-        "name": "Fiona Green",
-        "email": "fiona.green@example.com",        
-        "role": "user",
-        "about": "Regular user of the system",
+        "name": "María González",
+        "email": "maria.gonzalez@example.com",
+        "role": "member",
+        "about": "María González es una experta en robótica con un enfoque en Automatización de Procesos.",
         "degree": "Information Technology",
         "postgraduate": "Business Intelligence",
-        "expertise_area": "Data Analysis",
+        "expertise_area": "Robótica",
         "research_work": [],
-        "profile_picture": "fiona_green.jpg",
+        "profile_picture": "maria_gonzalez.jpg",
         "social_media": [
-            {"platform": "twitter", "url": "twitter.com/fionagreen"},
-            {"platform": "linkedin", "url": "linkedin.com/in/fionagreen"}
+            {
+                "platform": "linkedin",
+                "url": "https://www.linkedin.com/in/miguel1170/"
+            },
+            {
+                "platform": "github",
+                "url": "https://github.com/Maskeit/"
+            },
+            {
+                "platform": "website",
+                "url": "https://codeale.com"
+            }
         ],
-        "status": "active"
+        "status": "active",
+        "username": "maria_gonzalez"
     },
     {
         "id": 9,
-        "name": "George Harris",
-        "email": "george.harris@example.com",        
-        "role": "admin",
-        "about": "System administrator",
+        "name": "Fernando Rojas",
+        "email": "fernando.rojas@example.com",
+        "role": "member",
+        "about": "Fernando Rojas es un experto en fintech con un enfoque en Blockchain.",
         "degree": "Computer Science",
         "postgraduate": "Network Engineering",
-        "expertise_area": "Network Administration",
+        "expertise_area": "Fintech",
         "research_work": [],
-        "profile_picture": "george_harris.jpg",
+        "profile_picture": "fernando_rojas.jpg",
         "social_media": [
-            {"platform": "twitter", "url": "twitter.com/georgeharris"},
-            {"platform": "linkedin", "url": "linkedin.com/in/georgeharris"}
+            {
+                "platform": "linkedin",
+                "url": "https://www.linkedin.com/in/miguel1170/"
+            },
+            {
+                "platform": "github",
+                "url": "https://github.com/Maskeit/"
+            },
+            {
+                "platform": "website",
+                "url": "https://codeale.com"
+            }
         ],
-        "status": "active"
+        "status": "active",
+        "username": "fernando_rojas"
     },
     {
         "id": 10,
-        "name": "Hannah White",
-        "email": "hannah.white@example.com",        
-        "role": "user",
-        "about": "Regular user of the system",
+        "name": "Gabriela Mendoza",
+        "email": "gabriela.mendoza@example.com",
+        "role": "member",
+        "about": "Gabriela Mendoza es una diseñadora de interfaces de usuario especializada en Realidad Aumentada.",
         "degree": "Software Engineering",
         "postgraduate": "Artificial Intelligence",
-        "expertise_area": "AI Development",
+        "expertise_area": "Interfaz de Usuario",
         "research_work": [],
-        "profile_picture": "hannah_white.jpg",
+        "profile_picture": "gabriela_mendoza.jpg",
         "social_media": [
-            {"platform": "twitter", "url": "twitter.com/hannahwhite"},
-            {"platform": "linkedin", "url": "linkedin.com/in/hannahwhite"}
+            {
+                "platform": "linkedin",
+                "url": "https://www.linkedin.com/in/miguel1170/"
+            },
+            {
+                "platform": "github",
+                "url": "https://github.com/Maskeit/"
+            },
+            {
+                "platform": "website",
+                "url": "https://codeale.com"
+            }
         ],
-        "status": "active"
+        "status": "active",
+        "username": "gabriela_mendoza"
+    },
+    {
+        "id": 11,
+        "name": "Luis Herrera",
+        "email": "luis.herrera@example.com",
+        "role": "member",
+        "about": "Luis Herrera es un investigador y desarrollador especializado en Computación Cuántica.",
+        "degree": "Computer Science",
+        "postgraduate": "Quantum Computing",
+        "expertise_area": "Investigación y Desarrollo",
+        "research_work": [],
+        "profile_picture": "luis_herrera.jpg",
+        "social_media": [
+            {
+                "platform": "linkedin",
+                "url": "https://www.linkedin.com/in/miguel1170/"
+            },
+            {
+                "platform": "github",
+                "url": "https://github.com/Maskeit/"
+            },
+            {
+                "platform": "website",
+                "url": "https://codeale.com"
+            }
+        ],
+        "status": "active",
+        "username": "luis_herrera"
+    },
+    {
+        "id": 12,
+        "name": "Paula Vázquez",
+        "email": "paula.vazquez@example.com",
+        "role": "member",
+        "about": "Paula Vázquez es una ingeniera de sistemas embebidos especializada en Internet de las Cosas.",
+        "degree": "Information Systems",
+        "postgraduate": "Embedded Systems",
+        "expertise_area": "Sistemas Embebidos",
+        "research_work": [],
+        "profile_picture": "paula_vazquez.jpg",
+        "social_media": [
+            {
+                "platform": "linkedin",
+                "url": "https://www.linkedin.com/in/miguel1170/"
+            },
+            {
+                "platform": "github",
+                "url": "https://github.com/Maskeit/"
+            },
+            {
+                "platform": "website",
+                "url": "https://codeale.com"
+            }
+        ],
+        "status": "active",
+        "username": "paula_vazquez"
+    },
+    {
+        "id": 13,
+        "name": "Ximena Manzo",
+        "email": "ximena.manzo@example.com",
+        "role": "member",
+        "about": "Ximena Manzo es una ingeniera de sistemas embebidos especializada en Internet de las Cosas.",
+        "degree": "Computer Science",
+        "postgraduate": "Embedded Systems",
+        "expertise_area": "Sistemas Embebidos",
+        "research_work": [],
+        "profile_picture": "ximena_manzo.jpg",
+        "social_media": [
+            {
+                "platform": "linkedin",
+                "url": "https://www.linkedin.com/in/miguel1170/"
+            },
+            {
+                "platform": "github",
+                "url": "https://github.com/Maskeit/"
+            },
+            {
+                "platform": "website",
+                "url": "https://codeale.com"
+            }
+        ],
+        "status": "active",
+        "username": "ximena_manzo"
+    },
+    {
+        "id": 14,
+        "name": "Agustin Iturbide",
+        "email": "agustin.iturbide@example.com",
+        "role": "member",
+        "about": "Agustin Iturbide es un ingeniero de sistemas embebidos especializado en Internet de las Cosas.",
+        "degree": "Information Technology",
+        "postgraduate": "Embedded Systems",
+        "expertise_area": "Sistemas Embebidos",
+        "research_work": [],
+        "profile_picture": "agustin_iturbide.jpg",
+        "social_media": [
+            {
+                "platform": "linkedin",
+                "url": "https://www.linkedin.com/in/miguel1170/"
+            },
+            {
+                "platform": "github",
+                "url": "https://github.com/Maskeit/"
+            },
+            {
+                "platform": "website",
+                "url": "https://codeale.com"
+            }
+        ],
+        "status": "active",
+        "username": "agustin_iturbide"
+    },
+    {
+        "id": 15,
+        "name": "Guillermo Ochoa",
+        "email": "guillermo.ochoa@example.com",
+        "role": "member",
+        "about": "Guillermo Ochoa es un ingeniero de sistemas embebidos especializado en Internet de las Cosas.",
+        "degree": "Computer Engineering",
+        "postgraduate": "Embedded Systems",
+        "expertise_area": "Sistemas Embebidos",
+        "research_work": [],
+        "profile_picture": "guillermo_ochoa.jpg",
+        "social_media": [
+            {
+                "platform": "linkedin",
+                "url": "https://www.linkedin.com/in/miguel1170/"
+            },
+            {
+                "platform": "github",
+                "url": "https://github.com/Maskeit/"
+            },
+            {
+                "platform": "website",
+                "url": "https://codeale.com"
+            }
+        ],
+        "status": "active",
+        "username": "guillermo_ochoa"
+    },
+    {
+        "id": 16,
+        "name": "Alex Marín",
+        "email": "alex.marin@example.com",
+        "role": "member",
+        "about": "Alex Marín es un ingeniero de sistemas embebidos especializado en Internet de las Cosas.",
+        "degree": "Information Systems",
+        "postgraduate": "Embedded Systems",
+        "expertise_area": "Sistemas Embebidos",
+        "research_work": [],
+        "profile_picture": "alex_marin.jpg",
+        "social_media": [
+            {
+                "platform": "linkedin",
+                "url": "https://www.linkedin.com/in/miguel1170/"
+            },
+            {
+                "platform": "github",
+                "url": "https://github.com/Maskeit/"
+            },
+            {
+                "platform": "website",
+                "url": "https://codeale.com"
+            }
+        ],
+        "status": "active",
+        "username": "alex_marin"
     }
 ]

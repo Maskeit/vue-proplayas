@@ -1,9 +1,9 @@
 <template>
-    <div class="dark:text-[var(--color-dark-text)]">
-        <h1 class="text-2xl font-bold mb-4">Gestión de Artículos</h1>
+    <div class="text-gray-600 dark:text-gray-100">
+        <h1 class="text-2xl font-bold mb-4 ">Gestión de Artículos</h1>
 
         <!-- Formulario para crear/editar un Artículo -->
-        <form @submit.prevent="onSubmit" class="p-4 space-y-4 mb-8 bg-white dark:bg-[var(--color-dark-bg)] shadow-md rounded-lg">
+        <form @submit.prevent="onSubmit" class="p-4 space-y-4 mb-8 bg-white dark:bg-gray-600 shadow-md rounded-lg">
             <div>
                 <label class="block text-sm font-medium ">Tipo</label>
                 <input v-model="formData.type" type="text" class="mt-1 block w-full border rounded px-3 py-2"

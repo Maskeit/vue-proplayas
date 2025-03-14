@@ -1,8 +1,7 @@
 <template>
-    <div class="p-4">
+    <div>
         <!-- Otros componentes y elementos del CRUD -->
-        <CrudHeader @nuevo-registro="abrirFormulario" @search="filtrar" />
-        <CrudTable :items="registrosFiltrados" @editar="editarRegistro" @eliminar="confirmarEliminacion" />
+        <NodosTable :items="registrosFiltrados" @editar="editarRegistro" @eliminar="confirmarEliminacion" @nuevo-registro="abrirFormulario" @search="filtrar" />
 
         <!-- Modal para crear/editar registros -->
         <CrudModal :visible="mostrarModal" @cerrar="cerrarModal">
@@ -11,22 +10,33 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import CrudHeader from '@/components/AdminRoot/Crud/CrudHeader.vue';
-import CrudTable from '@/components/AdminRoot/Crud/CrudTable.vue';
+import { ref, computed, onMounted } from 'vue';
+import NodosTable from '@/components/AdminRoot/nodo/NodosTable.vue';
 import CrudForm from '@/components/AdminRoot/Crud/CrudForm.vue';
 import CrudModal from '@/components/AdminRoot/Crud/CrudModal.vue';
 import type { Nodes } from '@/interfaces/Nodes';
-import nodes from '@/utils/json/nodes.json';
+import type { InviteNodeLeader } from '@interfaces/Invitations';
+import InvitationService from "@/services/Class/admin/Invitation.ts";
+import { NodosService } from "@/services/Class/public/NodoService";
 
-// Aquí usamos el archivo JSON para inicializar la variable 'registros'
-// Asegúrate de que las propiedades en el JSON sean compatibles con la interface Nodes.
-const registros = ref<Nodes[]>(nodes);
+const invitationsService = new InvitationService();
+const nodosService = new NodosService();
 
+const registros = ref<Nodes[]>();
 const searchTerm = ref('');
-const mostrarModal = ref(false);
 const registroSeleccionado = ref<Nodes | null>(null);
-
+const mostrarModal = ref(false);
+const getNodes = async () => {
+    try {
+        const response = await nodosService.getPublicNodes();        
+        if (response) {
+            registros.value = response; // Asignar datos solo si la respuesta es válida
+        }
+    } catch (error) {
+        console.error("Error cargando nodos:", error);
+    }
+};
+onMounted(getNodes);
 // Filtrado basado en la propiedad 'name' (asegúrate de que el JSON use el mismo nombre de propiedad)
 const registrosFiltrados = computed(() => {
     if (!searchTerm.value) return registros.value;
@@ -35,8 +45,7 @@ const registrosFiltrados = computed(() => {
         r.code.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
         r.type.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
         r.country.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
-        r.city.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
-        r.activity_level.toLowerCase().includes(searchTerm.value.toLowerCase())
+        r.city.toLowerCase().includes(searchTerm.value.toLowerCase())
     );
 });
 
@@ -55,20 +64,16 @@ function confirmarEliminacion(registro: Nodes) {
     registros.value = registros.value.filter(r => r.id !== registro.id);
 }
 
-function guardarRegistro(nuevoRegistro: Nodes) {
-    // Si el id es 0, se trata de una creación
-    if (nuevoRegistro.id === 0) {
-        nuevoRegistro.id = Date.now(); // Ejemplo para asignar un id único
-        registros.value.push(nuevoRegistro);
-    } else {
-        // Actualización: busca y actualiza el registro
-        const index = registros.value.findIndex(r => r.id === nuevoRegistro.id);
-        if (index !== -1) {
-            registros.value[index] = nuevoRegistro;
-        }
+const guardarRegistro = async (nuevoRegistro: InviteNodeLeader) => {
+    try {
+        const response = await invitationsService.createInvitation(nuevoRegistro);
+        console.log(response);
+        alert("Invitación enviada correctamente");
+        mostrarModal.value = false;
+    } catch (error) {
+        alert("Error al enviar la invitación. Revisa la consola.");
     }
-    mostrarModal.value = false;
-}
+};
 
 function cerrarModal() {
     mostrarModal.value = false;

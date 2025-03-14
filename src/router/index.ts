@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
-
+import { decodeJWT } from "@/services/system";
+import Cookies from "js-cookie";
 // Layouts 
 import AdminRootLayout from "@layout/AdminRootLayout.vue";
 import AdminNodoLayout from "@layout/AdminNodoLayout.vue";
@@ -8,10 +9,11 @@ import BlankLayout from "@layout/BlankLayout.vue";
 import UserLayout from "@layout/UserLayout.vue";
 import PublicLayout from "@layout/PublicLayout.vue";
 // paginas
-import AdminRootCrud from "@view/adminRoot/Crud.vue";
+import NodosPrivadoRoot from "@view/adminRoot/NodosPrivado.vue";
+import NodoPrivadoRoot from "@view/adminRoot/NodoPrivado.vue";
 import AdminRootCMS from "@view/adminRoot/CMS.vue"; //vista
 
-import AdminNodoCrud from "@view/adminNodo/Crud.vue";
+import NodoPrivado from "@view/adminNodo/NodoPrivado.vue";
 import AdminNodoCMS from "@/views/adminNodo/CMS.vue"; //vista
 
 import Profile from "@view/user/Profile.vue";
@@ -19,9 +21,10 @@ import UserCMS from "@view/user/CMS.vue"; //vista
 
 // paginas publicas 
 import Login from "@view/public/Login.vue";
-import Register from "@view/public/Register.vue";
+import Register from "@view/Public/Register.vue";
 import Home  from "@view/public/Home.vue";
-
+import NodosPublico from "@view/public/NodosPublico.vue";
+import NodoPublico from "@view/public/NodoPublico.vue";
 import PublicProfile from "@view/public/PublicProfile.vue";
 // Components para CMS
 import WebinarsCMS from "@components/shared/CMS/Webinars.vue";
@@ -42,12 +45,37 @@ const adminRootRoutes: Array<RouteRecordRaw> = [
   {
     path: 'nodos',
     name: 'CrudRoot',
-    component: AdminRootCrud,
+    component: NodosPrivadoRoot,
+    meta: { requiresAuth: true, role: "admin" },
+
+  },
+  {
+    path: 'nodo/:code', // Ruta dinámica con el código del nodo
+    name: '',
+    component: NodoPrivadoRoot,
+    props: true, // Permite pasar el código del nodo como prop
+    meta: { requiresAuth: true, role: "admin" },
   },
   {
     path: '',
     component: AdminRootCMS,
     children: generateCmsRoutes('root'),
+    meta: { requiresAuth: true, role: "admin" },
+  },
+];
+// Rutas para administradores de nodo
+const nodeLeaderRoutes: Array<RouteRecordRaw> = [
+  {
+    path: '/:code',
+    name: 'NodoDetalleNodeLeader',
+    component: NodoPrivado,
+    props: true,
+    meta: { requiresAuth: true, role: "node_leader" },
+  },
+  {
+    path: '',
+    component: AdminNodoCMS,
+    children: generateCmsRoutes('lider'),
   },
 ];
 
@@ -65,20 +93,6 @@ const userRoutes: Array<RouteRecordRaw> = [
   },
 ];
 
-// Rutas para administradores de nodo
-const adminNodoRoutes: Array<RouteRecordRaw> = [
-  {
-    path: '',
-    name: 'CrudNodo',
-    component: AdminNodoCrud,
-    props: (route) => ({ node_id: route.params.node_id }),
-  },
-  {
-    path: '',
-    component: AdminNodoCMS,
-    children: generateCmsRoutes('nodo'),
-  },
-];
 
 
 const blankPages = [
@@ -99,7 +113,19 @@ const publicRoutes: Array<RouteRecordRaw> = [
     component: Home,
   },
   {
-    path: "profile/:username",
+    path: '/Nodos',
+    name: 'Nodos',
+    component: NodosPublico,
+  },
+  {
+    path: '/nodo/:code', // Ruta dinámica con el código del nodo
+    name: 'NodoPublico',
+    component: NodoPublico,
+    props: true, // Permite pasar el código del nodo como prop
+    meta: { requiresAuth: false }, // No requiere autenticación
+  },
+  {
+    path: "/:username",
     name: "PublicProfile",
     component: PublicProfile,
     props: true,
@@ -123,9 +149,9 @@ const routes: Array<RouteRecordRaw> = [
     children: adminRootRoutes,
   },
   {
-    path: '/nodo/:node_id',
+    path: '/lider',
     component: AdminNodoLayout,
-    children: adminNodoRoutes,
+    children: nodeLeaderRoutes,
   },
   {
     path: '/login',
@@ -146,14 +172,40 @@ const router = createRouter({
   routes,
 });
 
-// ✅ Middleware para restringir el perfil privado solo a usuarios autenticados
-// router.beforeEach((to, from, next) => {
-//   const isAuthenticated = !!localStorage.getItem("authToken"); // Simulación de autenticación
-//   if (to.meta.requiresAuth && !isAuthenticated) {
-//     next({ name: "Login" });
-//   } else {
-//     next();
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  const token = Cookies.get("Authorization") || localStorage.getItem("Authorization");
+
+  // Si el token no existe y la ruta NO requiere autenticación, permitir acceso
+  if (!token) {
+    if (!to.meta.requiresAuth) {
+      return next();
+    }
+    console.warn("No hay token válido, redirigiendo al login.");
+    return next({ path: "/Login" });
+  }
+
+  const decodedData = decodeJWT(token);
+
+  // Si el token es inválido, también redirigir al Login
+  if (!decodedData) {
+    console.warn("Token inválido, redirigiendo al Login.");
+    return next({ path: "/Login" });
+  }
+
+  // Si la ruta requiere autenticación y no hay usuario autenticado, redirigir
+  if (to.meta.requiresAuth && !decodedData) {
+    console.warn("Intento de acceso sin autenticación.");
+    return next({ path: "/Login" });
+  }
+
+  // Verificar si el rol del usuario coincide con la meta de la ruta
+  if (to.meta.role && to.meta.role !== decodedData.role) {
+    console.warn(`Acceso denegado: se requiere rol '${to.meta.role}', pero el usuario tiene '${decodedData.role}'`);
+    return next({ path: "/Login" });
+  }
+
+  next(); // Permitir acceso si todas las validaciones pasan
+});
+
 
 export default router;

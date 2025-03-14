@@ -8,8 +8,8 @@
                 <p class="mt-4 text-lg text-gray-700 dark:text-gray-200 ">
                     Nuestra red se construye sobre nodos dinámicos que integran diversos sectores: científico, empresarial, público y sociedad civil.
                 </p>
-                <button @click=""
-                    class="mt-6 px-6 py-3 bg-[var(--color-eastern-blue-600)] text-white rounded-lg shadow-lg hover:bg-[var(--color-eastern-blue-800)]">
+                <button @click="goNodos"
+                    class="mt-6 px-6 py-3 bg-[var(--color-eastern-blue-600)] text-white rounded-lg shadow-lg hover:bg-[var(--color-eastern-blue-800)] cursor-pointer">
                     Nodos
                 </button>
             </div>
@@ -37,3 +37,11 @@
         </div>
     </section>
 </template>
+<script setup lang="ts">
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const goNodos = () => {
+    router.push({ name: 'Nodos' });
+}
+</script>

@@ -1,16 +1,20 @@
 export interface Nodes { 
     id: string;
-    type: string;
+    leader_id: string;
     code : string;
+    type: string;
     name : string;
+    profile_picture: string;
+    about: string;
     country : string;
     city : string;
+    ip_address: string;
+    coordinates: string;
+    alt_places: string;
     joined_in : number;
     members_count : number;
-    leader_name : string;
-    email : string;
-    password : string;
-    website : string;
-    activity_level : string;
+    id_photo: string;
+    social_media: string;
     memorandum : string;
+    status: string;
 }

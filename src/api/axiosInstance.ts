@@ -3,7 +3,7 @@ import { V_Global_API, system } from '@service/system';
 
 const axiosInstance = axios.create({
     baseURL: V_Global_API,
-    //withCredentials: true,
+    withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use(

@@ -12,7 +12,7 @@ export class Authentication {
             case "member":
                 return "/User/Profile";
             case "node_leader":
-                return nodeCode ? `/nodo/${nodeCode}` : null;
+                return nodeCode ? `/lider/${nodeCode}` : null;
             default:
                 return null; // Si el rol no es reconocido
         }
@@ -25,16 +25,16 @@ export class Authentication {
                 password: btoa(credentials.password),
             });
             if (response.data) {
-                const {token, role, node_code} = response.data.data;
+                const { token, role, node_code } = response.data.data;
                 const authToken = token
                 const user_role = role;
                 system.authToken = token;
                 system.role = role // el rol puede ser admin, member o node_leader
                 localStorage.setItem("Authorization", authToken);
-                Cookies.set("Authorization", authToken, { expires: 7, path: "/" });            
+                Cookies.set("Authorization", authToken, { expires: 7, path: "/" });
                 // Obtener ruta de redirección basada en el rol
                 const route = this.getRedirectRoute(user_role, node_code);
-                return { token: authToken, route: route};
+                return { token: authToken, route: route };
             }
             return { token: null, route: null };
         } catch (error: any) {
@@ -45,13 +45,30 @@ export class Authentication {
         }
     }
 
+    async logout(): Promise<boolean> {
+        try {
+            const response = await axiosInstance.post('/logout');
+            if (response.status === 200) {
+                Cookies.remove("Authorization", { path: "/" });
+                localStorage.removeItem("Authorization");
+                system.authToken = null;
+                system.role = null;
+                return true;
+            }
+            console.error("Error al cerrar sesión: Código de estado inesperado", response.status);
+            return false;
+        } catch (error: any) {
+            console.error("Error al cerrar sesión:", error);
+            return false;
+        }
+    }
     async register(credentials: RegisterRequest): Promise<RegisterResponse> {
         try {
             const response = await axiosInstance.post<RegisterResponse>('/register', {
                 email: credentials.email,
                 password: btoa(credentials.password),
                 name: credentials.name,
-                role: "member",
+                role: "admin",
             });
             if (response.data.status === 201) {
                 return {

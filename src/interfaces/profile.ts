@@ -10,7 +10,8 @@ export interface Users {
     research_work: string;
     profile_picture: string;
     social_media: SocialLink[];
-    status: string
+    status: string;
+    username: string;
 }
 
 export interface SocialLink {
