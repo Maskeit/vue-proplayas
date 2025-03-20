@@ -25,7 +25,9 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700 dark:text-gray-100">
                     <tr v-for="item in items" :key="item.id" 
-                        @click="irADetalle(item.code)"
+
+                        @click="irADetalle(Number(item.id))"
+
                         class="hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer">
                         <td class="px-6 py-4">{{ item.id }}</td>
                         <td class="px-6 py-4">{{ item.code }}</td>
@@ -50,7 +52,17 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const searchTerm = ref('');
 const props = defineProps<{ items: Nodes[] }>();
-const irADetalle = (code:string) => {
-    router.push(`/nodo/${code}`);
-}
+// const irADetalle = (id:number) => {
+//     router.push(`/nodo/${id}`);
+// }
+
+const irADetalle = (id: number | string) => {
+    const numericId = Number(id);
+    if (isNaN(numericId)) {
+        console.error("El ID no es un número válido:", id);
+        return;
+    }
+    console.log(`Redirigiendo al nodo con ID: ${numericId}`);
+    router.push(`/nodo/${numericId}`);
+};
 </script>

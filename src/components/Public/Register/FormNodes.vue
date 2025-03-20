@@ -150,7 +150,7 @@
                         Descripción:
                     </label>
                     <div class="relative mt-1">
-                        <textarea v-model="formData.description" name="about"
+                        <textarea v-model="formData.about" name="about"
                             class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 h-24"></textarea>
                     </div>
                 </div>
@@ -213,7 +213,7 @@ const formData = ref<RegisterNodeLeader>({
     research_work: "",
     node_type: "",
     node_name: "",
-    description: "",
+    about: "",
     country: "",
     city: "",
 });

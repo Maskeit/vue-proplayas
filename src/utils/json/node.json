@@ -1,0 +1,33 @@
+{
+    "id": "1",
+    "leader_id": "leader1",
+    "code": "A3",
+    "type": "EMPRESARIAL",
+    "name": "Cuidado de Playas",
+    "profile_picture": "profile1.jpg",
+    "about": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, ipsa ratione voluptatum nobis accusantium libero inventore saepe minus deserunt. Excepturi eligendi consequatur aperiam illum vitae impedit corporis quidem quae illo?",
+    "country": "Country 1",
+    "city": "City 1",
+    "ip_address": "192.168.1.1",
+    "coordinates": "34.0522,-118.2437",
+    "alt_places": "Beach 1, Beach 2",
+    "joined_in": 2020,
+    "members_count": 3,
+    "id_photo": "id1.jpg",
+    "social_media": [
+        {
+            "platform": "linkedin",
+            "url": "https://www.linkedin.com/in/miguel1170/"
+        },
+        {
+            "platform": "github",
+            "url": "https://github.com/Maskeit/"
+        },
+        {
+            "platform": "website",
+            "url": "https://codeale.com"
+        }
+    ],
+    "memorandum": "Memorandum 1",
+    "status": "active"
+}

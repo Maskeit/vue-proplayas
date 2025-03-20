@@ -1,14 +1,13 @@
 <template>
-    <div class="px-6">
+    <div class="px-5">
         <!-- header -->
-        <div class="flex justify-between items-center p-4 border-b">
-            <h1 class="text-3xl font-semibold text-gray-700 dark:text-gray-100">Detalles del Nodo {{ code }}</h1>
-            <div class="flex items-center space-x-2">
+        <div class="flex lg:flex-row flex-col justify-between items-center p-4 border-b">
+            <h1 class="text-3xl font-semibold text-gray-700 dark:text-gray-100">Miembros del Nodo {{ code }}</h1>
+            <div class="flex items-center gap-2">
                 <!-- Buscador (opcional) -->
-                <input type="text" placeholder="Buscar..." class="border rounded px-2 py-1" v-model="searchTerm"
+                <input type="text" placeholder="Buscar..." class="border rounded px-2 py-1 w-full max-w-xs" v-model="searchTerm"
                     @input="$emit('search', searchTerm)" />
-                <!-- Botón para abrir el formulario de creación -->
-                <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 whitespace-nowrap"
                     @click="$emit('nuevo-registro')">
                     Nuevo
                 </button>

@@ -178,7 +178,7 @@ const token = Cookies.get("Authorization") || localStorage.getItem("Authorizatio
 if (token) {
     const decodedData = decodeJWT(token);
     const role = decodedData.role;
-    const nodeCode = decodedData.node_code; // Assuming node_code is part of the decoded token
+    const nodeCode = localStorage.getItem("node_id"); // Assuming node_code is part of the decoded token
 
     if (role === "admin") {
         // Redirect to admin dashboard

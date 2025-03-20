@@ -1,6 +1,7 @@
 <template>
     <div v-if="isOpen" class="fixed inset-0 flex items-center justify-center text-gray-700 bg-black/50 backdrop-opacity-80"@click="closeModal">
         <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg  overflow-hidden h-auto max-h-[90vh] overflow-y-auto"@click.stop>
+
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-lg font-semibold">Editar Biografía</h2>
                 <button @click="closeModal" class="text-gray-500 hover:text-gray-700 ">
@@ -56,6 +57,7 @@
                         class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Guardar</button>
                 </div>
             </form>
+            
         </div>
     </div>
 </template>

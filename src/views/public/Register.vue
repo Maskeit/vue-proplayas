@@ -35,15 +35,16 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
-import Invitation from '@/services/Class/admin/Invitation';
+import InvitationService from '@/services/Class/admin/Invitation';
 import { ArrowLeftCircleIcon } from '@heroicons/vue/24/solid'
 import { validateRegisterForm, ValidationRegisterErrors } from '@/utils/validators/AuthVal';
 import FormAdmin from '@/components/public/Register/FormAdmin.vue';
 import FormNode from '@/components/public/Register/FormNodes.vue';
 import FormMember from '@/components/public/Register/FormMember.vue';
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
+const router = useRouter();
 const errors = ref<ValidationRegisterErrors>({})
 const errorMessage = ref('');
 let decodedData: any = null;
@@ -111,7 +112,7 @@ const handleRegister = async (formData: any, role:string) => {
     }
 
     try {
-        const registerLeaderNode = new Invitation();
+        const registerLeaderNode = new InvitationService();
         const token = route.query.token as string;
 
         if (!token) {
@@ -122,9 +123,8 @@ const handleRegister = async (formData: any, role:string) => {
 
         const response = await registerLeaderNode.registerNewNode({ ...formData, token });
         console.log("Respuesta de la API:", response);
-        if (response.success) {
-            alert(response.message)
-            //router.push('/Login');
+        if (response === 201) {
+            router.push('/Login');
         } else {
             errorMessage.value = response.message || "Error desconocido en el registro";
         }

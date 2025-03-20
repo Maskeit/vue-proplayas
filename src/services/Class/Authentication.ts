@@ -5,14 +5,14 @@ import Cookies from "js-cookie";
 export class Authentication {
     constructor() { };
 
-    private getRedirectRoute(role: string, nodeCode?: string): string | null {
+    private getRedirectRoute(role: string, nodeId?: string): string | null {
         switch (role) {
             case "admin":
                 return "/root/nodos";
             case "member":
                 return "/User/Profile";
             case "node_leader":
-                return nodeCode ? `/lider/${nodeCode}` : null;
+                return nodeId ? `/lider/${nodeId}` : null;
             default:
                 return null; // Si el rol no es reconocido
         }
@@ -22,18 +22,19 @@ export class Authentication {
         try {
             const response = await axiosInstance.post<LoginResponse>('/login', {
                 email: credentials.email,
-                password: btoa(credentials.password),
+                password: credentials.password, //btoa(credentials.password),
             });
             if (response.data) {
-                const { token, role, node_code } = response.data.data;
+                const { token, role, node_id } = response.data.data;
                 const authToken = token
                 const user_role = role;
                 system.authToken = token;
                 system.role = role // el rol puede ser admin, member o node_leader
                 localStorage.setItem("Authorization", authToken);
+                localStorage.setItem("node_id", node_id);
                 Cookies.set("Authorization", authToken, { expires: 7, path: "/" });
                 // Obtener ruta de redirección basada en el rol
-                const route = this.getRedirectRoute(user_role, node_code);
+                const route = this.getRedirectRoute(user_role, node_id);
                 return { token: authToken, route: route };
             }
             return { token: null, route: null };

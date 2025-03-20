@@ -54,7 +54,9 @@ const route = useRoute();
 const isOpen = ref(false);
 
 // Obtenemos el nodeId dinámico desde la URL
-const nodeId = computed(() => route.params.node_id);
+const nodeId = localStorage.getItem("node_id"); // Assuming node_code is part of the decoded token
+
+//const nodeId = computed(() => route.params.node_id);
 
 // Función para alternar el menú
 function toggleMenu() {

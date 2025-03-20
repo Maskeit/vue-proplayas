@@ -1,162 +1,332 @@
 [
-    {
-      "id": 1,
-      "type": "EMPRESARIAL",
-      "code": "A3",
-      "name": "Node 1",
-      "country": "Country 1",
-      "city": "City 1",
-      "joined_in": 2020,
-      "members_count": 3,
-      "leader_name": "Leader 1",
-      "email": "leader1@example.com",
-      "password": "password1",
-      "website": "www.node1.com",
-      "activity_level": "high",
-      "memorandum": "Memorandum 1"
-    },
-    {
-      "id": 2,
-      "type": "EMPRESARIAL",
-      "code": "A4",
-      "name": "Node 2",
-      "country": "Country 2",
-      "city": "City 2",
-      "joined_in": 2019,
-      "members_count": 3,
-      "leader_name": "Leader 2",
-      "email": "leader2@example.com",
-      "password": "password2",
-      "website": "www.node2.com",
-      "activity_level": "medium",
-      "memorandum": "Memorandum 2"
-    },
-    {
-      "id": 3,
-      "type": "EMPRESARIAL",
-      "code": "A5",
-      "name": "Node 3",
-      "country": "Country 3",
-      "city": "City 3",
-      "joined_in": 2021,
-      "members_count": 3,
-      "leader_name": "Leader 3",
-      "email": "leader3@example.com",
-      "password": "password3",
-      "website": "www.node3.com",
-      "activity_level": "low",
-      "memorandum": "Memorandum 3"
-    },
-    {
-      "id": 4,
-      "type": "EMPRESARIAL",
-      "code": "A6",
-      "name": "Node 4",
-      "country": "Country 4",
-      "city": "City 4",
-      "joined_in": 2018,
-      "members_count": 1,
-      "leader_name": "Leader 4",
-      "email": "leader4@example.com",
-      "password": "password4",
-      "website": "www.node4.com",
-      "activity_level": "high",
-      "memorandum": "Memorandum 4"
-    },
-    {
-      "id": 5,
-      "type": "EMPRESARIAL",
-      "code": "A7",
-      "name": "Node 5",
-      "country": "Country 5",
-      "city": "City 5",
-      "joined_in": 2022,
-      "members_count": 1,
-      "leader_name": "Leader 5",
-      "email": "leader5@example.com",
-      "password": "password5",
-      "website": "www.node5.com",
-      "activity_level": "medium",
-      "memorandum": "Memorandum 5"
-    },
-    {
-      "id": 6,
-      "type": "EMPRESARIAL",
-      "code": "A8",
-      "name": "Node 6",
-      "country": "Country 6",
-      "city": "City 6",
-      "joined_in": 2020,
-      "members_count": 1,
-      "leader_name": "Leader 6",
-      "email": "leader6@example.com",
-      "password": "password6",
-      "website": "www.node6.com",
-      "activity_level": "low",
-      "memorandum": "Memorandum 6"
-    },
-    {
-      "id": 7,
-      "type": "EMPRESARIAL",
-      "code": "A9",
-      "name": "Node 7",
-      "country": "Country 7",
-      "city": "City 7",
-      "joined_in": 2019,
-      "members_count": 1,
-      "leader_name": "Leader 7",
-      "email": "leader7@example.com",
-      "password": "password7",
-      "website": "www.node7.com",
-      "activity_level": "high",
-      "memorandum": "Memorandum 7"
-    },
-    {
-      "id": 8,
-      "type": "EMPRESARIAL",
-      "code": "A10",
-      "name": "Node 8",
-      "country": "Country 8",
-      "city": "City 8",
-      "joined_in": 2021,
-      "members_count": 1,
-      "leader_name": "Leader 8",
-      "email": "leader8@example.com",
-      "password": "password8",
-      "website": "www.node8.com",
-      "activity_level": "medium",
-      "memorandum": "Memorandum 8"
-    },
-    {
-      "id": 9,
-      "type": "CIENTIFICO",
-      "code": "C1",
-      "name": "Node 9",
-      "country": "Country 9",
-      "city": "City 9",
-      "joined_in": 2018,
-      "members_count": 1,
-      "leader_name": "Leader 9",
-      "email": "leader9@example.com",
-      "password": "password9",
-      "website": "www.node9.com",
-      "activity_level": "low",
-      "memorandum": "Memorandum 9"
-    },
-    {
-      "id": 10,
-      "type": "CIENTIFICO",
-      "code": "C2",
-      "name": "Node 10",
-      "country": "Country 10",
-      "city": "City 10",
-      "joined_in": 2022,
-      "members_count": 1,
-      "leader_name": "Leader 10",
-      "email": "leader10@example.com",
-      "password": "password10",
-      "website": "www.node10.com",
-      "activity_level": "high",
-      "memorandum": "Memorandum 10"
-    }
-  ]
+  {
+    "id": "1",
+    "leader_id": "leader1",
+    "code": "A3",
+    "type": "EMPRESARIAL",
+    "name": "Cuidado de Playas",
+    "profile_picture": "playa.jpg",
+    "about": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, ipsa ratione voluptatum nobis accusantium libero inventore saepe minus deserunt. Excepturi eligendi consequatur aperiam illum vitae impedit corporis quidem quae illo?",
+    "country": "Country 1",
+    "city": "City 1",
+    "ip_address": "192.168.1.1",
+    "coordinates": "34.0522,-118.2437",
+    "alt_places": "Beach 1, Beach 2",
+    "joined_in": 2020,
+    "members_count": 3,
+    "id_photo": "id1.jpg",
+    "social_media": [
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/miguel1170/"
+      },
+      {
+        "platform": "github",
+        "url": "https://github.com/Maskeit/"
+      },
+      {
+        "platform": "website",
+        "url": "https://codeale.com"
+      }
+    ],
+    "memorandum": "Memorandum 1",
+    "status": "active"
+  },
+  {
+    "id": "2",
+    "leader_id": "leader2",
+    "code": "A4",
+    "type": "EMPRESARIAL",
+    "name": "Nodo vergas",
+    "profile_picture": "profile2.jpg",
+    "about": "joder este es un nodo ",
+    "country": "Country 2",
+    "city": "City 2",
+    "ip_address": "192.168.1.2",
+    "coordinates": "40.7128,-74.0060",
+    "alt_places": "Beach 3, Beach 4",
+    "joined_in": 2019,
+    "members_count": 3,
+    "id_photo": "id2.jpg",
+    "social_media": [
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/miguel1170/"
+      },
+      {
+        "platform": "github",
+        "url": "https://github.com/Maskeit/"
+      },
+      {
+        "platform": "website",
+        "url": "https://codeale.com"
+      }
+    ],
+    "memorandum": "Memorandum 2",
+    "status": "active"
+  },
+  {
+    "id": "3",
+    "leader_id": "leader3",
+    "code": "A5",
+    "type": "EMPRESARIAL",
+    "name": "Node 3",
+    "profile_picture": "profile3.jpg",
+    "about": "Node 3 is focused on coastal cleanup.",
+    "country": "Country 3",
+    "city": "City 3",
+    "ip_address": "192.168.1.3",
+    "coordinates": "51.5074,-0.1278",
+    "alt_places": "Beach 5, Beach 6",
+    "joined_in": 2021,
+    "members_count": 3,
+    "id_photo": "id3.jpg",
+    "social_media": [
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/miguel1170/"
+      },
+      {
+        "platform": "github",
+        "url": "https://github.com/Maskeit/"
+      },
+      {
+        "platform": "website",
+        "url": "https://codeale.com"
+      }
+    ],
+    "memorandum": "Memorandum 3",
+    "status": "active"
+  },
+  {
+    "id": "4",
+    "leader_id": "leader4",
+    "code": "A6",
+    "type": "EMPRESARIAL",
+    "name": "Node 4",
+    "profile_picture": "profile4.jpg",
+    "about": "Node 4 is focused on environmental education.",
+    "country": "Country 4",
+    "city": "City 4",
+    "ip_address": "192.168.1.4",
+    "coordinates": "48.8566,2.3522",
+    "alt_places": "Beach 7, Beach 8",
+    "joined_in": 2018,
+    "members_count": 1,
+    "id_photo": "id4.jpg",
+    "social_media": [
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/miguel1170/"
+      },
+      {
+        "platform": "github",
+        "url": "https://github.com/Maskeit/"
+      },
+      {
+        "platform": "website",
+        "url": "https://codeale.com"
+      }
+    ],
+    "memorandum": "Memorandum 4",
+    "status": "active"
+  },
+  {
+    "id": "5",
+    "leader_id": "leader5",
+    "code": "A7",
+    "type": "EMPRESARIAL",
+    "name": "Node 5",
+    "profile_picture": "profile5.jpg",
+    "about": "Node 5 is focused on sustainable tourism.",
+    "country": "Country 5",
+    "city": "City 5",
+    "ip_address": "192.168.1.5",
+    "coordinates": "35.6895,139.6917",
+    "alt_places": "Beach 9, Beach 10",
+    "joined_in": 2022,
+    "members_count": 1,
+    "id_photo": "id5.jpg",
+    "social_media": [
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/miguel1170/"
+      },
+      {
+        "platform": "github",
+        "url": "https://github.com/Maskeit/"
+      },
+      {
+        "platform": "website",
+        "url": "https://codeale.com"
+      }
+    ],
+    "memorandum": "Memorandum 5",
+    "status": "active"
+  },
+  {
+    "id": "6",
+    "leader_id": "leader6",
+    "code": "A8",
+    "type": "EMPRESARIAL",
+    "name": "Node 6",
+    "profile_picture": "profile6.jpg",
+    "about": "Node 6 is focused on marine pollution research.",
+    "country": "Country 6",
+    "city": "City 6",
+    "ip_address": "192.168.1.6",
+    "coordinates": "55.7558,37.6173",
+    "alt_places": "Beach 11, Beach 12",
+    "joined_in": 2020,
+    "members_count": 1,
+    "id_photo": "id6.jpg",
+    "social_media": [
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/miguel1170/"
+      },
+      {
+        "platform": "github",
+        "url": "https://github.com/Maskeit/"
+      },
+      {
+        "platform": "website",
+        "url": "https://codeale.com"
+      }
+    ],
+    "memorandum": "Memorandum 6",
+    "status": "active"
+  },
+  {
+    "id": "7",
+    "leader_id": "leader7",
+    "code": "A9",
+    "type": "EMPRESARIAL",
+    "name": "Node 7",
+    "profile_picture": "profile7.jpg",
+    "about": "Node 7 is focused on beach restoration.",
+    "country": "Country 7",
+    "city": "City 7",
+    "ip_address": "192.168.1.7",
+    "coordinates": "34.0522,-118.2437",
+    "alt_places": "Beach 13, Beach 14",
+    "joined_in": 2019,
+    "members_count": 1,
+    "id_photo": "id7.jpg",
+    "social_media": [
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/miguel1170/"
+      },
+      {
+        "platform": "github",
+        "url": "https://github.com/Maskeit/"
+      },
+      {
+        "platform": "website",
+        "url": "https://codeale.com"
+      }
+    ],
+    "memorandum": "Memorandum 7",
+    "status": "active"
+  },
+  {
+    "id": "8",
+    "leader_id": "leader8",
+    "code": "A10",
+    "type": "EMPRESARIAL",
+    "name": "Node 8",
+    "profile_picture": "profile8.jpg",
+    "about": "Node 8 is focused on oceanography.",
+    "country": "Country 8",
+    "city": "City 8",
+    "ip_address": "192.168.1.8",
+    "coordinates": "40.7128,-74.0060",
+    "alt_places": "Beach 15, Beach 16",
+    "joined_in": 2021,
+    "members_count": 1,
+    "id_photo": "id8.jpg",
+    "social_media": [
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/miguel1170/"
+      },
+      {
+        "platform": "github",
+        "url": "https://github.com/Maskeit/"
+      },
+      {
+        "platform": "website",
+        "url": "https://codeale.com"
+      }
+    ],
+    "memorandum": "Memorandum 8",
+    "status": "active"
+  },
+  {
+    "id": "9",
+    "leader_id": "leader9",
+    "code": "C1",
+    "type": "CIENTIFICO",
+    "name": "Node 9",
+    "profile_picture": "profile9.jpg",
+    "about": "Node 9 is focused on scientific research.",
+    "country": "Country 9",
+    "city": "City 9",
+    "ip_address": "192.168.1.9",
+    "coordinates": "51.5074,-0.1278",
+    "alt_places": "Beach 17, Beach 18",
+    "joined_in": 2018,
+    "members_count": 1,
+    "id_photo": "id9.jpg",
+    "social_media": [
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/miguel1170/"
+      },
+      {
+        "platform": "github",
+        "url": "https://github.com/Maskeit/"
+      },
+      {
+        "platform": "website",
+        "url": "https://codeale.com"
+      }
+    ],
+    "memorandum": "Memorandum 9",
+    "status": "active"
+  },
+  {
+    "id": "10",
+    "leader_id": "leader10",
+    "code": "C2",
+    "type": "CIENTIFICO",
+    "name": "Node 10",
+    "profile_picture": "profile10.jpg",
+    "about": "Node 10 is focused on technology innovation.",
+    "country": "Country 10",
+    "city": "City 10",
+    "ip_address": "192.168.1.10",
+    "coordinates": "48.8566,2.3522",
+    "alt_places": "Beach 19, Beach 20",
+    "joined_in": 2022,
+    "members_count": 1,
+    "id_photo": "id10.jpg",
+    "social_media": [
+      {
+        "platform": "linkedin",
+        "url": "https://www.linkedin.com/in/miguel1170/"
+      },
+      {
+        "platform": "github",
+        "url": "https://github.com/Maskeit/"
+      },
+      {
+        "platform": "website",
+        "url": "https://codeale.com"
+      }
+    ],
+    "memorandum": "Memorandum 10",
+    "status": "active"
+  }
+]

@@ -1,11 +1,19 @@
 <template>
     <div>
         <!-- Otros componentes y elementos del CRUD -->
-        <NodosTable :items="registrosFiltrados" @editar="editarRegistro" @eliminar="confirmarEliminacion" @nuevo-registro="abrirFormulario" @search="filtrar" />
+        <NodosTable 
+            :items="registrosFiltrados" 
+            @editar="editarRegistro" 
+            @eliminar="confirmarEliminacion" 
+            @nuevo-registro="abrirFormulario" 
+            @search="filtrar" />
 
         <!-- Modal para crear/editar registros -->
         <CrudModal :visible="mostrarModal" @cerrar="cerrarModal">
-            <CrudForm :model="registroSeleccionado" @guardar="guardarRegistro" @cancelar="cerrarModal" />
+            <CrudForm 
+                :model="registroSeleccionado" 
+                @guardar="guardarRegistro" 
+                @cancelar="cerrarModal" />
         </CrudModal>
     </div>
 </template>
@@ -16,16 +24,16 @@ import CrudForm from '@/components/AdminRoot/Crud/CrudForm.vue';
 import CrudModal from '@/components/AdminRoot/Crud/CrudModal.vue';
 import type { Nodes } from '@/interfaces/Nodes';
 import type { InviteNodeLeader } from '@interfaces/Invitations';
-import InvitationService from "@/services/Class/admin/Invitation.ts";
+import InvitationService from "@/services/Class/admin/Invitation";
 import { NodosService } from "@/services/Class/public/NodoService";
 
 const invitationsService = new InvitationService();
 const nodosService = new NodosService();
-
 const registros = ref<Nodes[]>();
 const searchTerm = ref('');
 const registroSeleccionado = ref<Nodes | null>(null);
 const mostrarModal = ref(false);
+
 const getNodes = async () => {
     try {
         const response = await nodosService.getPublicNodes();        
@@ -36,6 +44,7 @@ const getNodes = async () => {
         console.error("Error cargando nodos:", error);
     }
 };
+
 onMounted(getNodes);
 // Filtrado basado en la propiedad 'name' (asegúrate de que el JSON use el mismo nombre de propiedad)
 const registrosFiltrados = computed(() => {

@@ -1,5 +1,5 @@
 <template>
-    <div class="px-6">
+    <div class="px-5">
         <!-- header -->
         <div class="flex justify-between items-center p-4 border-b">
             <h1 class="text-3xl font-semibold text-gray-700 dark:text-gray-100">Nodo Publico: {{ code }}</h1>

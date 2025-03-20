@@ -1,12 +1,12 @@
 import axiosInstance from "@api";
-import type { InviteNodeLeader, RegisterNodeLeader } from "@interfaces/Invitations";
+import type { InviteNodeMember, RegisterNodeMember } from "@interfaces/Invitations";
 
 
 export default class InvitationService {
     
-    async createInvitation(data: InviteNodeLeader): Promise<any> {
+    async createInvitation(data: InviteNodeMember): Promise<any> {
         try {
-            const response = await axiosInstance.post("/nodes/invite", data);
+            const response = await axiosInstance.post("/members/invite", data);
             return response.data;
         } catch (error) {
             console.error("Error al enviar la invitación:", error);
@@ -14,7 +14,7 @@ export default class InvitationService {
         }
     }
 
-    async registerNewNode(data: RegisterNodeLeader ): Promise<any> {
+    async registerNewNode(data: RegisterNodeMember ): Promise<any> {
         try {
             const response = await axiosInstance.post("/invitations/accept", data);
             return response.data.status; // 201

@@ -109,6 +109,5 @@ const openEditProfileModal = () => {
 
 const updateProfile = (updatedData: { name: string; profile_picture: string }) => {
     console.log("Datos actualizados:", updatedData);
-    // Aquí puedes actualizar el estado global o emitir un evento para actualizar el perfil en el padre
 };
 </script>

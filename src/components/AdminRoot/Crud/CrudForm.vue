@@ -108,8 +108,7 @@ function onSubmit() {
     emits('guardar', {
         name: formData.value.name,
         email: formData.value.email,
-        node_type: formData.value.node_type,
-        code: formData.value.code,
+        node_type: formData.value.node_type
     });
 }
 </script>

@@ -53,25 +53,25 @@
 </template>
 
 <script setup lang="ts">
-import { Members } from '@/interfaces/Members'; // Ejemplo de interface para un Members
+import { Member } from '@/interfaces/Members'; // Ejemplo de interface para un Members
 import { ref } from 'vue';
 // admin Root nodo
 const searchTerm = ref('');
 // Obtenemos las propiedades pasadas por el componente padre
 const props = defineProps<{
-    items: Members[];
+    items: Member[];
     code: string; // Ej A5
 }>();
 const emits = defineEmits<{
-    (e: 'editar', item: Members): void;
-    (e: 'eliminar', item: Members): void;
+    (e: 'editar', item: Member): void;
+    (e: 'eliminar', item: Member): void;
 }>();
 
-function onEditar(item: Members) {
+function onEditar(item: Member) {
     emits('editar', item);
 }
 
-function onEliminar(item: Members) {
+function onEliminar(item: Member) {
     emits('eliminar', item);
 }
 </script>

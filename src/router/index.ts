@@ -66,7 +66,7 @@ const adminRootRoutes: Array<RouteRecordRaw> = [
 // Rutas para administradores de nodo
 const nodeLeaderRoutes: Array<RouteRecordRaw> = [
   {
-    path: '/:code',
+    path: '/lider/:code',
     name: 'NodoDetalleNodeLeader',
     component: NodoPrivado,
     props: true,
