@@ -22,7 +22,7 @@ export class Authentication {
         try {
             const response = await axiosInstance.post<LoginResponse>('/login', {
                 email: credentials.email,
-                password: credentials.password, //btoa(credentials.password),
+                password: btoa(credentials.password),
             });
             if (response.data) {
                 const { token, role, node_id } = response.data.data;
@@ -52,6 +52,7 @@ export class Authentication {
             if (response.status === 200) {
                 Cookies.remove("Authorization", { path: "/" });
                 localStorage.removeItem("Authorization");
+                localStorage.removeItem("node_id");
                 system.authToken = null;
                 system.role = null;
                 return true;

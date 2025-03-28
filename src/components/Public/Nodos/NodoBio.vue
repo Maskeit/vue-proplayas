@@ -1,6 +1,6 @@
 <template>
     <div class="p-5 lg:p-10">
-        <div class="bg-white dark:bg-gray-500 shadow-md rounded-lg p-6 grid grid-cols-1 md:grid-cols-[300px_minmax(600px,_1fr)] gap-6 relative">
+        <div class="bg-white dark:bg-zinc-700 shadow-md rounded-lg p-6 grid grid-cols-1 md:grid-cols-[300px_minmax(600px,_1fr)] gap-6 relative">
             <!-- Perfil: Foto y Nombre -->
             <div class="flex flex-col items-center md:items-start">
                 <div class="space-y-4">
@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { SocialLink } from "@/interfaces/profile";
+import { SocialLink } from "@/interfaces/Profile";
 import { GlobeAltIcon } from "@heroicons/vue/24/outline";
 import {  AcademicCapIcon } from "@heroicons/vue/24/solid";
 

@@ -59,7 +59,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from "vue";
-import { SocialLink } from "@/interfaces/profile";
+import { SocialLink } from "@/interfaces/Profile";
 
 interface FormData {
     name: string;

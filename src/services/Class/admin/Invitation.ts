@@ -15,6 +15,8 @@ export default class InvitationService {
     }
 
     async registerNewNode(data: RegisterNodeLeader ): Promise<any> {
+        data.password = btoa(data.password);
+        data.confirm_password = btoa(data.confirm_password);
         try {
             const response = await axiosInstance.post("/invitations/accept", data);
             return response.data.status; // 201

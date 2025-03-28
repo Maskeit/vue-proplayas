@@ -1,34 +1,34 @@
 <template>
-    <div>
-        <!-- Le paso a la tabla los registros -->
-        <NodosTable @search="filtrar" :items="registrosFiltrados"/>
-    </div>
+    <TalbeNodosSkeleton v-if="isLoading" />
+    <div v-else-if="registros.length === 0" class="text-gray-400 flex justify-center align-center mt-10">No se encontraron nodos...</div>
+    <NodosTable v-else @search="filtrar" :items="registrosFiltrados" />
 </template>
+
 <script setup lang="ts">
 import NodosTable from "@/components/Public/Nodos/NodosTable.vue";
+import TalbeNodosSkeleton from "@/components/shared/skeletons/TableNodosSkeleton.vue";
 import { ref, computed, onMounted } from 'vue';
-import type { Nodes } from '@/interfaces/Nodes';
-import nodes from '@/utils/json/nodes.json';
-import { NodosService } from "@/services/Class/public/NodoService";
+import type { Nodes } from '@interfaces/Nodes';
+import { useNodosStore } from '@stores/nodosStore';
 
-const nodosService = new NodosService();
-
-const registros = ref<Nodes[]>([]); // aqui rellenar los registros con los datos de nodos traidos
+const nodosStore = useNodosStore();
+const registros = ref<Nodes[]>([]);
 const searchTerm = ref('');
+const isLoading = ref(true);
 
 const getNodes = async () => {
     try {
-        const response = await nodosService.getPublicNodes();        
-        if (response) {
-            registros.value = response; // Asignar datos solo si la respuesta es válida
-        }
+        await nodosStore.fetchNodos();
+        registros.value = nodosStore.nodos;
     } catch (error) {
         console.error("Error cargando nodos:", error);
+    } finally {
+        isLoading.value = false;
     }
 };
 onMounted(getNodes);
-// Filtrado basado en la propiedad 'name' (asegúrate de que el JSON use el mismo nombre de propiedad)
-const registrosFiltrados = computed(() => {    
+
+const registrosFiltrados = computed(() => {
     if (!searchTerm.value) return registros.value;
     return registros.value.filter(r =>
         r.name.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
@@ -38,7 +38,6 @@ const registrosFiltrados = computed(() => {
         r.city.toLowerCase().includes(searchTerm.value.toLowerCase())
     );
 });
-
 
 function filtrar(term: string) {
     searchTerm.value = term;

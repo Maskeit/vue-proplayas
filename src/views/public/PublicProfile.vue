@@ -10,7 +10,7 @@
       </div>
 
       <!-- Información básica -->
-      <div class="bg-white dark:bg-[var(--color-eastern-blue-800)] text-gray-800 dark:text-gray-100 shadow-md rounded-lg p-6 flex items-center justify-between">
+      <div class="bg-white dark:bg-zinc-600 text-gray-800 dark:text-gray-100 shadow-md rounded-lg p-6 flex items-center justify-between">
         <div class="grid md:grid-cols-2 gap-3">
           <div class="mb-4">
             <h2 class="text-lg font-semibold">Sobre mí</h2>
@@ -58,7 +58,7 @@
 import { useRoute } from "vue-router";
 import { computed, ref } from "vue";
 import users from "@/utils/json/users.json";
-import type { Users } from "@/interfaces/profile";
+import type { User } from "@/interfaces/Profile";
 
 import FacebookIcon from "@icons/FacebookIcon.vue";
 import TwitterIcon from "@icons/TwitterIcon.vue";
@@ -71,10 +71,10 @@ import { GlobeAltIcon, AcademicCapIcon } from "@heroicons/vue/24/outline";
 const route = useRoute();
 const username = route.params.username as string;
 
-const usuarios = ref<Users[]>(users);
+const usuarios = ref<User[]>(users);
 
 // Computed para encontrar el usuario actual
-const user = computed<Users | undefined>(() => {
+const user = computed<User | undefined>(() => {
   return usuarios.value.find((u) => u.username === username);
 });
 

@@ -1,7 +1,7 @@
 <template>
     <!-- Contenedor del navbar con fondo blanco y sombra -->
-    <nav class="shadow-md bg-white dark:bg-[var(--color-eastern-blue-950)] !important">
-        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+    <nav class="fixed top-0 left-0 w-full z-50 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md backdrop-saturate-150 shadow-md">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between ">
             <!-- Logo y nombre del sitio -->
             <div class="flex items-center gap-4 text-xl font-bold">
                 <img src="/proplayas_logo.svg" alt="Logo" class="h-14">
@@ -188,7 +188,7 @@ if (token) {
         userRoute.value = `/lider/${nodeCode}`;
     } else if (role === "member") {
         // Redirect to member dashboard
-        userRoute.value = "/member";
+        userRoute.value = "/User/profile";
     }
 }
 </script>

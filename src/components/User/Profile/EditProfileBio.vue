@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isOpen" class="fixed inset-0 flex items-center justify-center text-gray-700 bg-black/50 backdrop-opacity-80"@click="closeModal">
+    <div v-if="isOpen" class="fixed inset-0 z-50 flex items-center justify-center text-gray-700 bg-black/50 backdrop-opacity-80" @click="closeModal">
         <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg  overflow-hidden h-auto max-h-[90vh] overflow-y-auto"@click.stop>
 
             <div class="flex justify-between items-center mb-4">
@@ -64,7 +64,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from "vue";
-import { SocialLink } from "@/interfaces/profile";
+import { SocialLink } from "@interfaces/Profile";
 
 interface FormData {
     about: string;

@@ -1,50 +1,52 @@
 <template>
-    <div>
-        <!-- Otros componentes y elementos del CRUD -->
-        <NodosTable 
-            :items="registrosFiltrados" 
-            @editar="editarRegistro" 
-            @eliminar="confirmarEliminacion" 
-            @nuevo-registro="abrirFormulario" 
-            @search="filtrar" />
+    <TalbeNodosSkeleton v-if="isLoading" />
+    <!-- Otros componentes y elementos del CRUD -->
+    <NodosTable v-else
+        :items="registrosFiltrados" 
+        @editar="editarRegistro" 
+        @eliminar="confirmarEliminacion" 
+        @nuevo-registro="abrirFormulario" 
+        @search="filtrar" />
 
-        <!-- Modal para crear/editar registros -->
-        <CrudModal :visible="mostrarModal" @cerrar="cerrarModal">
-            <CrudForm 
-                :model="registroSeleccionado" 
-                @guardar="guardarRegistro" 
-                @cancelar="cerrarModal" />
-        </CrudModal>
-    </div>
+    <!-- Modal para crear/editar registros -->
+    <CrudModal :visible="mostrarModal" @cerrar="cerrarModal">
+        <CrudForm 
+            :model="registroSeleccionado" 
+            @guardar="guardarRegistro" 
+            @cancelar="cerrarModal" />
+    </CrudModal>
 </template>
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
 import NodosTable from '@/components/AdminRoot/nodo/NodosTable.vue';
+import TalbeNodosSkeleton from "@/components/shared/skeletons/TableNodosSkeleton.vue";
 import CrudForm from '@/components/AdminRoot/Crud/CrudForm.vue';
 import CrudModal from '@/components/AdminRoot/Crud/CrudModal.vue';
+import { ref, computed, onMounted } from 'vue';
 import type { Nodes } from '@/interfaces/Nodes';
 import type { InviteNodeLeader } from '@interfaces/Invitations';
+import { useNodosStore } from '@stores/nodosStore';
 import InvitationService from "@/services/Class/admin/Invitation";
-import { NodosService } from "@/services/Class/public/NodoService";
+import { NodosService } from "@/services/Class/NodoService";
 
 const invitationsService = new InvitationService();
-const nodosService = new NodosService();
-const registros = ref<Nodes[]>();
+const nodosStore = useNodosStore();
+const registros = ref<Nodes[]>([]);
 const searchTerm = ref('');
+const isLoading = ref(true);
+
 const registroSeleccionado = ref<Nodes | null>(null);
 const mostrarModal = ref(false);
 
 const getNodes = async () => {
     try {
-        const response = await nodosService.getPublicNodes();        
-        if (response) {
-            registros.value = response; // Asignar datos solo si la respuesta es válida
-        }
+        await nodosStore.fetchNodos();
+        registros.value = nodosStore.nodos;
     } catch (error) {
         console.error("Error cargando nodos:", error);
+    } finally {
+        isLoading.value = false;
     }
 };
-
 onMounted(getNodes);
 // Filtrado basado en la propiedad 'name' (asegúrate de que el JSON use el mismo nombre de propiedad)
 const registrosFiltrados = computed(() => {
@@ -64,8 +66,13 @@ function abrirFormulario() {
 }
 
 function editarRegistro(registro: Nodes) {
-    registroSeleccionado.value = registro;
-    mostrarModal.value = true;
+  registroSeleccionado.value = {
+    code: registro.code[0], // Asegura que solo sea la letra inicial
+    node_type: registro.type,
+    name: registro.name,
+    email: '', // <- no lo tienes en el nodo, así que lo dejas vacío
+  };
+  mostrarModal.value = true;
 }
 
 function confirmarEliminacion(registro: Nodes) {

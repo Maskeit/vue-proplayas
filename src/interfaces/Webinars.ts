@@ -1,4 +1,4 @@
-export interface Webinars {
+export interface Webinar {
     id: number;
     title: string;
     date: Date;

@@ -1,5 +1,5 @@
 <template>
-    <section class="relative bg-gradient-to-r from-blue-50 to-blue-200 dark:from-[var(--color-eastern-blue-700)] dark:to-[var(--color-eastern-blue-800)] min-h-screen flex items-center justify-center"> 
+    <section class="relative bg-gradient-to-r from-blue-50 to-blue-200 dark:from-zinc-800 dark:to-zinc-900 min-h-screen flex items-center justify-center"> 
         <div class="container mx-auto px-6 lg:px-20 flex flex-col-reverse lg:flex-row items-center gap-10">
             <!-- Contenido de la izquierda -->
             <div class="lg:w-1/2 text-center lg:text-left animate-fade-up ">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
 
-                <button class="mt-6 px-6 py-3 bg-[var(--color-eastern-blue-600)] text-white rounded-lg shadow-lg hover:bg-[var(--color-eastern-blue-800)]">
+                <button class="mt-6 px-6 py-3 bg-[var(--color-eastern-blue-600)] dark:bg-zinc-600 dark:hover:bg-zinc-500 text-white rounded-lg shadow-lg hover:bg-[var(--color-eastern-blue-800)]">
                     Conócenos
                 </button>
             </div>

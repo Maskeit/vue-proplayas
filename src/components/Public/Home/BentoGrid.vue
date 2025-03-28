@@ -1,6 +1,6 @@
 <template>
     <div class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-200 
-        dark:from-[var(--color-eastern-blue-900)] dark:to-[var(--color-eastern-blue-900)] 
+        dark:from-zinc-800 dark:to-zinc-800 
         flex flex-col gap-8 py-12 px-5">
 
         <h1 class="text-3xl lg:text-5xl text-center font-bold text-[var(--color-eastern-blue-800)] dark:text-gray-200 max-w-6xl mx-auto">

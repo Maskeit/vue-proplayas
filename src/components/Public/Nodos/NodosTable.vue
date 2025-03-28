@@ -1,7 +1,7 @@
 <template>
-    <div class="px-6">
+    <div class="px-5">
         <!-- header -->
-        <div class="flex justify-between items-center p-4 border-b">
+        <div class="flex justify-between items-center p-4">
             <h1 class="text-3xl font-semibold text-gray-600 dark:text-gray-100">Nodos</h1>
             <div class="flex items-center space-x-2">
                 <input type="text" placeholder="Buscar..." class="border rounded px-2 py-1 dark:text-gray-100" v-model="searchTerm"
@@ -11,7 +11,7 @@
         <!-- table -->
         <div class="overflow-x-auto w-full">
             <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50 dark:bg-gray-800">
+                <thead class="bg-gray-50 dark:bg-zinc-800">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">ID</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">Code</th>
@@ -21,14 +21,14 @@
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">Ciudad</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">Miembros</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">Se Unió en</th>
-                    </tr>
+                    </tr> 
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700 dark:text-gray-100">
+                <tbody class="bg-white divide-y divide-gray-200 dark:bg-zinc-800 dark:divide-zinc-700 dark:text-gray-100">
                     <tr v-for="item in items" :key="item.id" 
 
                         @click="irADetalle(Number(item.id))"
 
-                        class="hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer">
+                        class="hover:bg-gray-200 dark:hover:bg-zinc-700 cursor-pointer">
                         <td class="px-6 py-4">{{ item.id }}</td>
                         <td class="px-6 py-4">{{ item.code }}</td>
                         <td class="px-6 py-4">{{ item.name }}</td>

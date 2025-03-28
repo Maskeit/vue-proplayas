@@ -31,7 +31,7 @@
                         </span>
                         <input v-model="formData.email" type="email" id="email" name="email"
                             class="dark:text-gray-200 text-gray-600 w-full pl-10 pr-3 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500"
-                            placeholder="Correo electrónico" required readonly/>
+                            placeholder="Correo electrónico" required readonly />
                     </div>
                 </div>
 
@@ -46,7 +46,8 @@
                         </span>
 
                         <!-- Input de contraseña -->
-                        <input v-model="formData.password" :type="showPassword ? 'text' : 'password'" id="password" name="password"
+                        <input v-model="formData.password" :type="showPassword ? 'text' : 'password'" id="password"
+                            name="password"
                             class="dark:text-gray-200 text-gray-600 w-full pl-10 pr-10 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500"
                             placeholder="Contraseña" />
 
@@ -113,7 +114,7 @@
                 </div>
 
                 <button type="button" @click="nextStep"
-                    class="bg-[var(--color-eastern-blue-600)] hover:bg-[var(--color-eastern-blue-700)] text-white px-4 py-2 rounded-md transition w-full">Siguiente</button>
+                    class="bg-[var(--color-eastern-blue-600)] hover:bg-[var(--color-eastern-blue-700)] dark:bg-zinc-600 dark:hover:bg-zinc-500 text-white px-4 py-2 rounded-md transition w-full">Siguiente</button>
             </div>
 
             <!-- PASO 2: Información del Nodo -->
@@ -158,9 +159,9 @@
 
                 <div class="flex justify-between">
                     <button type="button" @click="prevStep"
-                        class="bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-500 transition">Anterior</button>
+                        class="bg-zinc-600 dark:hover:bg-zinc-500 text-white px-4 py-2 rounded-md hover:bg-gray-500 transition">Anterior</button>
                     <button type="submit"
-                        class="bg-[var(--color-eastern-blue-600)] hover:bg-[var(--color-eastern-blue-700)] text-white px-4 py-2 rounded-md transition">Registrarse</button>
+                        class="bg-[var(--color-eastern-blue-600)] hover:bg-[var(--color-eastern-blue-700)]  text-white px-4 py-2 rounded-md transition">Registrarse</button>
                 </div>
             </div>
         </form>
@@ -170,12 +171,14 @@
 <script setup lang="ts">
 import { ref, watch, defineEmits } from "vue";
 import type { RegisterNodeMember } from "@interfaces/Invitations.ts";
-import { LockClosedIcon, AtSymbolIcon, EyeIcon, EyeSlashIcon, UserIcon, 
-    GlobeAmericasIcon, BriefcaseIcon, DocumentTextIcon, LifebuoyIcon, BuildingOfficeIcon } from '@heroicons/vue/24/solid'
+import {
+    LockClosedIcon, AtSymbolIcon, EyeIcon, EyeSlashIcon, UserIcon,
+    GlobeAmericasIcon, BriefcaseIcon, DocumentTextIcon, LifebuoyIcon, BuildingOfficeIcon
+} from '@heroicons/vue/24/solid'
 
 const currentStep = ref(1);
 const props = defineProps<{ initialData: Partial<RegisterNodeMember> }>();
-console.log(props.initialData)
+
 const formData = ref<RegisterNodeMember>({
     token: "",
     name: "",
