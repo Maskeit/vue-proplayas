@@ -44,7 +44,7 @@ import type { SocialLink } from "@interfaces/Profile";
 import { useNodosStore } from '@stores/nodosStore';
 import InvitationsService from "@/services/Class/nodo/Invitations";
 
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
 const nodosStore = useNodosStore();
 const invitationsService = new InvitationsService();
@@ -62,11 +62,8 @@ const mostrarModal = ref(false);
 
 onMounted(async () => {
   isLoading.value = true;
-
   nodeData.value = await nodosStore.fetchNodoInfo(Number(code));
-  ID.value = nodeData.value?.id ?? null;
   registros.value = await nodosStore.fetchNodoMembers(Number(code)) || [];
-
   isLoading.value = false;
 });
 

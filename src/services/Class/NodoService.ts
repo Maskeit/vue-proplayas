@@ -6,8 +6,7 @@ export class NodosService {
         try {
             const response = await axiosInstance.get("/nodes");
             const data = response.data.data;
-            const status = response.data.status;
-            return { nodes: data, status };
+            return data;
         } catch (e) {
             console.error("Error al obtener los nodos públicos:", e);
             return { nodes: [], status: 500 }; // manejas el error con status
@@ -29,8 +28,7 @@ export class NodosService {
     // Traer miembros del nodo
     async getNodoMembers(id: number): Promise<NodeMembers[] | null> {
         try {
-            const response = await axiosInstance.get<{ data: NodeMembers[] }>(`/users/node/${id}`);
-            // console.log(response.data.data, "Miembros lista"); // Retornar directamente los datos
+            const response = await axiosInstance.get<{ data: NodeMembers[] }>(`/nodes/members/${id}`);
             return response.data.data;
         } catch (err) {
             console.error(`Error al obtener los miembros del nodo con id ${id}:`, err);

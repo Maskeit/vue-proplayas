@@ -3,7 +3,7 @@
         <header>
             <Navbar />
         </header>
-        <main class="flex-1 pt-22">
+        <main class="flex-1 pt-22 pb-10">
             <router-view />
         </main>
         <Footer />

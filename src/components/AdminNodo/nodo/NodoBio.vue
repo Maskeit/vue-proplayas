@@ -1,6 +1,6 @@
 <template>
     <div class="p-5 lg:p-10">
-        <div class="bg-white dark:bg-gray-500 shadow-md rounded-lg p-6 grid grid-cols-1 md:grid-cols-[300px_minmax(600px,_1fr)] gap-6 relative">
+        <div class="bg-white dark:bg-zinc-700 shadow-md rounded-lg p-6 grid grid-cols-1 md:grid-cols-[300px_minmax(600px,_1fr)] gap-6 relative">
             <!-- Botón de Configuración -->
             <button @click="openEditProfileModal"
                 class="absolute top-4 right-4 p-2 rounded-full bg-white hover:bg-gray-100 dark:hover:bg-gray-700 transition"
@@ -11,7 +11,7 @@
             <!-- Perfil: Foto y Nombre -->
             <div class="flex flex-col items-center md:items-start">
                 <div class="space-y-4">
-                    <img :src="`/src/assets/images/nodos/playa.jpg`" alt="Foto de perfil"
+                    <img :src="`/src/assets/images/nodos/proplayas.svg`" alt="Foto de perfil"
                         class="md:w-48 md:h-48 w-32 h-32 rounded-full border-2 border-gray-300 object-cover" />
                 </div>
                 <div class="my-3 text-center md:text-left">

@@ -23,54 +23,33 @@ import NotFound from "@/components/shared/Error/NotFound.vue";
 import { onMounted, ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { NodosService } from "@/services/Class/NodoService";
-import type { Member } from "@interfaces/Members";
-import type { Node } from "@interfaces/Nodes";
+import { useNodosStore } from '@stores/nodosStore';
+
+import type { Node, NodeMembers } from "@interfaces/Nodes";
 
 // Servicios y rutas
 const route = useRoute();
-const nodosService = new NodosService();
+const nodosStore = useNodosStore();
 
 // Estados
-const ID = ref<number | null>(null);
 const code = route.params.code as string;
+const ID = ref<number | null>(null);
 const nodeData = ref<Node | null>(null);
+const registros = ref<NodeMembers[]>([]);
 const isLoading = ref(true);
-
-// Simulación de miembros (puede reemplazarse por llamada a API real si es necesario)
-import members from "@/utils/json/members.json";
-const registros = ref<Member[]>(members);
 const searchTerm = ref('');
 
-// Al montar el componente, cargar los datos del nodo
 onMounted(async () => {
-    const paramId = Number(code);
-    if (isNaN(paramId)) {
-        console.error("El ID en la URL no es válido:", code);
-        return;
-    }
-    ID.value = paramId;
-    try {
-        const response = await nodosService.getNodeById(paramId);
-        if (response) {
-            console.log(response)
-            nodeData.value = response;
-        } else {
-            console.error("El nodo no fue encontrado en la API.");
-        }
-    } catch (error) {
-        console.error("Error al obtener datos del nodo:", error);
-    } finally {
-        isLoading.value = false;
-    }
+  isLoading.value = true;
+  nodeData.value = await nodosStore.fetchNodoInfo(Number(code));
+  registros.value = await nodosStore.fetchNodoMembers(Number(code)) || [];
+  isLoading.value = false;
 });
 
 // Computed para filtrar los registros relacionados con el nodo
 const registrosFiltrados = computed(() => {
-    if (!nodeData.value) return [];
-    return registros.value.filter(member =>
-        member.node_id === ID.value &&
-        (!searchTerm.value || member.name.toLowerCase().includes(searchTerm.value.toLowerCase()))
-    );
+  return registros.value.filter(member =>
+    !searchTerm.value || member.name.toLowerCase().includes(searchTerm.value.toLowerCase())
+  );
 });
 </script>

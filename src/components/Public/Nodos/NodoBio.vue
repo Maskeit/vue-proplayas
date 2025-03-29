@@ -4,7 +4,7 @@
             <!-- Perfil: Foto y Nombre -->
             <div class="flex flex-col items-center md:items-start">
                 <div class="space-y-4">
-                    <img :src="`/src/assets/images/nodos/playa.jpg`" alt="Foto de perfil"
+                    <img :src="`/src/assets/images/nodos/proplayas.svg`" alt="Foto de perfil"
                         class="md:w-48 md:h-48 w-32 h-32 rounded-full border-2 border-gray-300 object-cover" />
                 </div>
                 <div class="my-3 text-center md:text-left">

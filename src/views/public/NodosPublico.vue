@@ -13,20 +13,15 @@ import { useNodosStore } from '@stores/nodosStore';
 
 const nodosStore = useNodosStore();
 const registros = ref<Nodes[]>([]);
-const searchTerm = ref('');
 const isLoading = ref(true);
 
-const getNodes = async () => {
-    try {
-        await nodosStore.fetchNodos();
-        registros.value = nodosStore.nodos;
-    } catch (error) {
-        console.error("Error cargando nodos:", error);
-    } finally {
-        isLoading.value = false;
-    }
-};
-onMounted(getNodes);
+const searchTerm = ref('');
+
+onMounted(async () => {
+    isLoading.value = true;
+    registros.value = await nodosStore.fetchNodos();
+    isLoading.value = false;
+});
 
 const registrosFiltrados = computed(() => {
     if (!searchTerm.value) return registros.value;

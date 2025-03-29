@@ -22,6 +22,20 @@
                 </div>
 
                 <div class="mb-4">
+                    <label for="name" class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
+                        Nombre de usuario
+                    </label>
+                    <div class="relative mt-1">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                            <UserIcon class="size-6 dark:text-gray-200 text-gray-600" />
+                        </span>
+                        <input v-model="formData.username" type="text" id="username" name="username"
+                            class="dark:text-gray-200 text-gray-600 w-full pl-10 pr-3 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500"
+                            required />
+                    </div>
+                </div>
+
+                <div class="mb-4">
                     <label for="email" class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
                         Correo electrónico
                     </label>
@@ -182,6 +196,7 @@ const props = defineProps<{ initialData: Partial<RegisterNodeMember> }>();
 const formData = ref<RegisterNodeMember>({
     token: "",
     name: "",
+    username: "",
     email: "",
     password: "",
     confirm_password: "",

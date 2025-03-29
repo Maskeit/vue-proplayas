@@ -14,13 +14,40 @@ export interface Nodes {
 
 export interface NodeMembers {
     id: number;
+    user_id: number;
     node_id: number;
     member_code: string;
     name: string;
     email: string;
     research_line: string;
     work_area: string;
+    username: string;
+    status: string;
 }
+
+// export interface NodeMembers {
+//     id: number;
+//     node_id: number;
+//     member_code: string;
+//     email: string;
+//     status: string;
+//     user: User;
+// }
+
+// interface User {
+//     id: number;
+//     name: string;
+//     about: string;
+//     email: string;
+//     degree: string;
+//     expertise_area: string;
+//     postgraduate: string;
+//     research_work: string;
+//     social_media: SocialLink[] | null;
+//     username: string;
+//     profile_picture: string;
+// }
+
 
 export interface Node {
     id: string;
