@@ -31,9 +31,9 @@ export const useNodosStore = defineStore('nodos', () => {
     };
 
     // traer informacion del nodo
-    const fetchNodoInfo = async (id: number): Promise<Node | null> => {
+    const fetchNodoInfo = async (code: string): Promise<Node | null> => {
         try {
-            const response = await nodosService.getNodeBio(id);
+            const response = await nodosService.getNodeBioCode(code);
             if (response) {
                 nodo.value = response;
                 cargado.value = true;

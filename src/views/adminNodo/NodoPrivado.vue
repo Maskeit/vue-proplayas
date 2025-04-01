@@ -8,6 +8,7 @@
                 :about="nodeData?.about"
                 :social_media="nodeData?.social_media" 
                 :joined_in="nodeData?.joined_in"
+                :leader="nodeData.leader"
                 :country="nodeData?.country"
                 :city="nodeData?.city"
                 @updateNodeData="handleUpdateNode"/>
@@ -37,12 +38,11 @@ import CrudModal from '@/components/AdminNodo/Crud/CrudModal.vue';
 import { useRoute } from 'vue-router';
 
 import type { Member } from "@interfaces/Members";
-import type { Node, NodeMembers } from "@interfaces/Nodes";
+import type { Node, NodeMembers, SocialLink } from "@interfaces/Nodes";
 import type { InviteNodeMember } from '@interfaces/Invitations';
-import type { SocialLink } from "@interfaces/Profile";
 
 import { useNodosStore } from '@stores/nodosStore';
-import InvitationsService from "@/services/Class/nodo/Invitations";
+import InvitationsService from "@/services/Class/InvitationService";
 
 import { ref, computed, onMounted } from 'vue';
 
@@ -91,7 +91,7 @@ function handleUpdateNode(updatedData: { name: string; about: string; profile_pi
 }
 async function guardarRegistro(nuevoRegistro: InviteNodeMember) {
     try {
-        await invitationsService.createInvitation(nuevoRegistro);
+        await invitationsService.createInvitationToNodeMember(nuevoRegistro);
         alert("Invitación enviada correctamente");
         mostrarModal.value = false;
     } catch (error) {

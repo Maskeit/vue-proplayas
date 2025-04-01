@@ -71,10 +71,15 @@ export interface Node {
     leader: Leader; // se muestra
 }
 
-interface Leader {
+export interface Leader {
     id: number;
     degree: string;
     email: string;
     name: string;
     postgraduate:string;
+}
+
+export interface SocialLink {
+    platform: 'linkedin' | 'github' | 'twitter' | 'website' | 'facebook' | 'instagram' | 'youtube' | 'research_gate';
+    url: string;
 }

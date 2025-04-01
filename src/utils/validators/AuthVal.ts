@@ -1,4 +1,3 @@
-
 export interface ValidationErrors {
     email?: string;
     password?: string;
@@ -7,6 +6,15 @@ export interface ValidationErrors {
 export interface ValidationRegisterErrors extends ValidationErrors {
     confirmPassword?: string;
     name?: string;
+}
+
+export interface ValidationMemberRegisterErrors extends ValidationRegisterErrors {
+    username?: string;
+    expertise_area?: string;
+    research_work?: string;
+    about?: string;
+    country?: string;
+    city?: string;
 }
 
 export const validateAuthForm = (email: string, password: string): ValidationErrors => {
@@ -62,6 +70,46 @@ export const validateRegisterForm = (
     // Validación de nombre
     if (!name.trim()) {
         errors.name = "El nombre es obligatorio.";
+    }
+
+    return errors;
+};
+
+export const validateMemberRegisterForm = ( formData: RegisterNodeMember ): ValidationMemberRegisterErrors => {
+    const errors: ValidationMemberRegisterErrors = {};
+
+    const { name, username, email, password, confirm_password, expertise_area, research_work, about, country, city } = formData;
+
+    // Reutiliza validaciones existentes para email, password, confirm_password y name
+    const commonErrors = validateRegisterForm(email, password, confirm_password, name);
+    Object.assign(errors, commonErrors);
+
+    // Validación de username
+    if (!username.trim()) {
+        errors.username = "El nombre de usuario es obligatorio.";
+    } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+        errors.username = "El nombre de usuario solo puede contener letras, números y guiones bajos.";
+    }
+
+    // Validaciones de campos adicionales
+    if (!expertise_area.trim()) {
+        errors.expertise_area = "El área de trabajo es obligatoria.";
+    }
+
+    if (!research_work.trim()) {
+        errors.research_work = "El trabajo de investigación es obligatorio.";
+    }
+
+    if (!about.trim()) {
+        errors.about = "La descripción es obligatoria.";
+    }
+
+    if (!country.trim()) {
+        errors.country = "El país es obligatorio.";
+    }
+
+    if (!city.trim()) {
+        errors.city = "La ciudad es obligatoria.";
     }
 
     return errors;

@@ -10,6 +10,13 @@
                 <div class="my-3 text-center md:text-left">
                     <h1 class="text-2xl font-semibold text-gray-500 dark:text-white">{{ name }}</h1>
                 </div>
+                <div class="max-w-lg">
+                    <div class="flex gap-2">
+                        <p class="text-gray-500 dark:text-white">{{ city }}, </p>
+                        <p class="text-gray-500 dark:text-white">{{ country }}</p>
+                        <MapPinIcon class="w-6 h-6 text-gray-500" />
+                    </div>
+                </div>
                 <!-- fecha en que se unió -->
                 <p class="text-gray-400 dark:text-white text-center md:text-left">Se unió a proplayas en {{ joined_in }}</p>
             </div>
@@ -22,26 +29,30 @@
                 </div>
 
                 <!-- Redes Sociales -->
-                <div v-if="social_media && social_media.length" class="mt-6 flex flex-wrap items-center gap-4">
+                <div v-if="social_media && Object.keys(social_media).length" class="mt-6 flex flex-wrap items-center gap-4">
                     <h2 class="text-lg font-semibold text-gray-500 dark:text-white">Redes Sociales:</h2>
                     <div class="flex flex-wrap gap-3">
-                        <a v-for="link in social_media" :key="link.platform" :href="link.url" target="_blank"
+                        <a v-for="[platform, url] in Object.entries(social_media)" :key="platform" :href="url" target="_blank"
                             class="flex items-center gap-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-500 transition">
-                            <component :is="getIconComponent(link.platform)" class="w-5 h-5" />
-                            {{ formatPlatform(link.platform) }}
+                            <component :is="getIconComponent(platform)" class="w-5 h-5" />
+                            {{ formatPlatform(platform) }}
                         </a>
                     </div>
                 </div>
+                <!-- <div>
+                    <p>Lider del nodo: {{ leader.name }}</p>
+                    <p>Email del nodo: {{ leader.email }}</p>
+                    <p>Grado del nodo: {{ leader.degree }}</p>
+                </div> -->
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { SocialLink } from "@/interfaces/Profile";
+import { Leader, SocialLink } from "@interfaces/Nodes";
 import { GlobeAltIcon } from "@heroicons/vue/24/outline";
-import {  AcademicCapIcon } from "@heroicons/vue/24/solid";
-
+import {  AcademicCapIcon,MapPinIcon } from "@heroicons/vue/24/solid";
 import FacebookIcon from "@icons/FacebookIcon.vue";
 import TwitterIcon from "@icons/TwitterIcon.vue";
 import InstagramIcon from "@icons/InstagramIcon.vue";
@@ -54,7 +65,10 @@ interface Props {
     about: string;
     joined_in: number;
     profile_picture: string;
-    social_media: SocialLink[] | null;
+    social_media: SocialLink | null;
+    leader: Leader;
+    country: string;
+    city: string;
 }
 
 defineProps<Props>();

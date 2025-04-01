@@ -19,9 +19,9 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
-import InvitationService from '@/services/Class/admin/Invitation';
+import InvitationService from '@/services/Class/InvitationService';
 import { ArrowLeftCircleIcon } from '@heroicons/vue/24/solid'
-import { validateRegisterForm, ValidationRegisterErrors } from '@/utils/validators/AuthVal';
+import { validateRegisterForm, ValidationRegisterErrors, validateMemberRegisterForm } from '@/utils/validators/AuthVal';
 import FormAdmin from '@/components/public/Register/FormAdmin.vue';
 import FormNode from '@/components/public/Register/FormNodes.vue';
 import FormMember from '@/components/public/Register/FormMember.vue';
@@ -82,13 +82,18 @@ const selectedFormComponent = computed(() => {
     return formMap[initialData.value.role_type] || null;
 });
 
-const handleRegister = async (formData: any, role:string) => {
-    errors.value = validateRegisterForm(
-        formData.email,
-        formData.password,
-        formData.confirm_password,
-        formData.name
-    );
+const handleRegister = async (formData: any, role: string) => {
+    // Validar según el tipo de usuario
+    if (role === 'member') {
+        errors.value = validateMemberRegisterForm(formData);
+    } else {
+        errors.value = validateRegisterForm(
+            formData.email,
+            formData.password,
+            formData.confirm_password,
+            formData.name
+        );
+    }
 
     if (Object.keys(errors.value).length > 0) {
         console.error("Errores de validación:", errors.value);
@@ -96,7 +101,7 @@ const handleRegister = async (formData: any, role:string) => {
     }
 
     try {
-        const registerLeaderNode = new InvitationService();
+        const invitationService = new InvitationService();
         const token = route.query.token as string;
 
         if (!token) {
@@ -105,7 +110,16 @@ const handleRegister = async (formData: any, role:string) => {
             return;
         }
 
-        const response = await registerLeaderNode.registerNewNode({ ...formData, token });
+        // Codificar contraseñas y enviar según rol
+        const payload = {
+            ...formData,
+            token,
+            password: btoa(formData.password),
+            confirm_password: btoa(formData.confirm_password)
+        };
+
+        const response = await invitationService.registerNewUser(payload);
+
         console.log("Respuesta de la API:", response);
         if (response === 201) {
             router.push('/Login');

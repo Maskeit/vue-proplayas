@@ -24,6 +24,17 @@ export class NodosService {
             return null; // Retornar null para evitar errores en la UI
         }
     }
+    // Traer informacion del nodo como su biografia
+    async getNodeBioCode(code: string): Promise<Node | null> {
+        try {
+            const response = await axiosInstance.get<Node>(`/nodes/code/${code}`);
+            console.log(response.data.data , "Biografia");
+            return response.data.data;
+        } catch (err) {
+            console.error(`Error al obtener el nodo con id ${code}:`, err);
+            return null; // Retornar null para evitar errores en la UI
+        }
+    }
 
     // Traer miembros del nodo
     async getNodoMembers(id: number): Promise<NodeMembers[] | null> {

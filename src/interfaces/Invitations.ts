@@ -36,16 +36,16 @@ export interface InviteNodeMember {
     name: string;
     email: string;
 }
+
 export interface RegisterNodeMember {
     token: string;
     name: string;
+    username: string;
     email: string;
     password: string;
     confirm_password: string;
     expertise_area: string;
     research_work: string;
-    node_type: string;
-    // node_name: string;
     about: string;
     country: string;
     city: string;

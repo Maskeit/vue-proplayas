@@ -26,12 +26,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import type { InviteNodeMember } from '@interfaces/Invitations';
 // Modal para invitar miembros
-const props = defineProps<{
-    model: InviteNodeMember | null;
-}>();
+const props = defineProps<{model: InviteNodeMember | null}>();
 
 // Inicializamos el formulario con valores por defecto
 const formData = ref<InviteNodeMember>({
@@ -40,7 +38,7 @@ const formData = ref<InviteNodeMember>({
 });
 
 const emits = defineEmits<{
-    (e: 'guardar', data: Invitations): void;
+    (e: 'guardar', data: InviteNodeMember): void;
     (e: 'cancelar'): void;
 }>();
 

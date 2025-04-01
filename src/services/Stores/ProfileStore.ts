@@ -13,10 +13,10 @@ export const useUserProfileStore = defineStore('userProfile', {
     clearProfile() {
       this.profile = null
     },
-    async fetchAndSetProfile(id: number) {
+    async fetchAndSetProfile() {
       try {
         const profileService = new ProfileService();
-        const profileData = await profileService.fetchProfile(id);
+        const profileData = await profileService.fetchProfile();
         this.setProfile(profileData);
       } catch (error) {
         console.error("Error al obtener y establecer el perfil:", error);

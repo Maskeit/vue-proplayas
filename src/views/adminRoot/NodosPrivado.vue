@@ -25,7 +25,7 @@ import { ref, computed, onMounted } from 'vue';
 import type { Nodes } from '@/interfaces/Nodes';
 import type { InviteNodeLeader } from '@interfaces/Invitations';
 import { useNodosStore } from '@stores/nodosStore';
-import InvitationService from "@/services/Class/admin/Invitation";
+import InvitationService from "@/services/Class/InvitationService";
 import { NodosService } from "@/services/Class/NodoService";
 
 const invitationsService = new InvitationService();

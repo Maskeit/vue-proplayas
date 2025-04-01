@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="name" class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
+                    <label for="username" class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
                         Nombre de usuario
                     </label>
                     <div class="relative mt-1">

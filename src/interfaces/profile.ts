@@ -11,7 +11,7 @@ export interface User {
     expertise_area: string;
     research_work: string;
     profile_picture: string;
-    social_media: SocialLink[];
+    social_media: SocialLink;
     status: string;
 }
 

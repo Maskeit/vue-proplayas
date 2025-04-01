@@ -26,7 +26,7 @@
                 <tbody class="bg-white divide-y divide-gray-200 dark:bg-zinc-800 dark:divide-zinc-700 dark:text-gray-100">
                     <tr v-for="item in items" :key="item.id" 
 
-                        @click="irADetalle(Number(item.id))"
+                        @click="irADetalle(item.code)"
 
                         class="hover:bg-gray-200 dark:hover:bg-zinc-700 cursor-pointer">
                         <td class="px-6 py-4">{{ item.id }}</td>
@@ -56,13 +56,13 @@ const props = defineProps<{ items: Nodes[] }>();
 //     router.push(`/nodo/${id}`);
 // }
 
-const irADetalle = (id: number | string) => {
-    const numericId = Number(id);
-    if (isNaN(numericId)) {
-        console.error("El ID no es un número válido:", id);
-        return;
-    }
-    console.log(`Redirigiendo al nodo con ID: ${numericId}`);
-    router.push(`/nodo/${numericId}`);
+const irADetalle = (code: string) => {
+    // const numericId = Number(id);
+    // if (isNaN(numericId)) {
+    //     console.error("El ID no es un número válido:", id);
+    //     return;
+    // }
+    console.log(`Redirigiendo al nodo con ID: ${code}`);
+    router.push(`/nodo/${code}`);
 };
 </script>

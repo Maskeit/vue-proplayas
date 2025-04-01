@@ -14,7 +14,7 @@
         :expertiseArea="userData.expertise_area" 
         :social_media="userData.social_media" 
         :research-work="userData.research_work" />
-    </template>
+    </template>    
   </div>
 </template>
 
@@ -33,8 +33,7 @@ const isLoading = ref(true);
 onMounted(async () => {
   try {
     isLoading.value = true;
-    const userId = 4; // Aquí deberías usar el ID real del usuario
-    await userProfileStore.fetchAndSetProfile(userId);
+    await userProfileStore.fetchAndSetProfile();
   } catch (error) {
     console.error("Error al obtener datos del usuario:", error);
   } finally {

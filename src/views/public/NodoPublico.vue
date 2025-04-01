@@ -5,8 +5,16 @@
             <TableSkeleton />
         </template>
         <template v-else>
-            <NodoBio v-if="nodeData" :name="nodeData.name" :profile_picture="nodeData.profile_picture"
-                :about="nodeData.about" :social_media="nodeData.social_media" :joined_in="nodeData.joined_in" />
+            <NodoBio v-if="nodeData" 
+              :name="nodeData.name" 
+              :profile_picture="nodeData.profile_picture"
+              :about="nodeData.about" 
+              :social_media="nodeData.social_media" 
+              :joined_in="nodeData.joined_in"
+              :leader="nodeData.leader"
+              :country="nodeData.country"
+              :city="nodeData.city"/>
+
             <NodoDetalle v-if="nodeData" :items="registrosFiltrados" :code="code" />
             <NotFound v-else />
         </template>
@@ -41,8 +49,9 @@ const searchTerm = ref('');
 
 onMounted(async () => {
   isLoading.value = true;
-  nodeData.value = await nodosStore.fetchNodoInfo(Number(code));
-  registros.value = await nodosStore.fetchNodoMembers(Number(code)) || [];
+  nodeData.value = await nodosStore.fetchNodoInfo(code);
+  const id = nodeData.value.id;
+  registros.value = await nodosStore.fetchNodoMembers(id) || [];
   isLoading.value = false;
 });
 

@@ -1,17 +1,19 @@
 <template>
-    <div class="bg-white dark:bg-zinc-600 shadow-md rounded-lg p-6 flex items-center justify-between dark:text-gray-100">
+    <div
+        class="bg-white dark:bg-zinc-600 shadow-md rounded-lg p-6 flex items-center justify-between dark:text-gray-100">
         <div class="grid md:grid-cols-2 gap-3">
             <!-- Información básica -->
             <div class="mb-4">
                 <h2 class="text-lg font-semibold">Sobre mí</h2>
-                <p class=" mt-1">{{ about ? about : `Describe algo importante sobre ti para que los demas sepan quien eres.`}}</p>
+                <p class=" mt-1">{{ about ? about : `Describe algo importante sobre ti para que los demas sepan quien
+                    eres.`}}</p>
             </div>
 
             <!-- Educación -->
             <div class="mb-4">
                 <h2 class="text-lg font-semibold">Educación</h2>
-                <p class=" mt-1"><strong>Grado:</strong> {{  degree ? degree : `Agregar un grado` }}</p>
-                <p v-if="postgraduate"><strong>Postgrado:</strong> {{ postgraduate}}</p>
+                <p class=" mt-1"><strong>Grado:</strong> {{ degree ? degree : `Agregar un grado` }}</p>
+                <p v-if="postgraduate"><strong>Postgrado:</strong> {{ postgraduate }}</p>
             </div>
 
             <!-- Área de especialización -->
@@ -21,18 +23,19 @@
             </div>
             <!-- Área de especialización -->
             <div class="mb-4">
-                <h2 class="text-lg font-semibold">Trabajos de Investigación</h2>
+                <h2 class="text-lg font-semibold">Investigación</h2>
                 <p class=" mt-1">{{ researchWork }}</p>
             </div>
 
             <!-- Redes Sociales -->
-            <div v-if="social_media && social_media.length" class="mt-4">
-                <h2 class="text-lg font-semibold">Redes Sociales</h2>
-                <div class="flex flex-wrap gap-3 mt-2">
-                    <a v-for="link in social_media" :key="link.platform" :href="link.url" target="_blank"
+            <div v-if="social_media && Object.keys(social_media).length" class="mt-6 flex flex-wrap items-center gap-4">
+                <h2 class="text-lg font-semibold text-gray-500 dark:text-white">Redes Sociales:</h2>
+                <div class="flex flex-wrap gap-3">
+                    <a v-for="[platform, url] in Object.entries(social_media)" :key="platform" :href="url"
+                        target="_blank"
                         class="flex items-center gap-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-500 transition">
-                        <component :is="getIconComponent(link.platform)" class="w-5 h-5" />
-                        {{ formatPlatform(link.platform) }}
+                        <component :is="getIconComponent(platform)" class="w-5 h-5" />
+                        {{ formatPlatform(platform) }}
                     </a>
                 </div>
             </div>
