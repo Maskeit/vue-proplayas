@@ -1,6 +1,8 @@
-export interface Users {
+// interfaz
+export interface User {
     id: number;
     name: string;
+    username: string;
     email: string;
     role: string;
     about: string;
@@ -9,9 +11,8 @@ export interface Users {
     expertise_area: string;
     research_work: string;
     profile_picture: string;
-    social_media: SocialLink[];
+    social_media: SocialLink;
     status: string;
-    username: string;
 }
 
 export interface SocialLink {

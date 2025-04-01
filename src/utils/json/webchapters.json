@@ -1,0 +1,18 @@
+[
+    {
+        "id": 101,
+        "title": "Capítulo 1 - El despertar",
+        "description": "Primer contacto alienígena.",
+        "youtube_url": "https://youtu.be/abc123",
+        "thumbnail_url": "https://img.youtube.com/vi/abc123/hqdefault.jpg",
+        "episode_number": 1
+    },
+    {
+        "id": 102,
+        "title": "Capítulo 2 - La amenaza",
+        "description": "La guerra comienza.",
+        "youtube_url": "https://youtu.be/def456",
+        "thumbnail_url": "https://img.youtube.com/vi/def456/hqdefault.jpg",
+        "episode_number": 2
+    }
+]

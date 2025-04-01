@@ -9,7 +9,7 @@
                     Nuestra red se construye sobre nodos dinámicos que integran diversos sectores: científico, empresarial, público y sociedad civil.
                 </p>
                 <button @click="goNodos"
-                    class="mt-6 px-6 py-3 bg-[var(--color-eastern-blue-600)] text-white rounded-lg shadow-lg hover:bg-[var(--color-eastern-blue-800)] cursor-pointer">
+                    class="mt-6 px-6 py-3 bg-[var(--color-eastern-blue-600)] hover:bg-[var(--color-eastern-blue-800)] dark:bg-zinc-600 dark:hover:bg-zinc-500 text-white rounded-lg shadow-lg  cursor-pointer">
                     Nodos
                 </button>
             </div>

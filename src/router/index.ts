@@ -22,22 +22,36 @@ import UserCMS from "@view/user/CMS.vue"; //vista
 // paginas publicas 
 import Login from "@view/public/Login.vue";
 import Register from "@view/Public/Register.vue";
-import Home  from "@view/public/Home.vue";
+import Home from "@view/public/Home.vue";
 import NodosPublico from "@view/public/NodosPublico.vue";
 import NodoPublico from "@view/public/NodoPublico.vue";
 import PublicProfile from "@view/public/PublicProfile.vue";
+import Content from "@view/public/Content.vue";
 // Components para CMS
 import WebinarsCMS from "@components/shared/CMS/Webinars.vue";
 import LibrosCMS from "@components/shared/CMS/Libros.vue";
 import WebSeriesCMS from "@components/shared/CMS/WebSeries.vue";
 import ArticulosCMS from "@components/shared/CMS/Articulos.vue";
 
+//Panel de contenido dinamico
+import Articulos from "@components/Public/Content/Articulos.vue";
+import Libros from "@components/Public/Content/Libros.vue";
+import WebSeries from "@components/Public/Content/WebSeries.vue";
+import Webinars from "@components/Public/Content/Webinars.vue";
 
 const generateCmsRoutes = (prefix: string): Array<RouteRecordRaw> => [
   { path: 'Webinar', name: `${prefix}CMSWebinar`, component: WebinarsCMS },
   { path: 'Libros', name: `${prefix}CMSLibros`, component: LibrosCMS },
   { path: 'WebSeries', name: `${prefix}CMSWebSeries`, component: WebSeriesCMS },
   { path: 'Articulos', name: `${prefix}CMSArticulos`, component: ArticulosCMS },
+];
+
+const contentPanels = (): Array<RouteRecordRaw> => [
+  { path: '', name:'', component: Webinars },
+  { path: 'articulos', name: 'Articulos', component: Articulos },
+  { path: 'webinars', name: 'Webinars', component: Webinars },
+  { path: 'libros', name: 'Libros', component: Libros },
+  { path: 'webseries', name: 'WebSeries', component: WebSeries },
 ];
 
 // Rutas para administradores_root
@@ -66,7 +80,7 @@ const adminRootRoutes: Array<RouteRecordRaw> = [
 // Rutas para administradores de nodo
 const nodeLeaderRoutes: Array<RouteRecordRaw> = [
   {
-    path: '/:code',
+    path: '/lider/:code',
     name: 'NodoDetalleNodeLeader',
     component: NodoPrivado,
     props: true,
@@ -78,7 +92,6 @@ const nodeLeaderRoutes: Array<RouteRecordRaw> = [
     children: generateCmsRoutes('lider'),
   },
 ];
-
 // Rutas para usuarios normales
 const userRoutes: Array<RouteRecordRaw> = [
   {
@@ -92,20 +105,21 @@ const userRoutes: Array<RouteRecordRaw> = [
     children: generateCmsRoutes('user'),
   },
 ];
-
-
-
 const blankPages = [
   { path: '/login', component: Login },
   { path: '/register', component: Register },
   { path: '/:pathMatch(.*)*', component: BlankLayout }, // Para cualquier ruta que no coincida con las anteriores
   { path: '', redirect: { name: 'Login' } }, // Para redireccionar a /login al inicio de la app.
 ]
-
 const publicRoutes: Array<RouteRecordRaw> = [
   {
     path: '/',
     redirect: { name: 'Home' } // Redirige el path vacío a Home
+  },
+  {
+    path: '/Content',
+    component: Content,
+    children: contentPanels(),
   },
   {
     path: "/Home",
@@ -130,8 +144,8 @@ const publicRoutes: Array<RouteRecordRaw> = [
     component: PublicProfile,
     props: true,
   },
-  { 
-    path: '/:pathMatch(.*)*', 
+  {
+    path: '/:pathMatch(.*)*',
     redirect: { name: 'Home' } // Redirige cualquier ruta no encontrada a Home
   }
 ];

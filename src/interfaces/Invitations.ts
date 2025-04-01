@@ -2,7 +2,6 @@ export interface InviteNodeLeader {
     name: string;
     email: string;
     node_type: string;    
-    code: string;
 }
 
 export interface RegisterNodeLeader {
@@ -15,7 +14,7 @@ export interface RegisterNodeLeader {
     research_work: string;
     node_type: string;
     node_name: string;
-    description: string;
+    about: string;
     country: string;
     city: string;
 }
@@ -31,4 +30,23 @@ export interface RegisterAdmin {
     email: string;
     password: string;
     confirm_password: string;
+}
+
+export interface InviteNodeMember {
+    name: string;
+    email: string;
+}
+
+export interface RegisterNodeMember {
+    token: string;
+    name: string;
+    username: string;
+    email: string;
+    password: string;
+    confirm_password: string;
+    expertise_area: string;
+    research_work: string;
+    about: string;
+    country: string;
+    city: string;
 }

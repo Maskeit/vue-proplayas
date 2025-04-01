@@ -1,0 +1,134 @@
+[
+    {
+        "id": 1,
+        "title": "Serie de Ciencia Ficción",
+        "description": "Explora los límites del universo.",
+        "organizer_type": "channel",
+        "organizer_id": 1001,
+        "thumbnail_url": "https://img.youtube.com/vi/abc123/hqdefault.jpg",
+        "chapters": [
+            {
+                "id": 101,
+                "title": "Capítulo 1 - El despertar",
+                "description": "Primer contacto alienígena.",
+                "youtube_url": "https://youtu.be/abc123",
+                "thumbnail_url": "https://img.youtube.com/vi/abc123/hqdefault.jpg",
+                "episode_number": 1
+            },
+            {
+                "id": 102,
+                "title": "Capítulo 2 - La amenaza",
+                "description": "La guerra comienza.",
+                "youtube_url": "https://youtu.be/def456",
+                "thumbnail_url": "https://img.youtube.com/vi/def456/hqdefault.jpg",
+                "episode_number": 2
+            },
+            {
+                "id": 103,
+                "title": "Capítulo 3 - La resistencia",
+                "description": "Un grupo rebelde se organiza.",
+                "youtube_url": "https://youtu.be/ghi789",
+                "thumbnail_url": "https://img.youtube.com/vi/ghi789/hqdefault.jpg",
+                "episode_number": 3
+            },
+            {
+                "id": 104,
+                "title": "Capítulo 4 - El sacrificio",
+                "description": "Un héroe cae para salvar a muchos.",
+                "youtube_url": "https://youtu.be/jkl012",
+                "thumbnail_url": "https://img.youtube.com/vi/jkl012/hqdefault.jpg",
+                "episode_number": 4
+            },
+            {
+                "id": 105,
+                "title": "Capítulo 5 - La alianza",
+                "description": "Nuevos aliados se unen a la causa.",
+                "youtube_url": "https://youtu.be/mno345",
+                "thumbnail_url": "https://img.youtube.com/vi/mno345/hqdefault.jpg",
+                "episode_number": 5
+            },
+            {
+                "id": 106,
+                "title": "Capítulo 6 - La batalla final",
+                "description": "El enfrentamiento definitivo.",
+                "youtube_url": "https://youtu.be/pqr678",
+                "thumbnail_url": "https://img.youtube.com/vi/pqr678/hqdefault.jpg",
+                "episode_number": 6
+            },
+            {
+                "id": 107,
+                "title": "Capítulo 7 - El nuevo comienzo",
+                "description": "La humanidad reconstruye su futuro.",
+                "youtube_url": "https://youtu.be/stu901",
+                "thumbnail_url": "https://img.youtube.com/vi/stu901/hqdefault.jpg",
+                "episode_number": 7
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Serie de Aventuras Épicas",
+        "description": "Un viaje lleno de peligros y descubrimientos.",
+        "organizer_type": "channel",
+        "organizer_id": 1002,
+        "thumbnail_url": "https://img.youtube.com/vi/vwx234/hqdefault.jpg",
+        "chapters": [
+            {
+                "id": 201,
+                "title": "Capítulo 1 - El llamado",
+                "description": "Un héroe inesperado es elegido.",
+                "youtube_url": "https://youtu.be/vwx234",
+                "thumbnail_url": "https://img.youtube.com/vi/vwx234/hqdefault.jpg",
+                "episode_number": 1
+            },
+            {
+                "id": 202,
+                "title": "Capítulo 2 - El mentor",
+                "description": "Un sabio guía al héroe.",
+                "youtube_url": "https://youtu.be/xyz567",
+                "thumbnail_url": "https://img.youtube.com/vi/xyz567/hqdefault.jpg",
+                "episode_number": 2
+            },
+            {
+                "id": 203,
+                "title": "Capítulo 3 - La prueba",
+                "description": "El héroe enfrenta su primer desafío.",
+                "youtube_url": "https://youtu.be/abc890",
+                "thumbnail_url": "https://img.youtube.com/vi/abc890/hqdefault.jpg",
+                "episode_number": 3
+            },
+            {
+                "id": 204,
+                "title": "Capítulo 4 - La traición",
+                "description": "Un aliado resulta ser un enemigo.",
+                "youtube_url": "https://youtu.be/def123",
+                "thumbnail_url": "https://img.youtube.com/vi/def123/hqdefault.jpg",
+                "episode_number": 4
+            },
+            {
+                "id": 205,
+                "title": "Capítulo 5 - El descubrimiento",
+                "description": "Un secreto cambia todo.",
+                "youtube_url": "https://youtu.be/ghi456",
+                "thumbnail_url": "https://img.youtube.com/vi/ghi456/hqdefault.jpg",
+                "episode_number": 5
+            },
+            {
+                "id": 206,
+                "title": "Capítulo 6 - La redención",
+                "description": "Un enemigo se convierte en aliado.",
+                "youtube_url": "https://youtu.be/jkl789",
+                "thumbnail_url": "https://img.youtube.com/vi/jkl789/hqdefault.jpg",
+                "episode_number": 6
+            },
+            {
+                "id": 207,
+                "title": "Capítulo 7 - El destino",
+                "description": "El héroe cumple su propósito.",
+                "youtube_url": "https://youtu.be/mno012",
+                "thumbnail_url": "https://img.youtube.com/vi/mno012/hqdefault.jpg",
+                "episode_number": 7
+            }
+        ]
+    }
+]

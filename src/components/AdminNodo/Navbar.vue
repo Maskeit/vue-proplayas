@@ -1,6 +1,6 @@
 <template>
     <!-- Contenedor del navbar con fondo blanco y sombra -->
-    <nav class="bg-white dark:bg-[var(--color-dark-bg)] shadow-md">
+    <nav class="fixed top-0 left-0 w-full z-50 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md backdrop-saturate-150 shadow-md">
         <div class="container mx-auto px-4 py-4 flex items-center justify-between">
             <!-- Logo y nombre del sitio -->
             <div class="flex items-center gap-4 text-xl font-bold">
@@ -54,7 +54,9 @@ const route = useRoute();
 const isOpen = ref(false);
 
 // Obtenemos el nodeId dinámico desde la URL
-const nodeId = computed(() => route.params.node_id);
+const nodeId = localStorage.getItem("node_id"); // Assuming node_code is part of the decoded token
+
+//const nodeId = computed(() => route.params.node_id);
 
 // Función para alternar el menú
 function toggleMenu() {

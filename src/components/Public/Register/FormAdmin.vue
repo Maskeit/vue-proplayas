@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-100 p-8">
+    <div class="min-w-100">
         <h2 class="text-xl font-semibold dark:text-gray-200 text-gray-600 text-center mb-4">
             Registro de Administrador
         </h2>
@@ -85,7 +85,7 @@
                 </div>
                 <div class="flex justify-between">
                     <button type="submit"
-                        class="bg-[var(--color-eastern-blue-600)] hover:bg-[var(--color-eastern-blue-700)] text-white px-4 py-2 rounded-md transition w-full">Registrarse</button>
+                        class="bg-[var(--color-eastern-blue-600)] hover:bg-[var(--color-eastern-blue-700)] dark:bg-zinc-600 dark:hover:bg-zinc-500 text-white px-4 py-2 rounded-md transition w-full">Registrarse</button>
                 </div>
             </div>
         </form>

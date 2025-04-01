@@ -1,4 +1,5 @@
 <template>
+    <h1 class="text-center text-xl font-bold">Invitar a un miembro a mi nodo</h1>
     <form @submit.prevent="onSubmit" class="space-y-4 ">
         <!-- Campo: Nombre -->
         <div>
@@ -7,8 +8,10 @@
         </div>
         <!-- Campo: Linea de investigacion -->
         <div>
-            <label class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-            <input type="email" v-model="formData.email" class="mt-1 block w-full border rounded px-3 py-2" required/>
+            <div class="flex gap-2">
+                <label class="block text-sm font-medium text-gray-700">Correo</label> <span class="text-sm text-gray-400">(Esta invitacion le llegara mediante correo electrónico)</span>
+            </div>
+            <input node_type="text" v-model="formData.email" class="mt-1 block w-full border rounded px-3 py-2" required />
         </div>
 
         <div class="flex justify-end space-x-2">
@@ -23,25 +26,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import type { Invitations } from '@interfaces/Invitations';
+import { ref } from 'vue';
+import type { InviteNodeMember } from '@interfaces/Invitations';
 // Modal para invitar miembros
-const props = defineProps<{
-    model: Invitations | null;
-}>();
-
-const emits = defineEmits<{
-    (e: 'guardar', data: Invitations): void;
-    (e: 'cancelar'): void;
-}>();
+const props = defineProps<{model: InviteNodeMember | null}>();
 
 // Inicializamos el formulario con valores por defecto
-const formData = ref<Invitations>({
+const formData = ref<InviteNodeMember>({
     name: '',
     email: '',
 });
 
+const emits = defineEmits<{
+    (e: 'guardar', data: InviteNodeMember): void;
+    (e: 'cancelar'): void;
+}>();
+
 function onSubmit() {
-    emits('guardar', formData.value);
+    emits('guardar', {
+        name: formData.value.name,
+        email: formData.value.email,
+    });
 }
 </script>

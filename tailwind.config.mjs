@@ -7,6 +7,7 @@ export default {
   ],
   theme: {
     extend: {
+      scrollbar: ['rounded'],
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
       },
@@ -24,6 +25,7 @@ export default {
   ],
   plugins: [
     require('tailwindcss-animated'),
+    require('tailwind-scrollbar'),
   ],
 
 }

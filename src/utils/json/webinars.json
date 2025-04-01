@@ -8,7 +8,7 @@
       "organizer_id": 101,
       "link": "https://example.com/webinar/vue3",
       "format": "online",
-      "location": null
+      "location": "Mex, USA"
     },
     {
       "id": 2,
@@ -19,7 +19,7 @@
       "organizer_id": 102,
       "link": "https://example.com/webinar/typescript",
       "format": "online",
-      "location": null
+      "location": "Mex, USA"
     },
     {
       "id": 3,
@@ -30,7 +30,7 @@
       "organizer_id": 103,
       "link": "https://example.com/webinar/apis",
       "format": "online",
-      "location": null
+      "location": "Mex, USA"
     },
     {
       "id": 4,
@@ -41,7 +41,7 @@
       "organizer_id": 104,
       "link": "https://example.com/webinar/ui-ux",
       "format": "online",
-      "location": null
+      "location": "Mex, USA"
     },
     {
       "id": 5,
@@ -52,6 +52,6 @@
       "organizer_id": 105,
       "link": "https://example.com/webinar/security",
       "format": "online",
-      "location": null
+      "location": "Mex, USA"
     }
   ]

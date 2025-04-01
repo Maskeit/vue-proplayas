@@ -1,39 +1,41 @@
 <template>
-    <div class="bg-white dark:bg-[var(--color-dark-bg)] shadow-md rounded-lg p-6 flex items-center justify-between">
+    <div
+        class="bg-white dark:bg-zinc-600 shadow-md rounded-lg p-6 flex items-center justify-between dark:text-gray-100">
         <div class="grid md:grid-cols-2 gap-3">
             <!-- Información básica -->
             <div class="mb-4">
                 <h2 class="text-lg font-semibold">Sobre mí</h2>
-                <p class=" mt-1">{{ about }}</p>
+                <p class=" mt-1">{{ about ? about : `Describe algo importante sobre ti para que los demas sepan quien
+                    eres.`}}</p>
             </div>
 
             <!-- Educación -->
             <div class="mb-4">
                 <h2 class="text-lg font-semibold">Educación</h2>
-                <p class=" mt-1"><strong>Grado:</strong> {{ degree }}</p>
-                <p v-if="postgraduate"><strong>Postgrado:</strong> {{ postgraduate
-                    }}</p>
+                <p class=" mt-1"><strong>Grado:</strong> {{ degree ? degree : `Agregar un grado` }}</p>
+                <p v-if="postgraduate"><strong>Postgrado:</strong> {{ postgraduate }}</p>
             </div>
 
             <!-- Área de especialización -->
             <div class="mb-4">
                 <h2 class="text-lg font-semibold">Área de Especialización</h2>
-                <p class=" mt-1">{{ expertiseArea }}</p>
+                <p class=" mt-1">{{ expertiseArea ? expertiseArea : `Agregar área de especialización` }}</p>
             </div>
             <!-- Área de especialización -->
             <div class="mb-4">
-                <h2 class="text-lg font-semibold">Trabajos de Investigación</h2>
+                <h2 class="text-lg font-semibold">Investigación</h2>
                 <p class=" mt-1">{{ researchWork }}</p>
             </div>
 
             <!-- Redes Sociales -->
-            <div v-if="socialMedia.length" class="mt-4">
-                <h2 class="text-lg font-semibold">Redes Sociales</h2>
-                <div class="flex flex-wrap gap-3 mt-2">
-                    <a v-for="link in socialMedia" :key="link.platform" :href="link.url" target="_blank"
+            <div v-if="social_media && Object.keys(social_media).length" class="mt-6 flex flex-wrap items-center gap-4">
+                <h2 class="text-lg font-semibold text-gray-500 dark:text-white">Redes Sociales:</h2>
+                <div class="flex flex-wrap gap-3">
+                    <a v-for="[platform, url] in Object.entries(social_media)" :key="platform" :href="url"
+                        target="_blank"
                         class="flex items-center gap-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-500 transition">
-                        <component :is="getIconComponent(link.platform)" class="w-5 h-5" />
-                        {{ formatPlatform(link.platform) }}
+                        <component :is="getIconComponent(platform)" class="w-5 h-5" />
+                        {{ formatPlatform(platform) }}
                     </a>
                 </div>
             </div>
@@ -50,14 +52,14 @@
             postgraduate,
             expertise_area: expertiseArea,
             research_work: researchWork,
-            social_media: socialMedia
+            social_media: social_media
         }" @close="isEditProfileOpen = false" @update="updateProfile" />
     </div>
 
 </template>
 
 <script setup lang="ts">
-import { SocialLink } from "@/interfaces/profile";
+import { SocialLink } from "@interfaces/Profile";
 import { GlobeAltIcon } from "@heroicons/vue/24/outline";
 import { AcademicCapIcon, PencilIcon } from "@heroicons/vue/24/solid";
 import { ref } from "vue";
@@ -76,7 +78,7 @@ interface Props {
     postgraduate?: string;
     expertiseArea: string;
     researchWork: string;
-    socialMedia: SocialLink[];
+    social_media: SocialLink[];
 }
 
 defineProps<Props>();
@@ -109,6 +111,5 @@ const openEditProfileModal = () => {
 
 const updateProfile = (updatedData: { name: string; profile_picture: string }) => {
     console.log("Datos actualizados:", updatedData);
-    // Aquí puedes actualizar el estado global o emitir un evento para actualizar el perfil en el padre
 };
 </script>

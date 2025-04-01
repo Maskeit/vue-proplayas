@@ -8,7 +8,11 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
     (config) => {
-        config.headers['Authorization'] = `Bearer ${system.authToken}`;
+        const token = system.authToken;
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
+
         return config;
     },
     (error) => Promise.reject(error)

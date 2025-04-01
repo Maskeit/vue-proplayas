@@ -1,9 +1,9 @@
 <template>
-    <div class="dark:text-[var(--color-dark-text)]">
+    <div class="text-gray-600 dark:text-gray-100">
         <h1 class="text-2xl font-bold mb-4">Gestión de Libros</h1>
 
         <!-- Formulario para crear/editar un Libro -->
-        <form @submit.prevent="onSubmit" class="p-4 space-y-4 mb-8 bg-white dark:bg-[var(--color-dark-bg)] shadow-md rounded-lg">
+        <form @submit.prevent="onSubmit" class="p-4 space-y-4 mb-8 bg-white dark:bg-zinc-600 shadow-md rounded-lg">
             <div>
                 <label class="block text-sm font-medium ">Título</label>
                 <input v-model="formData.title" type="text" class="mt-1 block w-full border rounded px-3 py-2"

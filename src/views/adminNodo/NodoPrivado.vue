@@ -1,87 +1,115 @@
 <template>
-    <div class="p-4">
-        <NodoDetalle :code="code" :items="registrosFiltrados" @editar="editarRegistro" @eliminar="confirmarEliminacion"
-            @nuevo-registro="abrirFormulario" @search="filtrar" />
+    <div>
+        <BioSkeleton v-if="isLoading" />
+        <template v-else>
+            <NodoBio 
+                :name="nodeData?.name" 
+                :profilePicture="nodeData?.profile_picture" 
+                :about="nodeData?.about"
+                :social_media="nodeData?.social_media" 
+                :joined_in="nodeData?.joined_in"
+                :leader="nodeData.leader"
+                :country="nodeData?.country"
+                :city="nodeData?.city"
+                @updateNodeData="handleUpdateNode"/>
+            <NodoDetalle 
+                :code="code"
+                :items="registrosFiltrados"
+                @editar="editarRegistro"
+                @eliminar="confirmarEliminacion"
+                @nuevo-registro="abrirFormulario"
+                @search="filtrar" />
+            <CrudModal :visible="mostrarModal" @cerrar="cerrarModal">
+                <CrudForm 
+                    :model="registroSeleccionado" 
+                    @guardar="guardarRegistro" 
+                    @cancelar="cerrarModal" />                    
+            </CrudModal>
+        </template>
     </div>
 </template>
 
 <script setup lang="ts">
-import NodoDetalle from "@/components/AdminRoot/nodo/NodoDetalle.vue";
-import { useRoute, useRouter } from 'vue-router';
-import members from "@/utils/json/members.json";
+import NodoBio from "@/components/AdminNodo/nodo/NodoBio.vue";
+import BioSkeleton from "@/components/shared/skeletons/BioSkeleton.vue"
+import NodoDetalle from "@/components/AdminNodo/nodo/NodoDetalle.vue";
+import CrudForm from '@/components/AdminNodo/Crud/CrudForm.vue';
+import CrudModal from '@/components/AdminNodo/Crud/CrudModal.vue';
+import { useRoute } from 'vue-router';
+
 import type { Member } from "@interfaces/Members";
-import { ref, computed } from 'vue';
+import type { Node, NodeMembers, SocialLink } from "@interfaces/Nodes";
+import type { InviteNodeMember } from '@interfaces/Invitations';
+
+import { useNodosStore } from '@stores/nodosStore';
+import InvitationsService from "@/services/Class/InvitationService";
+
+import { ref, computed, onMounted } from 'vue';
+
+const nodosStore = useNodosStore();
+const invitationsService = new InvitationsService();
 
 const route = useRoute();
-const router = useRouter();
 const code = route.params.code as string;
-const registros = ref<Member[]>(members);
+const ID = ref<number | null>(null);
+const nodeData = ref<Node | null>(null);
+const registros = ref<NodeMembers[]>([]);
+const registroSeleccionado = ref<NodeMembers | null>(null);
+const isLoading = ref(true);
 
 const searchTerm = ref('');
+const mostrarModal = ref(false);
 
-const registroSeleccionado = ref<Member | null>(null);
-const nodeId = computed(() => {
-    const nodo = registros.value.find(member => member.member_code === code);
-    return nodo ? nodo.node_id : null;
+onMounted(async () => {
+  isLoading.value = true;
+  nodeData.value = await nodosStore.fetchNodoInfo(Number(code));
+  registros.value = await nodosStore.fetchNodoMembers(Number(code)) || [];
+  isLoading.value = false;
 });
 
 const registrosFiltrados = computed(() => {
-    if (nodeId.value === null) return [];
-
-    return registros.value
-        .filter(member => member.node_id === nodeId.value) // Filtro por node_id
-        .filter(member => {
-            if (!searchTerm.value) return true;
-            const term = searchTerm.value.toLowerCase();
-            return (
-                member.name.toLowerCase().includes(term) ||
-                member.email.toLowerCase().includes(term) ||
-                member.research_line.toLowerCase().includes(term) ||
-                member.work_area.toLowerCase().includes(term)
-            );
-        });
+  return registros.value.filter(member =>
+    !searchTerm.value || member.name.toLowerCase().includes(searchTerm.value.toLowerCase())
+  );
 });
 
+function handleUpdateNode(updatedData: { name: string; about: string; profile_picture: string; social_media?: SocialLink[] }) {
+    if (!ID.value) return;
 
+    nodosService.editNodeBio(ID.value, {
+        ...updatedData,
+        social_media: typeof updatedData.social_media === "string"
+            ? updatedData.social_media
+            : JSON.stringify(updatedData.social_media),
+    }).then(() => {
+        if (nodeData.value) {
+            nodeData.value = { ...nodeData.value, ...updatedData };
+        }
+    }).catch(error => {
+        console.error("Error al actualizar el nodo:", error);
+    });
+}
+async function guardarRegistro(nuevoRegistro: InviteNodeMember) {
+    try {
+        await invitationsService.createInvitationToNodeMember(nuevoRegistro);
+        alert("Invitación enviada correctamente");
+        mostrarModal.value = false;
+    } catch (error) {
+        alert("Error al enviar la invitación. Revisa la consola.");
+    }
+}
 function abrirFormulario() {
     registroSeleccionado.value = null;
     mostrarModal.value = true;
 }
-
 function editarRegistro(registro: Member) {
     registroSeleccionado.value = registro;
     mostrarModal.value = true;
 }
-
-function confirmarEliminacion(registro: Member) {
-    // Lógica para confirmar y eliminar
-    registros.value = registros.value.filter(r => r.id !== registro.id);
-}
-
-function guardarRegistro(nuevoRegistro: Member) {
-    // Si el id es 0, se trata de una creación
-    if (nuevoRegistro.id === 0) {
-        nuevoRegistro.id = Date.now(); // Ejemplo para asignar un id único
-        registros.value.push(nuevoRegistro);
-    } else {
-        // Actualización: busca y actualiza el registro
-        const index = registros.value.findIndex(r => r.id === nuevoRegistro.id);
-        if (index !== -1) {
-            registros.value[index] = nuevoRegistro;
-        }
-    }
-    mostrarModal.value = false;
-}
-
 function cerrarModal() {
     mostrarModal.value = false;
 }
-
 function filtrar(term: string) {
     searchTerm.value = term;
 }
-
-const volverALista = () => {
-    router.push('/root/nodos'); // Redirige a la lista de nodos
-};
 </script>

@@ -1,4 +1,4 @@
-export interface Members {
+export interface Member {
     id: number;
     node_id: number;
     member_code: string;

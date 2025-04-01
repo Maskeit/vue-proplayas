@@ -33,7 +33,7 @@
                 </p>
 
                 <button @click="openPDF"
-                    class="mt-6 px-6 py-3 bg-[var(--color-eastern-blue-600)] text-white rounded-lg shadow-lg hover:bg-[var(--color-eastern-blue-800)]">
+                    class="mt-6 px-6 py-3 bg-[var(--color-eastern-blue-600)] hover:bg-[var(--color-eastern-blue-800)] dark:bg-zinc-600 dark:hover:bg-zinc-500 text-white rounded-lg shadow-lg ">
                     ABC Proplayas
                 </button>
             </div>

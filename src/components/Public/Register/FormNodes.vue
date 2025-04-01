@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-100 p-8">
+    <div class="min-w-100">
         <h2 class="text-xl font-semibold dark:text-gray-200 text-gray-600 text-center mb-4">
             {{ currentStep === 1 ? "Información Personal" : "Información del Nodo" }}
         </h2>
@@ -113,7 +113,7 @@
                 </div>
 
                 <button type="button" @click="nextStep"
-                    class="bg-[var(--color-eastern-blue-600)] hover:bg-[var(--color-eastern-blue-700)] text-white px-4 py-2 rounded-md transition w-full">Siguiente</button>
+                    class="bg-[var(--color-eastern-blue-600)] hover:bg-[var(--color-eastern-blue-700)] dark:bg-zinc-600 dark:hover:bg-zinc-500 text-white px-4 py-2 rounded-md transition w-full">Siguiente</button>
             </div>
 
             <!-- PASO 2: Información del Nodo -->
@@ -150,7 +150,7 @@
                         Descripción:
                     </label>
                     <div class="relative mt-1">
-                        <textarea v-model="formData.description" name="about"
+                        <textarea v-model="formData.about" name="about"
                             class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 h-24"></textarea>
                     </div>
                 </div>
@@ -185,9 +185,9 @@
 
                 <div class="flex justify-between">
                     <button type="button" @click="prevStep"
-                        class="bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-500 transition">Anterior</button>
+                        class="bg-zinc-600 dark:hover:bg-zinc-500 text-white px-4 py-2 rounded-md hover:bg-gray-500 transition">Anterior</button>
                     <button type="submit"
-                        class="bg-[var(--color-eastern-blue-600)] hover:bg-[var(--color-eastern-blue-700)] text-white px-4 py-2 rounded-md transition">Registrarse</button>
+                        class="bg-[var(--color-eastern-blue-600)] hover:bg-[var(--color-eastern-blue-700)]  text-white px-4 py-2 rounded-md transition">Registrarse</button>
                 </div>
             </div>
         </form>
@@ -213,7 +213,7 @@ const formData = ref<RegisterNodeLeader>({
     research_work: "",
     node_type: "",
     node_name: "",
-    description: "",
+    about: "",
     country: "",
     city: "",
 });

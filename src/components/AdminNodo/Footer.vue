@@ -1,6 +1,6 @@
 <template>
     <!-- Footer con fondo gris oscuro y texto en blanco -->
-    <footer class="bg-[var(--color-eastern-blue-950)] text-white py-4">
+    <footer class="bg-zinc-800 text-white py-4">
         <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
             <!-- Información de copyright o datos del sitio -->
             <div class="mb-4 md:mb-0">
