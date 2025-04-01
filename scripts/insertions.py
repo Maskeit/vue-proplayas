@@ -7,6 +7,9 @@ from datetime import datetime
 # Leer CSV
 df = pd.read_csv("nodos.csv")
 
+# El CSV tiene esta forma en sus cabezeras:
+# type,code,name,country,joined_in,city,leader_id,email,social_media
+
 # Conexión a MySQL
 conn = mysql.connector.connect(
     host='localhost',
@@ -50,8 +53,9 @@ for _, row in df.iterrows():
     if result:
         leader_id = result[0]
     else:
-        password = bcrypt.hashpw("Contra123@".encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
-        # Generar username base
+        # Generar hash compatible con Laravel
+        raw_hash = bcrypt.hashpw("Contra123@".encode("utf-8"), bcrypt.gensalt())
+        password = raw_hash.decode("utf-8").replace("$2b$", "$2y$")
         # Generar username base
         base_username = leader_email.split("@")[0].lower().replace(".", "_")
         username = base_username
@@ -82,7 +86,7 @@ for _, row in df.iterrows():
     # Preparar JSON social
     social_json = json.dumps({"url": social_url}) if pd.notna(social_url) and social_url != 'N/A' else None
 
-    # Insertar nodo
+    # Insertar nodo en la tabla
     cursor.execute("""
         INSERT INTO nodes (
             leader_id, code, type, name, country, city, joined_in, social_media, status, created_at, updated_at
