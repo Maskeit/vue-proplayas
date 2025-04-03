@@ -83,8 +83,21 @@ for _, row in df.iterrows():
         print(f"🆕 Usuario creado: {leader_name} ({leader_email}) → ID {leader_id}")
         log_file.write(f"{leader_name} | {leader_email} | {username}\n")
 
-    # Preparar JSON social
-    social_json = json.dumps({"url": social_url}) if pd.notna(social_url) and social_url != 'N/A' else None
+    # Preparar JSON de social_media segun la interface (url + platform)
+    social_json = None
+    if pd.notna(social_url) and social_url != 'N/A':
+        # Para el caso de múltiples URLs separadas por comas
+        # Ajusta según tu CSV real; si solo hay una, esto igual funciona.
+        links = [x.strip() for x in social_url.split(',')]
+        social_list = []
+        for link in links:
+            social_list.append({
+                'url': link,
+                'platform': 'website'
+            })
+        social_json = json.dumps(social_list)
+    else:
+        social_json = None
 
     # Insertar nodo en la tabla
     cursor.execute("""

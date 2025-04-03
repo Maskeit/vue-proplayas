@@ -15,7 +15,7 @@
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">ID</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">Code</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">Nombre</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">Nombre del nodo</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">Tipo</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">País</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">Ciudad</th>
@@ -32,7 +32,7 @@
                         <td class="px-6 py-4">{{ item.id }}</td>
                         <td class="px-6 py-4">{{ item.code }}</td>
                         <td class="px-6 py-4">{{ item.name }}</td>
-                        <td class="px-6 py-4">{{ item.type }}</td>
+                        <td class="px-6 py-4">{{ nodeType(item.type) }}</td>
                         <td class="px-6 py-4">{{ item.country }}</td>
                         <td class="px-6 py-4">{{ item.city }}</td>
                         <td class="px-6 py-4">{{ item.members_count == null ? 0 : item.members_count }}</td>
@@ -48,21 +48,12 @@
 import type { Nodes } from '@/interfaces/Nodes';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { nodeType } from "@/utils/validators/NodeTypes";
 // list public nodos
 const router = useRouter();
 const searchTerm = ref('');
 const props = defineProps<{ items: Nodes[] }>();
-// const irADetalle = (id:number) => {
-//     router.push(`/nodo/${id}`);
-// }
-
 const irADetalle = (code: string) => {
-    // const numericId = Number(id);
-    // if (isNaN(numericId)) {
-    //     console.error("El ID no es un número válido:", id);
-    //     return;
-    // }
-    console.log(`Redirigiendo al nodo con ID: ${code}`);
     router.push(`/nodo/${code}`);
 };
 </script>

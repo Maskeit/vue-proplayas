@@ -6,15 +6,18 @@
     <template v-else-if="userData">
       <ProfileHeader 
         :name="userData.name" 
-        :profilePicture="userData.profile_picture" />
+        :profilePicture="userData.profile_picture" 
+        @update="updateProfile" />
       <ProfileBio 
         :about="userData.about" 
         :degree="userData.degree" 
         :postgraduate="userData.postgraduate"
         :expertiseArea="userData.expertise_area" 
         :social_media="userData.social_media" 
-        :research-work="userData.research_work" />
-    </template>    
+        :research-work="userData.research_work" 
+        @update="updateProfile"/>
+    </template>
+    <Confirmation v-if="showConfirmation" @close="showConfirmation = false" />
   </div>
 </template>
 
@@ -22,13 +25,16 @@
 import ProfileHeader from '@/components/User/Profile/ProfileHeader.vue';
 import ProfileBio from '@/components/User/Profile/ProfileBio.vue';
 import ProfileSkeleton from '@/components/shared/skeletons/ProfileSkeleton.vue';
+import Confirmation from '@/components/shared/modales/Confirmation.vue';
 import { ref, computed, onMounted } from 'vue'
 import { useUserProfileStore } from '@/services/Stores/ProfileStore';
+
 import type { User } from "@interfaces/Profile";
 
 const userProfileStore = useUserProfileStore(); // Store de perfil
 const userData = computed(() => userProfileStore.profile); // Se obtiene del store
 const isLoading = ref(true);
+const showConfirmation = ref(false);
 
 onMounted(async () => {
   try {
@@ -40,4 +46,20 @@ onMounted(async () => {
     isLoading.value = false;
   }
 });
+
+// metodo para recibir los datos y usar el updateProfile( data )
+const updateProfile = async (data: any) => {
+  try {
+    isLoading.value = true;
+    const status = await userProfileStore.updateProfile(data);
+    if (status === 200) {
+      showConfirmation.value = true;
+    }
+  } catch (error) {
+    console.error("Error al actualizar datos del usuario:", error);
+  } finally {
+    isLoading.value = false;
+  }
+}
+
 </script>

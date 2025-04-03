@@ -14,54 +14,39 @@ export class NodosService {
     }
     
     // Traer informacion del nodo como su biografia
-    async getNodeBio(id: number): Promise<Node | null> {
+    async getNodeBio(code: number): Promise<Node | null> {
         try {
-            const response = await axiosInstance.get<Node>(`/nodes/${id}`);
-            // console.log(response.data.data , "Biografia");
+            const response = await axiosInstance.get<Node>(`/node/${code}`);
             return response.data.data;
         } catch (err) {
-            console.error(`Error al obtener el nodo con id ${id}:`, err);
-            return null; // Retornar null para evitar errores en la UI
-        }
-    }
-    // Traer informacion del nodo como su biografia
-    async getNodeBioCode(code: string): Promise<Node | null> {
-        try {
-            const response = await axiosInstance.get<Node>(`/nodes/code/${code}`);
-            console.log(response.data.data , "Biografia");
-            return response.data.data;
-        } catch (err) {
-            console.error(`Error al obtener el nodo con id ${code}:`, err);
+            console.error(`Error al obtener el nodo con code ${code}:`, err);
             return null; // Retornar null para evitar errores en la UI
         }
     }
 
     // Traer miembros del nodo
-    async getNodoMembers(id: number): Promise<NodeMembers[] | null> {
+    async getNodoMembers(code: string): Promise<NodeMembers[] | null> {
         try {
-            const response = await axiosInstance.get<{ data: NodeMembers[] }>(`/nodes/members/${id}`);
+            const response = await axiosInstance.get<{ data: NodeMembers[] }>(`/node/members/${code}`);
             return response.data.data;
         } catch (err) {
-            console.error(`Error al obtener los miembros del nodo con id ${id}:`, err);
+            console.error(`Error al obtener los miembros del nodo con code ${code}:`, err);
             return null; // Retornar null para evitar errores en la UI
         }
     }
 
-    async editNodeBio(id: number, data: Node): Promise<Node | null> {
+    async editNodeBio(id: number, editData: Node): Promise<Node | null> {
+        // console.log("Editando nodo con ID:", id);
+        // console.log("datos a enviar:", editData);
+        // return;
         try {
-            // Verifica que social_media sea un string JSON si es un objeto
-            const formattedData = {
-                ...data,
-                social_media: typeof data.social_media === "string" ? data.social_media : JSON.stringify(data.social_media),
-            };
-    
-            console.log("Datos enviados al servidor:", id, formattedData);
-    
-            const response = await axiosInstance.put(`/nodes/${id}`, formattedData);
-            return response.data; // Retornar directamente los datos
-        } catch (err) {
-            console.error(`Error al editar los datos del nodo`, err);
-            return null; // Retornar null para evitar errores en la UI
+            const response = await axiosInstance.put(`/node/${id}`, editData);
+            const {status, message, data} = response.data;
+            console.log({status, message, data});
+            return { status, message, data };
+        }  catch (error: any) {
+            console.error("Error al actualizar el perfil del miembro:", error);
+            throw error;
         }
-    }    
+    }
 }

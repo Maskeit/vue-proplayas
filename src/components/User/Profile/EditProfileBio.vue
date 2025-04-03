@@ -56,8 +56,7 @@
                     <button type="submit"
                         class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Guardar</button>
                 </div>
-            </form>
-            
+            </form>            
         </div>
     </div>
 </template>
@@ -78,7 +77,11 @@ interface FormData {
 const props = defineProps<{ isOpen: boolean; userData: FormData }>();
 const emit = defineEmits(["close", "update"]);
 
-const form = ref<FormData>({ ...props.userData });
+const form = ref<FormData>({
+  ...props.userData,
+  social_media: props.userData.social_media,
+});
+
 
 // Redes sociales disponibles
 const availableSocialPlatforms = computed(() => [
@@ -105,15 +108,24 @@ const closeOnEscape = (event: KeyboardEvent) => {
         closeModal();
     }
 };
+
 const submitForm = () => {
     emit("update", form.value);
     closeModal();
 };
 
 const addSocialMedia = () => {
-    form.value.social_media.push({ platform: "website", url: "" });
+    if (!form.value.social_media) {
+        form.value.social_media = [];
+    }
+    const usedPlatforms = form.value.social_media.map(link => link.platform);
+    const nextAvailable = availableSocialPlatforms.value.find(
+        option => !usedPlatforms.includes(option.value as SocialLink["platform"])
+    );
+    if (nextAvailable) {
+        form.value.social_media.push({ platform: nextAvailable.value as SocialLink["platform"], url: "" });
+    }
 };
-
 const removeSocialMedia = (index: number) => {
     form.value.social_media.splice(index, 1);
 };

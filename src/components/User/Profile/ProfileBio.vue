@@ -31,11 +31,9 @@
             <div v-if="social_media && Object.keys(social_media).length" class="mt-6 flex flex-wrap items-center gap-4">
                 <h2 class="text-lg font-semibold text-gray-500 dark:text-white">Redes Sociales:</h2>
                 <div class="flex flex-wrap gap-3">
-                    <a v-for="[platform, url] in Object.entries(social_media)" :key="platform" :href="url"
-                        target="_blank"
-                        class="flex items-center gap-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-500 transition">
-                        <component :is="getIconComponent(platform)" class="w-5 h-5" />
-                        {{ formatPlatform(platform) }}
+                    <a v-for="link in social_media" :key="link.platform" :href="link.url" target="_blank" class="flex items-center gap-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-500 transition">
+                        <component :is="getIconComponent(link.platform)" class="w-5 h-5" />
+                        {{ formatPlatform(link.platform) }}
                     </a>
                 </div>
             </div>
@@ -62,7 +60,7 @@
 import { SocialLink } from "@interfaces/Profile";
 import { GlobeAltIcon } from "@heroicons/vue/24/outline";
 import { AcademicCapIcon, PencilIcon } from "@heroicons/vue/24/solid";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import EditProfileBio from "./EditProfileBio.vue";
 
 import FacebookIcon from "@icons/FacebookIcon.vue";
@@ -109,7 +107,9 @@ const openEditProfileModal = () => {
     isEditProfileOpen.value = true;
 };
 
-const updateProfile = (updatedData: { name: string; profile_picture: string }) => {
-    console.log("Datos actualizados:", updatedData);
+// Recibe y retransmite los datos al padre real (Profile.vue)
+const emit = defineEmits(["update"]);
+const updateProfile = (updatedData: any) => {
+  emit("update", updatedData);
 };
 </script>
