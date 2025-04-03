@@ -1,4 +1,4 @@
-import type { SocialLink } from "@interfaces/profile";
+import type { SocialLink } from "@interfaces/Profile";
 
 export interface Nodes {
     id: string;
@@ -25,32 +25,8 @@ export interface NodeMembers {
     status: string;
 }
 
-// export interface NodeMembers {
-//     id: number;
-//     node_id: number;
-//     member_code: string;
-//     email: string;
-//     status: string;
-//     user: User;
-// }
-
-// interface User {
-//     id: number;
-//     name: string;
-//     about: string;
-//     email: string;
-//     degree: string;
-//     expertise_area: string;
-//     postgraduate: string;
-//     research_work: string;
-//     social_media: SocialLink[] | null;
-//     username: string;
-//     profile_picture: string;
-// }
-
-
 export interface Node {
-    id: string;
+    id: number;
     leader_id: string;
     code: string;// se muestra
     type: string;// se muestra
@@ -77,9 +53,4 @@ export interface Leader {
     email: string;
     name: string;
     postgraduate:string;
-}
-
-export interface SocialLink {
-    platform: 'linkedin' | 'github' | 'twitter' | 'website' | 'facebook' | 'instagram' | 'youtube' | 'research_gate';
-    url: string;
 }

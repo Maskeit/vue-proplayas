@@ -29,12 +29,12 @@
         </thead>
         <tbody class="bg-white divide-y divide-zinc-200 dark:bg-zinc-800 dark:divide-zinc-700 dark:text-gray-100">
           <tr v-for="item in items" :key="item.id" :item="item" @editar="onEditar" @eliminar="onEliminar"
-            @click="irADetalle(Number(item.id))"
+            @click="irADetalle(item.code)"
             class="hover:bg-zinc-200 dark:hover:bg-zinc-700 cursor-pointer">
             <td class="px-6 py-4">{{ item.id }}</td>
             <td class="px-6 py-4">{{ item.code }}</td>
             <td class="px-6 py-4">{{ item.name }}</td>
-            <td class="px-6 py-4">{{ item.type }}</td>
+            <td class="px-6 py-4">{{ nodeType(item.type) }}</td>
             <td class="px-6 py-4">{{ item.country }}</td>
             <td class="px-6 py-4">{{ item.city }}</td>
             <td class="px-6 py-4">{{ item.members_count == null ? 0 : item.members_count }}</td>
@@ -54,23 +54,15 @@
 import type { Nodes } from '@/interfaces/Nodes';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { nodeType } from "@/utils/validators/NodeTypes";
 // admin Root nodos
 const router = useRouter();
-// const irADetalle = (code: string) => {
-//   router.push(`/root/nodo/${code}`);
-// }
-const irADetalle = (id: number | string) => {
-    const numericId = Number(id);
-    if (isNaN(numericId)) {
-        console.error("El ID no es un número válido:", id);
-        return;
-    }
-    console.log(`Redirigiendo al nodo con ID: ${numericId}`);
-    router.push(`/root/nodo/${numericId}`);
+const props = defineProps<{ items: Nodes[]; }>();
+
+const irADetalle = (code: string) => {
+    router.push(`/root/nodo/${code}`);
 };
-const props = defineProps<{
-  items: Nodes[];
-}>();
+
 const searchTerm = ref('');
 const emits = defineEmits<{
   (e: 'editar', item: Nodes): void;

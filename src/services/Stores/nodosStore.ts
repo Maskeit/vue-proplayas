@@ -11,47 +11,52 @@ export const useNodosStore = defineStore('nodos', () => {
     const nodo = ref<Node | null>(null); // Cambiado a Node
     const cargado = ref(false);
 
+    const setNodos = (lista: Nodes[]) => {
+        nodos.value = lista
+    }
+    const setNodeBio = (node: Node) => {
+        nodo.value = node;
+    };
+
+    const setNodeMembers = (members: NodeMembers[]) => {
+        nodoMiembros.value = members;
+    }
+
     // Traer lista de los nodos
     const fetchNodos = async () => {
         if (cargado.value && nodos.value.length > 0) {
-            // Ya están cargados, no hacer petición
-            return nodos.value;
+            return nodos.value
         }
         try {
-            const response = await nodosService.getPublicNodes();
+            const response = await nodosService.getPublicNodes()
             if (response) {
-                nodos.value = response;
-                cargado.value = true;
-                return nodos.value;
+                setNodos(response)
+                cargado.value = true
+                return nodos.value
             }
         } catch (error) {
-            console.error("Error al cargar nodos desde el store:", error);
+            console.error('Error al cargar nodos desde el store:', error)
         }
-        return null;
-    };
+        return null
+    }
 
     // traer informacion del nodo
     const fetchNodoInfo = async (code: string): Promise<Node | null> => {
         try {
-            const response = await nodosService.getNodeBioCode(code);
-            if (response) {
-                nodo.value = response;
-                cargado.value = true;
-                return nodo.value;
-            }
+            const nodoBio = await nodosService.getNodeBio(code);
+            setNodeBio(nodoBio);
         } catch (error) {
-            console.error("Error al cargar nodo:", error);
+            console.error('Error al obtener y establecer el perfil:', error)
+            throw error
         }
-        return null;
     };
 
     // traer miembros del nodo
-    const fetchNodoMembers = async (id: number): Promise<NodeMembers[] | null> => {
+    const fetchNodoMembers = async (code: string): Promise<NodeMembers[] | null> => {
         try {
-            const members = await nodosService.getNodoMembers(id);
+            const members = await nodosService.getNodoMembers(code);
             if (members && Array.isArray(members)) {
-                nodoMiembros.value = members;
-                return members;
+                setNodeMembers(members);
             }
         } catch (error) {
             console.error("Error al cargar miembros del nodo desde el store:", error);
@@ -59,13 +64,32 @@ export const useNodosStore = defineStore('nodos', () => {
         return null;
     };
 
+    const updateNodeBio = async (id: number, editData: Node) => {
+        try {
+            const { status, message, data } = await nodosService.editNodeBio(id, editData);
+            setNodeBio(data);
+            return status;
+        } catch (error) {
+            console.error("Error al editar la biografía del nodo:", error);
+        }
+    }
+    
+    const updateNodeMember = async (id: number, data: NodeMembers) => {
+
+    }
     return {
         nodo,
         nodos,
         nodoMiembros,
         cargado,
+        //actions
+        setNodeBio,
+        setNodeMembers,
+        setNodos,
         fetchNodos,
         fetchNodoInfo,
         fetchNodoMembers,
+        updateNodeBio,
+        updateNodeMember,
     };
 });

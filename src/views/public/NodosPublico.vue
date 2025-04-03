@@ -11,15 +11,17 @@ import { ref, computed, onMounted } from 'vue';
 import type { Nodes } from '@interfaces/Nodes';
 import { useNodosStore } from '@stores/nodosStore';
 
+// servicios y rutas
 const nodosStore = useNodosStore();
-const registros = ref<Nodes[]>([]);
-const isLoading = ref(true);
 
+// Estados
+const registros = computed(() => nodosStore.nodos);
+const isLoading = ref(true);
 const searchTerm = ref('');
 
 onMounted(async () => {
     isLoading.value = true;
-    registros.value = await nodosStore.fetchNodos();
+    await nodosStore.fetchNodos();
     isLoading.value = false;
 });
 

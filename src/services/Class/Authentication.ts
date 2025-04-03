@@ -5,14 +5,14 @@ import Cookies from "js-cookie";
 export class Authentication {
     constructor() { };
 
-    private getRedirectRoute(role: string, nodeId?: string): string | null {
+    private getRedirectRoute(role: string, node_code?: string): string | null {
         switch (role) {
             case "admin":
                 return "/root/nodos";
             case "member":
                 return "/User/Profile";
             case "node_leader":
-                return nodeId ? `/lider/${nodeId}` : null;
+                return node_code ? `/lider/${node_code}` : null;
             default:
                 return null; // Si el rol no es reconocido
         }
@@ -24,7 +24,7 @@ export class Authentication {
                 email: credentials.email,
                 password: btoa(credentials.password),
             });
-            if (response.data) {
+            if (response.data.status === 200) {
                 const { token, role, node_id } = response.data.data;
                 const authToken = token
                 const user_role = role;
@@ -32,6 +32,7 @@ export class Authentication {
                 system.role = role // el rol puede ser admin, member o node_leader
                 localStorage.setItem("Authorization", authToken);
                 localStorage.setItem("node_id", node_id);
+                localStorage.setItem("role", role);
                 Cookies.set("Authorization", authToken, { expires: 7, path: "/" });
                 // Obtener ruta de redirección basada en el rol
                 const route = this.getRedirectRoute(user_role, node_id);
@@ -53,6 +54,7 @@ export class Authentication {
                 Cookies.remove("Authorization", { path: "/" });
                 localStorage.removeItem("Authorization");
                 localStorage.removeItem("node_id");
+                localStorage.removeItem("role");
                 system.authToken = null;
                 system.role = null;
                 return true;

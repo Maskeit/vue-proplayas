@@ -14,8 +14,11 @@
       <PencilIcon class="w-6 h-6" />
     </button>
     <!-- Modal para editar perfil -->
-    <EditProfileHeader :isOpen="isEditProfileOpen" :userData="{ name, profile_picture: profilePicture }"
-      @close="isEditProfileOpen = false" @update="updateProfile" />
+    <EditProfileHeader :isOpen="isEditProfileOpen" 
+      :userData="{
+        name, 
+        profile_picture: profilePicture 
+      }" @close="isEditProfileOpen = false" @update="updateProfile" />
   </div>
 </template>
 
@@ -38,8 +41,8 @@ const openEditProfileModal = () => {
   isEditProfileOpen.value = true;
 };
 
-const updateProfile = (updatedData: { name: string; profile_picture: string }) => {
-  console.log("Datos actualizados:", updatedData);
-  // Aquí puedes actualizar el estado global o emitir un evento para actualizar el perfil en el padre
+const emit = defineEmits(["update"]);
+const updateProfile = (updatedData: any) => {
+  emit("update", updatedData);
 };
 </script>

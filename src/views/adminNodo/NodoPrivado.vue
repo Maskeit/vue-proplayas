@@ -11,7 +11,7 @@
                 :leader="nodeData.leader"
                 :country="nodeData?.country"
                 :city="nodeData?.city"
-                @updateNodeData="handleUpdateNode"/>
+                @update="updateNodeBio"/>
             <NodoDetalle 
                 :code="code"
                 :items="registrosFiltrados"
@@ -26,6 +26,7 @@
                     @cancelar="cerrarModal" />                    
             </CrudModal>
         </template>
+        <Confirmation v-if="showConfirmation" @close="showConfirmation = false" />        
     </div>
 </template>
 
@@ -36,9 +37,9 @@ import NodoDetalle from "@/components/AdminNodo/nodo/NodoDetalle.vue";
 import CrudForm from '@/components/AdminNodo/Crud/CrudForm.vue';
 import CrudModal from '@/components/AdminNodo/Crud/CrudModal.vue';
 import { useRoute } from 'vue-router';
-
-import type { Member } from "@interfaces/Members";
-import type { Node, NodeMembers, SocialLink } from "@interfaces/Nodes";
+import Confirmation from '@/components/shared/modales/Confirmation.vue';
+import type { NodeMembers } from "@interfaces/Nodes";
+import type { SocialLink } from "@interfaces/Profile";
 import type { InviteNodeMember } from '@interfaces/Invitations';
 
 import { useNodosStore } from '@stores/nodosStore';
@@ -47,48 +48,51 @@ import InvitationsService from "@/services/Class/InvitationService";
 import { ref, computed, onMounted } from 'vue';
 
 const nodosStore = useNodosStore();
+
 const invitationsService = new InvitationsService();
 
 const route = useRoute();
 const code = route.params.code as string;
-const ID = ref<number | null>(null);
-const nodeData = ref<Node | null>(null);
-const registros = ref<NodeMembers[]>([]);
+const nodeData = computed(() => nodosStore.nodo);
+const registros = computed(() => nodosStore.nodoMiembros);
+
 const registroSeleccionado = ref<NodeMembers | null>(null);
 const isLoading = ref(true);
 
 const searchTerm = ref('');
 const mostrarModal = ref(false);
+const showConfirmation = ref(false);
 
+const ID = ref<number | null>(null);
 onMounted(async () => {
   isLoading.value = true;
-  nodeData.value = await nodosStore.fetchNodoInfo(Number(code));
-  registros.value = await nodosStore.fetchNodoMembers(Number(code)) || [];
+  await nodosStore.fetchNodoInfo(code);
+  ID.value = nodeData.value?.id || null; // se utiliza para tenerlo en context
+  await nodosStore.fetchNodoMembers(code) || [];
   isLoading.value = false;
 });
-
 const registrosFiltrados = computed(() => {
   return registros.value.filter(member =>
     !searchTerm.value || member.name.toLowerCase().includes(searchTerm.value.toLowerCase())
   );
 });
 
-function handleUpdateNode(updatedData: { name: string; about: string; profile_picture: string; social_media?: SocialLink[] }) {
-    if (!ID.value) return;
-
-    nodosService.editNodeBio(ID.value, {
-        ...updatedData,
-        social_media: typeof updatedData.social_media === "string"
-            ? updatedData.social_media
-            : JSON.stringify(updatedData.social_media),
-    }).then(() => {
-        if (nodeData.value) {
-            nodeData.value = { ...nodeData.value, ...updatedData };
+// metodo para editar el nodo descripción
+const updateNodeBio = async (updatedData: any) =>  {
+    try {
+        isLoading.value = true;
+        const status = await nodosStore.updateNodeBio(ID.value, updatedData);
+        if (status === 200) {
+            showConfirmation.value = true;
         }
-    }).catch(error => {
-        console.error("Error al actualizar el nodo:", error);
-    });
+    } catch (error) {
+        console.error("Error al actualizar datos del nodo:", error);
+    }finally {
+        isLoading.value = false;
+    }
 }
+
+
 async function guardarRegistro(nuevoRegistro: InviteNodeMember) {
     try {
         await invitationsService.createInvitationToNodeMember(nuevoRegistro);
@@ -100,10 +104,6 @@ async function guardarRegistro(nuevoRegistro: InviteNodeMember) {
 }
 function abrirFormulario() {
     registroSeleccionado.value = null;
-    mostrarModal.value = true;
-}
-function editarRegistro(registro: Member) {
-    registroSeleccionado.value = registro;
     mostrarModal.value = true;
 }
 function cerrarModal() {

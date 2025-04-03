@@ -28,22 +28,17 @@
                     </div>
                     <div>
                         <label class="block font-medium">Redes Sociales</label>
-                        <div v-for="(link, index) in form.social_media" :key="index"
-                            class="flex space-x-2 items-center mb-2">
+                        <div v-for="(link, index) in form.social_media" :key="index" class="flex space-x-2 items-center mb-2">
                             <!-- Corrección: Mostrar select correctamente -->
                             <select v-model="form.social_media[index].platform" class="w-1/2 p-2 border rounded-md ">
-                                <option v-for="option in availableSocialPlatforms" :key="option.value"
-                                    :value="option.value">
+                                <option v-for="option in availableSocialPlatforms" :key="option.value" :value="option.value">
                                     {{ option.label }}
                                 </option>
                             </select>
-                            <input v-model="form.social_media[index].url" placeholder="URL"
-                                class="w-1/2 p-2 border rounded-md " />
-                            <button @click.prevent="removeSocialMedia(index)"
-                                class="text-red-500 hover:text-red-700">✕</button>
+                            <input v-model="form.social_media[index].url" placeholder="URL" class="w-1/2 p-2 border rounded-md " />
+                            <button @click.prevent="removeSocialMedia(index)" class="text-red-500 hover:text-red-700">✕</button>
                         </div>
-                        <button @click.prevent="addSocialMedia" class="mt-2 text-blue-500 hover:underline">+
-                            Agregar</button>
+                        <button @click.prevent="addSocialMedia" class="mt-2 text-blue-500 hover:underline">+ Agregar</button>
                     </div>
                 </div>
 
@@ -64,7 +59,7 @@ import { SocialLink } from "@/interfaces/Profile";
 interface FormData {
     name: string;
     about: string;
-    profile_picture: string;
+    profile_picture: string | null;
     social_media: SocialLink[];
 }
 
@@ -72,11 +67,22 @@ const props = defineProps<{ isOpen: boolean; nodeData: FormData }>();
 const emit = defineEmits(["close", "update"]);
 
 const form = ref<FormData>({
-    name: props.nodeData.name || "",
-    about: props.nodeData.about || "",
-    profile_picture: props.nodeData.profile_picture || "",
-    social_media: props.nodeData.social_media ?? [] // Asegurar que sea un array vacío si no existe
+    ...props.nodeData,
+    social_media: props.nodeData.social_media,
 });
+const closeModal = () => emit("close");
+onMounted(() => {
+    window.addEventListener("keydown", closeOnEscape);
+});
+onUnmounted(() => {
+    window.removeEventListener("keydown", closeOnEscape);
+});
+
+const closeOnEscape = (event: KeyboardEvent) => {
+    if (event.key === "Escape") {
+        closeModal();
+    }
+};
 // Redes sociales disponibles
 const availableSocialPlatforms = computed(() => [
     { value: "linkedin", label: "LinkedIn" },
@@ -89,29 +95,23 @@ const availableSocialPlatforms = computed(() => [
     { value: "website", label: "Sitio Web" } // Se agregó website correctamente
 ]);
 
-const closeModal = () => emit("close");
-
-const closeOnEscape = (event: KeyboardEvent) => {
-    if (event.key === "Escape") {
-        closeModal();
-    }
-};
-
-onMounted(() => {
-    window.addEventListener("keydown", closeOnEscape);
-});
-onUnmounted(() => {
-    window.removeEventListener("keydown", closeOnEscape);
-});
 const submitForm = () => {
     emit("update", form.value);
     closeModal();
 };
 
 const addSocialMedia = () => {
-    form.value.social_media.push({ platform: "website", url: "" });
+    if (!form.value.social_media) {
+        form.value.social_media = [];
+    }
+    const usedPlatforms = form.value.social_media.map(link => link.platform);
+    const nextAvailable = availableSocialPlatforms.value.find(
+        option => !usedPlatforms.includes(option.value as SocialLink["platform"])
+    );
+    if (nextAvailable) {
+        form.value.social_media.push({ platform: nextAvailable.value as SocialLink["platform"], url: "" });
+    }
 };
-
 const removeSocialMedia = (index: number) => {
     form.value.social_media.splice(index, 1);
 };
