@@ -25,7 +25,10 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200 dark:bg-zinc-800 dark:divide-zinc-700 dark:text-gray-100">
-                    <tr class="hover:bg-zinc-200 dark:hover:bg-zinc-700 cursor-pointer" v-for="item in items" :key="item.id" :item="item">
+                    <tr class="hover:bg-zinc-200 dark:hover:bg-zinc-700 cursor-pointer" 
+                        v-for="item in items" :key="item.id" :item="item"
+                        @click="toProfile(item.username)"
+                        >
                         <td class="px-6 py-4 whitespace-nowrap">{{ item.node_id }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">{{ item.member_code }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">{{ item.name }}</td>
@@ -44,8 +47,14 @@
 <script setup lang="ts">
 import { NodeMembers } from '@/interfaces/Nodes'; // Ejemplo de interface para un NodeMembers
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 // list public nodo
 const searchTerm = ref('');
 // Obtenemos las propiedades pasadas por el componente padre
 const props = defineProps<{items: NodeMembers[];code: string;}>();
+const toProfile = (username: string) => {
+    // Redirigir a la página de perfil del miembro
+    router.push(`/${username}`);
+};
 </script>

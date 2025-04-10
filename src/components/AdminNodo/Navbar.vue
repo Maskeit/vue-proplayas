@@ -183,15 +183,9 @@ if (token) {
     const role = decodedData.role; // usado antes
     const nodeCode = localStorage.getItem("node_id"); // Assuming node_code is part of the decoded token
     const local_role = localStorage.getItem("role"); // Assuming role is stored in local storage member, node_leader // usado en pruebas
-    if (local_role === "admin") {
-        // Redirect to admin dashboard
-        userRoute.value = "/root/nodos";
-        userProfile.value = "/root/profile";
-    } else if (local_role === "node_leader") {
+    if (local_role === "node_leader") {
         userRoute.value = `/lider/${nodeCode}`;
         userProfile.value = `/User/profile`;
-    } else if (local_role === "member") {
-        userProfile.value = "/User/profile";
     }
 }
 

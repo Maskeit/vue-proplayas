@@ -60,7 +60,7 @@ const registrosFiltrados = computed(() => {
   );
 });
 
-function filtrar(term: string) {
+const filtrar = (term: string) => {
     searchTerm.value = term;
 }
 </script>

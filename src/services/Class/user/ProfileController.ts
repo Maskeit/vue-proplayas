@@ -23,4 +23,15 @@ export class ProfileService {
             throw error;
         }
     }
+
+    // peticion con axios para obtener el perfil publico
+    async getPublicProfile (username: string): Promise<{ status: number; data: profile }> {
+        try {
+            const response = await axiosInstance.get<profile>(`/user/${username}`);
+            return response.data.data;
+        } catch (error: any) {
+            console.error("Error al obtener el perfil público:", error);
+            throw error;
+        }    
+    }
 }
