@@ -21,7 +21,7 @@
             </div>
 
             <!-- Contenido de la derecha -->
-            <div class="lg:w-1/2 text-center lg:text-right animate-fade-up">
+            <div class="lg:w-1/2 text-center lg:text-right animate-fade-up gap-2">
                 <h1 class="text-4xl lg:text-6xl font-bold text-[var(--color-eastern-blue-800)] dark:text-gray-200">
                     ¿Quiénes Somos?
                 </h1>
@@ -31,9 +31,12 @@
                     Desde 2007, nos hemos consolidado como la comunidad de playeros más grande y diversa del continente,
                     promoviendo la gestión integrada de las zonas costeras.
                 </p>
-
+                <button @click="openHistory"
+                    class="mt-6 px-6 py-3 bg-yellow-500 hover:bg-zinc-400 dark:bg-yellow-600 dark:hover:bg-zinc-500 text-white rounded-lg shadow-lg ">
+                    Historia
+                </button>
                 <button @click="openPDF"
-                    class="mt-6 px-6 py-3 bg-[var(--color-eastern-blue-600)] hover:bg-[var(--color-eastern-blue-800)] dark:bg-zinc-600 dark:hover:bg-zinc-500 text-white rounded-lg shadow-lg ">
+                    class="mt-6 ml-3 px-6 py-3 bg-[var(--color-eastern-blue-600)] hover:bg-zinc-400 dark:bg-zinc-600 dark:hover:bg-zinc-500 text-white rounded-lg shadow-lg ">
                     ABC Proplayas
                 </button>
             </div>
@@ -43,7 +46,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
-
+import { useRouter } from 'vue-router';
+const router = useRouter();
 const columnsContainer = ref<HTMLElement | null>(null);
 
 const path = "/src/assets/images/home/";
@@ -54,7 +58,9 @@ const imagesRight = [`${path}about7.webp`, `${path}about8.webp`, `${path}about9.
 const openPDF = () => {
     window.open("/ABC_RED_PROPLAYAS.pdf", "_blank");
 };
-
+const openHistory = () => {
+    router.push('/history');
+};
 let scrollListener: (() => void) | null = null;
 onMounted(() => {
     if (!columnsContainer.value) return;
@@ -63,7 +69,6 @@ onMounted(() => {
     setTimeout(() => {
         // Verificar compatibilidad con ScrollTimeline
         if ("ScrollTimeline" in window) {
-            console.info("Usando ScrollTimeline para animaciones.");
             setupScrollTimeline();
         } else {
             console.warn("ScrollTimeline no está soportado en este navegador. Se usará requestAnimationFrame.");

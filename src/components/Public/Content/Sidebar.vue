@@ -44,6 +44,3 @@ const handleCollapse = () => {
   if (window.innerWidth >= 768) isCollapsed.value = true
 }
 </script>
-
-<style scoped>
-</style>

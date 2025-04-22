@@ -16,7 +16,6 @@
                     </div>
 
                     <div>
-
                         <div class="flex items-center justify-center w-full">
                             <label for="dropzone-file" class="relative flex flex-col items-center justify-center w-full h-64 
                                 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer
@@ -100,7 +99,7 @@
                     <button type="submit"
                         class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Guardar</button>
                 </div>
-            </form>            
+            </form>
         </div>
     </div>
 </template>
@@ -138,7 +137,8 @@ const availableSocialPlatforms = computed(() => [
     { value: "instagram", label: "Instagram" },
     { value: "youtube", label: "YouTube" },
     { value: "research_gate", label: "ResearchGate" },
-    { value: "website", label: "Sitio Web" } // Se agregó website correctamente
+    { value: "website", label: "Sitio Web" }, // Se agregó website correctamente
+    {value: "phone", label: "Teléfono"},
 ]);
 
 const closeModal = () => emit("close");

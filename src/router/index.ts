@@ -11,10 +11,10 @@ import PublicLayout from "@layout/PublicLayout.vue";
 // paginas
 import NodosPrivadoRoot from "@view/adminRoot/NodosPrivado.vue";
 import NodoPrivadoRoot from "@view/adminRoot/NodoPrivado.vue";
-import AdminRootCMS from "@view/adminRoot/CMS.vue"; //vista
+//import AdminRootCMS from "@view/adminRoot/CMS.vue"; //vista
 
 import NodoPrivado from "@view/adminNodo/NodoPrivado.vue";
-import AdminNodoCMS from "@/views/adminNodo/CMS.vue"; //vista
+//import AdminNodoCMS from "@/views/adminNodo/CMS.vue"; //vista
 
 import Profile from "@view/user/Profile.vue";
 import UserCMS from "@view/user/CMS.vue"; //vista
@@ -27,11 +27,13 @@ import NodosPublico from "@view/public/NodosPublico.vue";
 import NodoPublico from "@view/public/NodoPublico.vue";
 import PublicProfile from "@view/public/PublicProfile.vue";
 import Content from "@view/public/Content.vue";
+import History from "@view/public/History.vue";
 // Components para CMS
 import WebinarsCMS from "@components/shared/CMS/Webinars.vue";
 import LibrosCMS from "@components/shared/CMS/Libros.vue";
 import WebSeriesCMS from "@components/shared/CMS/WebSeries.vue";
 import ArticulosCMS from "@components/shared/CMS/Articulos.vue";
+import ProyectosCMS from "@components/shared/CMS/Proyectos.vue";
 
 //Panel de contenido dinamico
 import Articulos from "@components/Public/Content/Articulos.vue";
@@ -39,11 +41,14 @@ import Libros from "@components/Public/Content/Libros.vue";
 import WebSeries from "@components/Public/Content/WebSeries.vue";
 import Webinars from "@components/Public/Content/Webinars.vue";
 
-const generateCmsRoutes = (prefix: string): Array<RouteRecordRaw> => [
-  { path: 'Webinar', name: `${prefix}CMSWebinar`, component: WebinarsCMS },
-  { path: 'Libros', name: `${prefix}CMSLibros`, component: LibrosCMS },
-  { path: 'WebSeries', name: `${prefix}CMSWebSeries`, component: WebSeriesCMS },
-  { path: 'Articulos', name: `${prefix}CMSArticulos`, component: ArticulosCMS },
+
+const generateCmsRoutes = (): Array<RouteRecordRaw> => [
+  { path: '', name: '', component: WebinarsCMS },
+  { path: '/User/Content/Webinar', name: 'CMSWebinar', component: WebinarsCMS },
+  { path: '/User/Content/Libros', name: 'CMSLibros', component: LibrosCMS },
+  { path: '/User/Content/WebSeries', name: 'CMSWebSeries', component: WebSeriesCMS },
+  { path: '/User/Content/Articulos', name: 'CMSArticulos', component: ArticulosCMS },
+  { path: '/User/Content/Proyectos', name: 'CMSProyectos', component: ProyectosCMS },
 ];
 
 const contentPanels = (): Array<RouteRecordRaw> => [
@@ -70,12 +75,12 @@ const adminRootRoutes: Array<RouteRecordRaw> = [
     props: true, // Permite pasar el código del nodo como prop
     meta: { requiresAuth: true, role: "admin" },
   },
-  {
-    path: '',
-    component: AdminRootCMS,
-    children: generateCmsRoutes('root'),
-    meta: { requiresAuth: true, role: "admin" },
-  },
+  // {
+  //   path: '',
+  //   component: AdminRootCMS,
+  //   children: generateCmsRoutes('root'),
+  //   meta: { requiresAuth: true, role: "admin" },
+  // },
 ];
 // Rutas para administradores de nodo
 const nodeLeaderRoutes: Array<RouteRecordRaw> = [
@@ -86,11 +91,11 @@ const nodeLeaderRoutes: Array<RouteRecordRaw> = [
     props: true,
     meta: { requiresAuth: true, role: "node_leader" },
   },
-  {
-    path: '',
-    component: AdminNodoCMS,
-    children: generateCmsRoutes('lider'),
-  },
+  // {
+  //   path: '',
+  //   component: AdminNodoCMS,
+  //   children: generateCmsRoutes('lider'),
+  // },
 ];
 // Rutas para usuarios normales
 const userRoutes: Array<RouteRecordRaw> = [
@@ -100,9 +105,9 @@ const userRoutes: Array<RouteRecordRaw> = [
     component: Profile,
   },
   {
-    path: '',
+    path: '/User/Content',
     component: UserCMS,
-    children: generateCmsRoutes('user'),
+    children: generateCmsRoutes(),
   },
 ];
 const blankPages = [
@@ -125,6 +130,11 @@ const publicRoutes: Array<RouteRecordRaw> = [
     path: "/Home",
     name: "Home",
     component: Home,
+  },
+  {
+    path: "/History",
+    name: "History",
+    component: History,
   },
   {
     path: '/Nodos',

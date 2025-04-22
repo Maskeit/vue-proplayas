@@ -1,4 +1,5 @@
 <template>
+    <!-- No lo uso mas -->
     <!-- Contenedor del navbar con fondo blanco y sombra -->
     <nav class="fixed top-0 left-0 w-full z-50 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md backdrop-saturate-150 shadow-md">
         <div class="container mx-auto px-4 py-4 flex items-center justify-between">

@@ -70,7 +70,7 @@ import InstagramIcon from "@icons/InstagramIcon.vue";
 import YoutubeIcon from "@icons/YoutubeIcon.vue";
 import LinkedinIcon from "@icons/LinkedinIcon.vue";
 import GithubIcon from "@icons/GithubIcon.vue";
-import { GlobeAltIcon, AcademicCapIcon } from "@heroicons/vue/24/outline";
+import { GlobeAltIcon, AcademicCapIcon, PhoneIcon } from "@heroicons/vue/24/outline";
 import { useUserProfileStore } from '@/services/Stores/ProfileStore';
 
 // estados
@@ -105,6 +105,7 @@ const getIconComponent = (platform: string) => {
     instagram: InstagramIcon,
     research_gate: AcademicCapIcon,
     youtube: YoutubeIcon,
+    phone : PhoneIcon,
   };
   return icons[platform] || GlobeAltIcon;
 };

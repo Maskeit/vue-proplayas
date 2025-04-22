@@ -69,7 +69,7 @@ import type { Publications } from '@/interfaces/Publications';
 import publicationsJson from '@/utils/json/articulos.json';
 
 // Datos reactivos
-const publications = ref<Publications[]>(publicationsJson);
+const publications = ref<Publications[]>();
 
 // Datos del formulario basados en la interface Publications
 const formData = ref<Publications>({

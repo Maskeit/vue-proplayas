@@ -9,6 +9,7 @@ export const useUserProfileStore = defineStore('userProfile', () => {
 
   const setProfile = (user: User) => {
     profile.value = user
+    //console.log('Profile initial set:', profile.value[0])
   }
 
   const clearProfile = () => {
@@ -28,8 +29,9 @@ export const useUserProfileStore = defineStore('userProfile', () => {
 
   const updateProfile = async (form: Partial<User>) => {
     try { 
-      const { status, message, data } = await profileService.updateProfile(form)      
-      setProfile(data)
+      const { status, message, data } = await profileService.updateProfile(form)
+      console.log('data', data)
+      setProfile(data);
       return status
     } catch (error) {
       console.error('Error actualizando el perfil:', error)

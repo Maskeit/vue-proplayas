@@ -14,6 +14,7 @@
             <!-- Menú de navegación del user para pantallas medianas y grandes -->
             <div class="hidden md:flex space-x-4 items-center">
                 <router-link to="/Home" class="text-gray-800 dark:text-gray-200 font-semibold">Inicio</router-link>
+                <router-link to="/History" class="text-gray-800 dark:text-gray-200">Historia</router-link>
                 <a href="#quienes-somos" @click.prevent="scrollToSection"
                     class="text-gray-800 dark:text-gray-200">Quiénes Somos</a>
                 <router-link to="/Content" class="text-gray-800 dark:text-gray-200">Actividades</router-link>
@@ -43,24 +44,31 @@
                                 class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 focus:outline-hidden">
                                 <div class="py-1">
                                     <MenuItem v-if="userRoute" v-slot="{ active }">
-                                        <router-link :to="userRoute"
-                                            :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
-                                            Dashboard
-                                        </router-link>
+                                    <router-link :to="userRoute"
+                                        :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
+                                        Dashboard
+                                    </router-link>
                                     </MenuItem>
 
                                     <MenuItem v-if="userProfile" v-slot="{ active }">
-                                        <router-link :to="userProfile"
-                                            :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
-                                            Perfil
-                                        </router-link>
+                                    <router-link :to="userProfile"
+                                        :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
+                                        Perfil
+                                    </router-link>
+                                    </MenuItem>
+
+                                    <MenuItem v-if="userProfile" v-slot="{ active }">
+                                    <router-link :to="`/User/Content`"
+                                        :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
+                                        Contenido
+                                    </router-link>
                                     </MenuItem>
 
                                     <MenuItem v-slot="{ active }">
-                                        <button @click.prevent="logout"
-                                            :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block w-full px-4 py-2 text-left text-sm']">
-                                            Salir
-                                        </button>
+                                    <button @click.prevent="logout"
+                                        :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block w-full px-4 py-2 text-left text-sm']">
+                                        Salir
+                                    </button>
                                     </MenuItem>
                                 </div>
                             </MenuItems>
@@ -92,7 +100,7 @@
 
         <!-- Menú móvil: se muestra solo en pantallas pequeñas -->
         <div v-if="isOpen" class="md:hidden">
-            <div class="flex flex-col justify-center items-center text-center space-y-3 sm:px-4 py-4">
+            <div class="flex flex-col pb-4 justify-center items-center text-center space-y-3 sm:px-4 py-4">
                 <router-link to="/Home" class="block dark:text-gray-200">Inicio</router-link>
                 <a href="#quienes-somos" @click.prevent="scrollToSection" class="block dark:text-gray-200">Quiénes
                     Somos</a>
@@ -128,24 +136,31 @@
                                 class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 focus:outline-hidden">
                                 <div class="py-1">
                                     <MenuItem v-if="userRoute" v-slot="{ active }">
-                                        <router-link :to="userRoute"
-                                            :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
-                                            Dashboard
-                                        </router-link>
+                                    <router-link :to="userRoute"
+                                        :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
+                                        Dashboard
+                                    </router-link>
                                     </MenuItem>
 
                                     <MenuItem v-if="userProfile" v-slot="{ active }">
-                                        <router-link :to="userProfile"
-                                            :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
-                                            Perfil
-                                        </router-link>
+                                    <router-link :to="userProfile"
+                                        :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
+                                        Perfil
+                                    </router-link>
+                                    </MenuItem>
+
+                                    <MenuItem v-if="userProfile" v-slot="{ active }">
+                                    <router-link :to="`/User/Content`"
+                                        :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
+                                        Contenido
+                                    </router-link>
                                     </MenuItem>
 
                                     <MenuItem v-slot="{ active }">
-                                        <button @click.prevent="logout"
-                                            :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block w-full px-4 py-2 text-left text-sm']">
-                                            Salir
-                                        </button>
+                                    <button @click.prevent="logout"
+                                        :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block w-full px-4 py-2 text-left text-sm']">
+                                        Salir
+                                    </button>
                                     </MenuItem>
                                 </div>
                             </MenuItems>

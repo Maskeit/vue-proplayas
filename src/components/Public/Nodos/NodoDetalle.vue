@@ -34,7 +34,7 @@
                         <td class="px-6 py-4 whitespace-nowrap">{{ item.name }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">{{ item.username }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">{{ item.email }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap line-clamp-0.5">{{ item.research_line }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap line-clamp-0.5">{{ item.research_line.length > 10 ? item.research_line.substring(0, 15) + '...' : item.research_line }}</td>
                         <!-- <td class="px-6 py-4 whitespace-nowrap">{{ item.work_area }}</td> -->
                         <td class="px-6 py-4 whitespace-nowrap">{{ item.status }}</td>
                     </tr>

@@ -5,11 +5,10 @@ import bcrypt
 from datetime import datetime
 
 # Leer CSV
-df = pd.read_csv("nodos.csv")
+df = pd.read_csv("nodos_proplayas.csv")
 
 # El CSV tiene esta forma en sus cabezeras:
-# type,code,name,country,joined_in,city,leader_id,email,social_media
-
+# type,code,leader_name,email,username,password,role,degree,postgraduate,expertise_area,research_work,facebook,instagram,whatsapp,twitter,linkedin,researchgate,youtube,node_name,country,city,coordinates,alt_places,joined_in,members_count,website,email_nodo
 # Conexión a MySQL
 conn = mysql.connector.connect(
     host='localhost',
@@ -21,6 +20,9 @@ conn = mysql.connector.connect(
 cursor = conn.cursor()
 # Abrir archivo de log
 log_file = open("registro_usuarios.txt", "a", encoding="utf-8")
+
+def safe_value(value):
+    return value if pd.notna(value) else None
 
 def normalizar_tipo(tipo: str) -> str:
     tipo = tipo.lower()
@@ -37,14 +39,33 @@ def normalizar_tipo(tipo: str) -> str:
 
 for _, row in df.iterrows():
     node_type = normalizar_tipo(row["type"])
-    code = row["code"]
-    name = row["name"]
-    country = row["country"]
+    code = safe_value(row["code"])
+    node_name = safe_value(row["node_name"])
+    country = safe_value(row["country"])
     joined_in = int(row["joined_in"]) if not pd.isna(row["joined_in"]) else 2024
-    city = row["city"]
-    leader_name = row["leader_id"]
+    city = safe_value(row["city"])
+    leader_name = row["leader_name"]
     leader_email = row["email"]
-    social_url = row["social_media"]
+    username = row["username"]
+    if pd.isna(username) or not username.strip():
+        base_username = leader_email.split("@")[0].lower().replace(".", "_")
+        username = base_username
+        suffix = 1
+        # Asegurar que el username sea único
+        cursor.execute("SELECT id FROM users WHERE username = %s", (username,))
+        while cursor.fetchone():
+            username = f"{base_username}_{suffix}"
+            suffix += 1
+            cursor.execute("SELECT id FROM users WHERE username = %s", (username,))
+    raw_password = row["password"]
+    password_hash = bcrypt.hashpw(raw_password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8").replace("$2b$", "$2y$")
+    social_fields = ["facebook", "instagram", "whatsapp", "twitter", "linkedin", "researchgate", "youtube"]
+    social_list = []
+    for field in social_fields:
+        value = row[field]
+        if pd.notna(value) and str(value).strip().lower() != "nan":
+            social_list.append({"platform": field, "url": str(value).strip()})
+    social_media = json.dumps(social_list) if social_list else None
 
     # Buscar líder por correo
     cursor.execute("SELECT id FROM users WHERE email = %s", (leader_email,))
@@ -53,71 +74,61 @@ for _, row in df.iterrows():
     if result:
         leader_id = result[0]
     else:
-        # Generar hash compatible con Laravel
-        raw_hash = bcrypt.hashpw("Contra123@".encode("utf-8"), bcrypt.gensalt())
-        password = raw_hash.decode("utf-8").replace("$2b$", "$2y$")
-        # Generar username base
-        base_username = leader_email.split("@")[0].lower().replace(".", "_")
-        username = base_username
-        suffix = 1
- 
-        # Verificar y ajustar si el username ya existe
-        cursor.execute("SELECT id FROM users WHERE username = %s", (username,))
-        while cursor.fetchone():
-            username = f"{base_username}_{suffix}"
-            suffix += 1
-            cursor.execute("SELECT id FROM users WHERE username = %s", (username,))
+        degree = safe_value(row["degree"])
+        postgraduate = safe_value(row["postgraduate"])
+        expertise_area = safe_value(row["expertise_area"])
+        research_work = safe_value(row["research_work"])
         cursor.execute("""
-            INSERT INTO users (name, email, username, password, role, status, created_at, updated_at)
-            VALUES (%s, %s, %s, %s, 'node_leader', 'activo', %s, %s)
+            INSERT INTO users (name, email, username, password, role, degree, postgraduate, expertise_area, research_work, social_media, status, created_at, updated_at)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 'activo', %s, %s)
         """, (
             leader_name,
             leader_email,
             username,
-            password,
+            password_hash,
+            safe_value(row["role"]),
+            degree,
+            postgraduate,
+            expertise_area,
+            research_work,
+            social_media,
             datetime.now(),
             datetime.now()
         ))
         conn.commit()
         leader_id = cursor.lastrowid
         print(f"🆕 Usuario creado: {leader_name} ({leader_email}) → ID {leader_id}")
+        print(f"👤 Username asignado: {username}")
         log_file.write(f"{leader_name} | {leader_email} | {username}\n")
 
-    # Preparar JSON de social_media segun la interface (url + platform)
-    social_json = None
-    if pd.notna(social_url) and social_url != 'N/A':
-        # Para el caso de múltiples URLs separadas por comas
-        # Ajusta según tu CSV real; si solo hay una, esto igual funciona.
-        links = [x.strip() for x in social_url.split(',')]
-        social_list = []
-        for link in links:
-            social_list.append({
-                'url': link,
-                'platform': 'website'
-            })
-        social_json = json.dumps(social_list)
-    else:
-        social_json = None
 
+    coordinates = safe_value(row["coordinates"])
+    alt_places = safe_value(row["alt_places"])
+    members_count = int(row["members_count"]) if pd.notna(row["members_count"]) else None
+    email_nodo = safe_value(row["email_nodo"])
+    node_social_media = None  # si no hay datos aún, se queda en null
     # Insertar nodo en la tabla
     cursor.execute("""
         INSERT INTO nodes (
-            leader_id, code, type, name, country, city, joined_in, social_media, status, created_at, updated_at
+            leader_id, code, type, name, country, city, coordinates, alt_places, joined_in, members_count, social_media, status, created_at, updated_at
         )
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 'activo', %s, %s)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 'activo', %s, %s)
     """, (
         leader_id,
         code,
         node_type,
-        name,
+        node_name,
         country,
         city,
+        coordinates,
+        alt_places,
         joined_in,
-        social_json,
+        members_count,
+        node_social_media,
         datetime.now(),
         datetime.now()
     ))
-    print(f"✅ Nodo insertado: {code} - {name}")
+    print(f"✅ Nodo insertado: {code} - {node_name}")
 
 conn.commit()
 log_file.close()

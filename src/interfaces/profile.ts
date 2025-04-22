@@ -16,6 +16,6 @@ export interface User {
 }
 
 export interface SocialLink {
-    platform: 'linkedin' | 'github' | 'twitter' | 'website' | 'facebook' | 'instagram' | 'youtube' | 'research_gate';
+    platform: 'linkedin' | 'github' | 'twitter' | 'website' | 'facebook' | 'instagram' | 'youtube' | 'research_gate' | 'phone';
     url: string;
 }

@@ -15,8 +15,7 @@ export class ProfileService {
     async updateProfile(form: profile): Promise<{ status: number; message: string; data: profile }> {
         try {
             const response = await axiosInstance.put<profile>(`/user/profile`, form);
-            const {status, message, data} = response.data;
-            console.log({status, message, data});
+            const {status, message, data} = response.data;        
             return { status, message, data };
         } catch (error: any) {
             console.error("Error al actualizar el perfil del miembro:", error);

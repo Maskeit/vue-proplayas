@@ -1,20 +1,22 @@
 <template>
     <!-- Contenedor del navbar con fondo blanco y sombra -->
-    <nav class="fixed top-0 left-0 w-full z-50 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md backdrop-saturate-150 shadow-md">
+    <nav
+        class="fixed top-0 left-0 w-full z-50 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md backdrop-saturate-150 shadow-md">
         <div class="container mx-auto px-4 py-4 flex items-center justify-between">
             <!-- Logo y nombre del sitio -->
             <div class="flex items-center gap-4 text-xl font-bold">
                 <img src="/proplayas_logo.svg" alt="Logo" class="h-14">
                 <a href="/" class="text-gray-600 dark:text-gray-100 hover:text-gray-700">Proplayas</a>
             </div>
-            
+
             <!-- Menú de navegación del user para pantallas medianas y grandes -->
             <div class="hidden md:flex space-x-4 items-center">
-                <router-link to="/User/Profile" class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400 font-semibold">Perfil</router-link>
-                <router-link to="/User/Webinar" class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Webinars</router-link>
-                <router-link to="/User/Libros" class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Libros</router-link>
-                <router-link to="/User/WebSeries" class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Web Series</router-link>
-                <router-link to="/User/Articulos" class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Artículos</router-link>
+                <router-link to="/"
+                    class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400 font-semibold">Inicio</router-link>
+                <router-link to="/User/Profile"
+                    class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Perfil</router-link>
+                <router-link to="/User/Content"
+                    class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Contenido</router-link>
                 <div v-if="!token">
                     <router-link to="/Login"
                         class="bg-gray-200 p-3 rounded-lg text-gray-700 dark:text-black dark:hover:text-gray-700">Login</router-link>
@@ -39,24 +41,29 @@
                                 class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 focus:outline-hidden">
                                 <div class="py-1">
                                     <MenuItem v-if="userRoute" v-slot="{ active }">
-                                        <router-link :to="userRoute"
-                                            :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
-                                            Dashboard
-                                        </router-link>
+                                    <router-link :to="userRoute"
+                                        :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
+                                        Dashboard
+                                    </router-link>
                                     </MenuItem>
 
                                     <MenuItem v-if="userProfile" v-slot="{ active }">
-                                        <router-link :to="userProfile"
-                                            :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
-                                            Perfil
-                                        </router-link>
+                                    <router-link :to="userProfile"
+                                        :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
+                                        Perfil
+                                    </router-link>
                                     </MenuItem>
-
+                                    <MenuItem v-if="userProfile" v-slot="{ active }">
+                                    <router-link :to="`/User/Content`"
+                                        :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
+                                        Contenido
+                                    </router-link>
+                                    </MenuItem>
                                     <MenuItem v-slot="{ active }">
-                                        <button @click.prevent="logout"
-                                            :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block w-full px-4 py-2 text-left text-sm']">
-                                            Salir
-                                        </button>
+                                    <button @click.prevent="logout"
+                                        :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block w-full px-4 py-2 text-left text-sm']">
+                                        Salir
+                                    </button>
                                     </MenuItem>
                                 </div>
                             </MenuItems>
@@ -68,13 +75,17 @@
             <!-- Botón para desplegar el menú en pantallas pequeñas -->
             <div class="md:hidden flex items-center gap-2">
                 <!-- Botón de Modo Oscuro para móvil -->
-                <button @click="toggleMenu" type="button" class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400 focus:outline-none">
-                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <button @click="toggleMenu" type="button"
+                    class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400 focus:outline-none">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
                         <template v-if="!isOpen">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
                         </template>
                         <template v-else>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
                         </template>
                     </svg>
                 </button>
@@ -83,12 +94,13 @@
 
         <!-- Menú móvil: se muestra solo en pantallas pequeñas -->
         <div v-if="isOpen" class="md:hidden">
-            <div class="flex flex-col justify-center items-center text-center space-y-3 sm:px-4">
-                <router-link to="/User/Profile" class="block text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Perfil</router-link>
-                <router-link to="/User/Webinar" class="block text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Webinars</router-link>
-                <router-link to="/User/Libros" class="block text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Libros</router-link>
-                <router-link to="/User/WebSeries" class="block text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Web Series</router-link>
-                <router-link to="/User/Articulos" class="block text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Artículos</router-link>
+            <div class="flex flex-col pb-4 justify-center items-center text-center space-y-3 sm:px-4">
+                <router-link to="/"
+                    class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400 font-semibold">Inicio</router-link>
+                <router-link to="/User/Profile"
+                    class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Perfil</router-link>
+                <router-link to="/User/Content"
+                    class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Contenido</router-link>
                 <!-- Si el usuario no está autenticado, mostrar Login -->
                 <div v-if="!token">
                     <router-link to="/Login"
@@ -117,24 +129,29 @@
                                 class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 focus:outline-hidden">
                                 <div class="py-1">
                                     <MenuItem v-if="userRoute" v-slot="{ active }">
-                                        <router-link :to="userRoute"
-                                            :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
-                                            Dashboard
-                                        </router-link>
+                                    <router-link :to="userRoute"
+                                        :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
+                                        Dashboard
+                                    </router-link>
                                     </MenuItem>
 
                                     <MenuItem v-if="userProfile" v-slot="{ active }">
-                                        <router-link :to="userProfile"
-                                            :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
-                                            Perfil
-                                        </router-link>
+                                    <router-link :to="userProfile"
+                                        :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
+                                        Perfil
+                                    </router-link>
                                     </MenuItem>
-
+                                    <MenuItem v-if="userProfile" v-slot="{ active }">
+                                    <router-link :to="`/User/Content`"
+                                        :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
+                                        Contenido
+                                    </router-link>
+                                    </MenuItem>
                                     <MenuItem v-slot="{ active }">
-                                        <button @click.prevent="logout"
-                                            :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block w-full px-4 py-2 text-left text-sm']">
-                                            Salir
-                                        </button>
+                                    <button @click.prevent="logout"
+                                        :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block w-full px-4 py-2 text-left text-sm']">
+                                        Salir
+                                    </button>
                                     </MenuItem>
                                 </div>
                             </MenuItems>

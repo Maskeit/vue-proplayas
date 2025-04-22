@@ -40,7 +40,7 @@
                         <td class="px-6 py-4 whitespace-nowrap" @click="toProfile(item.username)">{{ item.name }}</td>
                         <td class="px-6 py-4 whitespace-nowrap" @click="toProfile(item.username)">{{ item.username }}</td>
                         <td class="px-6 py-4 whitespace-nowrap" @click="toProfile(item.username)">{{ item.email }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap line-clamp-0.5" @click="toProfile(item.username)">{{ item.research_line }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap line-clamp-0.5" @click="toProfile(item.username)">{{ item.research_line.length > 10 ? item.research_line.substring(0, 15) + '...' : item.research_line }}</td>
                         <!-- <td class="px-6 py-4 whitespace-nowrap">{{ item.work_area }}</td> -->
                         <td class="px-6 py-4 whitespace-nowrap" @click="toProfile(item.username)">{{ item.status }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">

@@ -14,8 +14,7 @@
                 <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">{{ user.name }}</h2>
             </div>
             <!-- Información básica -->
-            <div
-                class="bg-white dark:bg-zinc-600 text-gray-800 dark:text-gray-100 shadow-md rounded-lg p-6 flex flex-col gap-y-4">
+            <div class="bg-white dark:bg-zinc-600 text-gray-800 dark:text-gray-100 shadow-md rounded-lg p-6 flex flex-col gap-y-4">
                 <div class="flex justify-between items-center">
                     <h2 class="text-xl font-semibold">Mi Biografía</h2>
                     <button @click="openEditProfileModal"
@@ -79,23 +78,23 @@ import Confirmation from '@/components/shared/modales/Confirmation.vue';
 import { ref, computed, onMounted } from 'vue'
 import { useUserProfileStore } from '@/services/Stores/ProfileStore';
 import EditProfileBio from "@/components/User/Profile/EditProfileBio.vue";
-// icons
+// Icons
 import FacebookIcon from "@icons/FacebookIcon.vue";
 import TwitterIcon from "@icons/TwitterIcon.vue";
 import InstagramIcon from "@icons/InstagramIcon.vue";
 import YoutubeIcon from "@icons/YoutubeIcon.vue";
 import LinkedinIcon from "@icons/LinkedinIcon.vue";
 import GithubIcon from "@icons/GithubIcon.vue";
-import { GlobeAltIcon, AcademicCapIcon, PencilIcon } from "@heroicons/vue/24/outline";
+import { GlobeAltIcon, AcademicCapIcon, PencilIcon, PhoneIcon } from "@heroicons/vue/24/outline";
 
-// estados
+// Estados
 import { useRoute } from "vue-router";
 const route = useRoute();
 const username = route.params.username as string;
 const userProfileStore = useUserProfileStore(); // Store de perfil
-const user = computed(() => userProfileStore.profile); // Se obtiene del store
+const user = computed(() => userProfileStore.profile[0]); // Se obtiene del store
 const isLoading = ref(true);
-
+const showConfirmation = ref(false);
 // Computed para encontrar el usuario actual
 onMounted(async () => {
     try {
@@ -118,6 +117,7 @@ const getIconComponent = (platform: string) => {
         instagram: InstagramIcon,
         research_gate: AcademicCapIcon,
         youtube: YoutubeIcon,
+        phone : PhoneIcon
     };
     return icons[platform] || GlobeAltIcon;
 };
