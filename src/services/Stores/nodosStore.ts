@@ -22,6 +22,13 @@ export const useNodosStore = defineStore('nodos', () => {
         nodoMiembros.value = members;
     }
 
+    const setNodeMember = (member: NodeMembers) => {
+        const index = nodoMiembros.value.findIndex((m) => m.id === member.id);
+        if (index !== -1) {
+            nodoMiembros.value[index] = member;
+        }        
+    }
+
     // Traer lista de los nodos
     const fetchNodos = async () => {
         if (cargado.value && nodos.value.length > 0) {
@@ -73,10 +80,20 @@ export const useNodosStore = defineStore('nodos', () => {
             console.error("Error al editar la biografía del nodo:", error);
         }
     }
-    
-    const updateNodeMember = async (id: number, data: NodeMembers) => {
+
+    const updateNodeMember = async (id: number) => {        
 
     }
+    const toggleNodeMemberStatus = async (memberId: number) => {
+        try {
+            const { status, message, data } = await nodosService.toggleMemberStatus(memberId);
+            //setNodeMember(data); Se espera que el backend devuelva el miembro actualizado correctamente
+            return status;
+        } catch (error) {
+            console.error("Error al cargar miembros del nodo desde el store:", error);
+        }
+    }
+    
     return {
         nodo,
         nodos,
@@ -85,11 +102,13 @@ export const useNodosStore = defineStore('nodos', () => {
         //actions
         setNodeBio,
         setNodeMembers,
+        setNodeMember,
         setNodos,
         fetchNodos,
         fetchNodoInfo,
         fetchNodoMembers,
         updateNodeBio,
         updateNodeMember,
+        toggleNodeMemberStatus,
     };
 });

@@ -1,7 +1,7 @@
 <template>
     <div class="px-5">
         <!-- header -->
-        <div class="flex justify-between items-center p-4">
+        <div class="flex lg:flex-row flex-col justify-between items-center p-4 border-b">
             <h1 class="text-3xl font-semibold text-gray-600 dark:text-gray-100">Colaboradores del Nodo: {{ code }}</h1>
             <div class="flex items-center space-x-2">
                 <!-- Buscador (opcional) -->

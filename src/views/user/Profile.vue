@@ -92,7 +92,7 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 const username = route.params.username as string;
 const userProfileStore = useUserProfileStore(); // Store de perfil
-const user = computed(() => userProfileStore.profile[0]); // Se obtiene del store
+const user = computed(() => userProfileStore.profile); // Se obtiene del store
 const isLoading = ref(true);
 const showConfirmation = ref(false);
 // Computed para encontrar el usuario actual

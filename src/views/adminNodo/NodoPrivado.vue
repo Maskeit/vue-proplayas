@@ -122,6 +122,7 @@ const toggleStatus = async (item: NodeMembers) => {
         console.error("Error al actualizar el estado del miembro:", error);
     }
 }
+
 const filtrar = (term: string) => {
     searchTerm.value = term;
 }

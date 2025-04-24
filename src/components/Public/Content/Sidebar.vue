@@ -14,7 +14,8 @@
       <SidebarItem :icon="FilmIcon" text="Web Series" to="/Content/webseries" :showText="!isCollapsed" />
       <SidebarItem :icon="DocumentTextIcon" text="Artículos" to="/Content/articulos" :showText="!isCollapsed" />
       <SidebarItem :icon="BookOpenIcon" text="Libros" to="/Content/libros" :showText="!isCollapsed" />
-      </nav>
+      <SidebarItem :icon="GlobeAmericasIcon" text="Proyectos" to="/Content/Proyectos" :showText="!isCollapsed" />
+    </nav>
     </aside>
 </template>
 
@@ -28,6 +29,7 @@ import {
     FilmIcon,
     DocumentTextIcon,
     BookOpenIcon,
+    GlobeAmericasIcon,
 } from '@heroicons/vue/24/outline'
 import SidebarItem from './SidebarItem.vue'
 

@@ -40,7 +40,7 @@ import Articulos from "@components/Public/Content/Articulos.vue";
 import Libros from "@components/Public/Content/Libros.vue";
 import WebSeries from "@components/Public/Content/WebSeries.vue";
 import Webinars from "@components/Public/Content/Webinars.vue";
-
+import Proyects from "@components/Public/Content/Proyectos.vue";
 
 const generateCmsRoutes = (): Array<RouteRecordRaw> => [
   { path: '', name: '', component: WebinarsCMS },
@@ -57,6 +57,7 @@ const contentPanels = (): Array<RouteRecordRaw> => [
   { path: 'webinars', name: 'Webinars', component: Webinars },
   { path: 'libros', name: 'Libros', component: Libros },
   { path: 'webseries', name: 'WebSeries', component: WebSeries },
+  { path: 'proyectos', name: 'Proyectos', component: Proyects },
 ];
 
 // Rutas para administradores_root

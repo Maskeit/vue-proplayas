@@ -16,7 +16,7 @@
                 <router-link to="/User/Profile"
                     class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Perfil</router-link>
                 <router-link to="/User/Content"
-                    class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Contenido</router-link>
+                    class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Crear</router-link>
                 <div v-if="!token">
                     <router-link to="/Login"
                         class="bg-gray-200 p-3 rounded-lg text-gray-700 dark:text-black dark:hover:text-gray-700">Login</router-link>
@@ -56,7 +56,7 @@
                                     <MenuItem v-if="userProfile" v-slot="{ active }">
                                     <router-link :to="`/User/Content`"
                                         :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
-                                        Contenido
+                                        Crear
                                     </router-link>
                                     </MenuItem>
                                     <MenuItem v-slot="{ active }">

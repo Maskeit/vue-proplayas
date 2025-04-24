@@ -19,7 +19,7 @@
                 <thead class="bg-gray-50 dark:bg-zinc-800">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">ID</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">Node id</th>
+                        <!-- <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">Node id</th> -->
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">Code</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">Nombre</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">Username</th>
@@ -35,7 +35,7 @@
                     <tr class="hover:bg-zinc-200 dark:hover:bg-zinc-700 cursor-pointer" v-for="item in items"
                         :key="item.id" :item="item">
                         <td class="px-6 py-4 whitespace-nowrap" @click="toProfile(item.username)">{{ item.id }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap" @click="toProfile(item.username)">{{ item.node_id }}</td>
+                        <!-- <td class="px-6 py-4 whitespace-nowrap" @click="toProfile(item.username)">{{ item.node_id }}</td> -->
                         <td class="px-6 py-4 whitespace-nowrap" @click="toProfile(item.username)">{{ item.member_code }}</td>
                         <td class="px-6 py-4 whitespace-nowrap" @click="toProfile(item.username)">{{ item.name }}</td>
                         <td class="px-6 py-4 whitespace-nowrap" @click="toProfile(item.username)">{{ item.username }}</td>
@@ -45,7 +45,7 @@
                         <td class="px-6 py-4 whitespace-nowrap" @click="toProfile(item.username)">{{ item.status }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <button class="text-blue-600 hover:text-blue-800 mr-2"
-                            @click.stop.prevent="onToggle(item)">Cambiar</button>
+                            @click.stop.prevent="onToggle(item.user_id)">{{ item.status === "activo" ? "Desactivar" : "Activar" }}</button> <!-- Activar -->
                             <button class="text-red-600 hover:text-red-800"
                             @click.stop="deleteMember(item)">Eliminar</button>
                         </td>

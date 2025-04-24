@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "title": "Beach Cleanup Initiative",
+        "description": "A community-driven project to clean up plastic waste and debris from local beaches.",
+        "place": "Santa Monica Beach, California",
+        "date": "2023-05-15T00:00:00.000Z",
+        "image": "https://example.com/images/beach-cleanup.jpg",
+        "link": "https://example.com/projects/beach-cleanup"
+    },
+    {
+        "id": 2,
+        "title": "Coral Reef Restoration",
+        "description": "A project focused on restoring damaged coral reefs through sustainable practices.",
+        "place": "Great Barrier Reef, Australia",
+        "date": "2023-06-20T00:00:00.000Z",
+        "image": "https://example.com/images/coral-reef-restoration.jpg",
+        "link": "https://example.com/projects/coral-reef-restoration"
+    },
+    {
+        "id": 3,
+        "title": "Sea Turtle Conservation",
+        "description": "Protecting sea turtle nesting sites and raising awareness about marine life conservation.",
+        "place": "Tulum, Mexico",
+        "date": "2023-07-10T00:00:00.000Z",
+        "image": "https://example.com/images/sea-turtle-conservation.jpg",
+        "link": "https://example.com/projects/sea-turtle-conservation"
+    },
+    {
+        "id": 4,
+        "title": "Mangrove Reforestation",
+        "description": "Planting mangroves to combat coastal erosion and support marine ecosystems.",
+        "place": "Sundarbans, India",
+        "date": "2023-08-05T00:00:00.000Z",
+        "image": "https://example.com/images/mangrove-reforestation.jpg",
+        "link": "https://example.com/projects/mangrove-reforestation"
+    },
+    {
+        "id": 5,
+        "title": "Sustainable Fishing Practices",
+        "description": "Promoting sustainable fishing methods to protect marine biodiversity.",
+        "place": "Galapagos Islands, Ecuador",
+        "date": "2023-09-15T00:00:00.000Z",
+        "image": "https://example.com/images/sustainable-fishing.jpg",
+        "link": "https://example.com/projects/sustainable-fishing"
+    }
+]
