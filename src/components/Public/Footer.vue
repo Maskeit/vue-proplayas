@@ -8,9 +8,10 @@
             </div>
             <!-- Menú de navegación en el footer con los mismos enlaces -->
             <div class="flex space-x-4">
-                <a href="/Home" class="text-gray-300 hover:text-white">Inicio</a>
-                <a href="/About" class="text-gray-300 hover:text-white">Quienes Somos</a>
-                <a href="/Content" class="text-gray-300 hover:text-white">Content</a>
+                <router-link to="/Home" class="text-gray-800 dark:text-gray-200 font-semibold">Inicio</router-link>
+                <router-link to="/History" class="text-gray-800 dark:text-gray-200">Historia</router-link>
+                <router-link to="/Content" class="text-gray-800 dark:text-gray-200">Actividades</router-link>
+                <router-link to="/Nodos" class="text-gray-800 dark:text-gray-200">Nodos</router-link>
             </div>
         </div>
     </footer>

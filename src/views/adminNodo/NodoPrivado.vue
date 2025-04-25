@@ -15,18 +15,12 @@
             <NodoDetalle 
                 :code="code"
                 :items="registrosFiltrados"
-                @editar="editarRegistro"
-                @eliminar="confirmarEliminacion"
-                @nuevo-registro="abrirFormulario"
+                @toggle="toggleStatus"
+                @deleteMember="confirmarEliminacion"
+                @nuevo-registro="guardarRegistro"
                 @search="filtrar" />
-            <CrudModal :visible="mostrarModal" @cerrar="cerrarModal">
-                <CrudForm 
-                    :model="registroSeleccionado" 
-                    @guardar="guardarRegistro" 
-                    @cancelar="cerrarModal" />                    
-            </CrudModal>
         </template>
-        <Confirmation v-if="showConfirmation" @close="showConfirmation = false" />        
+        <Confirmation v-if="showConfirmation" :message="confirmationMessage" :type="confirmationType" @close="showConfirmation = false" />        
     </div>
 </template>
 
@@ -34,12 +28,10 @@
 import NodoBio from "@/components/AdminNodo/nodo/NodoBio.vue";
 import BioSkeleton from "@/components/shared/skeletons/BioSkeleton.vue"
 import NodoDetalle from "@/components/AdminNodo/nodo/NodoDetalle.vue";
-import CrudForm from '@/components/AdminNodo/Crud/CrudForm.vue';
-import CrudModal from '@/components/AdminNodo/Crud/CrudModal.vue';
 import { useRoute } from 'vue-router';
 import Confirmation from '@/components/shared/modales/Confirmation.vue';
 import type { NodeMembers } from "@interfaces/Nodes";
-import type { SocialLink } from "@interfaces/Profile";
+import type { SocialLink } from "@/interfaces/Profile";
 import type { InviteNodeMember } from '@interfaces/Invitations';
 
 import { useNodosStore } from '@stores/nodosStore';
@@ -47,21 +39,23 @@ import InvitationsService from "@/services/Class/InvitationService";
 
 import { ref, computed, onMounted } from 'vue';
 
+// servicios y rutas
+const route = useRoute();
 const nodosStore = useNodosStore();
-
 const invitationsService = new InvitationsService();
 
-const route = useRoute();
+// estados
 const code = route.params.code as string;
 const nodeData = computed(() => nodosStore.nodo);
 const registros = computed(() => nodosStore.nodoMiembros);
-
-const registroSeleccionado = ref<NodeMembers | null>(null);
 const isLoading = ref(true);
+const registroSeleccionado = ref<NodeMembers | null>(null);
 
 const searchTerm = ref('');
 const mostrarModal = ref(false);
 const showConfirmation = ref(false);
+const confirmationMessage = ref('');
+const confirmationType = ref<'success' | 'error' | 'warning'>('success');
 
 const ID = ref<number | null>(null);
 onMounted(async () => {
@@ -83,6 +77,8 @@ const updateNodeBio = async (updatedData: any) =>  {
         isLoading.value = true;
         const status = await nodosStore.updateNodeBio(ID.value, updatedData);
         if (status === 200) {
+            confirmationMessage.value = 'Cambios confirmados y guardados';
+            confirmationType.value = 'success';
             showConfirmation.value = true;
         }
     } catch (error) {
@@ -92,24 +88,42 @@ const updateNodeBio = async (updatedData: any) =>  {
     }
 }
 
-
-async function guardarRegistro(nuevoRegistro: InviteNodeMember) {
+const guardarRegistro = async (nuevoRegistro: InviteNodeMember) => {
     try {
-        await invitationsService.createInvitationToNodeMember(nuevoRegistro);
-        alert("Invitación enviada correctamente");
-        mostrarModal.value = false;
+        const { status, message, data } = await invitationsService.createInvitationToNodeMember(nuevoRegistro);
+        if (status && status === 201) {
+            confirmationMessage.value = 'Invitación enviada correctamente';
+            confirmationType.value = 'success';
+            showConfirmation.value = true;
+            mostrarModal.value = false;
+        } else {
+            confirmationMessage.value = 'Error al enviar la invitación';
+            confirmationType.value = 'error';
+            showConfirmation.value = true;
+        }
     } catch (error) {
-        alert("Error al enviar la invitación. Revisa la consola.");
+        console.error("Error al enviar la invitación:", error);
     }
 }
-function abrirFormulario() {
-    registroSeleccionado.value = null;
-    mostrarModal.value = true;
+
+const toggleStatus = async (item: NodeMembers) => {
+    try {
+        const status = await nodosStore.toggleNodeMemberStatus(item);
+        if (status === 200) {
+            confirmationMessage.value = 'Estado actualizado correctamente';
+            confirmationType.value = 'success';
+            showConfirmation.value = true;
+        }else {
+            confirmationMessage.value = 'Error al cambiar el estado';
+            confirmationType.value = 'error';
+            showConfirmation.value = true;
+        }
+    } catch (error) {
+        console.error("Error al actualizar el estado del miembro:", error);
+    }
 }
-function cerrarModal() {
-    mostrarModal.value = false;
-}
-function filtrar(term: string) {
+
+const filtrar = (term: string) => {
     searchTerm.value = term;
 }
 </script>

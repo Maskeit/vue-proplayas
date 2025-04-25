@@ -48,7 +48,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { Series, Chapter } from '@/interfaces/Series'
+import type { Series, Chapter } from '@/interfaces/Content'
 import Webserie from '@/components/Public/Content/Cards/Webserie.vue';
 import mockSeries from '@/utils/json/webseries.json'
 import mockChapters from '@/utils/json/webchapters.json'

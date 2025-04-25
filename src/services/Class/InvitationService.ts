@@ -1,5 +1,5 @@
 import axiosInstance from "@api";
-import type { InviteNodeMember, RegisterNodeMember , InviteNodeLeader, RegisterNodeLeader } from "@interfaces/Invitations";
+import type { InviteNodeMember,  InviteNodeLeader, } from "@interfaces/Invitations";
 
 export default class InvitationService {
     

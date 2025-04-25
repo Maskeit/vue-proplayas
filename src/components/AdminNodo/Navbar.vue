@@ -1,4 +1,5 @@
 <template>
+    <!-- No lo uso mas -->
     <!-- Contenedor del navbar con fondo blanco y sombra -->
     <nav class="fixed top-0 left-0 w-full z-50 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md backdrop-saturate-150 shadow-md">
         <div class="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -183,15 +184,9 @@ if (token) {
     const role = decodedData.role; // usado antes
     const nodeCode = localStorage.getItem("node_id"); // Assuming node_code is part of the decoded token
     const local_role = localStorage.getItem("role"); // Assuming role is stored in local storage member, node_leader // usado en pruebas
-    if (local_role === "admin") {
-        // Redirect to admin dashboard
-        userRoute.value = "/root/nodos";
-        userProfile.value = "/root/profile";
-    } else if (local_role === "node_leader") {
+    if (local_role === "node_leader") {
         userRoute.value = `/lider/${nodeCode}`;
         userProfile.value = `/User/profile`;
-    } else if (local_role === "member") {
-        userProfile.value = "/User/profile";
     }
 }
 

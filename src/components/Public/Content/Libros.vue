@@ -1,5 +1,13 @@
 <template>
-    <div class="flex flex-col items-center justify-center border border-gray-300 p-4 rounded-lg">
-        <h2 class="text-gray-400">Contenido de los Libros</h2>
+    <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <Libro v-for="book in parsedBooks" :key="book.id" v-bind="book" />
     </div>
 </template>
+<script setup lang="ts">
+import Libro from '@/components/Public/Content/Cards/Libro.vue';
+import books from '@/utils/json/books.json';
+const parsedBooks = books.map(b => ({
+    ...b,
+    date: new Date(b.publication_date)
+}));
+</script>

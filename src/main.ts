@@ -10,3 +10,4 @@ const pinia = createPinia(); // crear instancia de Pinia
 app.use(pinia); // usar pinia en la app
 app.use(router); // usar router
 app.mount('#app'); // montar app
+app.config.warnHandler = () => {}

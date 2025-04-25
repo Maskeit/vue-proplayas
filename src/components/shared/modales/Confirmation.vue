@@ -12,10 +12,22 @@
                     <span class="sr-only">Close modal</span>
                 </button>
                 <div class="p-4 md:p-5 text-center">
-                    <svg class="mx-auto mb-4 text-gray-400 w-16 h-16 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clip-rule="evenodd"/>
-                    </svg>
-                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Los cambios se han efectuado con exito.</h3>
+                    <template v-if="type === 'success'">
+                        <svg class="mx-auto mb-4 text-green-500 w-16 h-16 dark:text-green-400" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.707a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                    </template>
+                    <template v-else-if="type === 'error'">
+                        <svg class="mx-auto mb-4 text-red-500 w-16 h-16 dark:text-red-400" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.536-10.95a1 1 0 00-1.414-1.415L10 8.586 7.879 6.465a1 1 0 10-1.414 1.415L8.586 10l-2.121 2.121a1 1 0 001.414 1.415L10 11.414l2.121 2.122a1 1 0 001.414-1.415L11.414 10l2.122-2.121z" clip-rule="evenodd" />
+                        </svg>
+                    </template>
+                    <template v-else-if="type === 'warning'">
+                        <svg class="mx-auto mb-4 text-yellow-500 w-16 h-16 dark:text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.682-1.36 3.447 0l6.516 11.59c.75 1.335-.213 2.99-1.732 2.99H3.473c-1.52 0-2.482-1.655-1.732-2.99l6.516-11.59zM11 13a1 1 0 10-2 0 1 1 0 002 0zm-1-6a1 1 0 00-.993.883L9 8v3a1 1 0 001.993.117L11 11V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                    </template>
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">{{ message }}</h3>
                     <button @click="$emit('close')" type="button"
                         class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                         Listo
@@ -25,3 +37,16 @@
         </div>
     </div>
 </template>
+
+<script setup>
+const props = defineProps({
+    message: {
+        type: String,
+        default: 'Los cambios se han efectuado con éxito.',
+    },
+    type: {
+        type: String,
+        default: 'success', // 'success' | 'error' | 'warning'
+    }
+});
+</script>

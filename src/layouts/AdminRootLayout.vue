@@ -11,6 +11,6 @@
 </template>
 
 <script setup lang="ts">
-import Navbar from '@/components/AdminRoot/Navbar.vue';
-import Footer from '@/components/AdminRoot/Footer.vue';
+import Navbar from '@/components/User/Navbar.vue';
+import Footer from '@/components/User/Footer.vue';
 </script>

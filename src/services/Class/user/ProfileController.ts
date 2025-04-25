@@ -15,12 +15,22 @@ export class ProfileService {
     async updateProfile(form: profile): Promise<{ status: number; message: string; data: profile }> {
         try {
             const response = await axiosInstance.put<profile>(`/user/profile`, form);
-            const {status, message, data} = response.data;
-            console.log({status, message, data});
+            const {status, message, data} = response.data;        
             return { status, message, data };
         } catch (error: any) {
             console.error("Error al actualizar el perfil del miembro:", error);
             throw error;
         }
+    }
+
+    // peticion con axios para obtener el perfil publico
+    async getPublicProfile (username: string): Promise<{ status: number; data: profile }> {
+        try {
+            const response = await axiosInstance.get<profile>(`/user/${username}`);
+            return response.data.data;
+        } catch (error: any) {
+            console.error("Error al obtener el perfil público:", error);
+            throw error;
+        }    
     }
 }

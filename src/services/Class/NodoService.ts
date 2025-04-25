@@ -1,5 +1,5 @@
 import axiosInstance from "@api";
-import type { Nodes, Node, NodeMembers } from "@interfaces/Nodes";
+import type { Nodes, Node, NodeMembers, Member } from "@interfaces/Nodes";
 
 export class NodosService {
     async getPublicNodes(): Promise<{ nodes: Nodes[]; status: number }> {
@@ -36,9 +36,6 @@ export class NodosService {
     }
 
     async editNodeBio(id: number, editData: Node): Promise<Node | null> {
-        // console.log("Editando nodo con ID:", id);
-        // console.log("datos a enviar:", editData);
-        // return;
         try {
             const response = await axiosInstance.put(`/node/${id}`, editData);
             const {status, message, data} = response.data;
@@ -49,4 +46,16 @@ export class NodosService {
             throw error;
         }
     }
+
+    async toggleMemberStatus(memberId: number): Promise<Member | null> {
+        try{
+            const response = await axiosInstance.delete(`/user/${memberId}`);    
+            const {status, message, data} = response.data;
+            return {status, message, data};
+        } catch (error: any) {
+            console.error("Error al actualizar el perfil del miembro:", error);
+            throw error;
+        }
+    }
+
 }

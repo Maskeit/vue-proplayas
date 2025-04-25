@@ -50,7 +50,7 @@
 
 <script setup lang="ts">
 import { Leader } from "@interfaces/Nodes";
-import { SocialLink } from "@interfaces/Profile";
+import { SocialLink } from "@/interfaces/Profile";
 import { GlobeAltIcon } from "@heroicons/vue/24/outline";
 import {  AcademicCapIcon,MapPinIcon } from "@heroicons/vue/24/solid";
 import FacebookIcon from "@icons/FacebookIcon.vue";
