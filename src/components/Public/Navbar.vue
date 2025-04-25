@@ -102,6 +102,7 @@
         <div v-if="isOpen" class="md:hidden">
             <div class="flex flex-col pb-4 justify-center items-center text-center space-y-3 sm:px-4 py-4">
                 <router-link to="/Home" class="block dark:text-gray-200">Inicio</router-link>
+                <router-link to="/History" class="text-gray-800 dark:text-gray-200">Historia</router-link>
                 <a href="#quienes-somos" @click.prevent="scrollToSection" class="block dark:text-gray-200">Quiénes
                     Somos</a>
                 <router-link to="/Content" class="block dark:text-gray-200">Actividades</router-link>
