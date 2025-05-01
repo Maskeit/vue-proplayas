@@ -1,7 +1,7 @@
 <template>
-    <div class="max-w-100 p-8">
+    <div class="min-w-100">
         <h2 class="text-xl font-semibold dark:text-gray-200 text-gray-600 text-center mb-4">
-            {{ currentStep === 1 ? "Regsitro de Miembro" : "Un poco más de ti" }}
+            {{ currentStep === 1 ? "Registro de Miembro" : "Un poco más de ti" }}
         </h2>
 
         <form @submit.prevent="handleSubmit">
@@ -20,7 +20,9 @@
                             required />
                     </div>
                 </div>
-
+                <p v-if="errors.name" class="text-red-500 text-center text-sm mb-2">
+                    {{ errors.name }}
+                </p>
                 <div class="mb-4">
                     <label for="username" class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
                         Nombre de usuario
@@ -46,56 +48,6 @@
                         <input v-model="formData.email" type="email" id="email" name="email"
                             class="dark:text-gray-200 text-gray-600 w-full pl-10 pr-3 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500"
                             placeholder="Correo electrónico" required readonly />
-                    </div>
-                </div>
-
-                <div class="mb-4">
-                    <label for="password" class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
-                        Contraseña
-                    </label>
-                    <div class="relative mt-1">
-                        <!-- Icono de candado a la izquierda -->
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
-                            <LockClosedIcon class="size-6 dark:text-gray-200 text-gray-600" />
-                        </span>
-
-                        <!-- Input de contraseña -->
-                        <input v-model="formData.password" :type="showPassword ? 'text' : 'password'" id="password"
-                            name="password"
-                            class="dark:text-gray-200 text-gray-600 w-full pl-10 pr-10 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500"
-                            placeholder="Contraseña" />
-
-                        <!-- Botón para alternar la visibilidad -->
-                        <button type="button" @click="togglePasswordVisibility"
-                            class="absolute inset-y-0 right-0 flex items-center pr-3 dark:text-gray-200 text-gray-600 hover:text-gray-700">
-                            <EyeIcon v-if="!showPassword" class="size-6" />
-                            <EyeSlashIcon v-else class="size-6" />
-                        </button>
-                    </div>
-                </div>
-
-                <div class="mb-4">
-                    <label for="password" class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
-                        Confirmar Contraseña
-                    </label>
-                    <div class="relative mt-1">
-                        <!-- Icono de candado a la izquierda -->
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
-                            <LockClosedIcon class="size-6 dark:text-gray-200 text-gray-600" />
-                        </span>
-
-                        <!-- Input de contraseña -->
-                        <input v-model="formData.confirm_password" :type="showPassword ? 'text' : 'password'"
-                            id="confirm_password" name="confirm_password"
-                            class="dark:text-gray-200 text-gray-600 w-full pl-10 pr-10 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500"
-                            placeholder="Contraseña" />
-
-                        <!-- Botón para alternar la visibilidad -->
-                        <button type="button" @click="togglePasswordVisibility"
-                            class="absolute inset-y-0 right-0 flex items-center pr-3 dark:text-gray-200 text-gray-600 hover:text-gray-700">
-                            <EyeIcon v-if="!showPassword" class="size-6" />
-                            <EyeSlashIcon v-else class="size-6" />
-                        </button>
                     </div>
                 </div>
 
@@ -156,7 +108,9 @@
                             required />
                     </div>
                 </div>
-
+                <p v-if="errors.country" class="text-red-500 text-center text-sm mb-2">
+                    {{ errors.country }}
+                </p>
                 <div class="mb-4">
                     <label class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
                         Ciudad:
@@ -170,7 +124,66 @@
                             required />
                     </div>
                 </div>
+                <p v-if="errors.city" class="text-red-500 text-center text-sm mb-2">
+                    {{ errors.city }}
+                </p>
+                <div class="mb-4">
+                    <label for="password" class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
+                        Contraseña
+                    </label>
+                    <div class="relative mt-1">
+                        <!-- Icono de candado a la izquierda -->
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                            <LockClosedIcon class="size-6 dark:text-gray-200 text-gray-600" />
+                        </span>
 
+                        <!-- Input de contraseña -->
+                        <input v-model="formData.password" :type="showPassword ? 'text' : 'password'" id="password"
+                            name="password"
+                            class="dark:text-gray-200 text-gray-600 w-full pl-10 pr-10 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500"
+                            placeholder="Contraseña" />
+
+                        <!-- Botón para alternar la visibilidad -->
+                        <button type="button" @click="togglePasswordVisibility"
+                            class="absolute inset-y-0 right-0 flex items-center pr-3 dark:text-gray-200 text-gray-600 hover:text-gray-700">
+                            <EyeIcon v-if="!showPassword" class="size-6" />
+                            <EyeSlashIcon v-else class="size-6" />
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="password" class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
+                        Confirmar Contraseña
+                    </label>
+                    <div class="relative mt-1">
+                        <!-- Icono de candado a la izquierda -->
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                            <LockClosedIcon class="size-6 dark:text-gray-200 text-gray-600" />
+                        </span>
+
+                        <!-- Input de contraseña -->
+                        <input v-model="formData.confirm_password" :type="showPassword ? 'text' : 'password'"
+                            id="confirm_password" name="confirm_password"
+                            class="dark:text-gray-200 text-gray-600 w-full pl-10 pr-10 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500"
+                            placeholder="Contraseña" />
+
+                        <!-- Botón para alternar la visibilidad -->
+                        <button type="button" @click="togglePasswordVisibility"
+                            class="absolute inset-y-0 right-0 flex items-center pr-3 dark:text-gray-200 text-gray-600 hover:text-gray-700">
+                            <EyeIcon v-if="!showPassword" class="size-6" />
+                            <EyeSlashIcon v-else class="size-6" />
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mensaje de error -->
+                <div class="max-w-100">
+                    <p v-if="errors" v-for="error in errors" class="text-red-500 text-center text-sm mb-2 break-words">
+                        {{ error }}
+                    </p>
+                    <p v-if="errorMessage" class="text-red-500 text-center text-sm mb-2 break-words">{{ errorMessage }}</p>
+                </div>
                 <div class="flex justify-between">
                     <button type="button" @click="prevStep"
                         class="bg-zinc-600 dark:hover:bg-zinc-500 text-white px-4 py-2 rounded-md hover:bg-gray-500 transition">Anterior</button>
@@ -191,7 +204,12 @@ import {
 } from '@heroicons/vue/24/solid'
 
 const currentStep = ref(1);
-const props = defineProps<{ initialData: Partial<RegisterNodeMember> }>();
+const props = defineProps<{
+    initialData: Partial<RegisterNodeMember>,
+    errors: Record<string, string[]>;
+    errorMessage: string;
+}>();
+
 
 const formData = ref<RegisterNodeMember>({
     token: "",

@@ -15,7 +15,6 @@
                 <h2 class="text-center text-2xl font-semibold dark:text-gray-200 text-[var(--color-eastern-blue-700)] mb-6">
                     Inicia Sesión
                 </h2>
-
                 <form @submit.prevent="handleLogin">
                     <!-- Campo Email -->
                     <div class="mb-4">
@@ -84,9 +83,11 @@
                     </button>
 
                     <!-- Enlace de recuperación de contraseña -->
-                    <p class="text-center text-sm text-blue-500 mt-4 cursor-pointer hover:underline">
-                        Olvidé mi contraseña
-                    </p>
+                    <div class="text-center mt-4">
+                        <router-link to="/RecoverPassword" class="text-sm text-blue-500 cursor-pointer hover:underline">
+                            Olvidé mi contraseña
+                        </router-link>
+                    </div>
                 </form>
             </div>
         </div>
@@ -96,7 +97,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { validateAuthForm, ValidationErrors } from '@/utils/validators/AuthVal';
+import { validateAuthForm, Login } from '@/utils/validators/AuthVal';
 import { Authentication } from '@/services/Class/Authentication';
 import { LockClosedIcon, AtSymbolIcon, ArrowLeftCircleIcon, EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/solid'
 import Loader from '@/components/shared/Loader.vue';
@@ -111,7 +112,7 @@ const togglePasswordVisibility = () => {
     showPassword.value = !showPassword.value;
 };
 
-const errors = ref<ValidationErrors>({});
+const errors = ref<Login>({});
 const errorMessage = ref('');
 
 const handleLogin = async () => {

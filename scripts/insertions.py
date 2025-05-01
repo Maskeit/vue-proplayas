@@ -5,7 +5,7 @@ import bcrypt
 from datetime import datetime
 
 # Leer CSV
-df = pd.read_csv("nodos_proplayas.csv")
+df = pd.read_csv("NodosCompletos.csv")
 
 # El CSV tiene esta forma en sus cabezeras:
 # type,code,leader_name,email,username,password,role,degree,postgraduate,expertise_area,research_work,facebook,instagram,whatsapp,twitter,linkedin,researchgate,youtube,node_name,country,city,coordinates,alt_places,joined_in,members_count,website,email_nodo
@@ -59,7 +59,7 @@ for _, row in df.iterrows():
             cursor.execute("SELECT id FROM users WHERE username = %s", (username,))
     raw_password = row["password"]
     password_hash = bcrypt.hashpw(raw_password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8").replace("$2b$", "$2y$")
-    social_fields = ["facebook", "instagram", "whatsapp", "twitter", "linkedin", "researchgate", "youtube"]
+    social_fields = ["facebook", "instagram", "phone", "twitter", "linkedin", "researchgate", "youtube"]
     social_list = []
     for field in social_fields:
         value = row[field]
@@ -105,12 +105,28 @@ for _, row in df.iterrows():
     coordinates = safe_value(row["coordinates"])
     alt_places = safe_value(row["alt_places"])
     members_count = int(row["members_count"]) if pd.notna(row["members_count"]) else None
-    email_nodo = safe_value(row["email_nodo"])
-    node_social_media = None  # si no hay datos aún, se queda en null
+    email_nodo = safe_value(row["email_contacto_nodo"])
+    social_node_fields = {
+        "facebook_nodo": "facebook",
+        "instagram_nodo": "instagram",
+        "twitter_nodo": "twitter",
+        "linkedin_page_nodo": "linkedin",
+        "youtube_nodo": "youtube"
+    }
+    social_list = []
+    for field, platform in social_node_fields.items():
+        value = row[field]
+        if pd.notna(value) and str(value).strip().lower() != "nan":
+            social_list.append({"platform": platform, "url": str(value).strip()})
+    node_social_media = json.dumps(social_list) if social_list else None
+    # node_social_media = None  # si no hay datos aún, se queda en null
     # Insertar nodo en la tabla
     cursor.execute("""
         INSERT INTO nodes (
-            leader_id, code, type, name, country, city, coordinates, alt_places, joined_in, members_count, social_media, status, created_at, updated_at
+            leader_id, code, type, name, 
+            country, city, coordinates, 
+            alt_places, joined_in, members_count, 
+            social_media, status, created_at, updated_at
         )
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 'activo', %s, %s)
     """, (

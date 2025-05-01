@@ -23,7 +23,6 @@
         <Confirmation v-if="showConfirmation" :message="confirmationMessage" :type="confirmationType" @close="showConfirmation = false" />        
     </div>
 </template>
-
 <script setup lang="ts">
 import NodoBio from "@/components/AdminNodo/nodo/NodoBio.vue";
 import BioSkeleton from "@/components/shared/skeletons/BioSkeleton.vue"
@@ -31,9 +30,7 @@ import NodoDetalle from "@/components/AdminNodo/nodo/NodoDetalle.vue";
 import { useRoute } from 'vue-router';
 import Confirmation from '@/components/shared/modales/Confirmation.vue';
 import type { NodeMembers } from "@interfaces/Nodes";
-import type { SocialLink } from "@/interfaces/Profile";
 import type { InviteNodeMember } from '@interfaces/Invitations';
-
 import { useNodosStore } from '@stores/nodosStore';
 import InvitationsService from "@/services/Class/InvitationService";
 

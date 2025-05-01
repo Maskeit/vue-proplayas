@@ -91,4 +91,53 @@ export class Authentication {
             };
         }
     }
+
+    // envia correo de confirmación para autenticar usuario
+    async recoverPassword( email:string): Promise<any> {
+        try {
+            const response = await axiosInstance.post('/recover-password', {
+                email: email,
+            });
+            if (response.data.status === 200) {
+                return {
+                    status: response.data.status,
+                    message: response.data.message
+                };
+            }
+            return {
+                status: response.data.status,
+                message: response.data.message || "Recuperación no exitosa",
+            };
+        } catch (error: any) {
+            return {
+                status: error.response?.status || 500,
+                message: error.response?.data?.message || "Hubo un error en la recuperación"
+            };
+        }
+    }
+
+    // set new password
+    async setNewPassword(token: string, password: string): Promise<any> {
+        try {
+            const response = await axiosInstance.post('/set-new-password', {
+                token: token,
+                password: btoa(password),
+            });
+            if (response.data.status === 200) {
+                return {
+                    status: response.data.status,
+                    message: response.data.message
+                };
+            }
+            return {
+                status: response.data.status,
+                message: response.data.message || "Recuperación no exitosa",
+            };
+        } catch (error: any) {
+            return {
+                status: error.response?.status || 500,
+                message: error.response?.data?.message || "Hubo un error en la recuperación"
+            };
+        }
+    }
 }

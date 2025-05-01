@@ -22,6 +22,8 @@ import UserCMS from "@view/user/CMS.vue"; //vista
 // paginas publicas 
 import Login from "@view/public/Login.vue";
 import Register from "@view/Public/Register.vue";
+import RecoverPassword from "@view/Public/RecoverPassword.vue";
+import SetPassword from "@view/Public/SetPassword.vue";
 import Home from "@view/public/Home.vue";
 import NodosPublico from "@view/public/NodosPublico.vue";
 import NodoPublico from "@view/public/NodoPublico.vue";
@@ -114,6 +116,8 @@ const userRoutes: Array<RouteRecordRaw> = [
 const blankPages = [
   { path: '/login', component: Login },
   { path: '/register', component: Register },
+  { path: '/RecoverPassword', component: RecoverPassword },
+  { path: '/SetPassword', component: SetPassword },
   { path: '/:pathMatch(.*)*', component: BlankLayout }, // Para cualquier ruta que no coincida con las anteriores
   { path: '', redirect: { name: 'Login' } }, // Para redireccionar a /login al inicio de la app.
 ]
