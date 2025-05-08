@@ -10,7 +10,7 @@
 
       <!-- Navegación -->
     <nav class="flex flex-col gap-2 mt-4 px-2">
-      <SidebarItem :icon="PresentationChartBarIcon" text="Webinars" to="/Content/webinars" :showText="!isCollapsed" />
+      <SidebarItem :icon="PresentationChartBarIcon" text="Eventos" to="/Content/webinars" :showText="!isCollapsed" />
       <SidebarItem :icon="FilmIcon" text="Web Series" to="/Content/webseries" :showText="!isCollapsed" />
       <SidebarItem :icon="DocumentTextIcon" text="Artículos" to="/Content/articulos" :showText="!isCollapsed" />
       <SidebarItem :icon="BookOpenIcon" text="Libros" to="/Content/libros" :showText="!isCollapsed" />

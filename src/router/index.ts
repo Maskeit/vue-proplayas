@@ -11,6 +11,7 @@ import PublicLayout from "@layout/PublicLayout.vue";
 // paginas
 import NodosPrivadoRoot from "@view/adminRoot/NodosPrivado.vue";
 import NodoPrivadoRoot from "@view/adminRoot/NodoPrivado.vue";
+import Users from "@view/adminRoot/Users.vue";
 //import AdminRootCMS from "@view/adminRoot/CMS.vue"; //vista
 
 import NodoPrivado from "@view/adminNodo/NodoPrivado.vue";
@@ -78,6 +79,12 @@ const adminRootRoutes: Array<RouteRecordRaw> = [
     props: true, // Permite pasar el código del nodo como prop
     meta: { requiresAuth: true, role: "admin" },
   },
+  {
+    path: 'users',
+    name: 'Users',
+    component: Users,
+    meta: { requiresAuth: true, role: "admin" },
+  }
   // {
   //   path: '',
   //   component: AdminRootCMS,

@@ -1,6 +1,14 @@
 <template>
-    <div
-        class="bg-white dark:bg-zinc-700 shadow-md rounded-lg p-6 border border-gray-200 dark:border-none hover:shadow-lg transition cursor-pointer">
+    <div class="relative bg-white dark:bg-zinc-700 shadow-md rounded-lg p-6 border border-gray-200 dark:border-none hover:shadow-lg transition cursor-pointer">
+        <!-- Iconos de acciones -->
+        <div class="absolute top-3 right-3 flex gap-2">
+            <button @click.stop="$emit('edit')" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-500 transition">
+                <PencilIcon class="h-5 w-5" />
+            </button>
+            <button @click.stop="$emit('delete')" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-500 transition">
+                <TrashIcon class="h-5 w-5" />
+            </button>
+        </div>
         <h3 class="text-xl font-semibold text-cyan-800 dark:text-zinc-100 mb-2">{{ title }}</h3>
         <p class="text-sm text-gray-500 dark:text-zinc-300 mb-1">{{ formattedDate }}</p>
         <p v-if="props.author" class="text-sm text-gray-500 dark:text-zinc-300 italic">
@@ -25,7 +33,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { Webinar } from '../../../../interfaces/Content';
-
+import { PencilIcon, TrashIcon } from '@heroicons/vue/20/solid';
 const props = defineProps<Webinar & { author?: any }>()
 
 const formattedDate = computed(() =>

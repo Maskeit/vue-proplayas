@@ -30,7 +30,6 @@ export const useUserProfileStore = defineStore('userProfile', () => {
   const updateProfile = async (form: Partial<User>) => {
     try { 
       const { status, message, data } = await profileService.updateProfile(form)
-      console.log('data', data)
       setProfile(data);
       return status
     } catch (error) {

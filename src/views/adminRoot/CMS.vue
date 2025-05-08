@@ -5,7 +5,7 @@
             <router-link to="/root/Webinar"
                 class="px-6 py-3 text-gray-500 dark:text-gray-400 text-sm font-medium transition-all"
                 :class="{ 'border-b-2 border-blue-500 text-blue-600 dark:text-blue-400 font-semibold': isActive('CMSWebinar'), 'hover:text-gray-700 dark:hover:text-gray-300': !isActive('CMSWebinar') }">
-                Webinars
+                Eventos
             </router-link>
             <router-link to="/root/Libros"
                 class="px-6 py-3 text-gray-500 dark:text-gray-400 text-sm font-medium transition-all"

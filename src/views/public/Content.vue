@@ -1,7 +1,7 @@
 <template>
     <div class="flex min-h-screen">
       <Sidebar/>
-      <div class="flex-1 w-full p-4 flex justify-center">
+      <div class="flex-1 w-full p-6 max-w-7xl mx-auto">
         <router-view />
       </div>
     </div>

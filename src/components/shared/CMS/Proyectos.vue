@@ -29,6 +29,11 @@
     </div>
 </template>
 <script setup lang="ts">
+import { ref, onMounted, computed } from 'vue';
+import type { Projects } from '@interfaces/Content';
+import { useContentStore } from '@/services/Stores/ContentStore';
+import Confirmation from '../modales/Confirmation.vue';
+
 
 const formData = {
     title: '',

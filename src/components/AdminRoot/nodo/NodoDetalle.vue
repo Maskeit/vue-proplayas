@@ -36,11 +36,11 @@
                         <td class="px-6 py-4 whitespace-nowrap" @click="toProfile(item.username)">{{ item.email }}</td>
                         <td class="px-6 py-4 whitespace-nowrap line-clamp-0.5" @click="toProfile(item.username)">{{ item.research_line }}</td>
                         <td class="px-6 py-4 whitespace-nowrap" @click="toProfile(item.username)">{{ item.status }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <button class="text-blue-600 hover:text-blue-800 mr-2"
-                            @click.stop.prevent="update(item)">editar</button>
+                        <td class="px-6 py-4 whitespace-nowrap gap-2 flex">
+                            <button class="text-blue-600 hover:text-blue-800"
+                            @click.stop.prevent="toggleStatus(item)">{{item.status === "activo" ? "Desactivar" : "Activar"}}</button>
                             <button class="text-red-600 hover:text-red-800"
-                            @click.stop="deleteMember(item)">Eliminar</button>
+                            @click.stop="unlink(item)">Desligar</button>
                         </td>
                     </tr>
                 </tbody>
@@ -62,20 +62,22 @@ const props = defineProps<{
 }>();
 
 const emits = defineEmits<{
-  (e: 'update', item: Nodes): void;
-  (e: 'deleteMember', item: Nodes): void;
+  (e: 'toggleStatus', item: Nodes): void;
+  (e: 'unlinkUser', item: Nodes): void;
+
   (e: 'search', value: string): void;
   (e: 'deleteNode', item: Nodes): void;
   (e: 'nuevo-registro', item: NodeMembers): void;
 }>();
 
-const update = (item: Nodes) => {
-  emits('update', item);
+const toggleStatus = (item: Nodes) => {
+    emits('toggleStatus', item.id);
 }
 
-const deleteMember = (item: NodeMembers) => {
-    emits('deleteMember', item);
+const unlink = (item: Nodes) => {
+    emits('unlinkUser', item.id);
 }
+
 // Obtenemos las propiedades pasadas por el componente padre
 const toProfile = (username: string) => {
     router.push(`/${username}`);// Redirigir a la página de perfil del miembro

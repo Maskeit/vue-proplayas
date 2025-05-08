@@ -11,7 +11,8 @@
                 <div class="space-y-4">
                     <div>
                         <label class="block font-medium">Sobre el Nodo</label>
-                        <textarea v-model="form.about" class="w-full p-2 border rounded-md field-sizing-content"></textarea>
+                        <textarea v-model="form.about" class="w-full p-2 border rounded-md field-sizing-content" maxlength="250"></textarea>
+                        <label class="text-sm font-extralight text-red-500">Máximo 250 caracteres.</label>
                     </div>
                     <div>
                         <label class="block font-medium">Nombre del nodo</label>

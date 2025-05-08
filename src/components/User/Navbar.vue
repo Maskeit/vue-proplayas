@@ -17,6 +17,8 @@
                     class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Perfil</router-link>
                 <router-link to="/User/Content"
                     class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Crear</router-link>
+                <router-link v-if="isAdmin"  to="/root/users" 
+                    class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Usuarios</router-link>
                 <div v-if="!token">
                     <router-link to="/Login"
                         class="bg-gray-200 p-3 rounded-lg text-gray-700 dark:text-black dark:hover:text-gray-700">Login</router-link>
@@ -192,6 +194,7 @@ const logout = async () => {
 }
 const userRoute = ref("");
 const userProfile = ref("");
+const isAdmin = ref(false);
 const token = Cookies.get("Authorization") || localStorage.getItem("Authorization");
 if (token) {
     const decodedData = decodeJWT(token);
@@ -200,6 +203,7 @@ if (token) {
     const local_role = localStorage.getItem("role"); // Assuming role is stored in local storage member, node_leader // usado en pruebas
     if (local_role === "admin") {
         // Redirect to admin dashboard
+        isAdmin.value = true;
         userRoute.value = "/root/nodos";
         userProfile.value = "/root/profile";
     } else if (local_role === "node_leader") {

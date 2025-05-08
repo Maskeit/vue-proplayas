@@ -81,12 +81,21 @@ export const useNodosStore = defineStore('nodos', () => {
         }
     }
 
-    const updateNodeMember = async (id: number) => {        
-
-    }
-    const toggleNodeMemberStatus = async (memberId: number) => {
+    // en relacion con el miembro solo elimina la relacion entre el nodo y el miembro
+    const unlinkMember = async (id: number) => {        
         try {
-            const { status, message, data } = await nodosService.toggleMemberStatus(memberId);
+            const { status, message, data } = await nodosService.deleteMember(id);
+            //setNodeMember(data); Se espera que el backend devuelva el miembro actualizado correctamente
+            return status;
+        } catch (error) {
+            console.error("Error al eliminar miembro del nodo:", error);
+        }
+    }
+    
+    // activa o desactiva el miembro del nodo
+    const toggleNodeMemberStatus = async (id: number) => {
+        try {
+            const { status, message, data } = await nodosService.toggleMemberStatus(id);
             //setNodeMember(data); Se espera que el backend devuelva el miembro actualizado correctamente
             return status;
         } catch (error) {
@@ -108,7 +117,7 @@ export const useNodosStore = defineStore('nodos', () => {
         fetchNodoInfo,
         fetchNodoMembers,
         updateNodeBio,
-        updateNodeMember,
-        toggleNodeMemberStatus,
+        unlinkMember, // eliminar miembro del nodo
+        toggleNodeMemberStatus, // activar o desactivar miembro
     };
 });

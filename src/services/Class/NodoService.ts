@@ -49,11 +49,24 @@ export class NodosService {
 
     async toggleMemberStatus(memberId: number): Promise<Member | null> {
         try{
-            const response = await axiosInstance.delete(`/user/${memberId}`);    
+            const response = await axiosInstance.put(`/member/${memberId}`);
             const {status, message, data} = response.data;
             return {status, message, data};
         } catch (error: any) {
             console.error("Error al actualizar el perfil del miembro:", error);
+            throw error;
+        }
+    }
+
+    // elimina la relacion entre el nodo y el miembro
+    // no elimina el miembro de la base de datos
+    async deleteMember(memberId: number): Promise<Member | null> {
+        try{
+            const response = await axiosInstance.delete(`/member/${memberId}`);
+            const {status, message, data} = response.data;
+            return {status, message, data};
+        } catch (error: any) {
+            console.error("Error al eliminar el miembro:", error);
             throw error;
         }
     }
