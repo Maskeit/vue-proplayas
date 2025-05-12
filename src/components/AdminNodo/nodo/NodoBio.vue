@@ -15,12 +15,12 @@
                         class="md:w-48 md:h-48 w-32 h-32 rounded-full border-2 border-gray-300 object-cover" />
                 </div>
                 <div class="my-3 text-center md:text-left">
-                    <h1 class="text-2xl font-semibold text-gray-500 dark:text-white">{{ name }}</h1>
+                    <h1 class="text-2xl font-semibold text-gray-500 dark:text-white">{{ name.charAt(0).toUpperCase() + name.slice(1) }}</h1>
                 </div>
                 <div class="max-w-lg">
                     <div class="flex gap-2">
-                        <p class="text-gray-500 dark:text-white">{{ city }}, </p>
-                        <p class="text-gray-500 dark:text-white">{{ country }}</p>
+                        <p class="text-gray-500 dark:text-white">{{ city.charAt(0).toUpperCase() + city.slice(1) }}, </p>
+                        <p class="text-gray-500 dark:text-white">{{ country.charAt(0).toUpperCase() + country.slice(1) }}</p>
                         <MapPinIcon class="w-6 h-6 text-gray-500" />
                     </div>
                 </div>

@@ -25,8 +25,8 @@
                      class="w-full h-48 object-cover rounded-lg">
             </router-link>
 
-            <router-link to="/Content/Webinars" class="bento-box">
-                <h3 class="text-xl text-gray-600 dark:text-gray-100 font-semibold">Webinars</h3>
+            <router-link to="/Content/Events" class="bento-box">
+                <h3 class="text-xl text-gray-600 dark:text-gray-100 font-semibold">Events</h3>
                 <p class="text-gray-500 dark:text-gray-100 mb-3">Talleres impartidos por profesionales.</p>
                 <img src="/src/assets/images/home/content/webinars.svg" alt="Webinars" 
                      class="w-full h-48 object-cover rounded-lg">

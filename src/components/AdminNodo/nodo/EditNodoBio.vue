@@ -1,5 +1,5 @@
 <template>
-<div v-if="isOpen" class="fixed inset-0 flex items-center justify-center text-gray-700 bg-black/50 backdrop-opacity-80" @click="closeModal">
+<div v-if="isOpen" class="fixed z-100 inset-0 flex items-center justify-center text-gray-700 bg-black/50 backdrop-opacity-80" @click="closeModal">
         <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg  overflow-hidden h-auto max-h-[90vh] overflow-y-auto" @click.stop>    
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-lg font-semibold">Editar Nodo</h2>
@@ -10,13 +10,13 @@
             <form @submit.prevent="submitForm">
                 <div class="space-y-4">
                     <div>
+                        <label class="block font-medium">Nombre del nodo</label>
+                        <input v-model="form.name" type="text" class="w-full p-2 border rounded-md" />
+                    </div>
+                    <div>
                         <label class="block font-medium">Sobre el Nodo</label>
                         <textarea v-model="form.about" class="w-full p-2 border rounded-md field-sizing-content" maxlength="250"></textarea>
                         <label class="text-sm font-extralight text-red-500">Máximo 250 caracteres.</label>
-                    </div>
-                    <div>
-                        <label class="block font-medium">Nombre del nodo</label>
-                        <input v-model="form.name" type="text" class="w-full p-2 border rounded-md" />
                     </div>
                     <div>
                         <div class="flex items-center justify-center w-full">

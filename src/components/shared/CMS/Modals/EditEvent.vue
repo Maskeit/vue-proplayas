@@ -55,16 +55,16 @@
 </template>
 
 <script setup lang="ts">
-import type { Webinar } from '@interfaces/Content'
+import type { Event } from '@interfaces/Content'
 
-interface WebinarFormData extends Omit<Webinar, 'date'> {
+interface EventFormData extends Omit<Event, 'date'> {
   dateString: string;
   timeString: string;
 }
 
 const props = defineProps<{
   visible: boolean;
-  formData: WebinarFormData;
+  formData: EventFormData;
 }>();
 
 const emit = defineEmits<{

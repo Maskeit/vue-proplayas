@@ -12,7 +12,7 @@
             <!-- Menú de navegación del admin nodo para pantallas medianas y grandes -->
             <div class="hidden md:flex space-x-4 items-center">
                 <router-link :to="`/lider/${nodeId}`" class="text-gray-800 dark:text-gray-200 dark:hover:text-gray-400 font-semibold">Miembros</router-link>
-                <router-link :to="`/lider/${nodeId}/Webinar`" class="text-gray-800 dark:text-gray-200 dark:hover:text-gray-400">Webinars</router-link>
+                <router-link :to="`/lider/${nodeId}/Events`" class="text-gray-800 dark:text-gray-200 dark:hover:text-gray-400">Events</router-link>
                 <router-link :to="`/lider/${nodeId}/Libros`" class="text-gray-800 dark:text-gray-200 dark:hover:text-gray-400">Libros</router-link>
                 <router-link :to="`/lider/${nodeId}/WebSeries`" class="text-gray-800 dark:text-gray-200 dark:hover:text-gray-400">Web Series</router-link>
                 <router-link :to="`/lider/${nodeId}/Articulos`" class="text-gray-800 dark:text-gray-200 dark:hover:text-gray-400">Artículos</router-link>                
@@ -86,7 +86,7 @@
         <div v-if="isOpen" class="md:hidden">
             <div class="flex flex-col justify-center items-center text-center space-y-3 sm:px-4">
                 <router-link :to="`/nodo/${nodeId}`" class="block text-gray-800 dark:text-gray-200 dark:hover:text-gray-400">Perfil</router-link>
-                <router-link :to="`/nodo/${nodeId}/Webinar`" class="block text-gray-800 dark:text-gray-200 dark:hover:text-gray-400">Webinars</router-link>
+                <router-link :to="`/nodo/${nodeId}/Event`" class="block text-gray-800 dark:text-gray-200 dark:hover:text-gray-400">Events</router-link>
                 <router-link :to="`/nodo/${nodeId}/Libros`" class="block text-gray-800 dark:text-gray-200 dark:hover:text-gray-400">Libros</router-link>
                 <router-link :to="`/nodo/${nodeId}/WebSeries`" class="block text-gray-800 dark:text-gray-200 dark:hover:text-gray-400">WebSeries</router-link>
                 <router-link :to="`/nodo/${nodeId}/Articulos`" class="block text-gray-800 dark:text-gray-200 dark:hover:text-gray-400">Artículos</router-link>

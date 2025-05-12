@@ -50,11 +50,9 @@
                 </div>
 
                 <div class="flex justify-end space-x-2">
-                    <button node_type="button" class="px-4 py-2 border rounded" @click="$emit('cancelar')">
-                        Cancelar
-                    </button>
+                    <button @click="closeModal" class="px-4 py-2 border rounded-md mr-2">Cancelar</button>
                     <button node_type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">
-                        Guardar
+                        Invitar
                     </button>
                 </div>
             </form>
@@ -95,19 +93,6 @@ const closeOnEscape = (event: KeyboardEvent) => {
     }
 };
 
-// Si se recibe un modelo para edición, inicializa el formulario con esos datos
-watch(() => props.model, (newModel) => {
-    if (newModel) {
-        form.value = { ...newModel, code: newModel.code[0] };
-    } else {
-        form.value = {
-            node_type: '',
-            code: '',
-            name: '',
-            email: '',
-        };
-    }
-}, { immediate: true });
 
 // Función para actualizar automáticamente el campo node_type según el valor de code
 function updateType() {

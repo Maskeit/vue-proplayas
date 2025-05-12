@@ -8,7 +8,7 @@
             </div>
             <!-- Menú de navegación en el footer con los mismos enlaces -->
             <div class="flex space-x-4">
-                <a href="/webinars" class="text-gray-300 hover:text-white">Webinars</a>
+                <a href="/events" class="text-gray-300 hover:text-white">Eventos</a>
                 <a href="/libros" class="text-gray-300 hover:text-white">Libros</a>
                 <a href="/webseries" class="text-gray-300 hover:text-white">Web Series</a>
                 <a href="/articulos" class="text-gray-300 hover:text-white">Artículos</a>

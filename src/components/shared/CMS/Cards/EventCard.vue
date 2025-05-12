@@ -32,18 +32,21 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { Webinar } from '../../../../interfaces/Content';
+import type { Event } from '../../../../interfaces/Content';
 import { PencilIcon, TrashIcon } from '@heroicons/vue/20/solid';
-const props = defineProps<Webinar & { author?: any }>()
+const props = defineProps<Event & { author?: any }>()
 
-const formattedDate = computed(() =>
-    new Date(props.date).toLocaleDateString('es-MX', {
-        weekday: 'short',
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-    })
-)
+const formattedDate = computed(() => {
+  const d = new Date(props.date);          // ej. 2025-04-30T13:00:00.000000Z
+  return new Intl.DateTimeFormat('es-MX', {
+    weekday: 'short',    // mié
+    day:     '2-digit',  // 30
+    month:   'short',    // abr
+    year:    'numeric',  // 2025
+    hour:    '2-digit',
+    minute:  '2-digit',
+    hour12:  true,
+    timeZone: 'UTC',     // mostrar exactamente la hora guardada
+  }).format(d) + ' UTC';
+});
 </script>

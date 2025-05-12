@@ -23,6 +23,7 @@ export default defineConfig({
       '@api' : path.resolve(__dirname, './src/api/axiosInstance.ts'),
       '@icons' : path.resolve(__dirname, './src/components/icons'),
       '@stores' : path.resolve(__dirname, './src/services/Stores'),
+      '@utils' : path.resolve(__dirname, './src/utils'),
     },
   },
   logLevel: "info", // 🔹 Esto mostrará más detalles sobre los errores en la consola

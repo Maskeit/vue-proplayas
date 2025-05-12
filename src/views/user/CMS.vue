@@ -2,9 +2,9 @@
     <div class="max-w-9/10 m-auto md:p-7 pt-6 flex flex-col gap-y-6">
         <!-- Encabezado del CMS con tabs o botones -->
         <div class="flex sm:flex-row flex-col border-b border-gray-300 dark:border-gray-700">
-            <router-link to="/User/Content/Webinar"
+            <router-link to="/User/Content/Event"
                 class="px-6 py-3 text-gray-500 dark:text-gray-400 text-sm font-medium transition-all"
-                :class="{ 'border-b-2 border-blue-500 text-blue-600 dark:text-blue-400 font-semibold': isActive('CMSWebinar'), 'hover:text-gray-700 dark:hover:text-gray-300': !isActive('CMSWebinar') }">
+                :class="{ 'border-b-2 border-blue-500 text-blue-600 dark:text-blue-400 font-semibold': isActive('CMSEvent'), 'hover:text-gray-700 dark:hover:text-gray-300': !isActive('CMSEvent') }">
                 Eventos
             </router-link>
             <router-link to="/User/Content/Libros"

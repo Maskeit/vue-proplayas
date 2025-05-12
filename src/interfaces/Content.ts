@@ -1,25 +1,26 @@
 // Proyectos colaborativos de bajo costo
-export interface Projects{
+export interface Project{
     id: number;
     title: string;
     description: string;
-    place: string;
+    cover_image: string;
     date: Date;
-    image: string;
+    location: string;
     link: string;
+    participants: string;
 }
 
-// Webinars
-export interface Webinar {
+// Events
+export interface Event {
     id: number;
     title: string;
-    date: Date;
+    type: 'webinar' | 'congreso' | 'magistrado' | 'clase' | 'taller' | 'charla' | 'conferencia' | 'otro';
     description: string;
-    organizer_type: string;
-    organizer_id: number;
+    date: Date;
     link: string;
     format: string;
     location: string | null;
+    cover_image: string;
 }
 
 // sobre webseries

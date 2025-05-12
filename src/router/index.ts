@@ -32,7 +32,7 @@ import PublicProfile from "@view/public/PublicProfile.vue";
 import Content from "@view/public/Content.vue";
 import History from "@view/public/History.vue";
 // Components para CMS
-import WebinarsCMS from "@components/shared/CMS/Webinars.vue";
+import EventsCMS from "@components/shared/CMS/Events.vue";
 import LibrosCMS from "@components/shared/CMS/Libros.vue";
 import WebSeriesCMS from "@components/shared/CMS/WebSeries.vue";
 import ArticulosCMS from "@components/shared/CMS/Articulos.vue";
@@ -42,12 +42,12 @@ import ProyectosCMS from "@components/shared/CMS/Proyectos.vue";
 import Articulos from "@components/Public/Content/Articulos.vue";
 import Libros from "@components/Public/Content/Libros.vue";
 import WebSeries from "@components/Public/Content/WebSeries.vue";
-import Webinars from "@components/Public/Content/Webinars.vue";
+import Events from "@components/Public/Content/Events.vue";
 import Proyects from "@components/Public/Content/Proyectos.vue";
 
 const generateCmsRoutes = (): Array<RouteRecordRaw> => [
-  { path: '', name: '', component: WebinarsCMS },
-  { path: '/User/Content/Webinar', name: 'CMSWebinar', component: WebinarsCMS },
+  { path: '', name: '', component: EventsCMS },
+  { path: '/User/Content/Event', name: 'CMSEvent', component: EventsCMS },
   { path: '/User/Content/Libros', name: 'CMSLibros', component: LibrosCMS },
   { path: '/User/Content/WebSeries', name: 'CMSWebSeries', component: WebSeriesCMS },
   { path: '/User/Content/Articulos', name: 'CMSArticulos', component: ArticulosCMS },
@@ -55,9 +55,9 @@ const generateCmsRoutes = (): Array<RouteRecordRaw> => [
 ];
 
 const contentPanels = (): Array<RouteRecordRaw> => [
-  { path: '', name:'', component: Webinars },
+  { path: '', name:'', component: Events },
   { path: 'articulos', name: 'Articulos', component: Articulos },
-  { path: 'webinars', name: 'Webinars', component: Webinars },
+  { path: 'events', name: 'Events', component: Events },
   { path: 'libros', name: 'Libros', component: Libros },
   { path: 'webseries', name: 'WebSeries', component: WebSeries },
   { path: 'proyectos', name: 'Proyectos', component: Proyects },

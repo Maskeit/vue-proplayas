@@ -1,35 +1,58 @@
 import axiosInstance from "@api";
-import type { Webinar, Projects, Articles, Books } from "@interfaces/Content";
+import type { Event, Projects, Articles, Books } from "@interfaces/Content";
 
 export class ContentController {
 
 
     // Events format
-    async getEvents() { // traer todos los webinars
-        const response = await axiosInstance.get("/webinars");
+    async getEvents() { // traer todos los Eventos
+        const response = await axiosInstance.get("/events");
         const { status, message, data } = response.data;
         return { status, data };
     }
-    async getEvent(id: number) { // traer un webinar por id
-        const response = await axiosInstance.get(`/webinar/${id}`);
+    async getEvent(id: number) { // traer un Event por id
+        const response = await axiosInstance.get(`/event/${id}`);
         const { status, message, data } = response.data;
         return { status, data };
     }
-    async newEvent(event: Webinar) { // crear un webinar requiere token jwt
-        const response = await axiosInstance.post("/webinar", event);
+    async newEvent(event: Event) { // crear un Event requiere token jwt
+        let payload: any;
+        let headers: any = {};
+        const hasImage = event.cover_image && event.cover_image.startsWith('data:image/');
+        if (hasImage) {
+            payload = new FormData();
+            for (const [key, value] of Object.entries(event)) {
+                // La imagen debe convertirse desde base64 a Blob antes de añadir
+                if (key === 'cover_image' && typeof value === 'string') {
+                    const blob = await (await fetch(value)).blob();
+                    payload.append('cover_image', blob, 'cover_image.webp'); // puedes mejorar el nombre y tipo
+                } else {
+                    payload.append(key, value ?? '');
+                }
+            }            
+        } else {
+            // Si no hay imagen, se envía como JSON
+            payload = event;
+            headers['Content-Type'] = 'application/json';
+        }
+        const response = await axiosInstance.post("/event", payload, { headers });
         const { status, message, data } = response.data;
         return { status, data };
     }
-    async updateEvent(event: Webinar, id: number) { // actualizar un webinar por id
-        const response = await axiosInstance.put(`/webinar/${id}`, event);
+    async updateEvent(event: Event, id: number) { // actualizar un Event por id
+        const response = await axiosInstance.put(`/event/${id}`, event);
         const { status, message, data } = response.data;
         return { status, data };
     }
-    async deleteEvent(id: number) { // eliminar un webinar por id
-        const response = await axiosInstance.delete(`/webinar/${id}`);
+    async deleteEvent(id: number) { // eliminar un Event por id
+        const response = await axiosInstance.delete(`/event/${id}`);
         const { status, message, data } = response.data;
         return { status, data };
     }
+
+
+
+
 
     // PCBC (Proyectos Colaborativos de Bajo Costo)
     async getPCBC() { // traer todos los PCBC
@@ -57,6 +80,10 @@ export class ContentController {
         const { status, message, data } = response.data;
         return { status, data };
     }
+
+
+
+    
 
     // Libros
     async getBooks() { // traer todos los libros
