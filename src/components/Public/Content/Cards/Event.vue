@@ -3,7 +3,7 @@
         class="bg-white dark:bg-zinc-700 shadow-md rounded-lg p-6 border border-gray-200 dark:border-none hover:shadow-lg transition cursor-pointer">
         <h3 class="text-xl font-semibold text-cyan-800 dark:text-zinc-100 mb-2">{{ title }}</h3>
         <p class="text-sm text-gray-500 dark:text-zinc-300 mb-1">{{ formattedDate }}</p>
-        <p v-if="props.author" class="text-sm text-gray-500 dark:text-zinc-300 italic">
+        <p v-if="props.author" @click="toAutor(props.author.username)" class="text-sm text-gray-500 dark:text-zinc-300 italic hover:underline cursor-pointer">
             Autor: {{ props.author.name }}
         </p>
 
@@ -25,7 +25,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { Event } from '../../../../interfaces/Content';
-
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const props = defineProps<Event & { author?: any }>()
 
 const formattedDate = computed(() => {
@@ -41,4 +42,8 @@ const formattedDate = computed(() => {
     timeZone: 'UTC',     // mostrar exactamente la hora guardada
   }).format(d) + ' UTC';
 });
+
+const toAutor = (username: string) => {
+    router.push(`/${username}`)
+}
 </script>

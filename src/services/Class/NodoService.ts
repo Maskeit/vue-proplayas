@@ -46,6 +46,16 @@ export class NodosService {
             throw error;
         }
     }
+    async uploadNodeProfilePicture(id: number, file: File): Promise<Node | null> {
+        console.log("subiendo foto de perfil del nodo");
+        console.table(id, )
+        console.log(file);
+        try{
+
+        } catch (error: any) {
+            
+        }
+    }
 
     async toggleMemberStatus(memberId: number): Promise<Member | null> {
         try{

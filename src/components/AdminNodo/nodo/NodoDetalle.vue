@@ -62,7 +62,7 @@
                         <td class="px-6 py-4 whitespace-nowrap" @click="toProfile(item.username)">{{ item.status }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <button class="text-blue-600 hover:text-blue-800 mr-2"
-                                @click.stop.prevent="onToggle(item.user_id)">{{ item.status === "activo" ? "Desactivar"
+                                @click.stop.prevent="onToggle(item)">{{ item.status === "activo" ? "Desactivar"
                                     : "Activar" }}</button> <!-- Activar -->
                             <button class="text-red-600 hover:text-red-800"
                                 @click.stop="deleteMember(item)">Eliminar</button>
@@ -100,7 +100,7 @@ const guardarRegistro = (nuevoRegistro: NodeMembers) => {
 };
 
 const onToggle = (item: NodeMembers) => {
-    emits('toggle', item);
+    emits('toggle', item.id);
 }
 
 const deleteMember = (item: NodeMembers) => {

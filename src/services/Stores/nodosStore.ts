@@ -80,6 +80,16 @@ export const useNodosStore = defineStore('nodos', () => {
             console.error("Error al editar la biografía del nodo:", error);
         }
     }
+    // sube una foto de perfil del nodo
+    const uploadNodeImage = async (id: number, file: File) => {
+        try {
+            const { status, message, data } = await nodosService.uploadNodeProfilePicture(id, file);
+            setNodeBio(data);
+            return status;
+        } catch (error) {
+            console.error("Error al subir la foto de perfil del nodo:", error);
+        }
+    }
 
     // en relacion con el miembro solo elimina la relacion entre el nodo y el miembro
     const unlinkMember = async (id: number) => {        
@@ -117,6 +127,7 @@ export const useNodosStore = defineStore('nodos', () => {
         fetchNodoInfo,
         fetchNodoMembers,
         updateNodeBio,
+        uploadNodeImage, // sube una foto de perfil 
         unlinkMember, // eliminar miembro del nodo
         toggleNodeMemberStatus, // activar o desactivar miembro
     };

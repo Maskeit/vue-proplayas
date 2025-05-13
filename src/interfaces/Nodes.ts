@@ -13,8 +13,8 @@ export interface Nodes {
 }
 
 export interface NodeMembers {
-    id: number;
-    user_id: number;
+    id: number; // id del miembro
+    user_id: number; // id del usuario
     node_id: number;
     member_code: string;
     name: string;
@@ -31,7 +31,9 @@ export interface Node {
     code: string;// se muestra
     type: string;// se muestra
     name: string;// se muestra
-    profile_picture: string;// se muestra
+    
+    profile_picture_node_file: string;// foto del nodo
+    
     about: string;// se muestra
     country: string;// se muestra
     city: string;// se muestra
@@ -40,7 +42,9 @@ export interface Node {
     alt_places: string;// se muestra
     joined_in: number;// se muestra
     members_count: number;// se muestra
-    id_photo: string;
+    
+    //id_photo: string;
+    
     social_media: SocialLink[] | null;// se muestra
     memorandum: string;// se muestra
     status: string;

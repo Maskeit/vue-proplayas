@@ -1,10 +1,10 @@
 <template>
-    <div class="min-w-100">
+    <div class="min-h-screen max-h-screen overflow-y-auto px-4 py-6 min-w-100">
         <h2 class="text-xl font-semibold dark:text-gray-200 text-gray-600 text-center mb-4">
             {{ currentStep === 1 ? "Información Personal" : "Información del Nodo" }}
         </h2>
 
-        <form @submit.prevent="handleSubmit">
+        <form @submit.prevent="handleSubmit" class="overflow-auto">
             <!-- PASO 1: Información Personal -->
             <div v-if="currentStep === 1">
                 <div class="mb-4">
@@ -67,6 +67,15 @@
                 </div>
                 <div class="mb-4">
                     <label class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
+                        Descripción del Investigador:
+                    </label>
+                    <div class="relative mt-1">
+                        <textarea v-model="formData.about_user" name="about"
+                            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 h-24"></textarea>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
                         Tipo de Nodo:
                     </label>
                     <div class="relative mt-1">
@@ -78,6 +87,45 @@
                             required readonly />
                     </div>
                 </div>
+                <div class="mb-4">
+                    <label class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
+                        País donde reside el Lider de Nodo:
+                    </label>
+                    <div class="relative mt-1">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                            <GlobeAmericasIcon class="size-6 dark:text-gray-200 text-gray-600" />
+                        </span>
+                        <input v-model="formData.country_user" type="text" name="country"
+                            class="dark:text-gray-200 text-gray-600 w-full pl-10 pr-3 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500"
+                            required />
+                    </div>
+                </div>
+                <p v-if="errors.country_user" class="text-red-500 text-center text-sm mb-2">
+                    {{ errors.country_user }}
+                </p>
+
+                <div class="mb-4">
+                    <label class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
+                        Ciudad donde reside el Lider de Nodo:
+                    </label>
+                    <div class="relative mt-1">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                            <BuildingOfficeIcon class="size-6 dark:text-gray-200 text-gray-600" />
+                        </span>
+                        <input v-model="formData.city_user" type="text" name="city"
+                            class="dark:text-gray-200 text-gray-600 w-full pl-10 pr-3 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500"
+                            required />
+                    </div>
+                </div>
+                <p v-if="errors.city_user" class="text-red-500 text-center text-sm mb-2">
+                    {{ errors.city_user }}
+                </p>
+                <button type="button" @click="nextStep"
+                    class="bg-[var(--color-eastern-blue-600)] hover:bg-[var(--color-eastern-blue-700)] dark:bg-zinc-600 dark:hover:bg-zinc-500 text-white px-4 py-2 rounded-md transition w-full">Siguiente</button>
+            </div>
+
+            <!-- PASO 2: Información del Nodo -->
+            <div v-if="currentStep === 2">
                 <div class="mb-4">
                     <label class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
                         Nombre del Nodo:
@@ -94,56 +142,49 @@
                 <p v-if="errors.node_name" class="text-red-500 text-center text-sm mb-2">
                     {{ errors.node_name }}
                 </p>
-                <button type="button" @click="nextStep"
-                    class="bg-[var(--color-eastern-blue-600)] hover:bg-[var(--color-eastern-blue-700)] dark:bg-zinc-600 dark:hover:bg-zinc-500 text-white px-4 py-2 rounded-md transition w-full">Siguiente</button>
-            </div>
-
-            <!-- PASO 2: Información del Nodo -->
-            <div v-if="currentStep === 2">
-
                 <div class="mb-4">
                     <label class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
-                        Descripción:
+                        Descripción del Nodo:
                     </label>
                     <div class="relative mt-1">
-                        <textarea v-model="formData.about" name="about"
+                        <textarea v-model="formData.about_node" name="about"
                             class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 h-24"></textarea>
                     </div>
                 </div>
-
                 <div class="mb-4">
                     <label class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
-                        País:
+                        País donde reside el Nodo:
                     </label>
                     <div class="relative mt-1">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
                             <GlobeAmericasIcon class="size-6 dark:text-gray-200 text-gray-600" />
                         </span>
-                        <input v-model="formData.country" type="text" name="country"
+                        <input v-model="formData.country_node" type="text" name="country"
                             class="dark:text-gray-200 text-gray-600 w-full pl-10 pr-3 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500"
                             required />
                     </div>
                 </div>
-                <p v-if="errors.country" class="text-red-500 text-center text-sm mb-2">
-                    {{ errors.country }}
+                <p v-if="errors.country_node" class="text-red-500 text-center text-sm mb-2">
+                    {{ errors.country_node }}
                 </p>
 
                 <div class="mb-4">
                     <label class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
-                        Ciudad:
+                        Ciudad donde reside el Nodo:
                     </label>
                     <div class="relative mt-1">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
                             <BuildingOfficeIcon class="size-6 dark:text-gray-200 text-gray-600" />
                         </span>
-                        <input v-model="formData.city" type="text" name="city"
+                        <input v-model="formData.city_node" type="text" name="city"
                             class="dark:text-gray-200 text-gray-600 w-full pl-10 pr-3 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500"
                             required />
                     </div>
                 </div>
-                <p v-if="errors.city" class="text-red-500 text-center text-sm mb-2">
-                    {{ errors.city }}
+                <p v-if="errors.city_node" class="text-red-500 text-center text-sm mb-2">
+                    {{ errors.city_node }}
                 </p>
+
                 <div class="mb-4">
                     <label for="password" class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
                         Contraseña
@@ -197,7 +238,8 @@
                     <p v-if="errors" v-for="error in errors" class="text-red-500 text-center text-sm mb-2 break-words">
                         {{ error }}
                     </p>
-                    <p v-if="errorMessage" class="text-red-500 text-center text-sm mb-2 break-words">{{ errorMessage }}</p>
+                    <p v-if="errorMessage" class="text-red-500 text-center text-sm mb-2 break-words">{{ errorMessage }}
+                    </p>
                 </div>
                 <div class="flex justify-between">
                     <button type="button" @click="prevStep"
@@ -235,9 +277,12 @@ const formData = ref<RegisterNodeLeader>({
     research_work: "",
     node_type: "",
     node_name: "",
-    about: "",
-    country: "",
-    city: "",
+    about_user: "",
+    country_user: "",
+    city_user: "",
+    about_node: "",
+    country_node: "",
+    city_node: "",
 });
 const showPassword = ref(false);
 const togglePasswordVisibility = () => {

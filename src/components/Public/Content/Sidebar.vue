@@ -15,6 +15,12 @@
       <SidebarItem :icon="DocumentTextIcon" text="Artículos" to="/Content/articulos" :showText="!isCollapsed" />
       <SidebarItem :icon="BookOpenIcon" text="Libros" to="/Content/libros" :showText="!isCollapsed" />
       <SidebarItem :icon="GlobeAmericasIcon" text="Proyectos" to="/Content/Proyectos" :showText="!isCollapsed" />
+      <select class="bg-white dark:bg-zinc-700 shadow-md rounded-lg p-1 border border-gray-200 dark:border-none hover:shadow-lg transition cursor-pointer">
+        <option value="0" disabled selected>Filtra por nodo</option>
+        <option value="1">Opción 1</option>
+        <option value="2">Opción 2</option>
+        <option value="3">Opción 3</option>
+      </select>
     </nav>
     </aside>
 </template>

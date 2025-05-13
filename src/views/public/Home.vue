@@ -11,6 +11,9 @@
             <BentoGrid/>
         </AnimatedSection>
         <AnimatedSection>
+            <Help />
+        </AnimatedSection>
+        <AnimatedSection>
             <SocialMedia />
         </AnimatedSection>
     </div>
@@ -19,6 +22,7 @@
 <script setup lang="ts">
 import Hero from '@/components/Public/Home/Hero.vue';
 import Mision from '@/components/Public/Home/Mision.vue';
+import Help from '@/components/Public/Home/Help.vue';
 import About from '@/components/Public/Home/About.vue';
 import Estructura from '@/components/Public/Home/Estructura.vue';
 import BentoGrid from '@/components/Public/Home/BentoGrid.vue';

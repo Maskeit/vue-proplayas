@@ -12,9 +12,12 @@ export interface RegisterNodeLeader {
     name?: string;
     expertise_area?: string;
     research_work?: string;
-    about?: string;
-    country?: string;
-    city?: string;
+    about_user?: string;
+    country_user?: string;
+    city_user?: string;
+    about_node?: string;
+    country_node?: string;
+    city_node?: string;
     node_name?: string;
     node_type?: string;
 }
@@ -27,9 +30,9 @@ export interface RegisterNodeMember {
     name?: string;
     expertise_area?: string;
     research_work?: string;
-    about?: string;
-    country?: string;
-    city?: string;
+    about_user?: string;
+    country_user?: string;
+    city_user?: string;
 }
 
 
@@ -82,7 +85,7 @@ export const validatePassword = (password: string): Login => {
 export const validateRegisterLeader = (formData: RegisterNodeLeader): RegisterNodeLeader => {
     const errors: RegisterNodeLeader = {};
 
-    const { name, email, password, confirm_password, node_name, country, city } = formData;
+    const { name, email, password, confirm_password, node_name, country_node, city_node, country_user, city_user } = formData;
 
     // Validación de email
     const emailErrors = validateEmail(email);
@@ -106,13 +109,19 @@ export const validateRegisterLeader = (formData: RegisterNodeLeader): RegisterNo
     if (!node_name?.trim()) {
         errors.node_name = "El nombre del nodo es obligatorio.";
     }
-    // validacion del país
-    if (!country?.trim()) {
-        errors.country = "El país es obligatorio.";
+    // validacion del país y ciudad del usuario
+    if (!country_user?.trim()) {
+        errors.country_user = "El país es obligatorio.";
     }
-    // validacion de la ciudad
-    if (!city?.trim()) {
-        errors.city = "La ciudad es obligatoria.";
+    if (!city_user?.trim()) {
+        errors.city_user = "La ciudad es obligatoria.";
+    }
+    // validacion del país y ciudad del nodo
+    if (!country_node?.trim()) {
+        errors.country_node = "El país es obligatorio.";
+    }
+    if (!city_node?.trim()) {
+        errors.city_node = "La ciudad es obligatoria.";
     }
 
     return errors;
@@ -121,7 +130,7 @@ export const validateRegisterLeader = (formData: RegisterNodeLeader): RegisterNo
 export const validateMemberRegisterForm = (formData: RegisterNodeMember): RegisterNodeMember => {
     const errors: RegisterNodeMember = {};
 
-    const { name, email, password, confirm_password, country, city } = formData;
+    const { name, email, password, confirm_password, country_user, city_user } = formData;
 
     // Validación de email
     const emailErrors = validateEmail(email);
@@ -145,12 +154,12 @@ export const validateMemberRegisterForm = (formData: RegisterNodeMember): Regist
         errors.name = "El nombre es obligatorio.";
     }
 
-    if (!country?.trim()) {
-        errors.country = "El país es obligatorio.";
+    if (!country_user?.trim()) {
+        errors.country_user = "El país es obligatorio.";
     }
 
-    if (!city?.trim()) {
-        errors.city = "La ciudad es obligatoria.";
+    if (!city_user?.trim()) {
+        errors.city_user = "La ciudad es obligatoria.";
     }
 
     return errors;

@@ -90,7 +90,7 @@
                         Descripción:
                     </label>
                     <div class="relative mt-1">
-                        <textarea v-model="formData.about" name="about"
+                        <textarea v-model="formData.about_user" name="about"
                             class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 h-24"></textarea>
                     </div>
                 </div>
@@ -103,13 +103,13 @@
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
                             <GlobeAmericasIcon class="size-6 dark:text-gray-200 text-gray-600" />
                         </span>
-                        <input v-model="formData.country" type="text" name="country"
+                        <input v-model="formData.country_user" type="text" name="country"
                             class="dark:text-gray-200 text-gray-600 w-full pl-10 pr-3 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500"
                             required />
                     </div>
                 </div>
-                <p v-if="errors.country" class="text-red-500 text-center text-sm mb-2">
-                    {{ errors.country }}
+                <p v-if="errors.country_user" class="text-red-500 text-center text-sm mb-2">
+                    {{ errors.country_user }}
                 </p>
                 <div class="mb-4">
                     <label class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
@@ -119,13 +119,13 @@
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
                             <BuildingOfficeIcon class="size-6 dark:text-gray-200 text-gray-600" />
                         </span>
-                        <input v-model="formData.city" type="text" name="city"
+                        <input v-model="formData.city_user" type="text" name="city"
                             class="dark:text-gray-200 text-gray-600 w-full pl-10 pr-3 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500"
                             required />
                     </div>
                 </div>
-                <p v-if="errors.city" class="text-red-500 text-center text-sm mb-2">
-                    {{ errors.city }}
+                <p v-if="errors.city_user" class="text-red-500 text-center text-sm mb-2">
+                    {{ errors.city_user }}
                 </p>
                 <div class="mb-4">
                     <label for="password" class="block dark:text-gray-200 text-gray-600 text-sm font-medium">
@@ -220,9 +220,9 @@ const formData = ref<RegisterNodeMember>({
     confirm_password: "",
     expertise_area: "",
     research_work: "",
-    about: "",
-    country: "",
-    city: "",
+    about_user: "",
+    country_user: "",
+    city_user: "",
 });
 const showPassword = ref(false);
 const togglePasswordVisibility = () => {

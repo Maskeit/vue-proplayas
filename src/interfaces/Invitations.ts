@@ -14,9 +14,12 @@ export interface RegisterNodeLeader {
     research_work: string;
     node_type: string;
     node_name: string;
-    about: string;
-    country: string;
-    city: string;
+    about_node: string;
+    about_user: string;
+    country_user: string;
+    city_user: string;
+    country_node: string;
+    city_node: string;
 }
 
 export interface InviteAdmin {
@@ -46,7 +49,7 @@ export interface RegisterNodeMember {
     confirm_password: string;
     expertise_area: string;
     research_work: string;
-    about: string;
-    country: string;
-    city: string;
+    about_user: string;
+    country_user: string;
+    city_user: string;
 }

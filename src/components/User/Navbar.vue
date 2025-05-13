@@ -11,13 +11,11 @@
 
             <!-- Menú de navegación del user para pantallas medianas y grandes -->
             <div class="hidden md:flex space-x-4 items-center">
-                <router-link to="/"
-                    class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400 font-semibold">Inicio</router-link>
-                <router-link to="/User/Profile"
-                    class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Perfil</router-link>
-                <router-link to="/User/Content"
-                    class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Crear</router-link>
-                <router-link v-if="isAdmin"  to="/root/users" 
+                <router-link to="/Home" class="text-gray-800 dark:text-gray-200 font-semibold">Inicio</router-link>
+                <router-link to="/History" class="text-gray-800 dark:text-gray-200">Historia</router-link>
+                <router-link to="/Content" class="text-gray-800 dark:text-gray-200">Actividades</router-link>
+                <router-link to="/Nodos" class="text-gray-800 dark:text-gray-200">Nodos</router-link>
+                <router-link v-if="isAdmin" to="/root/users"
                     class="text-gray-700 dark:text-gray-100 dark:hover:text-gray-400">Usuarios</router-link>
                 <div v-if="!token">
                     <router-link to="/Login"

@@ -11,7 +11,9 @@
                 :leader="nodeData.leader"
                 :country="nodeData?.country"
                 :city="nodeData?.city"
-                @update="updateNodeBio"/>
+                @update="updateNodeBio"
+                @uploadImg="uploadImg"
+                />
             <NodoDetalle 
                 :code="code"
                 :items="registrosFiltrados"
@@ -80,6 +82,22 @@ const updateNodeBio = async (updatedData: any) =>  {
         }
     } catch (error) {
         console.error("Error al actualizar datos del nodo:", error);
+    }finally {
+        isLoading.value = false;
+    }
+}
+
+const uploadImg = async (formData: any) => {
+    try {
+        isLoading.value = true;
+        const status = await nodosStore.uploadNodeImage(ID.value, formData);
+        if (status === 200) {
+            confirmationMessage.value = 'Imagen actualizada correctamente';
+            confirmationType.value = 'success';
+            showConfirmation.value = true;
+        }
+    } catch (error) {
+        console.error("Error al actualizar la imagen del nodo:", error);
     }finally {
         isLoading.value = false;
     }
