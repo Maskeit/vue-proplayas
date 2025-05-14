@@ -26,7 +26,7 @@ export const useNodosStore = defineStore('nodos', () => {
         const index = nodoMiembros.value.findIndex((m) => m.id === member.id);
         if (index !== -1) {
             nodoMiembros.value[index] = member;
-        }        
+        }
     }
 
     // Traer lista de los nodos
@@ -80,20 +80,38 @@ export const useNodosStore = defineStore('nodos', () => {
             console.error("Error al editar la biografía del nodo:", error);
         }
     }
-
-    const updateNodeMember = async (id: number) => {        
-
-    }
-    const toggleNodeMemberStatus = async (memberId: number) => {
+    // estado que envia la foto de perfil al controlador/servicio
+    const uploadNodeImage = async (file: FormData) => {
         try {
-            const { status, message, data } = await nodosService.toggleMemberStatus(memberId);
+            const { status, message, data } = await nodosService.uploadNodeProfilePicture(file);
+            return {status, data};
+        } catch (error) {
+            console.error("Error al subir la foto de perfil del nodo:", error);
+        }
+    };
+
+    // en relacion con el miembro solo elimina la relacion entre el nodo y el miembro
+    const unlinkMember = async (id: number) => {
+        try {
+            const { status, message, data } = await nodosService.deleteMember(id);
+            //setNodeMember(data); Se espera que el backend devuelva el miembro actualizado correctamente
+            return status;
+        } catch (error) {
+            console.error("Error al eliminar miembro del nodo:", error);
+        }
+    }
+
+    // activa o desactiva el miembro del nodo
+    const toggleNodeMemberStatus = async (id: number) => {
+        try {
+            const { status, message, data } = await nodosService.toggleMemberStatus(id);
             //setNodeMember(data); Se espera que el backend devuelva el miembro actualizado correctamente
             return status;
         } catch (error) {
             console.error("Error al cargar miembros del nodo desde el store:", error);
         }
     }
-    
+
     return {
         nodo,
         nodos,
@@ -108,7 +126,8 @@ export const useNodosStore = defineStore('nodos', () => {
         fetchNodoInfo,
         fetchNodoMembers,
         updateNodeBio,
-        updateNodeMember,
-        toggleNodeMemberStatus,
+        uploadNodeImage, // sube una foto de perfil 
+        unlinkMember, // eliminar miembro del nodo
+        toggleNodeMemberStatus, // activar o desactivar miembro
     };
 });

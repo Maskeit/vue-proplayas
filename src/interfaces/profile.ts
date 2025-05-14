@@ -10,7 +10,7 @@ export interface User {
     postgraduate: string;
     expertise_area: string;
     research_work: string;
-    profile_picture: string;
+    profilePicture: File; // foto del usuario
     social_media: SocialLink[];
     status: string;
 }

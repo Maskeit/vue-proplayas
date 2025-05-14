@@ -18,8 +18,8 @@
                 v-if="nodeData"
                 :code="code" 
                 :items="registrosFiltrados" 
-                @editar="editarRegistro" 
-                @eliminar="confirmarEliminacion"
+                @toggleStatus="toggleStatus"
+                @unlinkUser="unlinkUserFromNode"
                 @search="filtrar" />
             <NotFound v-else />
         </template>
@@ -83,16 +83,15 @@ function abrirFormulario() {
     mostrarModal.value = true;
 }
 
-function editarRegistro(registro: Member) {
-    registroSeleccionado.value = registro;
-    mostrarModal.value = true;
+const toggleStatus = (memberId: Member) => {
+    // Lógica para activar/desactivar el registro
+    nodosStore.toggleNodeMemberStatus(memberId);
 }
 
-function confirmarEliminacion(registro: Member) {
-    // Lógica para confirmar y eliminar
-    registros.value = registros.value.filter(r => r.id !== registro.id);
+const unlinkUserFromNode = (memberId: Member) => {
+    // Lógica para desvincular al usuario del nodo
+    nodosStore.unlinkMember(memberId);
 }
-
 
 function cerrarModal() {
     mostrarModal.value = false;

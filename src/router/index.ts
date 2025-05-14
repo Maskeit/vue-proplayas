@@ -11,6 +11,7 @@ import PublicLayout from "@layout/PublicLayout.vue";
 // paginas
 import NodosPrivadoRoot from "@view/adminRoot/NodosPrivado.vue";
 import NodoPrivadoRoot from "@view/adminRoot/NodoPrivado.vue";
+import Users from "@view/adminRoot/Users.vue";
 //import AdminRootCMS from "@view/adminRoot/CMS.vue"; //vista
 
 import NodoPrivado from "@view/adminNodo/NodoPrivado.vue";
@@ -22,6 +23,8 @@ import UserCMS from "@view/user/CMS.vue"; //vista
 // paginas publicas 
 import Login from "@view/public/Login.vue";
 import Register from "@view/Public/Register.vue";
+import RecoverPassword from "@view/Public/RecoverPassword.vue";
+import SetPassword from "@view/Public/SetPassword.vue";
 import Home from "@view/public/Home.vue";
 import NodosPublico from "@view/public/NodosPublico.vue";
 import NodoPublico from "@view/public/NodoPublico.vue";
@@ -29,7 +32,7 @@ import PublicProfile from "@view/public/PublicProfile.vue";
 import Content from "@view/public/Content.vue";
 import History from "@view/public/History.vue";
 // Components para CMS
-import WebinarsCMS from "@components/shared/CMS/Webinars.vue";
+import EventsCMS from "@components/shared/CMS/Events.vue";
 import LibrosCMS from "@components/shared/CMS/Libros.vue";
 import WebSeriesCMS from "@components/shared/CMS/WebSeries.vue";
 import ArticulosCMS from "@components/shared/CMS/Articulos.vue";
@@ -39,12 +42,12 @@ import ProyectosCMS from "@components/shared/CMS/Proyectos.vue";
 import Articulos from "@components/Public/Content/Articulos.vue";
 import Libros from "@components/Public/Content/Libros.vue";
 import WebSeries from "@components/Public/Content/WebSeries.vue";
-import Webinars from "@components/Public/Content/Webinars.vue";
+import Events from "@components/Public/Content/Events.vue";
 import Proyects from "@components/Public/Content/Proyectos.vue";
 
 const generateCmsRoutes = (): Array<RouteRecordRaw> => [
-  { path: '', name: '', component: WebinarsCMS },
-  { path: '/User/Content/Webinar', name: 'CMSWebinar', component: WebinarsCMS },
+  { path: '', name: '', component: EventsCMS },
+  { path: '/User/Content/Event', name: 'CMSEvent', component: EventsCMS },
   { path: '/User/Content/Libros', name: 'CMSLibros', component: LibrosCMS },
   { path: '/User/Content/WebSeries', name: 'CMSWebSeries', component: WebSeriesCMS },
   { path: '/User/Content/Articulos', name: 'CMSArticulos', component: ArticulosCMS },
@@ -52,9 +55,9 @@ const generateCmsRoutes = (): Array<RouteRecordRaw> => [
 ];
 
 const contentPanels = (): Array<RouteRecordRaw> => [
-  { path: '', name:'', component: Webinars },
+  { path: '', name:'', component: Events },
   { path: 'articulos', name: 'Articulos', component: Articulos },
-  { path: 'webinars', name: 'Webinars', component: Webinars },
+  { path: 'events', name: 'Events', component: Events },
   { path: 'libros', name: 'Libros', component: Libros },
   { path: 'webseries', name: 'WebSeries', component: WebSeries },
   { path: 'proyectos', name: 'Proyectos', component: Proyects },
@@ -76,6 +79,12 @@ const adminRootRoutes: Array<RouteRecordRaw> = [
     props: true, // Permite pasar el código del nodo como prop
     meta: { requiresAuth: true, role: "admin" },
   },
+  {
+    path: 'users',
+    name: 'Users',
+    component: Users,
+    meta: { requiresAuth: true, role: "admin" },
+  }
   // {
   //   path: '',
   //   component: AdminRootCMS,
@@ -114,6 +123,8 @@ const userRoutes: Array<RouteRecordRaw> = [
 const blankPages = [
   { path: '/login', component: Login },
   { path: '/register', component: Register },
+  { path: '/RecoverPassword', component: RecoverPassword },
+  { path: '/SetPassword', component: SetPassword },
   { path: '/:pathMatch(.*)*', component: BlankLayout }, // Para cualquier ruta que no coincida con las anteriores
   { path: '', redirect: { name: 'Login' } }, // Para redireccionar a /login al inicio de la app.
 ]

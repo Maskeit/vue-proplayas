@@ -6,7 +6,7 @@ export default class InvitationService {
     // Miembros
     async createInvitationToNodeMember(data: InviteNodeMember): Promise<any> {
         try {
-            const response = await axiosInstance.post("/members/invite", data);
+            const response = await axiosInstance.post("/member/invite", data);
             return response.data;
         } catch (error) {
             console.error("Error al enviar la invitación:", error);
@@ -16,7 +16,7 @@ export default class InvitationService {
     // Lider de nodo
     async createInvitationToNodeLeader(data: InviteNodeLeader): Promise<any> {
         try {
-            const response = await axiosInstance.post("/nodes/invite", data);
+            const response = await axiosInstance.post("/node/invite", data);
             return response.data;
         } catch (error) {
             console.error("Error al enviar la invitación:", error);

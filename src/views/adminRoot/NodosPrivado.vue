@@ -1,53 +1,52 @@
 <template>
-    <TalbeNodosSkeleton v-if="isLoading" />
-    <!-- Otros componentes y elementos del CRUD -->
-    <NodosTable v-else
-        :items="registrosFiltrados" 
-        @editar="editarRegistro" 
-        @eliminar="confirmarEliminacion" 
-        @nuevo-registro="abrirFormulario" 
-        @search="filtrar" />
-
-    <!-- Modal para crear/editar registros -->
-    <CrudModal :visible="mostrarModal" @cerrar="cerrarModal">
-        <CrudForm 
-            :model="registroSeleccionado" 
-            @guardar="guardarRegistro" 
-            @cancelar="cerrarModal" />
-    </CrudModal>
+    <div>
+        <TalbeNodosSkeleton v-if="isLoading" />
+        <template v-else>
+            <!-- Otros componentes y elementos del CRUD -->
+            <NodosTable 
+                :items="registrosFiltrados" 
+                @editar="editarRegistro" 
+                @eliminar="confirmarEliminacion"
+                @nuevo-registro="guardarRegistro" 
+                @search="filtrar" />
+        </template>
+        <Confirmation v-if="showConfirmation" :message="confirmationMessage" :type="confirmationType"
+            @close="showConfirmation = false" />
+    </div>
 </template>
 <script setup lang="ts">
 import NodosTable from '@/components/AdminRoot/nodo/NodosTable.vue';
 import TalbeNodosSkeleton from "@/components/shared/skeletons/TableNodosSkeleton.vue";
-import CrudForm from '@/components/AdminRoot/Crud/CrudForm.vue';
-import CrudModal from '@/components/AdminRoot/Crud/CrudModal.vue';
-import { ref, computed, onMounted } from 'vue';
+import Confirmation from '@/components/shared/modales/Confirmation.vue';
 import type { Nodes } from '@/interfaces/Nodes';
 import type { InviteNodeLeader } from '@interfaces/Invitations';
 import { useNodosStore } from '@stores/nodosStore';
-import InvitationService from "@/services/Class/InvitationService";
-import { NodosService } from "@/services/Class/NodoService";
+import InvitationsService from "@/services/Class/InvitationService";
+import { ref, computed, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 
-const invitationsService = new InvitationService();
+// servicios y rutas
+const route = useRoute();
 const nodosStore = useNodosStore();
-const registros = ref<Nodes[]>([]);
-const searchTerm = ref('');
+const invitationsService = new InvitationsService();
+
+// Estados
+const registros = computed(() => nodosStore.nodos);
 const isLoading = ref(true);
+const searchTerm = ref('');
 
-const registroSeleccionado = ref<Nodes | null>(null);
 const mostrarModal = ref(false);
+const showConfirmation = ref(false);
+const confirmationMessage = ref('');
+const confirmationType = ref<'success' | 'error' | 'warning'>('success');
 
-const getNodes = async () => {
-    try {
-        await nodosStore.fetchNodos();
-        registros.value = nodosStore.nodos;
-    } catch (error) {
-        console.error("Error cargando nodos:", error);
-    } finally {
-        isLoading.value = false;
-    }
-};
-onMounted(getNodes);
+onMounted(async () => {
+    isLoading.value = true;
+    await nodosStore.fetchNodos();
+    isLoading.value = false;
+});
+
+
 // Filtrado basado en la propiedad 'name' (asegúrate de que el JSON use el mismo nombre de propiedad)
 const registrosFiltrados = computed(() => {
     if (!searchTerm.value) return registros.value;
@@ -60,42 +59,26 @@ const registrosFiltrados = computed(() => {
     );
 });
 
-function abrirFormulario() {
-    registroSeleccionado.value = null;
-    mostrarModal.value = true;
-}
-
-function editarRegistro(registro: Nodes) {
-  registroSeleccionado.value = {
-    code: registro.code[0], // Asegura que solo sea la letra inicial
-    node_type: registro.type,
-    name: registro.name,
-    email: '', // <- no lo tienes en el nodo, así que lo dejas vacío
-  };
-  mostrarModal.value = true;
-}
-
-function confirmarEliminacion(registro: Nodes) {
-    // Lógica para confirmar y eliminar
-    registros.value = registros.value.filter(r => r.id !== registro.id);
-}
 
 const guardarRegistro = async (nuevoRegistro: InviteNodeLeader) => {
     try {
-        const response = await invitationsService.createInvitation(nuevoRegistro);
-        console.log(response);
-        alert("Invitación enviada correctamente");
-        mostrarModal.value = false;
+        const { status, message, data } = await invitationsService.createInvitationToNodeLeader(nuevoRegistro);
+        if (status && status === 201) {
+            confirmationMessage.value = 'Invitación enviada correctamente';
+            confirmationType.value = 'success';
+            showConfirmation.value = true;
+            mostrarModal.value = false;
+        } else {
+            confirmationMessage.value = 'Error al enviar la invitación';
+            confirmationType.value = 'error';
+            showConfirmation.value = true;
+        }
     } catch (error) {
-        alert("Error al enviar la invitación. Revisa la consola.");
+        console.error("Error al enviar la invitación:", error);
     }
-};
-
-function cerrarModal() {
-    mostrarModal.value = false;
 }
 
-function filtrar(term: string) {
+const filtrar = (term: string) => {
     searchTerm.value = term;
 }
 </script>

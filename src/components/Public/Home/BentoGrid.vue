@@ -11,35 +11,35 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto max-w-6xl w-full">
             
             <!-- Tarjeta más grande que ocupa 2 columnas en pantallas grandes -->
-            <router-link to="/content/Projects" class="bento-box sm:col-span-2 lg:col-span-2">
-                <h3 class="text-xl text-gray-600 dark:text-gray-100 font-semibold">Proyectos Colaborativos</h3>
+            <router-link to="/Content/Proyectos" class="bento-box sm:col-span-2 lg:col-span-2">
+                <h3 class="text-xl text-gray-600 dark:text-gray-100 font-semibold">Proyectos Colaborativos De Bajo Costo</h3>
                 <p class="text-gray-500 dark:text-gray-100 mb-3">Participa y colabora en proyectos y obten recompensas.</p>
                 <img src="/src/assets/images/home/content/projects.svg" alt="Proyectos Colaborativos" 
                      class="w-full h-52 md:h-60 object-cover rounded-lg">
             </router-link>
 
-            <router-link to="/content/WebSeries" class="bento-box">
+            <router-link to="/Content/WebSeries" class="bento-box">
                 <h3 class="text-xl text-gray-600 dark:text-gray-100 font-semibold">Web Series</h3>
                 <p class="text-gray-500 dark:text-gray-100 mb-3">Noticias y videos sobre la comunidad.</p>
                 <img src="/src/assets/images/home/content/webserie.svg" alt="Web Series" 
                      class="w-full h-48 object-cover rounded-lg">
             </router-link>
 
-            <router-link to="/content/Webinars" class="bento-box">
-                <h3 class="text-xl text-gray-600 dark:text-gray-100 font-semibold">Webinars</h3>
+            <router-link to="/Content/Events" class="bento-box">
+                <h3 class="text-xl text-gray-600 dark:text-gray-100 font-semibold">Events</h3>
                 <p class="text-gray-500 dark:text-gray-100 mb-3">Talleres impartidos por profesionales.</p>
                 <img src="/src/assets/images/home/content/webinars.svg" alt="Webinars" 
                      class="w-full h-48 object-cover rounded-lg">
             </router-link>
 
-            <router-link to="/content/Articulos" class="bento-box">
+            <router-link to="/Content/Articulos" class="bento-box">
                 <h3 class="text-xl text-gray-600 dark:text-gray-100 font-semibold">Artículos</h3>
                 <p class="text-gray-500 dark:text-gray-100 mb-3">Información de investigadores.</p>
                 <img src="/src/assets/images/home/content/article.svg" alt="Artículos" 
                      class="w-full h-48 object-cover rounded-lg">
             </router-link>
 
-            <router-link to="/content/Libros" class="bento-box">
+            <router-link to="/Content/Libros" class="bento-box">
                 <h3 class="text-xl text-gray-600 dark:text-gray-100 font-semibold">Libros</h3>
                 <p class="text-gray-500 dark:text-gray-100 mb-3">Accede a libros de la comunidad.</p>
                 <img src="/src/assets/images/home/content/books.svg" alt="Libros" 

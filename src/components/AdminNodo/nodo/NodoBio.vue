@@ -1,6 +1,7 @@
 <template>
     <div class="p-5 lg:p-10">
-        <div class="bg-white dark:bg-zinc-700 shadow-md rounded-lg p-6 grid grid-cols-1 md:grid-cols-[300px_minmax(600px,_1fr)] gap-6 relative">
+        <div
+            class="bg-white dark:bg-zinc-700 shadow-md rounded-lg p-6 grid grid-cols-1 md:grid-cols-[300px_minmax(600px,_1fr)] gap-6 relative">
             <!-- Botón de Configuración -->
             <button @click="openEditProfileModal"
                 class="absolute top-4 right-4 p-2 rounded-full bg-white hover:bg-gray-100 dark:hover:bg-gray-700 transition"
@@ -10,35 +11,49 @@
 
             <!-- Perfil: Foto y Nombre -->
             <div class="flex flex-col items-center md:items-start">
-                <div class="space-y-4">
-                    <img :src="`/src/assets/images/nodos/proplayas.svg`" alt="Foto de perfil"
-                        class="md:w-48 md:h-48 w-32 h-32 rounded-full border-2 border-gray-300 object-cover" />
+                <div class="relative w-32 h-32 md:w-48 md:h-48 group">
+                  <img
+                    :src="`http://localhost:8080/storage/uploads/profiles/${props.profilePicture}`"
+                    alt="Foto de perfil"
+                    class="w-full h-full rounded-full border-2 border-gray-300 object-cover transition duration-300 group-hover:opacity-70"/>
+                  <button
+                    @click="openEditPhotoModal"
+                    class="absolute inset-0 flex items-center  justify-center opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity duration-300"
+                    aria-label="Editar foto">
+                    <PencilIcon class="w-10 h-10 text-gray-500 bg-white bg-opacity-50 rounded-full p-1" />
+                  </button>
                 </div>
+
                 <div class="my-3 text-center md:text-left">
-                    <h1 class="text-2xl font-semibold text-gray-500 dark:text-white">{{ name }}</h1>
+                    <h1 class="text-2xl font-semibold text-gray-500 dark:text-white">{{ props.name.charAt(0).toUpperCase() +
+                        props.name.slice(1) }}</h1>
                 </div>
                 <div class="max-w-lg">
                     <div class="flex gap-2">
-                        <p class="text-gray-500 dark:text-white">{{ city }}, </p>
-                        <p class="text-gray-500 dark:text-white">{{ country }}</p>
+                        <p class="text-gray-500 dark:text-white">{{ props.city.charAt(0).toUpperCase() + props.city.slice(1) }},
+                        </p>
+                        <p class="text-gray-500 dark:text-white">{{ props.country.charAt(0).toUpperCase() + props.country.slice(1)
+                            }}</p>
                         <MapPinIcon class="w-6 h-6 text-gray-500" />
                     </div>
                 </div>
                 <!-- fecha en que se unió -->
-                <p class="text-gray-400 dark:text-white text-center md:text-left">Se unió a proplayas en {{ joined_in }}</p>
+                <p class="text-gray-400 dark:text-white text-center md:text-left">Se unió a proplayas en {{ props.joined_in }}</p>
             </div>
 
             <!-- Información sobre el nodo -->
             <div class="flex flex-col justify-between">
                 <div class="max-w-lg">
                     <h1 class="text-2xl font-semibold text-gray-500 dark:text-white">Sobre el nodo</h1>
-                    <p class="text-gray-600 dark:text-white">{{ about }}</p>
+                    <p class="text-gray-600 dark:text-white">{{ props.about }}</p>
                 </div>
                 <!-- Redes Sociales -->
-                <div v-if="social_media && Object.keys(social_media).length" class="mt-6 flex flex-wrap items-center gap-4">
+                <div v-if="props.social_media && Object.keys(props.social_media).length"
+                    class="mt-6 flex flex-wrap items-center gap-4">
                     <h2 class="text-lg font-semibold text-gray-500 dark:text-white">Redes Sociales:</h2>
                     <div class="flex flex-wrap gap-3">
-                        <a v-for="link in social_media" :key="link.platform" :href="link.url" target="_blank" class="flex items-center gap-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-500 transition">
+                        <a v-for="link in props.social_media" :key="link.platform" :href="link.url" target="_blank"
+                            class="flex items-center gap-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-500 transition">
                             <component :is="getIconComponent(link.platform)" class="w-5 h-5" />
                             {{ formatPlatform(link.platform) }}
                         </a>
@@ -46,23 +61,25 @@
                 </div>
             </div>
         </div>
-        <EditNodoBio :isOpen="isEditNodoOpen" 
-        :nodeData ="{
-            name,
-            about,
-            profile_picture,
-            social_media: social_media,
+        <EditNodoBio :isOpen="isEditNodoOpen" :nodeData="{
+            name: props.name,
+            about: props.about,
+            social_media: props.social_media,
         }" @close="isEditNodoOpen = false" @update="updateNode" />
+        <EditNodePhoto :isOpen="isEditNodoPhotoOpen" :nodeData="{
+            image: props.profilePicture,
+        }" @close="isEditNodoPhotoOpen = false" @uploadImg="uploadImg" />
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 import { Leader } from "@interfaces/Nodes";
-import { SocialLink } from "@/interfaces/Profile";
+import { SocialLink } from "@interfaces/Profile";
 import { GlobeAltIcon } from "@heroicons/vue/24/outline";
-import {  AcademicCapIcon, PencilIcon, MapPinIcon } from "@heroicons/vue/24/solid";
+import { AcademicCapIcon, PencilIcon, MapPinIcon } from "@heroicons/vue/24/solid";
 import EditNodoBio from "@/components/AdminNodo/nodo/EditNodoBio.vue";
+import EditNodePhoto from "@/components/AdminNodo/nodo/EditNodePhoto.vue";
 
 import FacebookIcon from "@icons/FacebookIcon.vue";
 import TwitterIcon from "@icons/TwitterIcon.vue";
@@ -82,7 +99,7 @@ interface Props {
     city: string;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 // Función para mapear plataformas a iconos
 const getIconComponent = (platform: string) => {
@@ -105,13 +122,21 @@ const formatPlatform = (platform: string) => {
 };
 
 const isEditNodoOpen = ref(false);
-
 const openEditProfileModal = () => {
     isEditNodoOpen.value = true;
 };
+
+const isEditNodoPhotoOpen = ref(false);
+const openEditPhotoModal = () => {
+    isEditNodoPhotoOpen.value = true;
+};
 // Recibe y retransmite los datos al padre real (NodoPrivado.vue)
-const emit = defineEmits(["update"]);
+const emit = defineEmits(["update", "uploadImg"]);
+
 const updateNode = (updatedData: any) => {
-  emit("update", updatedData);
+    emit("update", updatedData);
+};
+const uploadImg = (newImageName: string) => {
+    emit("uploadImg", newImageName);
 };
 </script>

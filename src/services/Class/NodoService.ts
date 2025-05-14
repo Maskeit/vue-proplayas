@@ -12,7 +12,7 @@ export class NodosService {
             return { nodes: [], status: 500 }; // manejas el error con status
         }
     }
-    
+
     // Traer informacion del nodo como su biografia
     async getNodeBio(code: number): Promise<Node | null> {
         try {
@@ -38,22 +38,46 @@ export class NodosService {
     async editNodeBio(id: number, editData: Node): Promise<Node | null> {
         try {
             const response = await axiosInstance.put(`/node/${id}`, editData);
-            const {status, message, data} = response.data;
-            console.log({status, message, data});
+            const { status, message, data } = response.data;
             return { status, message, data };
-        }  catch (error: any) {
+        } catch (error: any) {
             console.error("Error al actualizar el perfil del miembro:", error);
             throw error;
         }
     }
 
+    // aqui lo envia a la api
+    async uploadNodeProfilePicture(file: FormData): Promise<Node | null> {
+        try {
+            const response = await axiosInstance.post(`/node/upload-profile-picture`, file);
+            const { status, message, data } = response.data;
+            return { status, message, data };
+        } catch (error: any) {
+            console.error("Error al subir la foto de perfil del nodo:", error);
+            throw error;
+        }
+    }
+
     async toggleMemberStatus(memberId: number): Promise<Member | null> {
-        try{
-            const response = await axiosInstance.delete(`/user/${memberId}`);    
-            const {status, message, data} = response.data;
-            return {status, message, data};
+        try {
+            const response = await axiosInstance.put(`/member/${memberId}`);
+            const { status, message, data } = response.data;
+            return { status, message, data };
         } catch (error: any) {
             console.error("Error al actualizar el perfil del miembro:", error);
+            throw error;
+        }
+    }
+
+    // elimina la relacion entre el nodo y el miembro
+    // no elimina el miembro de la base de datos
+    async deleteMember(memberId: number): Promise<Member | null> {
+        try {
+            const response = await axiosInstance.delete(`/member/${memberId}`);
+            const { status, message, data } = response.data;
+            return { status, message, data };
+        } catch (error: any) {
+            console.error("Error al eliminar el miembro:", error);
             throw error;
         }
     }

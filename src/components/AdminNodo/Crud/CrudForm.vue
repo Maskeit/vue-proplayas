@@ -25,7 +25,7 @@
                 <div class="flex justify-end mt-6">
                     <button @click="closeModal" class="px-4 py-2 border rounded-md mr-2">Cancelar</button>
                     <button type="submit"
-                        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Guardar</button>
+                        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Invitar</button>
                 </div>
             </form>
         </div>

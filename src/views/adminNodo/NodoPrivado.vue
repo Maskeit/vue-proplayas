@@ -11,7 +11,9 @@
                 :leader="nodeData.leader"
                 :country="nodeData?.country"
                 :city="nodeData?.city"
-                @update="updateNodeBio"/>
+                @update="updateNodeBio"
+                @uploadImg="uploadImg"
+                />
             <NodoDetalle 
                 :code="code"
                 :items="registrosFiltrados"
@@ -20,10 +22,9 @@
                 @nuevo-registro="guardarRegistro"
                 @search="filtrar" />
         </template>
-        <Confirmation v-if="showConfirmation" :message="confirmationMessage" :type="confirmationType" @close="showConfirmation = false" />        
+        <Confirmation v-if="showConfirmation" :message="confirmationMessage" :type="confirmationType" @close="showConfirmation = false" />
     </div>
 </template>
-
 <script setup lang="ts">
 import NodoBio from "@/components/AdminNodo/nodo/NodoBio.vue";
 import BioSkeleton from "@/components/shared/skeletons/BioSkeleton.vue"
@@ -31,9 +32,7 @@ import NodoDetalle from "@/components/AdminNodo/nodo/NodoDetalle.vue";
 import { useRoute } from 'vue-router';
 import Confirmation from '@/components/shared/modales/Confirmation.vue';
 import type { NodeMembers } from "@interfaces/Nodes";
-import type { SocialLink } from "@/interfaces/Profile";
 import type { InviteNodeMember } from '@interfaces/Invitations';
-
 import { useNodosStore } from '@stores/nodosStore';
 import InvitationsService from "@/services/Class/InvitationService";
 
@@ -87,6 +86,29 @@ const updateNodeBio = async (updatedData: any) =>  {
         isLoading.value = false;
     }
 }
+
+const uploadImg = async (imageFile: File | string) => {
+    try {
+        isLoading.value = true;
+        if (typeof imageFile !== 'string') {
+            const formData = new FormData();
+            formData.append("image", imageFile);
+            const { status, data } = await nodosStore.uploadNodeImage(formData);
+            if (status === 200 && data?.profile_picture) {
+                nodeData.value.profile_picture = data.profile_picture;
+                confirmationMessage.value = 'Imagen actualizada correctamente';
+                confirmationType.value = 'success';
+                showConfirmation.value = true;
+            }
+        } else {
+            nodeData.value.profile_picture = imageFile;
+        }
+    } catch (error) {
+        console.error("Error al actualizar la imagen del nodo:", error);
+    } finally {
+        isLoading.value = false;
+    }
+};
 
 const guardarRegistro = async (nuevoRegistro: InviteNodeMember) => {
     try {

@@ -20,9 +20,9 @@
 </template>
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { Projects } from '../../../../interfaces/Content';
+import type { Project } from '../../../../interfaces/Content';
 
-const props = defineProps<Projects>()
+const props = defineProps<Project>()
 
 const formattedDate = computed(() =>
     new Date(props.date).toLocaleDateString('es-MX', {

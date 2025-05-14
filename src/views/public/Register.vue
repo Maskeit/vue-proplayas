@@ -11,7 +11,12 @@
         </div>
         <!-- Seccion derecha - Formulario Register container -->
         <div class="flex items-center justify-around h-screen m-auto">
-            <component :is="selectedFormComponent" v-if="selectedFormComponent" :initialData="initialData"
+            <component 
+                :is="selectedFormComponent" 
+                v-if="selectedFormComponent" 
+                :initialData="initialData"
+                :errors="errors"
+                :error-message="errorMessage"
                 @register="handleRegister" />
         </div>
     </div>
@@ -21,7 +26,7 @@
 import { ref, onMounted, computed } from 'vue';
 import InvitationService from '@/services/Class/InvitationService';
 import { ArrowLeftCircleIcon } from '@heroicons/vue/24/solid'
-import { validateRegisterForm, ValidationRegisterErrors, validateMemberRegisterForm } from '@/utils/validators/AuthVal';
+import { validateRegisterLeader, ValidationRegisterErrors, validateMemberRegisterForm } from '@/utils/validators/AuthVal';
 import FormAdmin from '@/components/public/Register/FormAdmin.vue';
 import FormNode from '@/components/public/Register/FormNodes.vue';
 import FormMember from '@/components/public/Register/FormMember.vue';
@@ -32,7 +37,7 @@ const router = useRouter();
 const errors = ref<ValidationRegisterErrors>({})
 const errorMessage = ref('');
 let decodedData: any = null;
-
+let role: string = '';
 const decodeJWT = (token: string) => {
     try {
         const base64Url = token.split('.')[1];
@@ -66,9 +71,10 @@ onMounted(() => {
                 node_type: decodedData.node_type || '',
                 role_type: decodedData.role_type || '',
             };
+            role = decodedData.role_type; // Asigna el rol
         }
     } else {
-        console.error("No se encontró un token en la URL");
+        errorMessage.value = "Invitación inválida o ausente."; // Informa al usuario
     }
 });
 
@@ -82,24 +88,25 @@ const selectedFormComponent = computed(() => {
     return formMap[initialData.value.role_type] || null;
 });
 
-const handleRegister = async (formData: any, role: string) => {
+const handleRegister = async (formData: any) => {
+    // Limpia los errores previos antes de validar
+    errors.value = {};
+    errorMessage.value = '';
     // Validar según el tipo de usuario
     if (role === 'member') {
         errors.value = validateMemberRegisterForm(formData);
-    } else {
-        errors.value = validateRegisterForm(
-            formData.email,
-            formData.password,
-            formData.confirm_password,
-            formData.name
-        );
+    } else if (role === 'node_leader') {
+        errors.value = validateRegisterLeader(formData);
     }
 
+    // Verifica si hay errores de validación
     if (Object.keys(errors.value).length > 0) {
         console.error("Errores de validación:", errors.value);
         return;
     }
-
+    errors.value = {};
+    errorMessage.value = '';
+    
     try {
         const invitationService = new InvitationService();
         const token = route.query.token as string;
@@ -117,10 +124,8 @@ const handleRegister = async (formData: any, role: string) => {
             password: btoa(formData.password),
             confirm_password: btoa(formData.confirm_password)
         };
-
         const response = await invitationService.registerNewUser(payload);
 
-        console.log("Respuesta de la API:", response);
         if (response === 201) {
             router.push('/Login');
         } else {
@@ -130,5 +135,6 @@ const handleRegister = async (formData: any, role: string) => {
         console.error("Error en la petición de registro:", error);
         errorMessage.value = "Fallo al registrarse. Inténtalo de nuevo.";
     }
+    
 };
 </script>

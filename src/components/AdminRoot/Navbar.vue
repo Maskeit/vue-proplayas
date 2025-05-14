@@ -13,7 +13,7 @@
             <!-- Menú de navegación del admin root para pantallas medianas y grandes -->
             <div class="hidden md:flex space-x-4 items-center">
                 <router-link to="/root/nodos" class="text-gray-800 dark:text-gray-200 font-semibold">Nodos</router-link>
-                <router-link to="/root/Webinar" class="text-gray-800 dark:text-gray-200">Webinars</router-link>
+                <router-link to="/root/Event" class="text-gray-800 dark:text-gray-200">Events</router-link>
                 <router-link to="/root/Libros" class="text-gray-800 dark:text-gray-200">Libros</router-link>
                 <router-link to="/root/WebSeries" class="text-gray-800 dark:text-gray-200">Web Series</router-link>
                 <router-link to="/root/Articulos" class="text-gray-800 dark:text-gray-200">Artículos</router-link>
@@ -89,7 +89,7 @@
         <div v-if="isOpen" class="md:hidden">
             <div class="flex flex-col justify-center items-center text-center space-y-3 sm:px-4">
                 <router-link to="/root/nodos" class="block text-gray-800 dark:text-gray-200">Nodos</router-link>
-                <router-link to="/root/Webinar" class="block text-gray-800 dark:text-gray-200">Webinars</router-link>
+                <router-link to="/root/Event" class="block text-gray-800 dark:text-gray-200">Events</router-link>
                 <router-link to="/root/Libros" class="block text-gray-800 dark:text-gray-200">Libros</router-link>
                 <router-link to="/root/WebSeries" class="block text-gray-800 dark:text-gray-200">WebSeries</router-link>
                 <router-link to="/root/Articulos" class="block text-gray-800 dark:text-gray-200">Artículos</router-link>
