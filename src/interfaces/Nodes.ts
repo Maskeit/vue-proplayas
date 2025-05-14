@@ -32,7 +32,7 @@ export interface Node {
     type: string;// se muestra
     name: string;// se muestra
     
-    profile_picture_node_file: string;// foto del nodo
+    image: string;// foto del nodo
     
     about: string;// se muestra
     country: string;// se muestra

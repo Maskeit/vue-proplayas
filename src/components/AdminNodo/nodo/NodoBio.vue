@@ -13,7 +13,7 @@
             <div class="flex flex-col items-center md:items-start">
                 <div class="relative w-32 h-32 md:w-48 md:h-48 group">
                   <img
-                    :src="`http://localhost:8080/storage/uploads/profiles/${profilePicture}`"
+                    :src="`http://localhost:8080/storage/uploads/profiles/${props.profilePicture}`"
                     alt="Foto de perfil"
                     class="w-full h-full rounded-full border-2 border-gray-300 object-cover transition duration-300 group-hover:opacity-70"/>
                   <button
@@ -25,34 +25,34 @@
                 </div>
 
                 <div class="my-3 text-center md:text-left">
-                    <h1 class="text-2xl font-semibold text-gray-500 dark:text-white">{{ name.charAt(0).toUpperCase() +
-                        name.slice(1) }}</h1>
+                    <h1 class="text-2xl font-semibold text-gray-500 dark:text-white">{{ props.name.charAt(0).toUpperCase() +
+                        props.name.slice(1) }}</h1>
                 </div>
                 <div class="max-w-lg">
                     <div class="flex gap-2">
-                        <p class="text-gray-500 dark:text-white">{{ city.charAt(0).toUpperCase() + city.slice(1) }},
+                        <p class="text-gray-500 dark:text-white">{{ props.city.charAt(0).toUpperCase() + props.city.slice(1) }},
                         </p>
-                        <p class="text-gray-500 dark:text-white">{{ country.charAt(0).toUpperCase() + country.slice(1)
+                        <p class="text-gray-500 dark:text-white">{{ props.country.charAt(0).toUpperCase() + props.country.slice(1)
                             }}</p>
                         <MapPinIcon class="w-6 h-6 text-gray-500" />
                     </div>
                 </div>
                 <!-- fecha en que se unió -->
-                <p class="text-gray-400 dark:text-white text-center md:text-left">Se unió a proplayas en {{ joined_in }}</p>
+                <p class="text-gray-400 dark:text-white text-center md:text-left">Se unió a proplayas en {{ props.joined_in }}</p>
             </div>
 
             <!-- Información sobre el nodo -->
             <div class="flex flex-col justify-between">
                 <div class="max-w-lg">
                     <h1 class="text-2xl font-semibold text-gray-500 dark:text-white">Sobre el nodo</h1>
-                    <p class="text-gray-600 dark:text-white">{{ about }}</p>
+                    <p class="text-gray-600 dark:text-white">{{ props.about }}</p>
                 </div>
                 <!-- Redes Sociales -->
-                <div v-if="social_media && Object.keys(social_media).length"
+                <div v-if="props.social_media && Object.keys(props.social_media).length"
                     class="mt-6 flex flex-wrap items-center gap-4">
                     <h2 class="text-lg font-semibold text-gray-500 dark:text-white">Redes Sociales:</h2>
                     <div class="flex flex-wrap gap-3">
-                        <a v-for="link in social_media" :key="link.platform" :href="link.url" target="_blank"
+                        <a v-for="link in props.social_media" :key="link.platform" :href="link.url" target="_blank"
                             class="flex items-center gap-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-500 transition">
                             <component :is="getIconComponent(link.platform)" class="w-5 h-5" />
                             {{ formatPlatform(link.platform) }}
@@ -62,12 +62,12 @@
             </div>
         </div>
         <EditNodoBio :isOpen="isEditNodoOpen" :nodeData="{
-            name,
-            about,
-            social_media: social_media,
+            name: props.name,
+            about: props.about,
+            social_media: props.social_media,
         }" @close="isEditNodoOpen = false" @update="updateNode" />
         <EditNodePhoto :isOpen="isEditNodoPhotoOpen" :nodeData="{
-            profile_picture_node_file: profilePicture,
+            image: props.profilePicture,
         }" @close="isEditNodoPhotoOpen = false" @uploadImg="uploadImg" />
     </div>
 </template>
@@ -99,12 +99,8 @@ interface Props {
     city: string;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
-const uno = "graphic_wall_pose.jpg";
-const dos = "hiking_dog_mountain.jpg"
-const tres = "musician_interview.jpg";
-const customImg = tres;
 // Función para mapear plataformas a iconos
 const getIconComponent = (platform: string) => {
     const icons: Record<string, any> = {
@@ -126,22 +122,21 @@ const formatPlatform = (platform: string) => {
 };
 
 const isEditNodoOpen = ref(false);
-
-const isEditNodoPhotoOpen = ref(false);
 const openEditProfileModal = () => {
     isEditNodoOpen.value = true;
 };
 
+const isEditNodoPhotoOpen = ref(false);
 const openEditPhotoModal = () => {
     isEditNodoPhotoOpen.value = true;
 };
 // Recibe y retransmite los datos al padre real (NodoPrivado.vue)
-const emit = defineEmits(["update"], ["uploadImg"]);
+const emit = defineEmits(["update", "uploadImg"]);
 
 const updateNode = (updatedData: any) => {
     emit("update", updatedData);
 };
-const uploadImg = (img: string) => {
-    emit("uploadImg", img);
+const uploadImg = (newImageName: string) => {
+    emit("uploadImg", newImageName);
 };
 </script>

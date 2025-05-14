@@ -16,44 +16,6 @@
                     </div>
 
                     <div>
-                        <div class="flex items-center justify-center w-full">
-                            <label for="dropzone-file" class="relative flex flex-col items-center justify-center w-full h-64 
-                                border-2 border-gray-300 border-dashed rounded-lg cursor-pointer
-                                bg-gray-50 dark:bg-gray-700
-                                hover:bg-gray-100 dark:border-gray-600 
-                                dark:hover:border-gray-500 dark:hover:bg-gray-600" 
-                                :class="form.profile_picture ? 'border-0 bg-white dark:bg-gray-800' : ''" 
-                                @dragover.prevent @drop.prevent="handleDrop">
-                                <!-- Si NO hay imagen, muestra dropzone con instrucciones -->
-                                <div v-if="!form.profile_picture" class="flex flex-col items-center justify-center p-6">
-                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                        viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5
-                                            A5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5
-                                            a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                    </svg>
-                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                                        <span class="font-semibold">Click para añadir una foto</span> o arrástrala y suéltala
-                                    </p>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400">
-                                        SVG, PNG, JPG o GIF (Max. 800×400px)
-                                    </p>
-                                </div>
-
-                                <!-- Si hay imagen, muestra la vista previa -->
-                                <div v-else class="relative flex flex-col items-center justify-center p-4">
-                                    <img :src="form.profile_picture" alt="Foto de perfil"
-                                        class="w-40 h-40 rounded-full object-cover border border-gray-200 shadow-sm" />
-                                    <!-- Botón para remover la foto, opcional -->
-                                    <button type="button" @click="removeImage" class="absolute top-2 right-2 bg-white bg-opacity-80 text-red-600 hover:text-red-800 rounded-full w-5 h-5 shadow">✕</button>
-                                </div>
-
-                                <input id="dropzone-file" type="file" class="hidden" @change="handleFileUpload" />
-                            </label>
-                        </div>
-                    </div>
-                    <div>
                         <label class="block font-medium">Sobre mí</label>
                         <textarea v-model="form.about" class="w-full p-2 border rounded-md field-sizing-content"></textarea>
                     </div>
@@ -106,11 +68,10 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from "vue";
-import { SocialLink } from "@/interfaces/Profile";
+import { SocialLink } from "@interfaces/Profile";
 
 interface FormData {
     name: string;
-    profile_picture: string | null;
     about: string;
     degree: string;
     postgraduate?: string;
@@ -174,30 +135,5 @@ const addSocialMedia = () => {
 };
 const removeSocialMedia = (index: number) => {
     form.value.social_media.splice(index, 1);
-};
-const removeImage = () => {
-    form.value.profile_picture = null;
-};
-
-const handleDrop = (event: DragEvent) => {
-  if (!event.dataTransfer) return;
-  const file = event.dataTransfer.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      form.value.profile_picture = reader.result as string;
-    };
-    reader.readAsDataURL(file);
-  }
-};
-const handleFileUpload = (event: Event) => {
-    const file = (event.target as HTMLInputElement).files?.[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = () => {
-            form.value.profile_picture = reader.result as string;
-        };
-        reader.readAsDataURL(file);
-    }
 };
 </script>

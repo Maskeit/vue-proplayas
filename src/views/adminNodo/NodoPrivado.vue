@@ -22,7 +22,7 @@
                 @nuevo-registro="guardarRegistro"
                 @search="filtrar" />
         </template>
-        <Confirmation v-if="showConfirmation" :message="confirmationMessage" :type="confirmationType" @close="showConfirmation = false" />        
+        <Confirmation v-if="showConfirmation" :message="confirmationMessage" :type="confirmationType" @close="showConfirmation = false" />
     </div>
 </template>
 <script setup lang="ts">
@@ -87,21 +87,28 @@ const updateNodeBio = async (updatedData: any) =>  {
     }
 }
 
-const uploadImg = async (formData: any) => {
+const uploadImg = async (imageFile: File | string) => {
     try {
         isLoading.value = true;
-        const status = await nodosStore.uploadNodeImage(ID.value, formData);
-        if (status === 200) {
-            confirmationMessage.value = 'Imagen actualizada correctamente';
-            confirmationType.value = 'success';
-            showConfirmation.value = true;
+        if (typeof imageFile !== 'string') {
+            const formData = new FormData();
+            formData.append("image", imageFile);
+            const { status, data } = await nodosStore.uploadNodeImage(formData);
+            if (status === 200 && data?.profile_picture) {
+                nodeData.value.profile_picture = data.profile_picture;
+                confirmationMessage.value = 'Imagen actualizada correctamente';
+                confirmationType.value = 'success';
+                showConfirmation.value = true;
+            }
+        } else {
+            nodeData.value.profile_picture = imageFile;
         }
     } catch (error) {
         console.error("Error al actualizar la imagen del nodo:", error);
-    }finally {
+    } finally {
         isLoading.value = false;
     }
-}
+};
 
 const guardarRegistro = async (nuevoRegistro: InviteNodeMember) => {
     try {

@@ -12,7 +12,7 @@ export class NodosService {
             return { nodes: [], status: 500 }; // manejas el error con status
         }
     }
-    
+
     // Traer informacion del nodo como su biografia
     async getNodeBio(code: number): Promise<Node | null> {
         try {
@@ -38,30 +38,31 @@ export class NodosService {
     async editNodeBio(id: number, editData: Node): Promise<Node | null> {
         try {
             const response = await axiosInstance.put(`/node/${id}`, editData);
-            const {status, message, data} = response.data;
-            console.log({status, message, data});
+            const { status, message, data } = response.data;
             return { status, message, data };
-        }  catch (error: any) {
+        } catch (error: any) {
             console.error("Error al actualizar el perfil del miembro:", error);
             throw error;
         }
     }
-    async uploadNodeProfilePicture(id: number, file: File): Promise<Node | null> {
-        console.log("subiendo foto de perfil del nodo");
-        console.table(id, )
-        console.log(file);
-        try{
 
+    // aqui lo envia a la api
+    async uploadNodeProfilePicture(file: FormData): Promise<Node | null> {
+        try {
+            const response = await axiosInstance.post(`/node/upload-profile-picture`, file);
+            const { status, message, data } = response.data;
+            return { status, message, data };
         } catch (error: any) {
-            
+            console.error("Error al subir la foto de perfil del nodo:", error);
+            throw error;
         }
     }
 
     async toggleMemberStatus(memberId: number): Promise<Member | null> {
-        try{
+        try {
             const response = await axiosInstance.put(`/member/${memberId}`);
-            const {status, message, data} = response.data;
-            return {status, message, data};
+            const { status, message, data } = response.data;
+            return { status, message, data };
         } catch (error: any) {
             console.error("Error al actualizar el perfil del miembro:", error);
             throw error;
@@ -71,10 +72,10 @@ export class NodosService {
     // elimina la relacion entre el nodo y el miembro
     // no elimina el miembro de la base de datos
     async deleteMember(memberId: number): Promise<Member | null> {
-        try{
+        try {
             const response = await axiosInstance.delete(`/member/${memberId}`);
-            const {status, message, data} = response.data;
-            return {status, message, data};
+            const { status, message, data } = response.data;
+            return { status, message, data };
         } catch (error: any) {
             console.error("Error al eliminar el miembro:", error);
             throw error;

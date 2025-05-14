@@ -36,7 +36,7 @@
                                         suéltala
                                     </p>
                                     <p class="text-xs text-gray-500 dark:text-gray-400">
-                                        SVG, PNG, JPG o GIF (Max. 800×400px)
+                                        SVG, PNG, JPG
                                     </p>
                                 </div>
 
@@ -74,14 +74,14 @@ interface FormData {
     preview: string | null;
 }
 const props = defineProps<{ 
-    isOpen: boolean; nodeData: FormData 
+    isOpen: boolean; userData: FormData 
 }>();
 
 const emit = defineEmits(["close", "uploadImg"]);
 
 const form = ref<FormData>({
     image: null,
-    preview: props.nodeData.image ? `http://localhost:8080/storage/uploads/profiles/${props.nodeData.image}` : null,
+    preview: props.userData.image ? `http://localhost:8080/storage/uploads/profiles/${props.userData.image}` : null,
 });
 
 const closeModal = () => emit("close");
@@ -91,13 +91,11 @@ onMounted(() => {
 onUnmounted(() => {
     window.removeEventListener("keydown", closeOnEscape);
 });
-
 const closeOnEscape = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
         closeModal();
     }
 };
-
 const handleDrop = (event: DragEvent) => {
   if (!event.dataTransfer) return;
   const file = event.dataTransfer.files[0];
@@ -110,7 +108,6 @@ const handleDrop = (event: DragEvent) => {
     reader.readAsDataURL(file);
   }
 };
-
 const handleFileUpload = (event: Event) => {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {

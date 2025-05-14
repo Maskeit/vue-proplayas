@@ -26,7 +26,7 @@ export const useNodosStore = defineStore('nodos', () => {
         const index = nodoMiembros.value.findIndex((m) => m.id === member.id);
         if (index !== -1) {
             nodoMiembros.value[index] = member;
-        }        
+        }
     }
 
     // Traer lista de los nodos
@@ -80,19 +80,18 @@ export const useNodosStore = defineStore('nodos', () => {
             console.error("Error al editar la biografía del nodo:", error);
         }
     }
-    // sube una foto de perfil del nodo
-    const uploadNodeImage = async (id: number, file: File) => {
+    // estado que envia la foto de perfil al controlador/servicio
+    const uploadNodeImage = async (file: FormData) => {
         try {
-            const { status, message, data } = await nodosService.uploadNodeProfilePicture(id, file);
-            setNodeBio(data);
-            return status;
+            const { status, message, data } = await nodosService.uploadNodeProfilePicture(file);
+            return {status, data};
         } catch (error) {
             console.error("Error al subir la foto de perfil del nodo:", error);
         }
-    }
+    };
 
     // en relacion con el miembro solo elimina la relacion entre el nodo y el miembro
-    const unlinkMember = async (id: number) => {        
+    const unlinkMember = async (id: number) => {
         try {
             const { status, message, data } = await nodosService.deleteMember(id);
             //setNodeMember(data); Se espera que el backend devuelva el miembro actualizado correctamente
@@ -101,7 +100,7 @@ export const useNodosStore = defineStore('nodos', () => {
             console.error("Error al eliminar miembro del nodo:", error);
         }
     }
-    
+
     // activa o desactiva el miembro del nodo
     const toggleNodeMemberStatus = async (id: number) => {
         try {
@@ -112,7 +111,7 @@ export const useNodosStore = defineStore('nodos', () => {
             console.error("Error al cargar miembros del nodo desde el store:", error);
         }
     }
-    
+
     return {
         nodo,
         nodos,

@@ -7,14 +7,21 @@
             class="max-w-screen-lg xl:max-w-screen-md 2xl:max-w-screen-lg mx-auto px-4 md:p-7 py-6 flex flex-col gap-y-6">
             <!-- Perfil: Foto y Nombre -->
             <div class="flex flex-col justify-center items-center space-y-4 relative">
-                <div class="relative">
-                    <img :src="`/src/assets/images/nodos/proplayas.svg`" alt="Foto de perfil"
-                        class="md:w-40 md:h-40 w-32 h-32 rounded-full border-2 border-gray-300 object-cover" />
+                <div class="relative w-32 h-32 md:w-48 md:h-48 group">
+                    <img :src="`http://localhost:8080/storage/uploads/profiles/${user.profile_picture}`"
+                        alt="Foto de perfil"
+                        class="w-full h-full rounded-full border-2 border-gray-300 object-cover transition duration-300 group-hover:opacity-70" />
+                    <button @click="openEditPhotoModal"
+                        class="absolute inset-0 flex items-center  justify-center opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity duration-300"
+                        aria-label="Editar foto">
+                        <PencilIcon class="w-10 h-10 text-gray-500 bg-white bg-opacity-50 rounded-full p-1" />
+                    </button>
                 </div>
                 <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">{{ user.name }}</h2>
             </div>
             <!-- Información básica -->
-            <div class="bg-white dark:bg-zinc-600 text-gray-800 dark:text-gray-100 shadow-md rounded-lg p-6 flex flex-col gap-y-4">
+            <div
+                class="bg-white dark:bg-zinc-600 text-gray-800 dark:text-gray-100 shadow-md rounded-lg p-6 flex flex-col gap-y-4">
                 <div class="flex justify-between items-center">
                     <h2 class="text-xl font-semibold">Mi Biografía</h2>
                     <button @click="openEditProfileModal"
@@ -60,7 +67,6 @@
             </div>
             <EditProfileBio :isOpen="isEditProfileOpen" :userData="{
                 name: user.name,
-                profile_picture: user.profile_picture,
                 about: user.about,
                 degree: user.degree,
                 postgraduate: user.postgraduate,
@@ -68,8 +74,14 @@
                 research_work: user.research_work,
                 social_media: user.social_media
             }" @close="isEditProfileOpen = false" @update="updateProfile" />
+
+            <EditProfilePhoto :isOpen="isEditNodoPhotoOpen" :userData="{
+                image: user.profile_picture
+            }" @close="isEditNodoPhotoOpen = false" @uploadImg="uploadImg" />
         </div>
     </template>
+    <Confirmation v-if="showConfirmation" :message="confirmationMessage" :type="confirmationType"
+        @close="showConfirmation = false" />
 </template>
 
 <script setup lang="ts">
@@ -78,6 +90,7 @@ import Confirmation from '@/components/shared/modales/Confirmation.vue';
 import { ref, computed, onMounted } from 'vue'
 import { useUserProfileStore } from '@/services/Stores/ProfileStore';
 import EditProfileBio from "@/components/User/Profile/EditProfileBio.vue";
+import EditProfilePhoto from '@/components/User/Profile/EditProfilePhoto.vue';
 // Icons
 import FacebookIcon from "@icons/FacebookIcon.vue";
 import TwitterIcon from "@icons/TwitterIcon.vue";
@@ -93,8 +106,11 @@ const route = useRoute();
 const username = route.params.username as string;
 const userProfileStore = useUserProfileStore(); // Store de perfil
 const user = computed(() => userProfileStore.profile); // Se obtiene del store
+console.log("Usuario encontrado:", user);
 const isLoading = ref(true);
 const showConfirmation = ref(false);
+const confirmationMessage = ref('');
+const confirmationType = ref<'success' | 'error' | 'warning'>('success');
 // Computed para encontrar el usuario actual
 onMounted(async () => {
     try {
@@ -117,7 +133,7 @@ const getIconComponent = (platform: string) => {
         instagram: InstagramIcon,
         research_gate: AcademicCapIcon,
         youtube: YoutubeIcon,
-        phone : PhoneIcon
+        phone: PhoneIcon
     };
     return icons[platform] || GlobeAltIcon;
 };
@@ -127,17 +143,26 @@ const formatPlatform = (platform: string) => {
     return platform.charAt(0).toUpperCase() + platform.slice(1);
 };
 const isEditProfileOpen = ref(false);
-
 const openEditProfileModal = () => {
     isEditProfileOpen.value = true;
 };
 
+const isEditNodoPhotoOpen = ref(false);
+const openEditPhotoModal = () => {
+    isEditNodoPhotoOpen.value = true;
+};
 // Recibe y retransmite los datos al padre real (Profile.vue)
 const updateProfile = async (data: any) => {
     try {
         isLoading.value = true;
         const status = await userProfileStore.updateProfile(data);
         if (status === 200) {
+            confirmationMessage.value = 'Información actualizada correctamente';
+            confirmationType.value = 'success';
+            showConfirmation.value = true;
+        } else {
+            confirmationMessage.value = 'Error al actualizar la información';
+            confirmationType.value = 'error';
             showConfirmation.value = true;
         }
     } catch (error) {
@@ -146,4 +171,28 @@ const updateProfile = async (data: any) => {
         isLoading.value = false;
     }
 }
+
+// actualiza la foto de perfil
+const uploadImg = async (imageFile: File | string) => {
+    try {
+        isLoading.value = true;
+        if (typeof imageFile !== 'string') {
+            const formData = new FormData();
+            formData.append("image", imageFile);
+            const { status, data } = await userProfileStore.uploadUserImage(formData);
+            if (status === 200 && data?.profile_picture) {
+                user.value.profile_picture = data.profile_picture;
+                confirmationMessage.value = 'Imagen actualizada correctamente';
+                confirmationType.value = 'success';
+                showConfirmation.value = true;
+            }
+        } else {
+            user.value.profile_picture = imageFile;
+        }
+    } catch (error) {
+        console.error("Error al actualizar la imagen del nodo:", error);
+    } finally {
+        isLoading.value = false;
+    }
+};
 </script>

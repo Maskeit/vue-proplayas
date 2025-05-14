@@ -37,7 +37,15 @@ export const useUserProfileStore = defineStore('userProfile', () => {
       throw error
     }
   }
-
+    // estado que envia la foto de perfil al controlador/servicio
+    const uploadUserImage = async (file: FormData) => {
+        try {
+            const { status, message, data } = await profileService.uploadProfilePicture(file);
+            return {status, data};
+        } catch (error) {
+            console.error("Error al subir la foto de perfil del nodo:", error);
+        }
+    };
   const getProfile = async (username: string) => {
     try {      
       const profileData = await profileService.getPublicProfile(username)
@@ -56,6 +64,7 @@ export const useUserProfileStore = defineStore('userProfile', () => {
     clearProfile,
     fetchAndSetProfile,
     updateProfile,
+    uploadUserImage,
     getProfile,
   }
 })
