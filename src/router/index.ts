@@ -12,13 +12,11 @@ import PublicLayout from "@layout/PublicLayout.vue";
 import NodosPrivadoRoot from "@view/adminRoot/NodosPrivado.vue";
 import NodoPrivadoRoot from "@view/adminRoot/NodoPrivado.vue";
 import Users from "@view/adminRoot/Users.vue";
-//import AdminRootCMS from "@view/adminRoot/CMS.vue"; //vista
 
 import NodoPrivado from "@view/adminNodo/NodoPrivado.vue";
-//import AdminNodoCMS from "@/views/adminNodo/CMS.vue"; //vista
 
 import Profile from "@view/user/Profile.vue";
-import UserCMS from "@view/user/CMS.vue"; //vista
+import UserCMS from "@view/CMS/CMS.vue"; //vista
 
 // paginas publicas 
 import Login from "@view/public/Login.vue";
@@ -35,11 +33,11 @@ import History from "@view/public/History.vue";
 import EventsCMS from "@components/shared/CMS/Events.vue";
 import LibrosCMS from "@components/shared/CMS/Libros.vue";
 import WebSeriesCMS from "@components/shared/CMS/WebSeries.vue";
-import ArticulosCMS from "@components/shared/CMS/Articulos.vue";
+import PublicacionesCMS from "@components/shared/CMS/Publicaciones.vue";
 import ProyectosCMS from "@components/shared/CMS/Proyectos.vue";
 
 //Panel de contenido dinamico
-import Articulos from "@components/Public/Content/Articulos.vue";
+import Publicaciones from "@components/Public/Content/Publicaciones.vue";
 import Libros from "@components/Public/Content/Libros.vue";
 import WebSeries from "@components/Public/Content/WebSeries.vue";
 import Events from "@components/Public/Content/Events.vue";
@@ -50,13 +48,13 @@ const generateCmsRoutes = (): Array<RouteRecordRaw> => [
   { path: '/User/Content/Event', name: 'CMSEvent', component: EventsCMS },
   { path: '/User/Content/Libros', name: 'CMSLibros', component: LibrosCMS },
   { path: '/User/Content/WebSeries', name: 'CMSWebSeries', component: WebSeriesCMS },
-  { path: '/User/Content/Articulos', name: 'CMSArticulos', component: ArticulosCMS },
+  { path: '/User/Content/Publicaciones', name: 'CMSPublicaciones', component: PublicacionesCMS },
   { path: '/User/Content/Proyectos', name: 'CMSProyectos', component: ProyectosCMS },
 ];
 
 const contentPanels = (): Array<RouteRecordRaw> => [
   { path: '', name:'', component: Events },
-  { path: 'articulos', name: 'Articulos', component: Articulos },
+  { path: 'publicaciones', name: 'Publicaciones', component: Publicaciones },
   { path: 'events', name: 'Events', component: Events },
   { path: 'libros', name: 'Libros', component: Libros },
   { path: 'webseries', name: 'WebSeries', component: WebSeries },

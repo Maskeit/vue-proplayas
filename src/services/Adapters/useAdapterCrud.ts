@@ -10,18 +10,19 @@ import type { CrudStore } from '@interfaces/CrudStore';
  * De esta manera, los componentes pueden usar `useCrud<Event>(useEventCrud())`
  * sin acoplarse directamente a Pinia ni a los nombres concretos del store.
  */
+
+
 export function useEventCrud(): CrudStore<Event> {
   const s = useContentStore();
 
   return {
     // Lista reactiva de eventos
-    items: computed(() => s.events),
-
-    // Métodos CRUD
-    fetch : s.fetchEvents,
-    create: s.createEvent,
-    update: s.updateEvent,
-    delete: s.deleteEvent,
+    items: computed(() => s.contentMap['events']),
+    // Métodos CRUD generalizados para 'events'
+    fetch : () => s.fetchContent('events'),
+    create: (payload: Event) => s.createContent('event', payload),
+    update: (payload: Event, id: number) => s.updateContent('event', id, payload),
+    delete: (id: number) => s.deleteContent('event', id),
   };
 }
 

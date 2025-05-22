@@ -12,7 +12,7 @@
     <nav class="flex flex-col gap-2 mt-4 px-2">
       <SidebarItem :icon="PresentationChartBarIcon" text="Eventos" to="/Content/events" :showText="!isCollapsed" />
       <SidebarItem :icon="FilmIcon" text="Web Series" to="/Content/webseries" :showText="!isCollapsed" />
-      <SidebarItem :icon="DocumentTextIcon" text="Artículos" to="/Content/articulos" :showText="!isCollapsed" />
+      <SidebarItem :icon="DocumentTextIcon" text="Publicaciones" to="/Content/publicaciones" :showText="!isCollapsed" />
       <SidebarItem :icon="BookOpenIcon" text="Libros" to="/Content/libros" :showText="!isCollapsed" />
       <SidebarItem :icon="GlobeAmericasIcon" text="Proyectos" to="/Content/Proyectos" :showText="!isCollapsed" />
       <select class="bg-white dark:bg-zinc-700 shadow-md rounded-lg p-1 border border-gray-200 dark:border-none hover:shadow-lg transition cursor-pointer">

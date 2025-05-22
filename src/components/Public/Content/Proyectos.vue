@@ -4,14 +4,21 @@
         Proyectos Colaborativos de bajo costo
     </h1>
     <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        <Proyecto v-for="project in parsedProjects" :key="project.id" v-bind="project" />
+        <Proyecto v-for="project in projects" :key="project.id" v-bind="project" />
     </div>
 </template>
 <script setup lang="ts">
 import Proyecto from '@/components/Public/Content/Cards/Proyecto.vue'
-import projects from '@/utils/json/projects.json'
-const parsedProjects = projects.map(p => ({
-    ...p,
-    date: new Date(p.date)
-}));
+import { ref, onMounted, computed } from 'vue';
+import { useContentStore } from '@/services/Stores/ContentStore';
+
+// estados
+const contentStore = useContentStore();
+const projects = computed(() => contentStore.contentMap['projects']);
+const isLoading = ref(true);
+onMounted(async () => {
+    isLoading.value = true;
+    await contentStore.fetchContent("projects");
+    isLoading.value = false;
+});
 </script>

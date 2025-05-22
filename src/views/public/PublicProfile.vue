@@ -7,7 +7,7 @@
       <!-- Verifica si el usuario existe -->
       <!-- Perfil: Foto y Nombre -->
       <div class="flex flex-col justify-center items-center space-y-4">
-        <img :src="`/src/assets/images/nodos/proplayas.svg`" alt="Foto de perfil"
+        <img :src="`http://localhost:8080/storage/uploads/profiles/${user.profile_picture}`" alt="Foto de perfil"
           class="md:w-40 md:h-40 w-24 h-24 rounded-full border-2 border-gray-300 object-cover" />
         <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">{{ user.name }}</h2>
       </div>

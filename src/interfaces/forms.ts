@@ -13,14 +13,17 @@ export type EventFormData = Omit<Event, 'date' | 'cover_image'> & {
 export const EMPTY_EVENT_FORM: EventFormData = {
   title: '',
   description: '',
-  type: '' as any,      // TS insiste en el union; inicia vacío
-  link: '',
-  format: '',
-  location: null,
+  type: '',
   dateString: '',
   timeString: '',
-  cover_image: undefined,
+  link: '',
+  format: '',
+  location: '',
+  cover_image: '',
 };
+
+
+
 
 
 /* ---------- PROJECT ---------- */

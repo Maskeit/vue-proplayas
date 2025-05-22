@@ -4,7 +4,9 @@
             <!-- Perfil: Foto y Nombre -->
             <div class="flex flex-col items-center md:items-start">
                 <div class="space-y-4">
-                    <img :src="`/src/assets/images/nodos/proplayas.svg`" alt="Foto de perfil"
+                    <img 
+                    :src="`http://localhost:8080/storage/uploads/profiles/${profile_picture}`"
+                    alt="Foto de perfil"
                         class="md:w-48 md:h-48 w-32 h-32 rounded-full border-2 border-gray-300 object-cover" />
                 </div>
                 <div class="my-3 text-center md:text-left">
@@ -38,11 +40,6 @@
                         </a>
                     </div>
                 </div>
-                <!-- <div>
-                    <p>Lider del nodo: {{ leader.name }}</p>
-                    <p>Email del nodo: {{ leader.email }}</p>
-                    <p>Grado del nodo: {{ leader.degree }}</p>
-                </div> -->
             </div>
         </div>
     </div>

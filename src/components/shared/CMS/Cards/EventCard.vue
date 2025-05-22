@@ -32,9 +32,9 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { Event } from '../../../../interfaces/Content';
+import type { Events } from '../../../../interfaces/Content';
 import { PencilIcon, TrashIcon } from '@heroicons/vue/20/solid';
-const props = defineProps<Event & { author?: any }>()
+const props = defineProps<Events & { author?: any }>()
 
 const formattedDate = computed(() => {
   const d = new Date(props.date);          // ej. 2025-04-30T13:00:00.000000Z

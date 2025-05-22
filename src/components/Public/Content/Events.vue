@@ -9,17 +9,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, watch } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import Event from '@/components/Public/Content/Cards/Event.vue'
 import { useContentStore } from '@/services/Stores/ContentStore';
 
 // estados
 const contentStore = useContentStore();
-const events = computed(() => contentStore.events);
+const events = computed(() => contentStore.contentMap['events']);
 const isLoading = ref(true);
 onMounted(async () => {
   isLoading.value = true;
-  await contentStore.fetchEvents();
+  await contentStore.fetchContent("events");
   isLoading.value = false;
 });
 
