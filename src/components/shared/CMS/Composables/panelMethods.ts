@@ -1,4 +1,4 @@
-import { buildDateTimeMySQL } from '@/utils/validators/dateUtils'
+import { buildDateTimeMySQL } from '@utils/validators/dateUtils'
 import type { Ref } from "vue"
 
 
@@ -21,14 +21,13 @@ export function useSubmitMethods<T extends Record<string, any>>({
 }) {
   const onSubmit = async (contentType: string) => {
     const payload: any = { ...formData.value };
-
     // Solo si contiene dateString y timeString, formateamos
     if ('dateString' in formData.value && 'timeString' in formData.value) {
       payload.date = buildDateTimeMySQL(formData.value.dateString, formData.value.timeString);
     }
 
     try {
-      await create(payload.value);
+      await create(payload);
       showConfirmation(`${contentType} creado con éxito.`, 'success');
       reset();
     } catch (err) {
@@ -69,6 +68,7 @@ export function usePanelUtilities<T extends Record<string, any>>({
   selectedItem: Ref<T | null>,
   confirmation: Ref<{ isOpen: boolean; message: string; type: 'success' | 'error' | 'warning' }>,
   fileInputRef: Ref<HTMLInputElement | null>,
+  coverImagePreview: Ref<string>
 }) {
   const openModal = (item: T, patch: (val: Partial<T>) => void) => {
     selectedItem.value = item;
@@ -105,12 +105,13 @@ export function usePanelUtilities<T extends Record<string, any>>({
         return;
       }
 
+      // ✅ Asignamos el archivo directamente
+      formData[fieldName] = file;
+
+      // ✅ Para mostrar la vista previa:
       const reader = new FileReader();
       reader.onload = () => {
-        if (!formData.value || typeof formData.value !== 'object') {
-          formData.value = {} as Partial<T>;
-        }
-        formData.value[fieldName] = reader.result as string;
+        coverImagePreview.value = reader.result as string;
       };
       reader.readAsDataURL(file);
     }

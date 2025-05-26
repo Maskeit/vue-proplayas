@@ -9,6 +9,7 @@
                 <TrashIcon class="h-5 w-5" />
             </button>
         </div>
+        <img :src="`http://localhost:8080/storage/uploads/covers/${cover_image}`" alt="Foto de perfil"/>
         <h3 class="text-xl font-semibold text-cyan-800 dark:text-zinc-100 mb-2">{{ title }}</h3>
         <p class="text-sm text-gray-500 dark:text-zinc-300 mb-1">{{ formattedDate }}</p>
         <p v-if="props.author" class="text-sm text-gray-500 dark:text-zinc-300 italic">

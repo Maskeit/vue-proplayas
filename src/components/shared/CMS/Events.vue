@@ -2,14 +2,14 @@
   <div class="text-gray-600 dark:text-gray-100">
     <h1 class="text-2xl font-bold mb-4">Gestión de Eventos</h1>
 
-    <div class="grid grid-cols-2 gap-5">
+    <div class="grid grid-cols-1 gap-5">
       <!-- Columna izquierda: Formulario -->
       <div class="order-1">
         <EventForm :formData="formData" @submit="(type) => onSubmit(type)" />
       </div>
 
       <!-- Lista de Eventos existentes -->
-      <!-- <div class="order-2">
+      <div class="order-2">
         <h2 class="text-2xl font-bold mb-4">Tus Eventos</h2>
         <div v-if="!isLoading && events.length > 0">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -21,7 +21,7 @@
           <p>Cargando eventos...</p>
         </div>
         <EditEvent :visible="isEditModalOpen" :formData="formData" @close="closeEditModal" @update="onUpdate" />
-      </div> -->
+      </div>
     </div>
     <!-- <Confirmation v-if="confirmation.isOpen" :message="confirmation.message" :type="confirmation.type"
       @close="confirmation.isOpen = false" @confirm="confirmDelete" /> -->
@@ -44,9 +44,13 @@ import Confirmation from '../modales/Confirmation.vue';
 import { useSubmitMethods, usePanelUtilities } from './Composables/panelMethods';
 
 const formData = ref<EventFormData>({ ...EMPTY_EVENT_FORM });
+
+// limpia el formulario
 const reset = () => {
   formData.value = { ...EMPTY_EVENT_FORM };
 };
+
+
 const patch = (val: Partial<EventFormData>) => {
   formData.value = { ...formData.value, ...val };
 };

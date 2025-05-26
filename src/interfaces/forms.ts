@@ -8,7 +8,7 @@ import type { Event, Project, Articles, Books  } from "@interfaces/Content";
 export type EventFormData = Omit<Event, 'date' | 'cover_image'> & {
     dateString: string;
     timeString: string;
-    cover_image?: string;
+    cover_image_file?: string;
 }
 export const EMPTY_EVENT_FORM: EventFormData = {
   title: '',
@@ -19,7 +19,7 @@ export const EMPTY_EVENT_FORM: EventFormData = {
   link: '',
   format: '',
   location: '',
-  cover_image: '',
+  cover_image_file: '',
 };
 
 

@@ -24,7 +24,7 @@ export interface Events {
     format: 'presencial' | 'online';
     location?: string | null;
     participants?: string[] | null;
-    cover_image_file?: string | null;
+    cover_image?: string | null;
     cover_image_url?: string | null;
     file_url?: string | null;
 }
