@@ -37,7 +37,7 @@
         </div>
         <div>
             <label class="block text-sm font-medium ">Enlace al evento o de registro</label>
-            <input v-model="formData.link" type="url" class="mt-1 block w-full border rounded px-3 py-2" required />
+            <input v-model="formData.link" type="url" class="mt-1 block w-full border rounded px-3 py-2" />
         </div>
         <div>
             <label class="block text-sm font-medium">Modalidad del Evento</label>
@@ -78,17 +78,15 @@
         </div>
 
         <div class="flex justify-end">
-            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">Guardar Evento</button>
+            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer">Guardar Evento</button>
         </div>
     </form>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, Ref } from 'vue';
+import { ref, watch } from 'vue';
 import { TrashIcon, PhotoIcon } from '@heroicons/vue/24/solid';
 import { usePanelUtilities } from '../Composables/panelMethods';
-
-import type { EventFormData } from '@interfaces/forms';
 
 const props = defineProps<{ formData: any }>();
 

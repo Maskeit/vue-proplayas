@@ -14,7 +14,7 @@
         <div v-if="!isLoading && events.length > 0">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <EventCard v-for="event in events" :key="event.id" v-bind="event" @edit="openEditModal(event)"
-              @delete="deleteEvent(event)" />
+              @delete="triggerDeleteModal(event)" />
           </div>
         </div>
         <div v-else>
@@ -23,19 +23,18 @@
         <EditEvent :visible="isEditModalOpen" :formData="formData" @close="closeEditModal" @update="onUpdate" />
       </div>
     </div>
-    <!-- <Confirmation v-if="confirmation.isOpen" :message="confirmation.message" :type="confirmation.type"
-      @close="confirmation.isOpen = false" @confirm="confirmDelete" /> -->
+    <Confirmation v-if="confirmation.isOpen" :message="confirmation.message" :type="confirmation.type"
+      @close="confirmation.isOpen = false"   @confirm="handleConfirmDelete" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, reactive, computed } from 'vue';
+import { ref, Ref, onMounted, reactive, computed } from 'vue';
 
 import type { Events } from '@interfaces/Content'; // estructura de como se recibe
 import EventForm from './Forms/EventForm.vue';
-import EventPreview from './FormPreview/EventPreview.vue';
 import EventCard from '../CMS/Cards/EventCard.vue';
-import EditEvent from './Modals/EditEvent.vue';
+import EditEvent from './Forms/Edit/EditEvent.vue';
 import { useCrud } from '@/components/shared/CMS/Composables/useCrud';
 import { useEventCrud } from '@/services/Adapters/useAdapterCrud';
 import { EMPTY_EVENT_FORM, type EventFormData } from '@interfaces/forms'; // estructura de como se envia
@@ -43,16 +42,16 @@ import Confirmation from '../modales/Confirmation.vue';
 //import type { Ref } from "vue"
 import { useSubmitMethods, usePanelUtilities } from './Composables/panelMethods';
 
-const formData = ref<EventFormData>({ ...EMPTY_EVENT_FORM });
+const formData = reactive<EventFormData>({ ...EMPTY_EVENT_FORM });
 
 // limpia el formulario
 const reset = () => {
-  formData.value = { ...EMPTY_EVENT_FORM };
+  Object.assign(formData, EMPTY_EVENT_FORM);
 };
 
 
 const patch = (val: Partial<EventFormData>) => {
-  formData.value = { ...formData.value, ...val };
+  Object.assign(formData, val);
 };
 // CRUD genérico para eventos
 const {
@@ -68,11 +67,12 @@ onMounted(fetchAll);
 const selectedItem = ref<Events | null>(null);
 const confirmation = ref({ isOpen: false, message: '', type: 'success' });
 
-const { onSubmit: submitMethod, onUpdate } = useSubmitMethods<Events>({
-  formData: formData as Ref<Partial<Events>>,
+const { onSubmit: submitMethod, onUpdate, onDelete } = useSubmitMethods<Events>({
+  formData: formData as Partial<Events>,
   reset,
   create,
   update,
+  remove,
   selectedItem,
   closeModal: () => {},
   showConfirmation: (msg, type) => {
@@ -82,9 +82,27 @@ const { onSubmit: submitMethod, onUpdate } = useSubmitMethods<Events>({
       type,
     };
   },
+  fetchAll,
+  items: events,
 });
 
 const onSubmit = (type: string) => {
   submitMethod(type);
+};
+
+const { confirmDelete } = usePanelUtilities<EventFormData>({
+  formData,
+  selectedItem,
+  confirmation,
+  fileInputRef: ref(null),
+  coverImagePreview: ref('')
+});
+
+const triggerDeleteModal = (event: Events) => {
+  confirmDelete(event, event.title);
+};
+const handleConfirmDelete = () => {
+  onDelete('evento'); // ← este sí es el de useSubmitMethods
+  confirmation.value.isOpen = false; // opcional si no se cierra dentro
 };
 </script>

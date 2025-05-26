@@ -5,7 +5,7 @@
             <div class="flex flex-col items-center md:items-start">
                 <div class="space-y-4">
                     <img 
-                    :src="`http://localhost:8080/storage/uploads/profiles/${profile_picture}`"
+                    :src="coverUrl"
                     alt="Foto de perfil"
                         class="md:w-48 md:h-48 w-32 h-32 rounded-full border-2 border-gray-300 object-cover" />
                 </div>
@@ -56,7 +56,9 @@ import InstagramIcon from "@icons/InstagramIcon.vue";
 import YoutubeIcon from "@icons/YoutubeIcon.vue";
 import LinkedinIcon from "@icons/LinkedinIcon.vue";
 import GithubIcon from "@icons/GithubIcon.vue";
+import { computed } from "vue";
 
+const PROFILE_COVER_BASE_URL = import.meta.env.VITE_APP_PROFILE_COVER_URL;
 interface Props {
     name: string;
     about: string;
@@ -68,7 +70,11 @@ interface Props {
     city: string;
 }
 
-defineProps<Props>();
+
+
+const props = defineProps<Props>();
+const coverUrl = computed(() => `${import.meta.env.VITE_APP_PROFILE_COVER_URL}${props.profile_picture}`);
+
 // Función para mapear plataformas a iconos
 const getIconComponent = (platform: string) => {
     const icons: Record<string, any> = {

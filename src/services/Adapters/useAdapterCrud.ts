@@ -19,8 +19,8 @@ export function useEventCrud(): CrudStore<Event> {
     // Lista reactiva de eventos
     items: computed(() => s.contentMap['events']),
     // Métodos CRUD generalizados para 'events'
-    fetch : () => s.fetchContent('events'),
-    create: (payload: Event) => s.createContent('event', payload),
+    fetch : () => s.fetchContentAuthor('events'), //funciona
+    create: (payload: Event) => s.createContent('event', payload), // funciona
     update: (payload: Event, id: number) => s.updateContent('event', id, payload),
     delete: (id: number) => s.deleteContent('event', id),
   };

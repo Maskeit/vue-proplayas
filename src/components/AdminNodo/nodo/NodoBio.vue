@@ -13,7 +13,7 @@
             <div class="flex flex-col items-center md:items-start">
                 <div class="relative w-32 h-32 md:w-48 md:h-48 group">
                   <img
-                    :src="`http://localhost:8080/storage/uploads/profiles/${props.profilePicture}`"
+                    :src="coverUrl"
                     alt="Foto de perfil"
                     class="w-full h-full rounded-full border-2 border-gray-300 object-cover transition duration-300 group-hover:opacity-70"/>
                   <button
@@ -73,7 +73,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { Leader } from "@interfaces/Nodes";
 import { SocialLink } from "@interfaces/Profile";
 import { GlobeAltIcon } from "@heroicons/vue/24/outline";
@@ -88,6 +88,7 @@ import YoutubeIcon from "@icons/YoutubeIcon.vue";
 import LinkedinIcon from "@icons/LinkedinIcon.vue";
 import GithubIcon from "@icons/GithubIcon.vue";
 
+const PROFILE_COVER_BASE_URL = import.meta.env.VITE_APP_PROFILE_COVER_URL;
 interface Props {
     name: string;
     about: string;
@@ -100,6 +101,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+const coverUrl = computed(() => `${import.meta.env.VITE_APP_PROFILE_COVER_URL}${props.profilePicture}`);
 
 // Función para mapear plataformas a iconos
 const getIconComponent = (platform: string) => {

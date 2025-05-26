@@ -1,3 +1,12 @@
+interface Author {
+    id: number;
+    name: string;
+    username: string;
+    email: string;
+    role: string;
+    status: string;
+}
+
 // Proyectos colaborativos de bajo costo
 export interface Projects {
     id: number;
@@ -27,6 +36,7 @@ export interface Events {
     cover_image?: string | null;
     cover_image_url?: string | null;
     file_url?: string | null;
+    author?: Author | null; // nullable, author details
 }
 
 // sobre webseries

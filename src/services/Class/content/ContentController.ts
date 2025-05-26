@@ -8,6 +8,12 @@ export class ContentController {
         const { status, message, data } = response.data;
         return { status, data };
     }
+        // traer todos los Contenidos depende el argumento pasado
+    async getContentAuthor(content: string) { 
+        const response = await axiosInstance.get(`/${content}/own`);
+        const { status, message, data } = response.data;
+        return { status, data };
+    }
 
     // crear contenido genérico
     async createContent(content: string, payload: any) {

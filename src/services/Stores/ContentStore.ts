@@ -30,6 +30,19 @@ export const useContentStore = defineStore('content', () => {
       error.value = err.message || 'Error al obtener events';
     }
   }
+  // trae todos los contenidos solo del autor depende el argumento pasado
+    async function fetchContentAuthor(typeContent: string) {
+    error.value = null;
+    try {
+      const { status, data } = await controller.getContentAuthor(typeContent)
+      if (status === 200) {
+        contentMap[typeContent] = data
+      }
+      return data
+    } catch (err: any) {
+      error.value = err.message || 'Error al obtener events';
+    }
+  }
   
   // crear contenido genérico
   async function createContent(content: string, payload: any) {
@@ -95,6 +108,7 @@ export const useContentStore = defineStore('content', () => {
     error,
     //method
     fetchContent,
+    fetchContentAuthor,
     createContent,
     updateContent,
     deleteContent,
