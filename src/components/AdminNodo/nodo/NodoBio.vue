@@ -12,33 +12,34 @@
             <!-- Perfil: Foto y Nombre -->
             <div class="flex flex-col items-center md:items-start">
                 <div class="relative w-32 h-32 md:w-48 md:h-48 group">
-                  <img
-                    :src="coverUrl"
-                    alt="Foto de perfil"
-                    class="w-full h-full rounded-full border-2 border-gray-300 object-cover transition duration-300 group-hover:opacity-70"/>
-                  <button
-                    @click="openEditPhotoModal"
-                    class="absolute inset-0 flex items-center  justify-center opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity duration-300"
-                    aria-label="Editar foto">
-                    <PencilIcon class="w-10 h-10 text-gray-500 bg-white bg-opacity-50 rounded-full p-1" />
-                  </button>
+                    <img :src="coverUrl" alt="Foto de perfil"
+                        class="w-full h-full rounded-full border-2 border-gray-300 object-cover transition duration-300 group-hover:opacity-70" />
+                    <button @click="openEditPhotoModal"
+                        class="absolute inset-0 flex items-center  justify-center opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity duration-300"
+                        aria-label="Editar foto">
+                        <PencilIcon class="w-10 h-10 text-gray-500 bg-white bg-opacity-50 rounded-full p-1" />
+                    </button>
                 </div>
 
                 <div class="my-3 text-center md:text-left">
-                    <h1 class="text-2xl font-semibold text-gray-500 dark:text-white">{{ props.name.charAt(0).toUpperCase() +
+                    <h1 class="text-2xl font-semibold text-gray-500 dark:text-white">{{
+                        props.name.charAt(0).toUpperCase() +
                         props.name.slice(1) }}</h1>
                 </div>
                 <div class="max-w-lg">
                     <div class="flex gap-2">
-                        <p class="text-gray-500 dark:text-white">{{ props.city.charAt(0).toUpperCase() + props.city.slice(1) }},
+                        <p class="text-gray-500 dark:text-white">{{ props.city.charAt(0).toUpperCase() +
+                            props.city.slice(1) }},
                         </p>
-                        <p class="text-gray-500 dark:text-white">{{ props.country.charAt(0).toUpperCase() + props.country.slice(1)
+                        <p class="text-gray-500 dark:text-white">{{ props.country.charAt(0).toUpperCase() +
+                            props.country.slice(1)
                             }}</p>
                         <MapPinIcon class="w-6 h-6 text-gray-500" />
                     </div>
                 </div>
                 <!-- fecha en que se unió -->
-                <p class="text-gray-400 dark:text-white text-center md:text-left">Se unió a proplayas en {{ props.joined_in }}</p>
+                <p class="text-gray-400 dark:text-white text-center md:text-left">Se unió a proplayas en {{
+                    props.joined_in }}</p>
             </div>
 
             <!-- Información sobre el nodo -->
@@ -67,7 +68,8 @@
             social_media: props.social_media,
         }" @close="isEditNodoOpen = false" @update="updateNode" />
         <EditNodePhoto :isOpen="isEditNodoPhotoOpen" :nodeData="{
-            image: props.profilePicture,
+            image: null,
+            preview: coverUrl,
         }" @close="isEditNodoPhotoOpen = false" @uploadImg="uploadImg" />
     </div>
 </template>

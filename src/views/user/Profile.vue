@@ -8,7 +8,7 @@
             <!-- Perfil: Foto y Nombre -->
             <div class="flex flex-col justify-center items-center space-y-4 relative">
                 <div class="relative w-32 h-32 md:w-48 md:h-48 group">
-                    <img :src="`http://localhost:8080/storage/uploads/profiles/${user.profile_picture}`"
+                    <img :src="coverUrl"
                         alt="Foto de perfil"
                         class="w-full h-full rounded-full border-2 border-gray-300 object-cover transition duration-300 group-hover:opacity-70" />
                     <button @click="openEditPhotoModal"
@@ -76,7 +76,8 @@
             }" @close="isEditProfileOpen = false" @update="updateProfile" />
 
             <EditProfilePhoto :isOpen="isEditNodoPhotoOpen" :userData="{
-                image: user.profile_picture
+                image: null,
+                preview: coverUrl
             }" @close="isEditNodoPhotoOpen = false" @uploadImg="uploadImg" />
         </div>
     </template>
@@ -102,6 +103,8 @@ import { GlobeAltIcon, AcademicCapIcon, PencilIcon, PhoneIcon } from "@heroicons
 
 // Estados
 import { useRoute } from "vue-router";
+const PROFILE_COVER_BASE_URL = import.meta.env.VITE_APP_PROFILE_COVER_URL;
+const coverUrl = computed(() => `${PROFILE_COVER_BASE_URL}${user.value?.profile_picture}`);
 const route = useRoute();
 const username = route.params.username as string;
 const userProfileStore = useUserProfileStore(); // Store de perfil
@@ -186,9 +189,7 @@ const uploadImg = async (imageFile: File | string) => {
                 confirmationType.value = 'success';
                 showConfirmation.value = true;
             }
-        } else {
-            user.value.profile_picture = imageFile;
-        }
+         }
     } catch (error) {
         console.error("Error al actualizar la imagen del nodo:", error);
     } finally {

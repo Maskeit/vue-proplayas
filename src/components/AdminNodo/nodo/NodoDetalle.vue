@@ -62,10 +62,10 @@
                         <td class="px-6 py-4 whitespace-nowrap" @click="toProfile(item.username)">{{ item.status }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <button class="text-blue-600 hover:text-blue-800 mr-2"
-                                @click.stop.prevent="onToggle(item)">{{ item.status === "activo" ? "Desactivar"
+                                @click.stop.prevent="emits('toggle',item)">{{ item.status === "activo" ? "Desactivar"
                                     : "Activar" }}</button> <!-- Activar -->
                             <button class="text-red-600 hover:text-red-800"
-                                @click.stop="deleteMember(item)">Eliminar</button>
+                                @click.stop="emits('unlinkUser',item)">Eliminar</button>
                         </td>
                     </tr>
                 </tbody>
@@ -89,7 +89,7 @@ const props = defineProps<{ items: NodeMembers[]; code: string; }>();
 
 const emits = defineEmits<{
     (e: 'toggle', item: NodeMembers): void;
-    (e: 'deleteMember', item: NodeMembers): void;
+    (e: 'unlinkUser', item: NodeMembers): void;
     (e: 'search', value: string): void;
     (e: 'nuevo-registro', item: NodeMembers): void;
 }>();
@@ -98,14 +98,6 @@ const guardarRegistro = (nuevoRegistro: NodeMembers) => {
     emits('nuevo-registro', nuevoRegistro);
     isInvitationModal.value = false;
 };
-
-const onToggle = (item: NodeMembers) => {
-    emits('toggle', item.id);
-}
-
-const deleteMember = (item: NodeMembers) => {
-    emits('deleteMember', item);
-}
 // Obtenemos las propiedades pasadas por el componente padre
 const toProfile = (username: string) => {
     router.push(`/${username}`);// Redirigir a la página de perfil del miembro

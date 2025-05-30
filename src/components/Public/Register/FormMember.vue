@@ -197,7 +197,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import type { RegisterNodeMember } from "@interfaces/Invitations.ts";
+import type { RegisterNodeMember } from "@interfaces/Invitations";
 import {
     LockClosedIcon, AtSymbolIcon, EyeIcon, EyeSlashIcon, UserIcon,
     GlobeAmericasIcon, BriefcaseIcon, DocumentTextIcon, LifebuoyIcon, BuildingOfficeIcon

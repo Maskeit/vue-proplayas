@@ -7,7 +7,7 @@
       <!-- Verifica si el usuario existe -->
       <!-- Perfil: Foto y Nombre -->
       <div class="flex flex-col justify-center items-center space-y-4">
-        <img :src="`http://localhost:8080/storage/uploads/profiles/${user.profile_picture}`" alt="Foto de perfil"
+        <img :src="coverUrl" alt="Foto de perfil"
           class="md:w-40 md:h-40 w-24 h-24 rounded-full border-2 border-gray-300 object-cover" />
         <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">{{ user.name }}</h2>
       </div>
@@ -72,7 +72,8 @@ import LinkedinIcon from "@icons/LinkedinIcon.vue";
 import GithubIcon from "@icons/GithubIcon.vue";
 import { GlobeAltIcon, AcademicCapIcon, PhoneIcon } from "@heroicons/vue/24/outline";
 import { useUserProfileStore } from '@/services/Stores/ProfileStore';
-
+const PROFILE_COVER_BASE_URL = import.meta.env.VITE_APP_PROFILE_COVER_URL;
+const coverUrl = computed(() => `${PROFILE_COVER_BASE_URL}${user.value?.profile_picture}`);
 // estados
 const route = useRoute();
 const username = route.params.username as string;

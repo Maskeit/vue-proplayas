@@ -8,14 +8,13 @@
 
         <div class="flex flex-wrap text-sm text-gray-600 gap-3 mb-4">
             <!-- <span class="bg-blue-100 text-cyan-800 px-2 py-1 rounded">Formato: {{ format }}</span> -->
-            <span v-if="place" class="bg-green-100 text-green-800 px-2 py-1 rounded">Ubicación: {{ place }}</span>
+            <span v-if="location" class="bg-green-100 text-green-800 px-2 py-1 rounded">Ubicación: {{ location }}</span>
         </div>
 
         <a :href="link" target="_blank"
             class="inline-block mt-auto text-sm font-medium text-white bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded transition">
             Ver Proyecto            
-        </a>
-        <slot />
+        </a>        
     </div>
 </template>
 <script setup lang="ts">

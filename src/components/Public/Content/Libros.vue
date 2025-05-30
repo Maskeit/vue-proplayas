@@ -3,7 +3,7 @@
         eBooks Compartidos
     </h1>
     <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        <Libro v-for="book in parsedBooks" :key="book.id" v-bind="book" />
+        <Libro v-for="book in books" :key="book.id" v-bind="book" />
     </div>
 </template>
 <script setup lang="ts">

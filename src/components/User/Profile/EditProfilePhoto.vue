@@ -68,11 +68,14 @@
 
 <script setup lang="ts">
 import { ref, watch, computed, onMounted, onUnmounted } from "vue";
+const PROFILE_COVER_BASE_URL = import.meta.env.VITE_APP_PROFILE_COVER_URL;
+const coverUrl = computed(() => `${import.meta.env.VITE_APP_PROFILE_COVER_URL}${props.userData.image}`);
 
 interface FormData {
     image: File | null;
     preview: string | null;
 }
+
 const props = defineProps<{ 
     isOpen: boolean; userData: FormData 
 }>();
@@ -81,7 +84,7 @@ const emit = defineEmits(["close", "uploadImg"]);
 
 const form = ref<FormData>({
     image: null,
-    preview: props.userData.image ? `http://localhost:8080/storage/uploads/profiles/${props.userData.image}` : null,
+    preview: props.userData.image ? `${coverUrl}` : null,
 });
 
 const closeModal = () => emit("close");

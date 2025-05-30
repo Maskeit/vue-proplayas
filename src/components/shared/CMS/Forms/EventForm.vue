@@ -14,13 +14,15 @@
             <label class="block text-sm font-medium ">Tipo de evento</label>
             <select v-model="formData.type" class="mt-1 block w-full border rounded px-3 py-2" required>
                 <option value="" disabled>Selecciona un tipo de evento</option>
-                <option value="webinar">Webinar</option>
-                <option value="congreso">Congreso</option>
-                <option value="magistrado">Magistrado</option>
-                <option value="clase">Clase</option>
+                <option value="event">Evento</option>
                 <option value="taller">Taller</option>
-                <option value="charla">Charla</option>
+                <option value="clase">Clase</option>
+                <option value="curso">Curso</option>
+                <option value="seminario">Seminario</option>
+                <option value="foro">Foro</option>
                 <option value="conferencia">Conferencia</option>
+                <option value="congreso">Congreso</option>
+                <option value="webinar">Webinar</option>
                 <option value="otro">Otro</option>
             </select>
         </div>

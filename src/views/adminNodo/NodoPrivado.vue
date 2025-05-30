@@ -1,6 +1,9 @@
 <template>
     <div>
-        <BioSkeleton v-if="isLoading" />
+        <template v-if="isLoading">
+            <BioSkeleton />
+            <TableSkeleton />
+        </template>
         <template v-else>
             <NodoBio 
                 :name="nodeData?.name" 
@@ -18,7 +21,7 @@
                 :code="code"
                 :items="registrosFiltrados"
                 @toggle="toggleStatus"
-                @deleteMember="confirmarEliminacion"
+                @unlinkUser="unlikMemberFromNode"
                 @nuevo-registro="guardarRegistro"
                 @search="filtrar" />
         </template>
@@ -27,16 +30,21 @@
 </template>
 <script setup lang="ts">
 import NodoBio from "@/components/AdminNodo/nodo/NodoBio.vue";
-import BioSkeleton from "@/components/shared/skeletons/BioSkeleton.vue"
 import NodoDetalle from "@/components/AdminNodo/nodo/NodoDetalle.vue";
-import { useRoute } from 'vue-router';
+// Loader and skeletons
+import BioSkeleton from "@/components/shared/skeletons/BioSkeleton.vue"
+import TableSkeleton from "@/components/shared/skeletons/TableSkeleton.vue";
 import Confirmation from '@/components/shared/modales/Confirmation.vue';
+
+// interfaces y servicios
+import { useRoute } from 'vue-router';
 import type { NodeMembers } from "@interfaces/Nodes";
 import type { InviteNodeMember } from '@interfaces/Invitations';
 import { useNodosStore } from '@stores/nodosStore';
+import { ref, computed, onMounted } from 'vue';
+
 import InvitationsService from "@/services/Class/InvitationService";
 
-import { ref, computed, onMounted } from 'vue';
 
 // servicios y rutas
 const route = useRoute();
@@ -50,6 +58,7 @@ const registros = computed(() => nodosStore.nodoMiembros);
 const isLoading = ref(true);
 const registroSeleccionado = ref<NodeMembers | null>(null);
 
+// refs y computed
 const searchTerm = ref('');
 const mostrarModal = ref(false);
 const showConfirmation = ref(false);
@@ -130,7 +139,7 @@ const guardarRegistro = async (nuevoRegistro: InviteNodeMember) => {
 
 const toggleStatus = async (item: NodeMembers) => {
     try {
-        const status = await nodosStore.toggleNodeMemberStatus(item);
+        const status = await nodosStore.toggleNodeMemberStatus(item.id);
         if (status === 200) {
             confirmationMessage.value = 'Estado actualizado correctamente';
             confirmationType.value = 'success';
@@ -143,6 +152,10 @@ const toggleStatus = async (item: NodeMembers) => {
     } catch (error) {
         console.error("Error al actualizar el estado del miembro:", error);
     }
+}
+const unlikMemberFromNode = async (item: NodeMembers) => {
+    // Lógica para desvincular al usuario del nodo
+    console.log(`Desvinculando al usuario ${item.name} del nodo:`, item.node_id);
 }
 
 const filtrar = (term: string) => {

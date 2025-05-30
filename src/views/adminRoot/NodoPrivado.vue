@@ -5,44 +5,36 @@
             <TableSkeleton />
         </template>
         <template v-else>
-            <NodoBio 
-                :name="nodeData?.name" 
-                :profilePicture="nodeData?.profile_picture" 
-                :about="nodeData?.about"
-                :social_media="nodeData?.social_media" 
-                :joined_in="nodeData?.joined_in"
-                :leader="nodeData.leader"
-                :country="nodeData?.country"
-                :city="nodeData?.city"/>
+            <NodoBio :code="code" />
             <NodoDetalle 
                 v-if="nodeData"
                 :code="code" 
                 :items="registrosFiltrados" 
-                @toggleStatus="toggleStatus"
-                @unlinkUser="unlinkUserFromNode"
+                @toggle="toggleStatus"
+                @unlinkUser="unlikMemberFromNode"
                 @search="filtrar" />
-            <NotFound v-else />
         </template>
+        <Confirmation v-if="showConfirmation" :message="confirmationMessage" :type="confirmationType" @close="showConfirmation = false" />
     </div>
 </template>
 
 <script setup lang="ts">
 import NodoBio from "@/components/Public/Nodos/NodoBio.vue";
-import NodoDetalle from "@/components/AdminRoot/nodo/NodoDetalle.vue";
+import NodoDetalle from "@/components/AdminNodo/nodo/NodoDetalle.vue";
+// Loader and skeletons
 import BioSkeleton from "@/components/shared/skeletons/BioSkeleton.vue";
 import TableSkeleton from "@/components/shared/skeletons/TableSkeleton.vue";
-import NotFound from "@/components/shared/Error/NotFound.vue";
+import Confirmation from '@/components/shared/modales/Confirmation.vue';
+
 import { onMounted, ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import Confirmation from '@/components/shared/modales/Confirmation.vue';
-import type { NodeMembers } from "@interfaces/Nodes";
-
-import type { Node } from "@interfaces/Nodes";
+import type { Member, Node,NodeMembers } from "@interfaces/Nodes";
 import { useNodosStore } from '@stores/nodosStore';
 
 // Servicios y rutas
 const route = useRoute();
 const nodosStore = useNodosStore();
+
 // Estados
 const code = route.params.code as string;
 const nodeData = computed(() => nodosStore.nodo);
@@ -59,7 +51,6 @@ const confirmationType = ref<'success' | 'error' | 'warning'>('success');
 // Al montar el componente, cargar los datos de la BioNodo
 onMounted(async () => {
   isLoading.value = true;
-  await nodosStore.fetchNodoInfo(code);
   await nodosStore.fetchNodoMembers(code) || [];
   isLoading.value = false;
 });
@@ -78,23 +69,27 @@ const registrosFiltrados = computed(() => {
 const filtrar = (term: string) => {
     searchTerm.value = term;
 }
-function abrirFormulario() {
-    registroSeleccionado.value = null;
-    mostrarModal.value = true;
+
+const toggleStatus = async (item: NodeMembers) => {
+    try {
+        const status = await nodosStore.toggleNodeMemberStatus(item.id);
+        if (status === 200) {
+            confirmationMessage.value = 'Estado actualizado correctamente';
+            confirmationType.value = 'success';
+            showConfirmation.value = true;
+        }else {
+            confirmationMessage.value = 'Error al cambiar el estado';
+            confirmationType.value = 'error';
+            showConfirmation.value = true;
+        }
+    } catch (error) {
+        console.error("Error al actualizar el estado del miembro:", error);
+    }
 }
 
-const toggleStatus = (memberId: Member) => {
-    // Lógica para activar/desactivar el registro
-    nodosStore.toggleNodeMemberStatus(memberId);
-}
-
-const unlinkUserFromNode = (memberId: Member) => {
+const unlikMemberFromNode = async (item: NodeMembers) => {
     // Lógica para desvincular al usuario del nodo
-    nodosStore.unlinkMember(memberId);
-}
-
-function cerrarModal() {
-    mostrarModal.value = false;
+    console.log(`Desvinculando al usuario ${item.name} del nodo:`, item.node_id);
 }
 
 

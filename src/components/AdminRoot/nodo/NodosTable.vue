@@ -54,6 +54,7 @@
     <CrudForm :isOpen="isInvitationModal" :invitation="{
       name: '',
       email: '',
+      node_type: '',
     }" @close="isInvitationModal = false" @guardar="guardarRegistro" />
   </div>
 </template>

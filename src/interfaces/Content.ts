@@ -25,8 +25,8 @@ export interface Projects {
 // Events
 export interface Events {
     id: number;
-    title: string;
-    type: 'event' | 'taller' | 'clase' | 'curso' | 'seminario' | 'foro' | 'conferencia' | 'congreso';
+    title: string; 
+    type: 'event' | 'taller' | 'clase' | 'curso' | 'seminario' | 'foro' | 'conferencia' | 'congreso' | 'webinar';
     description: string;
     date: string; // ISO date string, since PHP expects a date string
     link: string;
@@ -56,7 +56,7 @@ export interface Series {
     description?: string | null; // nullable string
     cover_image_file?: string | null; // nullable, image file path or name
     cover_image_url?: string | null; // nullable, must be a URL
-    //chapters: Chapter[];
+    chapters: Chapter[];
 }
 
 // articulos

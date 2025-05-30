@@ -53,7 +53,9 @@ export function useSubmitMethods<T extends Record<string, any>>({
 
     try {
       await update(updatedItem, selectedItem.value.id);
+      console.log("Evento actualizado", updatedItem);
       closeModal();
+      if (typeof fetchAll === 'function') await fetchAll();
       showConfirmation(`Evento actualizado con éxito.`, 'success');
     } catch (err) {
       showConfirmation('Error al actualizar el evento.', 'error');
@@ -80,6 +82,17 @@ export function useSubmitMethods<T extends Record<string, any>>({
   };
 
   return { onSubmit, onUpdate, onDelete };
+}
+
+// Utilidad para dividir un string ISO de fecha en dateString y timeString (ajustada a hora local)
+export function splitDateTimeISOString(isoString: string) {
+  const date = new Date(isoString);
+  const localDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+  const pad = (n: number) => n.toString().padStart(2, '0');
+  return {
+    dateString: `${localDate.getFullYear()}-${pad(localDate.getMonth() + 1)}-${pad(localDate.getDate())}`,
+    timeString: `${pad(localDate.getHours())}:${pad(localDate.getMinutes())}`
+  };
 }
 
 export function usePanelUtilities<T extends Record<string, any>>({

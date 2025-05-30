@@ -5,8 +5,8 @@
 
     /* Configuración requerida para references */
     "composite": true,
-    "noEmit": false, // Permitimos la generación de archivos
-    "emitDeclarationOnly": true, // Se activa para permitir 'allowImportingTsExtensions'
+    "noEmit": true, // Permitimos la generación de archivos
+    "emitDeclarationOnly": false, // Se activa para permitir 'allowImportingTsExtensions'
     "allowImportingTsExtensions": true,
 
     /* Linting */
