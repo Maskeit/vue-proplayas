@@ -9,7 +9,6 @@ import type { CrudStore } from '@interfaces/CrudStore';
  */
 export function useCrud<T>(provider: CrudStore<T>) {
     const isLoading = ref(false);
-
     const fetchAll = async () => {
         if (provider.items.value.length) return; // evita petición doble
         isLoading.value = true;

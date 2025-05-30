@@ -2,7 +2,7 @@
     <UsersTable 
         :items="registrosFiltrados" 
         @toggle="toggleStatus" 
-        @deleteUser="deleteNode" 
+        @deleteUser="deleteUser" 
         @search="filtrar"
         />
 </template>
@@ -27,20 +27,26 @@ onMounted(async() => {
 });
 
 // Computed para filtrar los registros relacionados con el nodo
-const camposBusqueda = ['name', 'username', 'email', 'member_code', 'research_line'];
-
+const camposBusqueda = ['name', 'email','role' , 'node_id','node_code'];
 const registrosFiltrados = computed(() => {
   if (!searchTerm.value) return registros.value;
   const term = searchTerm.value.toLowerCase();
 
   return registros.value.filter(m =>
-    camposBusqueda.some(campo =>
-      (m[campo as keyof typeof m] || '').toLowerCase().includes(term)
-    )
+    camposBusqueda.some(campo => {
+      const valor = m[campo as keyof typeof m];
+      return typeof valor === 'string' && valor.toLowerCase().includes(term);
+    })
   );
 });
 
 const filtrar = (term: string) => {
     searchTerm.value = term;
+}
+const toggleStatus = (item: any) => {
+    console.log('Toggle status for:', item);
+}
+const deleteUser = (node_code: string) => {
+    console.log('Delete user with code:', node_code);
 }
 </script>

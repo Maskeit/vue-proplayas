@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
     "baseUrl": "./",
     "rootDir": "./src",
     "paths": {
@@ -15,7 +16,7 @@
       "@stores/*": ["src/services/Stores/*"],
       "@utils/*": ["src/utils/*"],
     },
-    "declaration": true,
+    "declaration": false,
     "outDir": "./dist",
     "module": "ESNext",
     "target": "ESNext",
@@ -26,10 +27,9 @@
     // "declarationDir": "dist/types", // envia los archivos d.ts
   },
   "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
+  "references": [    
     { "path": "./tsconfig.node.json" }
   ],
   "exclude": ["node_modules", "dist"],
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

@@ -35,9 +35,9 @@ export const useNodosStore = defineStore('nodos', () => {
             return nodos.value
         }
         try {
-            const response = await nodosService.getPublicNodes()
-            if (response) {
-                setNodos(response)
+            const { status, message, data } = await nodosService.getPublicNodes()
+            if (data && Array.isArray(data)) {
+                setNodos(data)
                 cargado.value = true
                 return nodos.value
             }
@@ -50,20 +50,24 @@ export const useNodosStore = defineStore('nodos', () => {
     // traer informacion del nodo
     const fetchNodoInfo = async (code: string): Promise<Node | null> => {
         try {
-            const nodoBio = await nodosService.getNodeBio(code);
-            setNodeBio(nodoBio);
+            const response = await nodosService.getNodeBio(code);
+            if (response && response.data) {
+                setNodeBio(response.data);
+                return response.data;
+            }
         } catch (error) {
-            console.error('Error al obtener y establecer el perfil:', error)
-            throw error
+            console.error('Error al obtener y establecer el perfil:', error);
         }
+        return null;
     };
 
     // traer miembros del nodo
     const fetchNodoMembers = async (code: string): Promise<NodeMembers[] | null> => {
         try {
-            const members = await nodosService.getNodoMembers(code);
-            if (members && Array.isArray(members)) {
-                setNodeMembers(members);
+            const { status, message, data } = await nodosService.getNodoMembers(code);
+            if (data && Array.isArray(data)) {
+                setNodeMembers(data);
+                return data;
             }
         } catch (error) {
             console.error("Error al cargar miembros del nodo desde el store:", error);
@@ -84,7 +88,7 @@ export const useNodosStore = defineStore('nodos', () => {
     const uploadNodeImage = async (file: FormData) => {
         try {
             const { status, message, data } = await nodosService.uploadNodeProfilePicture(file);
-            return {status, data};
+            return { status, data };
         } catch (error) {
             console.error("Error al subir la foto de perfil del nodo:", error);
         }
@@ -99,7 +103,21 @@ export const useNodosStore = defineStore('nodos', () => {
         } catch (error) {
             console.error("Error al eliminar miembro del nodo:", error);
         }
-    }
+    };
+
+    // Eliminar un Nodo completo
+    const deleteNode = async (id: number) => {
+        try{
+            const { status, message, data } = await nodosService.deleteNode(id);
+            if (status === 200) {
+                // Eliminar el nodo de la lista local
+                nodos.value = nodos.value.filter(n => n.id !== id);
+            }
+            return status;
+        } catch (error) {
+            console.error("Error al eliminar el nodo:", error);
+        }
+    };
 
     // activa o desactiva el miembro del nodo
     const toggleNodeMemberStatus = async (id: number) => {
@@ -129,5 +147,6 @@ export const useNodosStore = defineStore('nodos', () => {
         uploadNodeImage, // sube una foto de perfil 
         unlinkMember, // eliminar miembro del nodo
         toggleNodeMemberStatus, // activar o desactivar miembro
+        deleteNode // eliminar nodo completo
     };
 });

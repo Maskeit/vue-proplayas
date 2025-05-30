@@ -1,9 +1,13 @@
 <template>
     <div
         class="bg-white dark:bg-zinc-700 shadow-md rounded-lg p-6 border border-gray-200 dark:border-none hover:shadow-lg transition cursor-pointer">
-        <h3 class="text-xl font-semibold text-cyan-800 dark:text-zinc-100 mb-2">{{ title }}</h3>
+        <div v-if="cover_image" class="w-full h-48 bg-gray-200 overflow-hidden rounded-t">
+            <img :src="coverUrl" alt="Imagen del evento" class="w-full h-full object-cover" />
+        </div>
+        <h3 class="text-xl font-semibold text-cyan-800 dark:text-zinc-100 my-2">{{ title }}</h3>
         <p class="text-sm text-gray-500 dark:text-zinc-300 mb-1">{{ formattedDate }}</p>
-        <p v-if="props.author" @click="toAutor(props.author.username)" class="text-sm text-gray-500 dark:text-zinc-300 italic hover:underline cursor-pointer">
+        <p v-if="props.author" @click="toAutor(props.author.username)"
+            class="text-sm text-gray-500 dark:text-zinc-300 italic hover:underline cursor-pointer">
             Autor: {{ props.author.name }}
         </p>
 
@@ -11,6 +15,7 @@
 
         <div class="flex flex-wrap text-sm text-gray-600 gap-3 mb-4">
             <span class="bg-blue-100 text-cyan-800 px-2 py-1 rounded">Formato: {{ format }}</span>
+            <span class="bg-yellow-100 text-cyan-800 px-2 py-1 rounded">Tipo de evento: {{ type }}</span>
             <span v-if="location" class="bg-green-100 text-green-800 px-2 py-1 rounded">Ubicación: {{ location }}</span>
         </div>
 
@@ -24,23 +29,25 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { Event } from '../../../../interfaces/Content';
+import type { Events } from '../../../../interfaces/Content';
 import { useRouter } from 'vue-router'
-const router = useRouter()
-const props = defineProps<Event & { author?: any }>()
+const COVER_BASE_URL = import.meta.env.VITE_APP_COVER_URL;
 
+const router = useRouter()
+const props = defineProps<Events & { author?: any }>()
+const coverUrl = computed(() => `${import.meta.env.VITE_APP_COVER_URL}${props.cover_image}`);
 const formattedDate = computed(() => {
-  const d = new Date(props.date);          // ej. 2025-04-30T13:00:00.000000Z
-  return new Intl.DateTimeFormat('es-MX', {
-    weekday: 'short',    // mié
-    day:     '2-digit',  // 30
-    month:   'short',    // abr
-    year:    'numeric',  // 2025
-    hour:    '2-digit',
-    minute:  '2-digit',
-    hour12:  true,
-    timeZone: 'UTC',     // mostrar exactamente la hora guardada
-  }).format(d) + ' UTC';
+    const d = new Date(props.date);          // ej. 2025-04-30T13:00:00.000000Z
+    return new Intl.DateTimeFormat('es-MX', {
+        weekday: 'short',    // mié
+        day: '2-digit',  // 30
+        month: 'short',    // abr
+        year: 'numeric',  // 2025
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+        timeZone: 'UTC',     // mostrar exactamente la hora guardada
+    }).format(d) + ' UTC';
 });
 
 const toAutor = (username: string) => {

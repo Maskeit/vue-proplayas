@@ -122,11 +122,14 @@ const handleLogin = async () => {
         try {
             loading.value = true; // Activa el loader
             const authService = new Authentication();
-            const { token, route } = await authService.login({ email: email.value, password: password.value });
-            if (token && route) {
-                router.push(route); // Redirigir al usuario según su rol
+            const response = await authService.login({
+            email: email.value,
+            password: password.value
+            });
+            if (response.status === 200 && response.data?.token && response.data?.route) {
+            router.push(response.data.route); // Redirigir al usuario según su rol
             } else {
-                errorMessage.value = "No se pudo determinar la ruta de acceso.";
+            errorMessage.value = response.message || "No se pudo determinar la ruta de acceso.";
             }
         } catch (error) {
             errorMessage.value = 'Failed to fetch';

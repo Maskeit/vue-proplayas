@@ -11,7 +11,7 @@
             <span v-if="" class="bg-green-100 text-green-800 px-2 py-1 rounded">Ubicación: {{ place }}</span>
         </div> -->
 
-        <a :href="links" target="_blank"
+        <a :href="link" target="_blank"
             class="inline-block mt-auto text-sm font-medium text-white bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded transition">
             Ir al Articulo            
         </a>
@@ -19,6 +19,6 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { Articles } from '../../../../interfaces/Content';
-defineProps<Articles>()
+import type { Publications } from '../../../../interfaces/Content';
+defineProps<Publications>()
 </script>

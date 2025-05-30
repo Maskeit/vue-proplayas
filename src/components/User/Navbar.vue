@@ -43,7 +43,7 @@
                                     <MenuItem v-if="userRoute" v-slot="{ active }">
                                     <router-link :to="userRoute"
                                         :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
-                                        Dashboard
+                                        Mi Nodo
                                     </router-link>
                                     </MenuItem>
 
@@ -131,7 +131,7 @@
                                     <MenuItem v-if="userRoute" v-slot="{ active }">
                                     <router-link :to="userRoute"
                                         :class="[active ? 'bg-gray-100 text-gray-900 outline-hidden' : 'text-gray-700', 'block px-4 py-2 text-sm']">
-                                        Dashboard
+                                        Mi Nodo
                                     </router-link>
                                     </MenuItem>
 

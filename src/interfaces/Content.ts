@@ -1,26 +1,42 @@
-// Proyectos colaborativos de bajo costo
-export interface Project{
+interface Author {
     id: number;
-    title: string;
-    description: string;
-    cover_image: string;
-    date: Date;
-    location: string;
-    link: string;
-    participants: string;
+    name: string;
+    username: string;
+    email: string;
+    role: string;
+    status: string;
+}
+
+// Proyectos colaborativos de bajo costo
+export interface Projects {
+    id: number;
+    title: string; // required, max 255
+    description: string; // required
+    date: string; // ISO date string, required
+    location?: string | null; // nullable, max 255
+    link?: string | null; // nullable, must be a URL
+    file_file?: string | null; // nullable, file path or name
+    file_url?: string | null; // nullable, must be a URL
+    cover_image_file?: string | null; // nullable, image file path or name
+    cover_image_url?: string | null; // nullable, must be a URL
+    participants?: string[] | null; // nullable, array of strings, each max 255
 }
 
 // Events
-export interface Event {
+export interface Events {
     id: number;
-    title: string;
-    type: 'webinar' | 'congreso' | 'magistrado' | 'clase' | 'taller' | 'charla' | 'conferencia' | 'otro';
+    title: string; 
+    type: 'event' | 'taller' | 'clase' | 'curso' | 'seminario' | 'foro' | 'conferencia' | 'congreso' | 'webinar';
     description: string;
-    date: Date;
+    date: string; // ISO date string, since PHP expects a date string
     link: string;
-    format: string;
-    location: string | null;
-    cover_image: string;
+    format: 'presencial' | 'online';
+    location?: string | null;
+    participants?: string[] | null;
+    cover_image?: string | null;
+    cover_image_url?: string | null;
+    file_url?: string | null;
+    author?: Author | null; // nullable, author details
 }
 
 // sobre webseries
@@ -35,36 +51,50 @@ export interface Chapter {
 
 export interface Series {
     id: number;
-    title: string;
-    description: string;
-    organizer_type: string;
-    organizer_id: number;
-    thumbnail_url: string;
+    title: string; // required, max 255
+    url?: string | null; // nullable, must be a URL
+    description?: string | null; // nullable string
+    cover_image_file?: string | null; // nullable, image file path or name
+    cover_image_url?: string | null; // nullable, must be a URL
     chapters: Chapter[];
 }
 
 // articulos
-export interface Articles {
+export interface Publications {
     id: number;
-    type: string;
+    type: 'boletin' | 'guia' | 'articulo';
     title: string;
-    description: string;
-    links: string;
-    doi: string;
-    issn: string;
-    file_path: string;
-    cover_image: string;
+    description?: string | null;
+    link?: string | null;
+    doi?: string | null;
+    issn?: string | null;
+    cover_image_url?: string | null;
+    cover_image_file?: string | null;
+    file_url?: string | null;
+    file_file?: string | null;
 }
 
 // Libros
 export interface Books {
     id: number;
-    title: string;
-    author: string | null;
-    publication_date: Date | null;
-    isbn: string | null;
-    description: string | null;
-    link: string | null;
-    file_path: string | null;
-    cover_image: string | null;
+    title: string; // required, max 255
+    book_author: string; // required, max 255
+    publication_date?: string | null; // ISO date string, nullable
+    isbn?: string | null; // nullable, max 255
+    description: string; // required
+    link?: string | null; // nullable, must be a URL
+    file_file?: string | null; // nullable, file path or name
+    file_url?: string | null; // nullable, must be a URL
+    cover_image_file?: string | null; // nullable, image file path or name
+    cover_image_url?: string | null; // nullable, must be a URL
+}
+
+export interface News {
+    title: string; // required, max 255
+    content: string; // required
+    category: string; // required, max 255
+    tags?: string[] | null; // nullable, array of strings, each max 100
+    cover_image_file?: string | null; // nullable, image file path or name
+    cover_image_url?: string | null; // nullable, must be a URL
+    link?: string | null; // nullable, must be a URL
 }

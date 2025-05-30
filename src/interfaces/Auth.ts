@@ -6,6 +6,8 @@ export interface LoginRequest {
 export interface LoginResponse {
     token: string;
     role: string;
+    node_id: string;
+    route: string | null;
 }
 
 export interface AuthUser {
@@ -15,16 +17,8 @@ export interface AuthUser {
     role: 'admin' | 'user' | 'editor';
 }
 
-// seccion del registro
-export interface RegisterRequest {
-    email: string;
-    password: string;
-    name: string;
-    role: string;
-}
-
-export interface RegisterResponse {
+export interface ApiResponse<T> {
     status: number;
     message: string;
-    data: string;
+    data: T;
 }

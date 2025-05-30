@@ -1,6 +1,6 @@
 import axiosInstance from "@api";
 import { system } from '@service/system';
-import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '@interfaces/Auth';
+import { ApiResponse, LoginRequest, LoginResponse } from '@interfaces/Auth';
 import Cookies from "js-cookie";
 export class Authentication {
     constructor() { };
@@ -18,31 +18,45 @@ export class Authentication {
         }
     }
 
-    async login(credentials: LoginRequest): Promise<LoginResponse> {
+    async login(credentials: LoginRequest): Promise<ApiResponse<LoginResponse>> {
         try {
-            const response = await axiosInstance.post<LoginResponse>('/login', {
+            const response = await axiosInstance.post('/login', {
                 email: credentials.email,
                 password: btoa(credentials.password),
             });
             if (response.data.status === 200) {
                 const { token, role, node_id } = response.data.data;
-                const authToken = token
-                const user_role = role;
                 system.authToken = token;
-                system.role = role // el rol puede ser admin, member o node_leader
-                localStorage.setItem("Authorization", authToken);
+                system.role = role; // el rol puede ser admin, member o node_leader
+                localStorage.setItem("Authorization", token);
                 localStorage.setItem("node_id", node_id);
                 localStorage.setItem("role", role);
-                Cookies.set("Authorization", authToken, { expires: 7, path: "/" });
-                // Obtener ruta de redirección basada en el rol
-                const route = this.getRedirectRoute(user_role, node_id);
-                return { token: authToken, route: route };
+                Cookies.set("Authorization", token, { expires: 7, path: "/" });
+
+                const route = this.getRedirectRoute(role, node_id);
+
+                return {
+                    status: 200,
+                    message: "Inicio de sesión exitoso",
+                    data: {
+                        token,
+                        role,
+                        node_id,
+                        route
+                    }
+                };
             }
-            return { token: null, route: null };
+
+            return {
+                status: response.data.status,
+                message: response.data.message || "Inicio de sesión fallido",
+                data: null
+            };
         } catch (error: any) {
             return {
                 status: error.response?.status || 500,
-                token: null
+                message: "Hubo un error en el servidor",
+                data: null
             };
         }
     }
@@ -66,34 +80,9 @@ export class Authentication {
             return false;
         }
     }
-    async register(credentials: RegisterRequest): Promise<RegisterResponse> {
-        try {
-            const response = await axiosInstance.post<RegisterResponse>('/register', {
-                email: credentials.email,
-                password: btoa(credentials.password),
-                name: credentials.name,
-                role: "admin",
-            });
-            if (response.data.status === 201) {
-                return {
-                    status: response.data.status,
-                    message: response.data.message
-                };
-            }
-            return {
-                status: response.data.status,
-                message: response.data.message || "Registro no exitoso",
-            };
-        } catch (error: any) {
-            return {
-                status: error.response?.status || 500,
-                message: error.response?.data?.message || "Hubo un error en el registro"
-            };
-        }
-    }
 
     // envia correo de confirmación para autenticar usuario
-    async recoverPassword( email:string): Promise<any> {
+    async recoverPassword(email: string): Promise<any> {
         try {
             const response = await axiosInstance.post('/recover-password', {
                 email: email,

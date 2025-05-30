@@ -84,21 +84,22 @@ onUnmounted(() => {
 });
 
 const setupScrollTimeline = () => {
-    columnsContainer.value!.querySelector(".columns")!.style.overflowY = "hidden";
-    const timeline = new ScrollTimeline({ source: document.documentElement });
+    
+    (columnsContainer.value!.querySelector(".columns") as HTMLElement).style.overflowY = "hidden";
+    const timeline = new (window as any).ScrollTimeline({ source: document.documentElement });
 
     columnsContainer.value!.querySelectorAll(".column-reverse").forEach(($column) => {
         ($column as HTMLElement).style.flexDirection = "column-reverse";
         ($column as HTMLElement).animate(
             { transform: ["translateY(calc(-100% + 100vh))", "translateY(calc(100% - 100vh))"] },
-            { fill: "both", timeline }
+            { fill: "both", timeline } as any
         );
     });
 
     columnsContainer.value!.querySelectorAll(".column").forEach(($column) => {
         ($column as HTMLElement).animate(
             { transform: ["translateY(calc(100% - 100vh))", "translateY(calc(-100% + 100vh))"] },
-            { fill: "both", timeline }
+            { fill: "both", timeline } as any
         );
     });
 };

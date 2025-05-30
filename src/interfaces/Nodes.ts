@@ -1,7 +1,7 @@
-import type { SocialLink } from "@interfaces/Profile";
+import type { SocialLink } from '@interfaces/Profile';
 
 export interface Nodes {
-    id: string;
+    id: number;
     code: string; // se muestra
     type: string; // se muestra
     name: string; // se muestra
@@ -31,9 +31,7 @@ export interface Node {
     code: string;// se muestra
     type: string;// se muestra
     name: string;// se muestra
-    
-    image: string;// foto del nodo
-    
+    profile_picture: string;// foto del nodo
     about: string;// se muestra
     country: string;// se muestra
     city: string;// se muestra
@@ -42,9 +40,7 @@ export interface Node {
     alt_places: string;// se muestra
     joined_in: number;// se muestra
     members_count: number;// se muestra
-    
     //id_photo: string;
-    
     social_media: SocialLink[] | null;// se muestra
     memorandum: string;// se muestra
     status: string;
@@ -61,10 +57,19 @@ export interface Leader {
 
 export interface Member {
     id: number;
+    user_id: number; // id del usuario
     node_id: number;
-    member_code: string;
+    username: string; // nombre de usuario
     name: string;
+    member_code: string;
     email: string;
     research_line: string;
     work_area: string;
+    status: string;
+}
+
+export interface ApiResponse<T>{
+    status: number;
+    message: string;
+    data: T;
 }

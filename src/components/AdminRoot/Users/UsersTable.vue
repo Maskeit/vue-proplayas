@@ -13,7 +13,7 @@
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50 dark:bg-zinc-800">
           <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">ID</th>
+            
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">Code</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">Nombre</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">Email</th>
@@ -23,17 +23,19 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-zinc-200 dark:bg-zinc-800 dark:divide-zinc-700 dark:text-gray-100">
-          <tr v-for="item in items" :key="item.id" class="hover:bg-zinc-200 dark:hover:bg-zinc-700 cursor-pointer">
-            <td class="px-6 py-4">{{ item.id }}</td>
-            <td class="px-6 py-4">{{ item.code }}</td>
+          <tr v-for="item in items" :key="item.node_id" class="hover:bg-zinc-200 dark:hover:bg-zinc-700 cursor-pointer">
+            <td class="px-6 py-4">{{ item.node_code }}</td>
             <td class="px-6 py-4">{{ item.name }}</td>
             <td class="px-6 py-4">{{ item.email }}</td>
             <td class="px-6 py-4">{{ item.status }}</td>
             <td class="px-6 py-4">{{ item.role }}</td>
-            <td class="px-6 py-4 whitespace-nowrap">
+            <td class="px-6 py-4 flex gap-2">
               <!-- Botón Eliminar -->
-              <button class="text-red-600 hover:text-red-800" @click.stop="deleteUser(item.id)">
+              <button class="text-red-600 hover:text-red-800" @click.stop="emits('deleteUser',item.node_code)">
                 Eliminar
+              </button>
+              <button class="text-blue-600 hover:text-blue-800" @click.stop="emits('toggle',item.node_code)">
+                {{ item.status === 'activo' ? 'Desactivar' : 'Activar' }}
               </button>
             </td>
           </tr>
@@ -44,9 +46,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { User } from '@/interfaces/profile';
+import type { Users } from '@interfaces/Profile';
 
-const props = defineProps<{items: User[]}>();
+const props = defineProps<{items: Users[]}>();
 const searchTerm = ref('');
-
+const emits = defineEmits(['toggle', 'deleteUser', 'search']);
 </script>

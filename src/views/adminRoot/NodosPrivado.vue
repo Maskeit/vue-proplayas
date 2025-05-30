@@ -4,10 +4,9 @@
         <template v-else>
             <!-- Otros componentes y elementos del CRUD -->
             <NodosTable 
-                :items="registrosFiltrados" 
-                @editar="editarRegistro" 
-                @eliminar="confirmarEliminacion"
-                @nuevo-registro="guardarRegistro" 
+                :items="registrosFiltrados"         
+                @deleteNode="confirmarEliminacion"
+                @guardar="guardarRegistro" 
                 @search="filtrar" />
         </template>
         <Confirmation v-if="showConfirmation" :message="confirmationMessage" :type="confirmationType"
@@ -78,6 +77,26 @@ const guardarRegistro = async (nuevoRegistro: InviteNodeLeader) => {
     }
 }
 
+const confirmarEliminacion = async (item: Nodes) => {
+    
+    if(!confirm(`¿Estás seguro de que deseas eliminar el nodo ${item.name}?`)) return;
+    try {
+        const status = await nodosStore.deleteNode(item.id);
+        if (status && status === 200) {
+            confirmationMessage.value = 'Nodo eliminado correctamente';
+            confirmationType.value = 'success';
+        } else {
+            confirmationMessage.value = 'Error al eliminar el nodo';
+            confirmationType.value = 'error';
+        }
+    } catch (error) {
+        console.error("Error al eliminar el nodo:", error);
+        confirmationMessage.value = 'Error al eliminar el nodo';
+        confirmationType.value = 'error';
+    } finally {
+        showConfirmation.value = true;
+    }
+}
 const filtrar = (term: string) => {
     searchTerm.value = term;
 }

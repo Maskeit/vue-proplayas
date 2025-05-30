@@ -1,4 +1,4 @@
-import type { Event, Project, Articles, Books  } from "@interfaces/Content";
+import type { Events, Projects, Publications, Books  } from "@interfaces/Content";
 
 /**
  * Form data for the Event form
@@ -8,19 +8,22 @@ import type { Event, Project, Articles, Books  } from "@interfaces/Content";
 export type EventFormData = Omit<Event, 'date' | 'cover_image'> & {
     dateString: string;
     timeString: string;
-    cover_image?: string;
+    cover_image_file?: string;
 }
 export const EMPTY_EVENT_FORM: EventFormData = {
   title: '',
   description: '',
-  type: '' as any,      // TS insiste en el union; inicia vacío
-  link: '',
-  format: '',
-  location: null,
+  type: '',
   dateString: '',
   timeString: '',
-  cover_image: undefined,
+  link: '',
+  format: '',
+  location: '',
+  cover_image_file: '',
 };
+
+
+
 
 
 /* ---------- PROJECT ---------- */

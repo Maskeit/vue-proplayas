@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, ComponentPublicInstance } from 'vue'
 import type { Series, Chapter } from '@/interfaces/Content'
 import Webserie from '@/components/Public/Content/Cards/Webserie.vue';
 import mockSeries from '@/utils/json/webseries.json'
@@ -60,8 +60,16 @@ function extractYouTubeId(url: string): string | null {
 
 const carousels = ref<(HTMLElement | null)[]>([])
 
-function setCarouselRef(el: HTMLElement | null, index: number) {
-    carousels.value[index] = el
+// function setCarouselRef(el: HTMLElement | null, index: number) {
+//     carousels.value[index] = el
+// }
+function setCarouselRef(el: Element | ComponentPublicInstance | null, index: number) {
+  // Asegúrate de que es un HTMLElement
+  if (el instanceof HTMLElement) {
+    carousels.value[index] = el;
+  } else {
+    carousels.value[index] = null;
+  }
 }
 
 function scrollLeft(index: number) {
