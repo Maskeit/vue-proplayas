@@ -1,5 +1,5 @@
 import axiosInstance from "@api";
-import { ApiResponse, Users } from "@/interfaces/Profile";
+import { ApiResponse, Users } from '@interfaces/Profile';
 export class UserService {
     // Trae la lista de usuarios
     async fetchUsers(): Promise<any> {

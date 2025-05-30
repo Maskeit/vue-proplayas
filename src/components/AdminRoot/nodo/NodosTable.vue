@@ -38,12 +38,11 @@
             <td class="px-6 py-4" @click="irADetalle(item.code)">{{ nodeType(item.type) }}</td>
             <td class="px-6 py-4" @click="irADetalle(item.code)">{{ item.country }}</td>
             <td class="px-6 py-4" @click="irADetalle(item.code)">{{ item.city }}</td>
-            <td class="px-6 py-4" @click="irADetalle(item.code)">{{ item.members_count == null ? 0 : item.members_count
-            }}</td>
+            <td class="px-6 py-4" @click="irADetalle(item.code)">{{ item.members_count == null ? 0 : item.members_count }}</td>
             <td class="px-6 py-4" @click="irADetalle(item.code)">{{ item.joined_in }}</td>
             <td class="px-6 py-4 whitespace-nowrap">
               <!-- Botón Eliminar -->
-              <button class="text-red-600 hover:text-red-800" @click.stop="deleteNode(item)">
+              <button class="text-white hover:text-red-600 border p-2 rounded cursor-pointer" @click.stop="emits('deleteNode', item)">
                 Eliminar
               </button>
             </td>
@@ -60,11 +59,12 @@
 </template>
 
 <script setup lang="ts">
-import type { Nodes } from '@/interfaces/Nodes';
+import type { Nodes, Node } from '@/interfaces/Nodes';
 import { ref } from 'vue';
 import CrudForm from '@/components/AdminRoot/Crud/CrudForm.vue';
 import { useRouter } from 'vue-router';
 import { nodeType } from "@/utils/validators/NodeTypes";
+import type { InviteNodeLeader } from '@interfaces/Invitations';
 // admin Root nodos
 const router = useRouter();
 const props = defineProps<{ items: Nodes[]; }>();
@@ -73,19 +73,14 @@ const emits = defineEmits<{
   (e: 'toggle', item: Nodes): void;
   (e: 'deleteNode', item: Nodes): void;
   (e: 'search', value: string): void;
-  (e: 'nuevo-registro', item: Nodes): void;
+  (e: 'guardar', item: InviteNodeLeader): void;
 }>();
 
-const guardarRegistro = (nuevoRegistro: Nodes) => {
-  emits('nuevo-registro', nuevoRegistro);
+const guardarRegistro = (nuevoRegistro: InviteNodeLeader) => {
+  emits('guardar', nuevoRegistro);
   isInvitationModal.value = false;
 };
-const onToggle = (item: Nodes) => {
-  emits('toggle', item);
-}
-const deleteNode = (item: Nodes) => {
-  emits('deleteNode', item);
-}
+
 const irADetalle = (code: string) => {
   router.push(`/root/nodo/${code}`);
 };

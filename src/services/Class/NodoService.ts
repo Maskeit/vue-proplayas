@@ -77,4 +77,14 @@ export class NodosService {
         }
     }
 
+    async deleteNode(nodeId: number): Promise<ApiResponse<Nodes>> {
+        try {
+            const response = await axiosInstance.delete(`/node/${nodeId}`);
+            return response.data;
+        } catch (error: any) {
+            console.error("Error al eliminar el nodo:", error);
+            throw error;
+        }
+    }
+
 }

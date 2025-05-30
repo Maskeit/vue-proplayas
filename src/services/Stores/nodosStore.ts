@@ -103,7 +103,21 @@ export const useNodosStore = defineStore('nodos', () => {
         } catch (error) {
             console.error("Error al eliminar miembro del nodo:", error);
         }
-    }
+    };
+
+    // Eliminar un Nodo completo
+    const deleteNode = async (id: number) => {
+        try{
+            const { status, message, data } = await nodosService.deleteNode(id);
+            if (status === 200) {
+                // Eliminar el nodo de la lista local
+                nodos.value = nodos.value.filter(n => n.id !== id);
+            }
+            return status;
+        } catch (error) {
+            console.error("Error al eliminar el nodo:", error);
+        }
+    };
 
     // activa o desactiva el miembro del nodo
     const toggleNodeMemberStatus = async (id: number) => {
@@ -133,5 +147,6 @@ export const useNodosStore = defineStore('nodos', () => {
         uploadNodeImage, // sube una foto de perfil 
         unlinkMember, // eliminar miembro del nodo
         toggleNodeMemberStatus, // activar o desactivar miembro
+        deleteNode // eliminar nodo completo
     };
 });

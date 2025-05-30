@@ -19,8 +19,8 @@ export const useUserProfileStore = defineStore('userProfile', () => {
   // private user data
   const fetchAndSetProfile = async () => {
     try {
-      const profileData = await profileService.fetchProfile()
-      setProfile(profileData)
+      const { status, message, data } = await profileService.fetchProfile()
+      setProfile(data)
     } catch (error) {
       console.error('Error al obtener y establecer el perfil:', error)
       throw error
@@ -28,7 +28,7 @@ export const useUserProfileStore = defineStore('userProfile', () => {
   }
 
   const updateProfile = async (form: Partial<User>) => {
-    try { 
+    try {
       const { status, message, data } = await profileService.updateProfile(form)
       setProfile(data);
       return status
@@ -37,19 +37,19 @@ export const useUserProfileStore = defineStore('userProfile', () => {
       throw error
     }
   }
-    // estado que envia la foto de perfil al controlador/servicio
-    const uploadUserImage = async (file: FormData) => {
-        try {
-            const { status, message, data } = await profileService.uploadProfilePicture(file);
-            return {status, data};
-        } catch (error) {
-            console.error("Error al subir la foto de perfil del nodo:", error);
-        }
-    };
+  // estado que envia la foto de perfil al controlador/servicio
+  const uploadUserImage = async (file: FormData) => {
+    try {
+      const { status, message, data } = await profileService.uploadProfilePicture(file);
+      return { status, data };
+    } catch (error) {
+      console.error("Error al subir la foto de perfil del nodo:", error);
+    }
+  };
   const getProfile = async (username: string) => {
-    try {      
-      const profileData = await profileService.getPublicProfile(username)
-      setProfile(profileData);
+    try {
+      const { status, message, data } = await profileService.getPublicProfile(username)
+      setProfile(data);
     } catch (error) {
       console.error('Error al obtener y establecer el perfil:', error)
       throw error

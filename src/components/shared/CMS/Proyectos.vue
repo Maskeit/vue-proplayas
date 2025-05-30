@@ -62,7 +62,7 @@ import type { Projects } from '@interfaces/Content';
 import ProyectoCard from './Cards/ProyectoCard.vue'; // faltan de configurar
 import EditProyecto from './Modals/EditProyecto.vue'; // faltan de configurar
 import { useCrud } from '@/components/shared/CMS/Composables/useCrud';
-import { useProjectsCrud } from '@/services/Adapters/useAdapterCrud';
+import { useProjectCrud } from '@/services/Adapters/useAdapterCrud';
 
 import Confirmation from '../modales/Confirmation.vue';
 import { buildDateTimeMySQL } from '@/utils/validators/dateUtils';
@@ -80,5 +80,5 @@ const {
     create,
     update,
     remove,
-} = useCrud<Projects>(useProjectsCrud());
+} = useCrud<Projects>(useProjectCrud());
 </script>

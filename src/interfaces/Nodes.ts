@@ -1,7 +1,7 @@
-import type { SocialLink } from "@interfaces/Profile";
+import type { SocialLink } from '@interfaces/Profile';
 
 export interface Nodes {
-    id: string;
+    id: number;
     code: string; // se muestra
     type: string; // se muestra
     name: string; // se muestra

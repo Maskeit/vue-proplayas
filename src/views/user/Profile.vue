@@ -92,6 +92,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useUserProfileStore } from '@/services/Stores/ProfileStore';
 import EditProfileBio from "@/components/User/Profile/EditProfileBio.vue";
 import EditProfilePhoto from '@/components/User/Profile/EditProfilePhoto.vue';
+import default_image from "@/assets/images/default/default_image.png";
 // Icons
 import FacebookIcon from "@icons/FacebookIcon.vue";
 import TwitterIcon from "@icons/TwitterIcon.vue";
@@ -104,7 +105,11 @@ import { GlobeAltIcon, AcademicCapIcon, PencilIcon, PhoneIcon } from "@heroicons
 // Estados
 import { useRoute } from "vue-router";
 const PROFILE_COVER_BASE_URL = import.meta.env.VITE_APP_PROFILE_COVER_URL;
-const coverUrl = computed(() => `${PROFILE_COVER_BASE_URL}${user.value?.profile_picture}`);
+const coverUrl = computed(() => {
+    return user.value?.profile_picture
+        ? `${PROFILE_COVER_BASE_URL}${user.value.profile_picture}`
+        : default_image
+});
 const route = useRoute();
 const username = route.params.username as string;
 const userProfileStore = useUserProfileStore(); // Store de perfil

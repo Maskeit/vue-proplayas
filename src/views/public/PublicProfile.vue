@@ -63,6 +63,7 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 import { onMounted, ref, computed } from 'vue';
+import default_image from "@/assets/images/default/default_image.png";
 import ProfileSkeleton from '@/components/shared/skeletons/ProfileSkeleton.vue';
 import FacebookIcon from "@icons/FacebookIcon.vue";
 import TwitterIcon from "@icons/TwitterIcon.vue";
@@ -73,7 +74,11 @@ import GithubIcon from "@icons/GithubIcon.vue";
 import { GlobeAltIcon, AcademicCapIcon, PhoneIcon } from "@heroicons/vue/24/outline";
 import { useUserProfileStore } from '@/services/Stores/ProfileStore';
 const PROFILE_COVER_BASE_URL = import.meta.env.VITE_APP_PROFILE_COVER_URL;
-const coverUrl = computed(() => `${PROFILE_COVER_BASE_URL}${user.value?.profile_picture}`);
+const coverUrl = computed(() => {
+    return user.value?.profile_picture
+        ? `${PROFILE_COVER_BASE_URL}${user.value.profile_picture}`
+        : default_image
+});
 // estados
 const route = useRoute();
 const username = route.params.username as string;

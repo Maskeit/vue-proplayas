@@ -26,15 +26,15 @@
 import { ref, onMounted, computed } from 'vue';
 import InvitationService from '@/services/Class/InvitationService';
 import { ArrowLeftCircleIcon } from '@heroicons/vue/24/solid'
-import { validateRegisterLeader, ValidationRegisterErrors, validateMemberRegisterForm } from '@/utils/validators/AuthVal';
-import FormAdmin from '@/components/public/Register/FormAdmin.vue';
-import FormNode from '@/components/public/Register/FormNodes.vue';
-import FormMember from '@/components/public/Register/FormMember.vue';
+import { validateRegisterLeader, validateMemberRegisterForm } from '@utils/validators/AuthVal';
+import FormAdmin from '@/components/Public/Register/FormAdmin.vue';
+import FormNode from '@/components/Public/Register/FormNodes.vue';
+import FormMember from '@/components/Public/Register/FormMember.vue';
 import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
 const router = useRouter();
-const errors = ref<ValidationRegisterErrors>({})
+const errors = ref({})
 const errorMessage = ref('');
 let decodedData: any = null;
 let role: string = '';

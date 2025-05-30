@@ -32,8 +32,8 @@
                                 class="dark:text-gray-200 text-gray-600 w-full pl-10 pr-3 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500"
                                 placeholder="Correo electrónico" />
                         </div>
-                        <p v-if="errors.email" class="text-red-500 text-sm mt-1">
-                            {{ errors.email }}
+                        <p v-if="errors" class="text-red-500 text-sm mt-1">
+                            {{ errors }}
                         </p>
                     </div>
 
@@ -55,7 +55,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { validateEmail, ValidationErrors } from '@/utils/validators/AuthVal';
+import { validateEmail } from '@/utils/validators/AuthVal';
 import { Authentication } from '@/services/Class/Authentication';
 import { LockClosedIcon, AtSymbolIcon, ArrowLeftCircleIcon, EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/solid'
 import Loader from '@/components/shared/Loader.vue';
@@ -69,7 +69,7 @@ const loading = ref(false);
 const togglePasswordVisibility = () => {
     showPassword.value = !showPassword.value;
 };
-const errors = ref<ValidationErrors>({});
+const errors = ref({});
 const errorMessage = ref('');
 
 const handleRecoverPassword = async () => {

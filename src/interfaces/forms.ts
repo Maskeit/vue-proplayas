@@ -1,4 +1,4 @@
-import type { Event, Project, Articles, Books  } from "@interfaces/Content";
+import type { Events, Projects, Publications, Books  } from "@interfaces/Content";
 
 /**
  * Form data for the Event form

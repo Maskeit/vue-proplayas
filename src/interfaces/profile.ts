@@ -23,7 +23,7 @@ export interface Users {
     status: string;
 }
 export interface ApiResponse<T> {
-    status: string;
+    status: number;
     message: string;
     data: T;
 }
