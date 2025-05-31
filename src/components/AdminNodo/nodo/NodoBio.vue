@@ -77,7 +77,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { Leader } from "@interfaces/Nodes";
-import { SocialLink } from "@interfaces/Profile";
+import { SocialLink } from "@/interfaces/Profile";
 import { GlobeAltIcon } from "@heroicons/vue/24/outline";
 import { AcademicCapIcon, PencilIcon, MapPinIcon } from "@heroicons/vue/24/solid";
 import EditNodoBio from "@/components/AdminNodo/nodo/EditNodoBio.vue";

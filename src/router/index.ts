@@ -19,16 +19,16 @@ import Profile from "@view/user/Profile.vue";
 import UserCMS from "@view/CMS/CMS.vue"; //vista
 
 // paginas publicas 
-import Login from "@view/public/Login.vue";
+import Login from "@view/Public/Login.vue";
 import Register from "@view/Public/Register.vue";
 import RecoverPassword from "@view/Public/RecoverPassword.vue";
 import SetPassword from "@view/Public/SetPassword.vue";
-import Home from "@view/public/Home.vue";
-import NodosPublico from "@view/public/NodosPublico.vue";
-import NodoPublico from "@view/public/NodoPublico.vue";
-import PublicProfile from "@view/public/PublicProfile.vue";
-import Content from "@view/public/Content.vue";
-import History from "@view/public/History.vue";
+import Home from "@view/Public/Home.vue";
+import NodosPublico from "@view/Public/NodosPublico.vue";
+import NodoPublico from "@view/Public/NodoPublico.vue";
+import PublicProfile from "@view/Public/PublicProfile.vue";
+import Content from "@view/Public/Content.vue";
+import History from "@view/Public/History.vue";
 // Components para CMS
 import EventsCMS from "@components/shared/CMS/Events.vue";
 import LibrosCMS from "@components/shared/CMS/Libros.vue";
@@ -53,7 +53,7 @@ const generateCmsRoutes = (): Array<RouteRecordRaw> => [
 ];
 
 const contentPanels = (): Array<RouteRecordRaw> => [
-  { path: '', name:'', component: Events },
+  { path: '', name: '', component: Events },
   { path: 'publicaciones', name: 'Publicaciones', component: Publicaciones },
   { path: 'events', name: 'Events', component: Events },
   { path: 'libros', name: 'Libros', component: Libros },
@@ -118,14 +118,15 @@ const userRoutes: Array<RouteRecordRaw> = [
     children: generateCmsRoutes(),
   },
 ];
-const blankPages = [
-  { path: '/login', component: Login },
-  { path: '/register', component: Register },
-  { path: '/RecoverPassword', component: RecoverPassword },
-  { path: '/SetPassword', component: SetPassword },
-  { path: '/:pathMatch(.*)*', component: BlankLayout }, // Para cualquier ruta que no coincida con las anteriores
-  { path: '', redirect: { name: 'Login' } }, // Para redireccionar a /login al inicio de la app.
-]
+// const blankPages = [
+//   { path: '/login', component: Login },
+//   { path: '/register', component: Register },
+//   { path: '/RecoverPassword', component: RecoverPassword },
+//   { path: '/SetPassword', component: SetPassword },
+//   { path: '/:pathMatch(.*)*', component: BlankLayout }, // Para cualquier ruta que no coincida con las anteriores
+//   { path: '', redirect: { name: 'Login' } }, // Para redireccionar a /login al inicio de la app.
+// ]
+
 const publicRoutes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -188,9 +189,15 @@ const routes: Array<RouteRecordRaw> = [
     children: nodeLeaderRoutes,
   },
   {
-    path: '/login',
+    path: '/',
     component: BlankLayout,
-    children: blankPages,
+    children: [
+      { path: 'login', component: Login },
+      { path: 'register', component: Register },
+      { path: 'RecoverPassword', component: RecoverPassword },
+      { path: 'SetPassword', component: SetPassword },
+      { path: '', redirect: { name: 'Login' } },
+    ],
   },
   {
     path: '/',

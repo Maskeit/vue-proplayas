@@ -1,4 +1,4 @@
-import type { ApiResponse, User } from '@interfaces/Profile';
+import type { ApiResponse, User } from '@/interfaces/Profile';
 import axiosInstance from "@api";
 
 export class ProfileService {

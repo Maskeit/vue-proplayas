@@ -1,7 +1,7 @@
 // ProfileStore.ts
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { User } from '@interfaces/Profile'
+import type { User } from '@/interfaces/Profile'
 import { ProfileService } from '@/services/Class/user/ProfileController'
 
 export const useUserProfileStore = defineStore('userProfile', () => {

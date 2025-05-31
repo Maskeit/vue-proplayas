@@ -20,7 +20,7 @@ export function useEventCrud(): CrudStore<Events> {
     // Métodos CRUD generalizados para 'events'
     fetch : () => s.fetchContentAuthor('events'), //funciona
     create: (payload: Events) => s.createContent('event', payload), // funciona
-    update: (id: number | string, payload: Events) => s.updateContent('event', Number(id), payload),
+    update: (id: number | string, payload: Partial<Events>) => s.updateContent('event', Number(id), payload),
     delete: (id: number) => s.deleteContent('event', id),
   };
 }

@@ -32,13 +32,13 @@
 import { ref, Ref, onMounted, reactive, computed } from 'vue';
 
 import type { Events } from '@interfaces/Content'; // estructura de como se recibe
-import EventForm from './Forms/EventForm.vue';
-import EventCard from '../CMS/Cards/EventCard.vue';
-import EditEvent from './Forms/Edit/EditEvent.vue';
+import EventForm from '@/components/shared/CMS/Forms/EventForm.vue';
+import EventCard from '@/components/shared/CMS/Cards/EventCard.vue';
+import EditEvent from '@/components/shared/CMS/Forms/Edit/EditEvent.vue';
 import { useCrud } from '@/components/shared/CMS/Composables/useCrud';
 import { useEventCrud } from '@/services/Adapters/useAdapterCrud';
-import { EMPTY_EVENT_FORM, type EventFormData } from '@interfaces/forms'; // estructura de como se envia
-import Confirmation from '../modales/Confirmation.vue';
+import { EMPTY_EVENT_FORM, type EventFormData } from '@interfaces/Forms'; // estructura de como se envia
+import Confirmation from '@/components/shared/modales/Confirmation.vue';
 //import type { Ref } from "vue"
 import { useSubmitMethods, usePanelUtilities, splitDateTimeISOString } from './Composables/panelMethods';
 
@@ -67,14 +67,14 @@ const {
 onMounted(fetchAll);
 
 const selectedItem = ref<Events | null>(null);
-const confirmation = ref({ isOpen: false, message: '', type: 'success' });
+const confirmation = ref<{ isOpen: boolean; message: string; type: 'success' | 'error' | 'warning' }>({ isOpen: false, message: '', type: 'success' });
 const isEditModalOpen = ref(false);
 
 const { onSubmit: submitMethod, onUpdate, onDelete } = useSubmitMethods<Events>({
   formData: formData as Partial<Events>,
   reset,
   create,
-  update,
+  update: (data, id) => update(id, data as Events),
   remove,
   selectedItem,
   closeModal: () => {},
@@ -95,14 +95,20 @@ const onSubmit = (type: string) => {
 
 const { confirmDelete, openModal, closeModal } = usePanelUtilities<EventFormData>({
   formData,
-  selectedItem,
+  selectedItem: selectedItem as unknown as Ref<EventFormData>,
   confirmation,
   fileInputRef: ref(null),
   coverImagePreview: ref(''),
 });
 
 const triggerDeleteModal = (event: Events) => {
-  confirmDelete(event, event.title);
+  const { dateString, timeString } = splitDateTimeISOString(event.date);
+  const eventFormData: EventFormData = {
+    ...event,
+    dateString,
+    timeString,
+  };
+  confirmDelete(eventFormData, event.title);
 };
 const handleConfirmDelete = () => {
   onDelete('evento'); // ← este sí es el de useSubmitMethods

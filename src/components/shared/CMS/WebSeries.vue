@@ -50,7 +50,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { Series } from '@/interfaces/Series';
+import type { Series } from '@/interfaces/Content';
 // Importa el archivo JSON de datos de prueba
 import seriesJson from '@/utils/json/series.json';
 

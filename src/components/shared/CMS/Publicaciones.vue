@@ -64,7 +64,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { Publications } from '@/interfaces/Publications';
+import type { Publications } from '@/interfaces/Content';
 // Importa los datos de prueba
 import publicationsJson from '@/utils/json/articulos.json';
 

@@ -46,7 +46,7 @@
 storage/app/public/uploads/profiles/a30630b6-881f-40fb-b7e6-dad419622dbc.webp
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from "vue";
-import { SocialLink } from "@interfaces/Profile";
+import { SocialLink } from "@/interfaces/Profile";
 
 interface FormData {
     name: string;

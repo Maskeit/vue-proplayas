@@ -46,7 +46,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { Users } from '@interfaces/Profile';
+import type { Users } from '@/interfaces/Profile';
 
 const props = defineProps<{items: Users[]}>();
 const searchTerm = ref('');

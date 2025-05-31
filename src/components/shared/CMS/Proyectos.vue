@@ -67,7 +67,7 @@ import { useProjectCrud } from '@/services/Adapters/useAdapterCrud';
 import Confirmation from '../modales/Confirmation.vue';
 import { buildDateTimeMySQL } from '@/utils/validators/dateUtils';
 
-import { EMPTY_PROJECT_FORM, type ProjectFormData } from '@interfaces/forms';
+import { EMPTY_PROJECT_FORM, type ProjectFormData } from '@/interfaces/Forms';
 
 // estados
 

@@ -1,4 +1,4 @@
-import type { SocialLink } from '@interfaces/Profile';
+import type { SocialLink } from '@/interfaces/Profile';
 
 export interface Nodes {
     id: number;

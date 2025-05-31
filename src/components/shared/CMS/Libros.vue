@@ -62,64 +62,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { Books } from '@/interfaces/Books';
+import type { Books } from '@interfaces/Content';
 import booksJson from '@/utils/json/books.json';
 // Creamos un tipo auxiliar para el formulario que convierte publication_date a string
 interface BookFormData extends Omit<Books, 'publication_date'> {
     publicationDateString: string;
 }
-
-// Lista reactiva de libros; opcionalmente, se pueden cargar datos desde un JSON
-const books = ref<Books[]>(booksJson);
-
-// Datos del formulario con valores iniciales (en este ejemplo, se parte de un formulario vacío)
-const formData = ref<BookFormData>({
-    id: 0,
-    title: '',
-    author: null,
-    publication_date: null,
-    isbn: null,
-    description: null,
-    link: null,
-    file_path: null,
-    cover_image: null,
-    publicationDateString: '',
-});
-
-// Función para formatear la fecha a un formato legible
-function formatDate(date: Date | null): string {
-    if (!date) return 'Fecha no disponible';
-    return new Date(date).toLocaleDateString();
-}
-
-// Manejo del envío del formulario
-function onSubmit() {
-    // Convierte publicationDateString a objeto Date si se ingresó valor
-    const newBook: Books = {
-        ...formData.value,
-        id: Date.now(), // Simulación de un id único
-        publication_date: formData.value.publicationDateString ? new Date(formData.value.publicationDateString) : null,
-    };
-    // Agrega el nuevo libro a la lista
-    books.value.push(newBook);
-    console.log("Libro guardado:", newBook);
-
-    // Limpia el formulario
-    formData.value = {
-        id: 0,
-        title: '',
-        author: null,
-        publication_date: null,
-        isbn: null,
-        description: null,
-        link: null,
-        file_path: null,
-        cover_image: null,
-        publicationDateString: '',
-    };
-}
 </script>
-
-<style scoped>
-/* Agrega estilos adicionales si lo requieres */
-</style>
